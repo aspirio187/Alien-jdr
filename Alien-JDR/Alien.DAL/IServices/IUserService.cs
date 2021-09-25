@@ -7,12 +7,9 @@ using System.Threading.Tasks;
 
 namespace Alien.DAL.IServices
 {
-    public interface IUserService
+    public interface IUserService<T> : IBaseService<T>
+        where T : UserEntity
     {
-        Task<UserEntity> GetUserAsync();
-        Task<IEnumerable<UserEntity>> GetUsersAsync();
-        void CreateUser(UserEntity user);
-        void UpdateUSer(UserEntity user);
-        void DeleteUser(UserEntity user);
+        
     }
 }
