@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Alien.DAL.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,8 @@ namespace Alien.DAL
 {
     public class AlienContext : DbContext
     {
+        public DbSet<UserEntity> Users { get; set; }
+
         public AlienContext()
         {
 
