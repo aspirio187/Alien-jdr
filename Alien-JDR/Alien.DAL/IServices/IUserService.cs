@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace Alien.DAL.IServices
 {
-    public interface IUserService<T> : IBaseService<T>
-        where T : UserEntity
+    public interface IUserService : IBaseService<UserEntity>
     {
-        
+
     }
 }
