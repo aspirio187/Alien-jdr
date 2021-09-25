@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alien.UI", "Alien.UI\Alien.UI.csproj", "{20DA1019-9C79-409E-A8A5-677BCB484F18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alien.UI", "Alien.UI\Alien.UI.csproj", "{20DA1019-9C79-409E-A8A5-677BCB484F18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alien.DAL", "Alien.DAL\Alien.DAL.csproj", "{675CDE75-EAE5-45F5-867F-EF5F6637634E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alien.DAL", "Alien.DAL\Alien.DAL.csproj", "{675CDE75-EAE5-45F5-867F-EF5F6637634E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alien.DTO", "Alien.DTO\Alien.DTO.csproj", "{01E4A076-3B3C-4B6F-B683-3EC811E85E3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alien.Tools", "Alien.Tools\Alien.Tools.csproj", "{285C032B-E9DC-4DAF-8C8B-9A6B3FAAD4AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alien.Tools", "Alien.Tools\Alien.Tools.csproj", "{285C032B-E9DC-4DAF-8C8B-9A6B3FAAD4AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alien.BLL", "Alien.BLL\Alien.BLL.csproj", "{87DAA4F1-1E5E-4898-9D2A-F446E828A9D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,14 +25,14 @@ Global
 		{675CDE75-EAE5-45F5-867F-EF5F6637634E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{675CDE75-EAE5-45F5-867F-EF5F6637634E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{675CDE75-EAE5-45F5-867F-EF5F6637634E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{01E4A076-3B3C-4B6F-B683-3EC811E85E3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{01E4A076-3B3C-4B6F-B683-3EC811E85E3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{01E4A076-3B3C-4B6F-B683-3EC811E85E3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{01E4A076-3B3C-4B6F-B683-3EC811E85E3E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{285C032B-E9DC-4DAF-8C8B-9A6B3FAAD4AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{285C032B-E9DC-4DAF-8C8B-9A6B3FAAD4AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{285C032B-E9DC-4DAF-8C8B-9A6B3FAAD4AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{285C032B-E9DC-4DAF-8C8B-9A6B3FAAD4AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87DAA4F1-1E5E-4898-9D2A-F446E828A9D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87DAA4F1-1E5E-4898-9D2A-F446E828A9D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87DAA4F1-1E5E-4898-9D2A-F446E828A9D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87DAA4F1-1E5E-4898-9D2A-F446E828A9D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
