@@ -9,9 +9,10 @@ namespace Alien.DAL.IServices
 {
     public interface IUserService
     {
-        Task<bool> SignInAsync(string email, string password);
-        Task<bool> SignUpAsync();
         Task<UserEntity> GetUserAsync();
         Task<IEnumerable<UserEntity>> GetUsersAsync();
+        void CreateUser(UserEntity user);
+        void UpdateUSer(UserEntity user);
+        void DeleteUser(UserEntity user);
     }
 }
