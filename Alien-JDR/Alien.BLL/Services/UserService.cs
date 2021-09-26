@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace Alien.BLL.Services
 {
-    public class UserRepository
+    public class UserService
     {
         private readonly IUserRepository _userService;
         private readonly IMapper _mapper;
 
-        public UserRepository(IUserRepository userService, IMapper mapper)
+        public UserService(IUserRepository userService, IMapper mapper)
         {
             _userService = userService ??
                 throw new ArgumentNullException(nameof(userService));
