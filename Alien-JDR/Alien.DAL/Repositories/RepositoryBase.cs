@@ -48,7 +48,6 @@ namespace Alien.DAL.Repositories
         {
             if (entity is null) throw new ArgumentNullException(nameof(entity));
             TEntity saved = _context.Add(entity).Entity;
-            _context.SaveChanges();
             return saved;
         }
 
@@ -57,12 +56,11 @@ namespace Alien.DAL.Repositories
         /// </summary>
         /// <param name="entity"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        public virtual bool Update(TEntity entity)
+        public virtual void Update(TEntity entity)
         {
             if (entity is null) throw new ArgumentNullException(nameof(entity));
             EntityEntry entry = _context.Entry(entity);
             entry.State = EntityState.Modified;
-            return _context.SaveChanges() > 0;
         }
 
         /// <summary>
@@ -70,12 +68,11 @@ namespace Alien.DAL.Repositories
         /// </summary>
         /// <param name="entity"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        public virtual bool Delete(TKey key)
+        public virtual void Delete(TKey key)
         {
             if (key is null) throw new ArgumentNullException(nameof(key));
             TEntity entity = _context.Find<TEntity>(key);
             _context.Remove(entity);
-            return _context.SaveChanges() > 0;
         }
 
         /// <summary>
