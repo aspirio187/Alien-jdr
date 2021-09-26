@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Alien.DAL.Services
+namespace Alien.DAL.Repositories
 {
     public class UserService : BaseService<UserEntity>, IUserService
     {

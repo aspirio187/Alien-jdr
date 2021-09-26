@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Alien.BLL.Repositories
+namespace Alien.BLL.Services
 {
     public class UserRepository
     {
