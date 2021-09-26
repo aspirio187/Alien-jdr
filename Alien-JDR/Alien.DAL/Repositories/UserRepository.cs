@@ -8,20 +8,18 @@ using System.Threading.Tasks;
 
 namespace Alien.DAL.Repositories
 {
-    public class UserRepository : RepositoryBase<UserEntity>, IUserRepository
+    public class UserRepository : RepositoryBase<UserEntity, int>, IUserRepository
     {
-        public UserRepository(AlienContext context)
-            : base(context)
-        {
+        public UserRepository(AlienContext context) : base(context) { }
 
+        public UserEntity Login(string email, string password)
+        {
+            throw new NotImplementedException();
         }
 
-        public override void Create(UserEntity entity)
+        public bool Register(string email, string username, string password)
         {
-            if (entity is null) throw new ArgumentNullException(nameof(entity));
-
-            // Hacher le password
-            // Enregistrer l'user
+            throw new NotImplementedException();
         }
     }
 }

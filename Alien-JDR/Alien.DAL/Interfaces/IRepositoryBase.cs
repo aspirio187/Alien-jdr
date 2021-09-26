@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Alien.DAL.Interfaces
 {
-    public interface IRepositoryBase<T>
-        where T : class
+    public interface IRepositoryBase<TEntity, TKey>
+        where TEntity : class
     {
-        Task<T> GetEntityAsync(int id);
-        Task<IEnumerable<T>> GetEntitiesAsync();
+        Task<IEnumerable<TEntity>> GetAllAsync();
+        Task<TEntity> GetByKey(TKey key);
+        TEntity Create(TEntity entity);
+        bool Update(TEntity entity);
+        bool Delete(TKey key);
         bool SaveChanges();
-        void Create(T entity);
-        void Update(T entity);
-        void Delete(T entity);
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Alien.BLL.Dtos;
+using Alien.BLL.Interfaces;
 using Alien.DAL.Entities;
 using Alien.DAL.Interfaces;
+using Alien.Tools.Helpers;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -10,24 +12,27 @@ using System.Threading.Tasks;
 
 namespace Alien.BLL.Services
 {
-    public class UserService
+    public class UserService : IUserService
     {
-        private readonly IUserRepository _userService;
+        private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
+        private readonly ModelValidator _modelState;
 
-        public UserService(IUserRepository userService, IMapper mapper)
+        public UserService(IUserRepository userRepository, IMapper mapper)
         {
-            _userService = userService ??
-                throw new ArgumentNullException(nameof(userService));
-            _mapper = mapper ??
-                throw new ArgumentNullException(nameof(mapper));
+            _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         public bool SignUp(UserSignUpDto user)
         {
             if (user is null) throw new ArgumentNullException(nameof(user));
-            _userService.Create(_mapper.Map<UserEntity>(user));
-            return _userService.SaveChanges();
+            if (!_modelState.IsValid(user)) return false;
+
+            var userToCreate = _mapper.Map<UserEntity>(user);
+            userToCreate.Password = HashHelper.HashUsingPbkdf2(user.Password, "SaltADeplacer");
+            _userRepository.Create(userToCreate);
+            return _userRepository.SaveChanges();
         }
 
         public string SignIn(UserSignInDto user)

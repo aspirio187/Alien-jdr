@@ -1,5 +1,6 @@
 ﻿using Alien.DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace Alien.DAL.Repositories
 {
-    public abstract class RepositoryBase<T> : IRepositoryBase<T>
-        where T : class
+    public abstract class RepositoryBase<TEntity, TKey> : IRepositoryBase<TEntity, TKey>
+        where TEntity : class
     {
         protected readonly AlienContext _context;
 
@@ -19,16 +20,49 @@ namespace Alien.DAL.Repositories
                 throw new ArgumentNullException(nameof(context));
         }
 
+        /// <summary>
+        /// Return the complete list of entities asynchronously
+        /// </summary>
+        /// <returns>IEnumerable <typeparamref name="TEntity"/> </returns>
+        public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
+        {
+            return await _context.Set<TEntity>().ToListAsync();
+        }
+
+        /// <summary>
+        /// Get an entity from the database by its ID asynchronously
+        /// </summary>
+        /// <param name="key">ID of the entity</param>
+        /// <returns><typeparamref name="TEntity"/></returns>
+        public virtual async Task<TEntity> GetByKey(TKey key)
+        {
+            return await _context.Set<TEntity>().FindAsync(key);
+        }
 
         /// <summary>
         /// Create an entity in the database
         /// </summary>
         /// <param name="entity"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        public virtual void Create(T entity)
+        public virtual TEntity Create(TEntity entity)
         {
             if (entity is null) throw new ArgumentNullException(nameof(entity));
-            _context.Entry(entity).State = EntityState.Added;
+            TEntity saved = _context.Add(entity).Entity;
+            _context.SaveChanges();
+            return saved;
+        }
+
+        /// <summary>
+        /// Update the entity from the database
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <exception cref="ArgumentNullException"></exception>
+        public virtual bool Update(TEntity entity)
+        {
+            if (entity is null) throw new ArgumentNullException(nameof(entity));
+            EntityEntry entry = _context.Entry(entity);
+            entry.State = EntityState.Modified;
+            return _context.SaveChanges() > 0;
         }
 
         /// <summary>
@@ -36,29 +70,12 @@ namespace Alien.DAL.Repositories
         /// </summary>
         /// <param name="entity"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        public virtual void Delete(T entity)
+        public virtual bool Delete(TKey key)
         {
-            if (entity is null) throw new ArgumentNullException(nameof(entity));
-            _context.Entry(entity).State = EntityState.Deleted;
-        }
-
-        /// <summary>
-        /// Return the complete list of entities asynchronously
-        /// </summary>
-        /// <returns>IEnumerable <typeparamref name="T"/> </returns>
-        public virtual async Task<IEnumerable<T>> GetEntitiesAsync()
-        {
-            return await _context.Set<T>().ToListAsync();
-        }
-
-        /// <summary>
-        /// Get an entity from the database by its ID asynchronously
-        /// </summary>
-        /// <param name="id">ID of the entity</param>
-        /// <returns><typeparamref name="T"/></returns>
-        public virtual async Task<T> GetEntityAsync(int id)
-        {
-            return await _context.Set<T>().FindAsync(id);
+            if (key is null) throw new ArgumentNullException(nameof(key));
+            TEntity entity = _context.Find<TEntity>(key);
+            _context.Remove(entity);
+            return _context.SaveChanges() > 0;
         }
 
         /// <summary>
@@ -68,17 +85,6 @@ namespace Alien.DAL.Repositories
         public bool SaveChanges()
         {
             return _context.SaveChanges() > 0;
-        }
-
-        /// <summary>
-        /// Update the entity from the database
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <exception cref="ArgumentNullException"></exception>
-        public virtual void Update(T entity)
-        {
-            if (entity is null) throw new ArgumentNullException(nameof(entity));
-            _context.Entry(entity).State = EntityState.Modified;
         }
     }
 }
