@@ -1,5 +1,5 @@
 ﻿using Alien.DAL.Entities;
-using Alien.DAL.IServices;
+using Alien.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Alien.DAL.Repositories
 {
-    public class UserService : BaseService<UserEntity>, IUserService
+    public class UserRepository : RepositoryBase<UserEntity>, IUserRepository
     {
-        public UserService(AlienContext context)
+        public UserRepository(AlienContext context)
             : base(context)
         {
 
@@ -19,6 +19,7 @@ namespace Alien.DAL.Repositories
         public override void Create(UserEntity entity)
         {
             if (entity is null) throw new ArgumentNullException(nameof(entity));
+
             // Hacher le password
             // Enregistrer l'user
         }

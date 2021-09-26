@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Alien.DAL.IServices
+namespace Alien.DAL.Interfaces
 {
-    public interface IBaseService<T>
+    public interface IRepositoryBase<T>
         where T : class
     {
-        ValueTask<T> GetEntityAsync(int id);
-        ValueTask<IEnumerable<T>> GetEntitiesAsync();
+        Task<T> GetEntityAsync(int id);
+        Task<IEnumerable<T>> GetEntitiesAsync();
         bool SaveChanges();
         void Create(T entity);
         void Update(T entity);

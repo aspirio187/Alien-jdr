@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Alien.DAL.IServices
+namespace Alien.DAL.Interfaces
 {
-    public interface IUserService : IBaseService<UserEntity>
+    public interface IUserRepository : IRepositoryBase<UserEntity>
     {
 
     }

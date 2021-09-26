@@ -20,6 +20,8 @@ namespace Alien.DAL.Configurations
             builder.Property(x => x.Password)
                 .IsRequired();
 
+            builder.HasCheckConstraint("CK_username", "LEN(Username) > 5");
+
             builder.Property(x => x.Email)
                 .IsRequired()
                 .HasMaxLength(256);

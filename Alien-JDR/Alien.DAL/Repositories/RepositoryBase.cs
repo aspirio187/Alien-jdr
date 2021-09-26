@@ -1,4 +1,4 @@
-﻿using Alien.DAL.IServices;
+﻿using Alien.DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Alien.DAL.Repositories
 {
-    public class BaseService<T> : IBaseService<T>
+    public abstract class RepositoryBase<T> : IRepositoryBase<T>
         where T : class
     {
         protected readonly AlienContext _context;
 
-        public BaseService(AlienContext context)
+        public RepositoryBase(AlienContext context)
         {
             _context = context ??
                 throw new ArgumentNullException(nameof(context));
@@ -46,7 +46,7 @@ namespace Alien.DAL.Repositories
         /// Return the complete list of entities asynchronously
         /// </summary>
         /// <returns>IEnumerable <typeparamref name="T"/> </returns>
-        public virtual async ValueTask<IEnumerable<T>> GetEntitiesAsync()
+        public virtual async Task<IEnumerable<T>> GetEntitiesAsync()
         {
             return await _context.Set<T>().ToListAsync();
         }
@@ -56,7 +56,7 @@ namespace Alien.DAL.Repositories
         /// </summary>
         /// <param name="id">ID of the entity</param>
         /// <returns><typeparamref name="T"/></returns>
-        public virtual async ValueTask<T> GetEntityAsync(int id)
+        public virtual async Task<T> GetEntityAsync(int id)
         {
             return await _context.Set<T>().FindAsync(id);
         }

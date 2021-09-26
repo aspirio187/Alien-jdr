@@ -12,4 +12,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="IServices\" />
+  </ItemGroup>
+
 </Project>

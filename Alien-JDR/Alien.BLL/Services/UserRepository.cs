@@ -1,6 +1,6 @@
 ﻿using Alien.BLL.Dtos;
 using Alien.DAL.Entities;
-using Alien.DAL.IServices;
+using Alien.DAL.Interfaces;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
@@ -12,10 +12,10 @@ namespace Alien.BLL.Services
 {
     public class UserRepository
     {
-        private readonly IUserService _userService;
+        private readonly IUserRepository _userService;
         private readonly IMapper _mapper;
 
-        public UserRepository(IUserService userService, IMapper mapper)
+        public UserRepository(IUserRepository userService, IMapper mapper)
         {
             _userService = userService ??
                 throw new ArgumentNullException(nameof(userService));

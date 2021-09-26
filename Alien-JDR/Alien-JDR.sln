@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alien.Tools", "Alien.Tools\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alien.BLL", "Alien.BLL\Alien.BLL.csproj", "{87DAA4F1-1E5E-4898-9D2A-F446E828A9D1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "10 DAL", "10 DAL", "{BD75BB68-D2EE-4834-B48D-7E831B9C593E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{675CDE75-EAE5-45F5-867F-EF5F6637634E} = {BD75BB68-D2EE-4834-B48D-7E831B9C593E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1F1AE926-FD69-4CA5-A15B-0F866B678F2F}
