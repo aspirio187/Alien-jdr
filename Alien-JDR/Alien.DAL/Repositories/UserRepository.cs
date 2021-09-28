@@ -17,7 +17,7 @@ namespace Alien.DAL.Repositories
         {
             if (username is null) throw new ArgumentNullException(nameof(username));
             if (password is null) throw new ArgumentNullException(nameof(password));
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username && u.Password == password);
+            UserEntity user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username && u.Password == password);
             return user;
         }
     }

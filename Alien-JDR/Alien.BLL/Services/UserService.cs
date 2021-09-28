@@ -30,7 +30,7 @@ namespace Alien.BLL.Services
             if (user is null) throw new ArgumentNullException(nameof(user));
             if (!_modelState.IsValid(user)) return false;
 
-            var userToCreate = _mapper.Map<UserEntity>(user);
+            UserEntity userToCreate = _mapper.Map<UserEntity>(user);
             userToCreate.Password = HashHelper.HashUsingPbkdf2(user.Password, "SaltADeplacer");
             _userRepository.Create(userToCreate);
             return _userRepository.SaveChanges();
