@@ -22,6 +22,7 @@ namespace Alien.BLL.Services
         {
             _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _modelState = new ModelValidator();
         }
 
         public bool SignUp(UserSignUpDto user)
@@ -35,14 +36,20 @@ namespace Alien.BLL.Services
             return _userRepository.SaveChanges();
         }
 
-        public string SignIn(UserSignInDto user)
+        public async Task<string> SignInAsync(UserSignInDto user)
         {
             if (user is null) throw new ArgumentNullException(nameof(user));
+            string hashedPassword = HashHelper.HashUsingPbkdf2(user.Password, "SaltADeplacer");
+            var userFromRepo = await _userRepository.SignInAsync(user.Username, hashedPassword);
+            if (userFromRepo is null) return string.Empty;
 
-            return string.Empty;
+            string token = string.Empty;
+            // Retourner soit un token, soit un claim, bref quelque chose qui permettra à l'utilisateur d'avoir une session active
+
+            return token;
         }
 
-        public async Task<UserDto> GetUser(Guid id)
+        public async Task<UserDto> GetUserAsync(Guid id)
         {
             if (id == Guid.Empty) throw new ArgumentException("User ID is empty!");
             UserEntity userFromRepo = await _userRepository.GetByKeyAsync(id);

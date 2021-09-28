@@ -9,6 +9,6 @@ namespace Alien.DAL.Interfaces
 {
     public interface IUserRepository : IRepositoryBase<UserEntity, Guid>
     {
-        
+        Task<UserEntity> SignInAsync(string username, string password);
     }
 }

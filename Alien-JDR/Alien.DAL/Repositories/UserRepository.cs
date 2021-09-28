@@ -1,5 +1,6 @@
 ﻿using Alien.DAL.Entities;
 using Alien.DAL.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,14 +13,12 @@ namespace Alien.DAL.Repositories
     {
         public UserRepository(AlienContext context) : base(context) { }
 
-        public UserEntity Login(string email, string password)
+        public async Task<UserEntity> SignInAsync(string username, string password)
         {
-            throw new NotImplementedException();
-        }
-
-        public bool Register(string email, string username, string password)
-        {
-            throw new NotImplementedException();
+            if (username is null) throw new ArgumentNullException(nameof(username));
+            if (password is null) throw new ArgumentNullException(nameof(password));
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username && u.Password == password);
+            return user;
         }
     }
 }
