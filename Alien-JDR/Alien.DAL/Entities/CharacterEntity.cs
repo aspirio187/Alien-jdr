@@ -10,6 +10,7 @@ namespace Alien.DAL.Entities
     {
         public int Id { get; set; }
 
-        public UserEntity Owner { get; set; }
+        //public UserEntity Owner { get; set; }
+        public ICollection<UserEntity> Users { get; set; }
     }
 }
