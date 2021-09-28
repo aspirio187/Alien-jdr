@@ -21,7 +21,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "30 UI", "30 UI", "{1265BE02
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "80 Test", "80 Test", "{44859F7F-056F-49A7-AFD9-35F327D58474}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alien.ConsoleApp.Test", "Alien.ConsoleApp.Test\Alien.ConsoleApp.Test.csproj", "{A7854BB1-7E8E-45F3-B8C2-809C0CCDFD19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alien.ConsoleApp.Test", "Alien.ConsoleApp.Test\Alien.ConsoleApp.Test.csproj", "{A7854BB1-7E8E-45F3-B8C2-809C0CCDFD19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alien.Test", "Alien.Test\Alien.Test.csproj", "{1231A6D7-E4B8-410F-B75D-0A5ED1337780}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +51,10 @@ Global
 		{A7854BB1-7E8E-45F3-B8C2-809C0CCDFD19}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7854BB1-7E8E-45F3-B8C2-809C0CCDFD19}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7854BB1-7E8E-45F3-B8C2-809C0CCDFD19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1231A6D7-E4B8-410F-B75D-0A5ED1337780}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1231A6D7-E4B8-410F-B75D-0A5ED1337780}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1231A6D7-E4B8-410F-B75D-0A5ED1337780}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1231A6D7-E4B8-410F-B75D-0A5ED1337780}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +65,7 @@ Global
 		{285C032B-E9DC-4DAF-8C8B-9A6B3FAAD4AE} = {F5D5856D-2CB6-4173-A419-A3BF490ADF39}
 		{87DAA4F1-1E5E-4898-9D2A-F446E828A9D1} = {99210DDF-4BA1-4BE6-A433-D43429762ED1}
 		{A7854BB1-7E8E-45F3-B8C2-809C0CCDFD19} = {44859F7F-056F-49A7-AFD9-35F327D58474}
+		{1231A6D7-E4B8-410F-B75D-0A5ED1337780} = {44859F7F-056F-49A7-AFD9-35F327D58474}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1F1AE926-FD69-4CA5-A15B-0F866B678F2F}
