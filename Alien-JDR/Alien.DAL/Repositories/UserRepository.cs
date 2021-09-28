@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Alien.DAL.Repositories
 {
-    public class UserRepository : RepositoryBase<UserEntity, int>, IUserRepository
+    public class UserRepository : RepositoryBase<UserEntity, Guid>, IUserRepository
     {
         public UserRepository(AlienContext context) : base(context) { }
 

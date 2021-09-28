@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Alien.DAL.Interfaces
 {
-    public interface IUserRepository : IRepositoryBase<UserEntity, int>
+    public interface IUserRepository : IRepositoryBase<UserEntity, Guid>
     {
         
     }

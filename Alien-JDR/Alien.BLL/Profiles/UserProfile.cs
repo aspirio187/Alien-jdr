@@ -15,6 +15,7 @@ namespace Alien.BLL.Profiles
         {
             CreateMap<UserSignUpDto, UserEntity>();
             CreateMap<UserSignInDto, UserEntity>();
+            CreateMap<UserEntity, UserDto>();
         }
     }
 }

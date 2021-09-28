@@ -10,7 +10,7 @@ namespace Alien.DAL.Interfaces
         where TEntity : class
     {
         Task<IEnumerable<TEntity>> GetAllAsync();
-        Task<TEntity> GetByKey(TKey key);
+        Task<TEntity> GetByKeyAsync(TKey key);
         TEntity Create(TEntity entity);
         void Update(TEntity entity);
         void Delete(TKey key);

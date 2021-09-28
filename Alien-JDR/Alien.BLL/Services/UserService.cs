@@ -41,5 +41,13 @@ namespace Alien.BLL.Services
 
             return string.Empty;
         }
+
+        public async Task<UserDto> GetUser(Guid id)
+        {
+            if (id == Guid.Empty) throw new ArgumentException("User ID is empty!");
+            UserEntity userFromRepo = await _userRepository.GetByKeyAsync(id);
+            if (userFromRepo is null) throw new NullReferenceException(nameof(userFromRepo));
+            return _mapper.Map<UserDto>(userFromRepo);
+        }
     }
 }

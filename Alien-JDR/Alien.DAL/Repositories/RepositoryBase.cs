@@ -34,7 +34,7 @@ namespace Alien.DAL.Repositories
         /// </summary>
         /// <param name="key">ID of the entity</param>
         /// <returns><typeparamref name="TEntity"/></returns>
-        public virtual async Task<TEntity> GetByKey(TKey key)
+        public virtual async Task<TEntity> GetByKeyAsync(TKey key)
         {
             return await _context.Set<TEntity>().FindAsync(key);
         }
