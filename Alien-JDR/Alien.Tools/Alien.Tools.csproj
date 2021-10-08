@@ -6,6 +6,8 @@
 
   <ItemGroup>
     <Folder Include="Extensions\" />
+    <Folder Include="Exceptions\" />
+    <Folder Include="ValidationAttributes\" />
   </ItemGroup>
 
 </Project>

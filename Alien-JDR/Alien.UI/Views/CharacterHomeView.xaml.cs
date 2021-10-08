@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Alien.UI
+namespace Alien.UI.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Logique d'interaction pour CharacterHomeView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CharacterHomeView : ContentControl
     {
-        public MainWindow()
+        public CharacterHomeView()
         {
             InitializeComponent();
         }
