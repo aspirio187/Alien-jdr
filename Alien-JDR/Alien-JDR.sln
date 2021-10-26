@@ -23,7 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "80 Test", "80 Test", "{4485
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alien.ConsoleApp.Test", "Alien.ConsoleApp.Test\Alien.ConsoleApp.Test.csproj", "{A7854BB1-7E8E-45F3-B8C2-809C0CCDFD19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alien.Test", "Alien.Test\Alien.Test.csproj", "{1231A6D7-E4B8-410F-B75D-0A5ED1337780}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alien.Test", "Alien.Test\Alien.Test.csproj", "{1231A6D7-E4B8-410F-B75D-0A5ED1337780}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
