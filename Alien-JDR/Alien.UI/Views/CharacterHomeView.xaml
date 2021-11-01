@@ -1,4 +1,4 @@
-﻿<ContentControl x:Class="Alien.UI.Views.CharacterHomeView"
+﻿<Window x:Class="Alien.UI.Views.CharacterHomeView"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -112,4 +112,4 @@
 
     </WrapPanel>
     
-</ContentControl>
+</Window>
