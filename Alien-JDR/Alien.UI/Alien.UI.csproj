@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\**" />
+    <Compile Remove="Model\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <EmbeddedResource Remove="Model\**" />
+    <None Remove="Models\**" />
+    <None Remove="Model\**" />
+    <Page Remove="Models\**" />
+    <Page Remove="Model\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Fonts\Alenia.otf" />
   </ItemGroup>
 
@@ -21,9 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
     <Folder Include="Images\" />
-    <Folder Include="Model\" />
   </ItemGroup>
 
   <ItemGroup>
