@@ -8,24 +8,17 @@
         xmlns:viewModels="clr-namespace:Alien.UI.ViewModels"
         mc:Ignorable="d"
         Title="ShellView" Height="450" Width="800">
-        Height="1920" Width="1080"
+        <!--Height="1920" Width="1080"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         MouseDown="Window_MouseDown"
         WindowState="Maximized"
         MinHeight="600"
-        MinWidth="400">
-
-
-    <Window.DataContext>
-        <viewModels:ShellViewModel/>
-    </Window.DataContext>
-
-
+        MinWidth="400">-->
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="Images/alienMainUI.jpg"/>
+            <ImageBrush ImageSource="../Images/alienMainUI.jpg"/>
         </Grid.Background>
 
         <Grid.ColumnDefinitions>
@@ -41,7 +34,7 @@
 
         <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Vertical">
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <DockPanel HorizontalAlignment="Right">
 
                 <Button x:Name="MinimizeButton" 
                         Content="_" 
@@ -70,7 +63,7 @@
                         Margin="5"
                         FontSize="20"/>
 
-            </StackPanel>
+            </DockPanel>
 
         </StackPanel>
 
