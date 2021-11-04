@@ -7,18 +7,23 @@
         xmlns:local="clr-namespace:Alien.UI.Views"
         xmlns:viewModels="clr-namespace:Alien.UI.ViewModels"
         mc:Ignorable="d"
-        Title="ShellView" Height="450" Width="800">
-        <!--Height="1920" Width="1080"
+        Title="ShellView"
+        Height="1920" Width="1080"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         MouseDown="Window_MouseDown"
         WindowState="Maximized"
         MinHeight="600"
-        MinWidth="400">-->
+        MinWidth="400">
+
+
+    <!--<Window.DataContext>
+        <viewModels:ShellViewModel/>
+    </Window.DataContext>-->
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="../Images/alienMainUI.jpg"/>
+            <ImageBrush ImageSource="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Images\alienMainUI.jpg"/>
         </Grid.Background>
 
         <Grid.ColumnDefinitions>
@@ -40,7 +45,7 @@
                         Content="_" 
                         VerticalAlignment="Top" 
                         HorizontalAlignment="Right"
-                        FontFamily="Fonts/#Alenia"
+                        FontFamily="Alenia"
                         Click="MinimizeButton_Click"
                         Margin="5"
                         FontSize="20"/>
@@ -49,7 +54,7 @@
                         Content="m"
                         VerticalAlignment="Top"
                         HorizontalAlignment="Right"
-                        FontFamily="Fonts/#Alenia"
+                        FontFamily="Alenia"
                         Click="MaximizeButton_Click"
                         Margin="5"
                         FontSize="20"/>
@@ -58,7 +63,7 @@
                         Content="x" 
                         VerticalAlignment="Top" 
                         HorizontalAlignment="Right"
-                        FontFamily="Fonts/#Alenia"
+                        FontFamily="Alenia"
                         Click="CloseButton_Click"
                         Margin="5"
                         FontSize="20"/>
@@ -74,7 +79,7 @@
                        HorizontalAlignment="Left"
                        Foreground="White"
                        FontSize="25"
-                       FontFamily="Fonts/#Alenia"
+                       FontFamily="Alenia"
                        Margin="20,0,0,0"/>
 
         <StackPanel Grid.Row="1">
@@ -84,7 +89,7 @@
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
-                             FontFamily="Fonts/#Alenia"
+                             FontFamily="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Fonts\Alenia.otf"
                              Command="{Binding CharacterHomeViewCommand}"
                              IsChecked="True"/>
 
@@ -93,7 +98,7 @@
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
-                             FontFamily="Fonts/#Alenia"
+                             FontFamily="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Fonts\Alenia.otf"
                              Command="{Binding GamesViewCommand}"/>
 
             <RadioButton Content="Mes Parties"

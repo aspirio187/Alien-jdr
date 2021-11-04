@@ -4,7 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Alien.UI.Views" 
-      xmlns:viewmodels="clr-namespace:Alien.UI.ViewModels" xmlns:iconPacks="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Material" d:DataContext="{d:DesignInstance Type=viewmodels:ShellViewModel}"
+    xmlns:viewmodels="clr-namespace:Alien.UI.ViewModels" 
+    xmlns:iconPacks="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Material"
       mc:Ignorable="d" 
       d:DesignHeight="460" d:DesignWidth="380"
       Title="AuthenticationView"
@@ -35,7 +36,7 @@
             <StackPanel>
 
                 <StackPanel.Background >
-                    <ImageBrush ImageSource="Images/alien_banner_2000x1000-VF-1170x585.jpg"/>
+                    <ImageBrush ImageSource="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Images\alien_banner_2000x1000-VF-1170x585.jpg"/>
                 </StackPanel.Background>
 
                 <DockPanel>

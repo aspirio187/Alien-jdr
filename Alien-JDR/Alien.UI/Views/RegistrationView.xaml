@@ -3,7 +3,9 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Alien.UI.Views" xmlns:iconPacks="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Material"
+      xmlns:local="clr-namespace:Alien.UI.Views" 
+        xmlns:iconPacks="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Material" 
+        xmlns:viewmodels="clr-namespace:Alien.UI.ViewModels"
         mc:Ignorable="d" 
       d:DesignHeight="540" d:DesignWidth="960"
       Title="RegistrationView"
@@ -12,7 +14,7 @@
         MouseDown="Window_MouseDown"
         WindowStartupLocation="CenterScreen">
     <Window.Background>
-        <ImageBrush ImageSource="Images/AlienRegistration.jpg"/>
+        <ImageBrush ImageSource="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Images\AlienRegistration.jpg"/>
     </Window.Background>
 
     <Grid>
@@ -159,7 +161,7 @@
 
             <DockPanel Margin="0,40,0,0" HorizontalAlignment="Center">
                 <Button Width="200" Height="40" Content="s'enregistrer" Margin="20"  FontFamily="Fonts/#Alenia"/>
-                <Button Width="200" Height="40" Content="RETOUR A L'authentification"  FontFamily="Fonts/#Alenia"/>
+                <Button Width="200" Height="40" Content="Retour a l'authentification"  FontFamily="Fonts/#Alenia"/>
             </DockPanel>
 
         </StackPanel>
