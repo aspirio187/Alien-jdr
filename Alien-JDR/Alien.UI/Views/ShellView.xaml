@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:prism="http://prismlibrary.com/"
         xmlns:local="clr-namespace:Alien.UI.Views"
-        xmlns:viewModels="clr-namespace:Alien.UI.ViewModels" 
+        xmlns:viewModels="clr-namespace:Alien.UI.ViewModels"
         mc:Ignorable="d"
         Title="ShellView"
         Height="1920" Width="1080"
@@ -20,8 +20,6 @@
     <!--<Window.DataContext>
         <viewModels:ShellViewModel/>
     </Window.DataContext>-->
-
-
 
     <Grid>
         <Grid.Background>
@@ -41,7 +39,7 @@
 
         <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Vertical">
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <DockPanel HorizontalAlignment="Right">
 
                 <Button x:Name="MinimizeButton" 
                         Content="_" 
@@ -70,7 +68,7 @@
                         Margin="5"
                         FontSize="20"/>
 
-            </StackPanel>
+            </DockPanel>
 
         </StackPanel>
 
