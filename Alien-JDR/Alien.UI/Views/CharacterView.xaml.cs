@@ -18,7 +18,7 @@ namespace Alien.UI.Views
     /// <summary>
     /// Logique d'interaction pour CharacterView.xaml
     /// </summary>
-    public partial class CharacterView : UserControl
+    public partial class CharacterView : ContentControl
     {
         public CharacterView()
         {

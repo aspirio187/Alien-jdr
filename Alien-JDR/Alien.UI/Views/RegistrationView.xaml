@@ -10,8 +10,8 @@
         Title="RegistrationView"
         AllowsTransparency="True"
         WindowStyle="None"
-        MouseDown="Window_MouseDown"
         WindowStartupLocation="CenterScreen">
+    
     <Window.Background>
         <ImageBrush ImageSource="/Images/AlienRegistration.jpg"/>
     </Window.Background>
@@ -36,8 +36,7 @@
                         Content="x" 
                         VerticalAlignment="Top" 
                         HorizontalAlignment="Right"
-                        FontFamily="Fonts/#Alenia"
-                        Click="CloseButton_Click"/>
+                        FontFamily="Fonts/#Alenia" />
 
         </StackPanel>
 
