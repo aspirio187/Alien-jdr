@@ -120,21 +120,16 @@
 
         </StackPanel>
 
-        <WrapPanel Grid.Row="1"
-                    Grid.Column="1">
-
-            <ContentControl Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                            prism:RegionManager.RegionName="MainRegion">
-                <behavior:Interaction.Triggers>
-                    <behavior:EventTrigger EventName="Loaded">
-                        <prism:InvokeCommandAction Command="{Binding LoadCommand}"/>
-                    </behavior:EventTrigger>
-                </behavior:Interaction.Triggers>
-            </ContentControl>
-
-        </WrapPanel>
-
-
+        <ContentControl Grid.Row="1" Grid.Column="1"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        prism:RegionManager.RegionName="MainRegion">
+            
+            <behavior:Interaction.Triggers>
+                <behavior:EventTrigger EventName="Loaded">
+                    <prism:InvokeCommandAction Command="{Binding LoadCommand}"/>
+                </behavior:EventTrigger>
+            </behavior:Interaction.Triggers>
+        </ContentControl>
     </Grid>
 </Window>
     
