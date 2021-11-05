@@ -32,4 +32,8 @@
     <Resource Include="Images\alienMainUI.jpg" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="States\" />
+  </ItemGroup>
+
 </Project>
