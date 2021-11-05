@@ -24,13 +24,22 @@ namespace Alien.UI.ViewModels
         public ShellViewModel(RegionManager regionManager, IRegionNavigationService regionNavigationService)
             : base(regionNavigationService)
         {
-            _regionManager = regionManager ?? 
+            _regionManager = regionManager ??
                 throw new ArgumentNullException(nameof(regionManager));
+
+            // Déclaration des commandes
+            LoadCommand = new(Load);
+            NavigateCharacterCommand = new(NavigateCharacter);
         }
 
-        protected override void LoadAsync()
+        protected override void Load()
         {
             _regionNavigationService.Region = _regionManager.Regions[Global.REGION_NAME];
+            Navigate(ViewsEnum.CharactersView);
+        }
+
+        public void NavigateCharacter()
+        {
             Navigate(ViewsEnum.CharactersView);
         }
     }

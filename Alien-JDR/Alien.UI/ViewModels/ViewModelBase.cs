@@ -32,7 +32,7 @@ namespace Alien.UI.ViewModels
         /// <summary>
         /// Asynchronious loading method
         /// </summary>
-        protected virtual async void LoadAsync()
+        protected virtual async Task LoadAsync()
         {
 
         }
