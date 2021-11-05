@@ -18,7 +18,7 @@ namespace Alien.UI.Views
     /// <summary>
     /// Logique d'interaction pour AuthenticationView.xaml
     /// </summary>
-    public partial class AuthenticationView : Page
+    public partial class AuthenticationView : UserControl
     {
         public AuthenticationView()
         {

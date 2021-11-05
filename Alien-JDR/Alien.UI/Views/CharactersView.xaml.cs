@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Alien.UI.Views
 {
     /// <summary>
-    /// Logique d'interaction pour CharacterHomeView.xaml
+    /// Logique d'interaction pour CharacterView.xaml
     /// </summary>
-    public partial class CharacterHomeView : ContentControl
+    public partial class CharactersView : ContentControl
     {
-        public CharacterHomeView()
+        public CharactersView()
         {
             InitializeComponent();
         }

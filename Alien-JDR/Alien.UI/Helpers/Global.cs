@@ -14,6 +14,9 @@ namespace Alien.UI.Helpers
 
     public enum ViewsEnum
     {
-        
+        CharactersView,
+        PartiesView,
+        HistoryView,
+        NotificationView
     }
 }

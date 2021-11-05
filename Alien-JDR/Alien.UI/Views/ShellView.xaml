@@ -4,26 +4,21 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:prism="http://prismlibrary.com/"
+        xmlns:behavior="http://schemas.microsoft.com/xaml/behaviors"
+        prism:ViewModelLocator.AutoWireViewModel="True"
         xmlns:local="clr-namespace:Alien.UI.Views"
-        xmlns:viewModels="clr-namespace:Alien.UI.ViewModels"
         mc:Ignorable="d"
-        Title="ShellView"
-        Height="1920" Width="1080"
+        Height="480" Width="640"
+        ResizeMode="CanResizeWithGrip"
+        AllowsTransparency="True"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        MouseDown="Window_MouseDown"
-        WindowState="Maximized"
-        MinHeight="600"
-        MinWidth="400">
-
-
-    <!--<Window.DataContext>
-        <viewModels:ShellViewModel/>
-    </Window.DataContext>-->
+        MinHeight="600" MinWidth="400" 
+        Loaded="Window_Loaded" SizeChanged="Window_SizeChanged">
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Images\alienMainUI.jpg"/>
+            <ImageBrush ImageSource="pack://application:,,,/Images/alienMainUI.jpg"/>
         </Grid.Background>
 
         <Grid.ColumnDefinitions>
@@ -32,66 +27,58 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="75"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
 
 
-        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Vertical">
-
+        <DockPanel Grid.Row="0" Grid.Column="1" Margin="0,5,5,0" Background="Transparent" VerticalAlignment="Top" MouseDown="DockPanel_MouseDown">
             <DockPanel HorizontalAlignment="Right">
-
                 <Button x:Name="MinimizeButton" 
-                        Content="_" 
-                        VerticalAlignment="Top" 
-                        HorizontalAlignment="Right"
+                        Content="_"
+                        FontSize="16"
                         FontFamily="Alenia"
-                        Click="MinimizeButton_Click"
-                        Margin="5"
-                        FontSize="20"/>
+                        FontWeight="Bold"
+                        Width="25"
+                        Height="25" Click="MinimizeButton_Click"/>
 
                 <Button x:Name="MaximizeButton"
-                        Content="m"
-                        VerticalAlignment="Top"
-                        HorizontalAlignment="Right"
-                        FontFamily="Alenia"
-                        Click="MaximizeButton_Click"
-                        Margin="5"
-                        FontSize="20"/>
+                        Content="M"
+                        Width="25"
+                        Height="25"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        FontFamily="Alenia" Click="MaximizeButton_Click" />
 
                 <Button x:Name="CloseButton" 
-                        Content="x" 
-                        VerticalAlignment="Top" 
-                        HorizontalAlignment="Right"
-                        FontFamily="Alenia"
-                        Click="CloseButton_Click"
-                        Margin="5"
-                        FontSize="20"/>
-
+                        Content="X"
+                        Width="25"
+                        Height="25"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        FontFamily="Alenia" Click="CloseButton_Click"/>
             </DockPanel>
 
-        </StackPanel>
+        </DockPanel>
 
-
-
-        <TextBlock Text="ALIEN"
+        <StackPanel Grid.Row="0" Grid.RowSpan="2">
+            <TextBlock Text="ALIEN"
                        VerticalAlignment="Center"
-                       HorizontalAlignment="Left"
+                       HorizontalAlignment="Stretch"
+                       TextAlignment="Center"
                        Foreground="White"
                        FontSize="25"
-                       FontFamily="Alenia"
-                       Margin="20,0,0,0"/>
-
-        <StackPanel Grid.Row="1">
+                       Margin="5"
+                       FontFamily="Fonts/Alenia" />
 
             <RadioButton Content="Personnages"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"
-                             FontFamily="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Fonts\Alenia.otf"
-                             Command="{Binding CharacterHomeViewCommand}"
-                             IsChecked="True"/>
+                        Height="50"
+                        Foreground="White"
+                        FontSize="14"
+                        Style="{StaticResource MenuButtonTheme}"
+                        FontFamily="Alenia"
+                        Command="{Binding NavigateCharacterCommand}"
+                        IsChecked="True"/>
 
             <RadioButton Content="Parties"
                              Height="50"
@@ -101,32 +88,40 @@
                              FontFamily="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Fonts\Alenia.otf"
                              Command="{Binding GamesViewCommand}"/>
 
-            <RadioButton Content="Historique"
+            <RadioButton Content="Mes Parties"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                              FontFamily="Fonts/#Alenia"/>
+
+            <RadioButton Content="Historique"
+                        Height="50"
+                        Foreground="White"
+                        FontSize="14"
+                        Style="{StaticResource MenuButtonTheme}"
+                        FontFamily="Fonts/#Alenia"
+                        Command="{Binding NavigateHistoryCommand}"/>
 
             <RadioButton Content="Notifications"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"
-                             FontFamily="Fonts/#Alenia"/>
-
+                        Height="50"
+                        Foreground="White"
+                        FontSize="14"
+                        Style="{StaticResource MenuButtonTheme}"
+                        FontFamily="Fonts/#Alenia"
+                        Command="{Binding NavigateNotificationCommand}"/>
         </StackPanel>
 
-        <WrapPanel Grid.Row="1"
-                    Grid.Column="1">
-
-            <ContentControl Margin="10"
-                            Content="{Binding CurrentView}"/>
-
-        </WrapPanel>
-
-
+        <ContentControl Grid.Row="1" Grid.Column="1" Margin="5"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                        prism:RegionManager.RegionName="MainRegion">
+            
+            <behavior:Interaction.Triggers>
+                <behavior:EventTrigger EventName="Loaded">
+                    <prism:InvokeCommandAction Command="{Binding LoadCommand}"/>
+                </behavior:EventTrigger>
+            </behavior:Interaction.Triggers>
+        </ContentControl>
     </Grid>
-
 </Window>
     

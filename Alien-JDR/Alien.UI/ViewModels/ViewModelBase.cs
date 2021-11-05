@@ -12,13 +12,13 @@ namespace Alien.UI.ViewModels
 {
     public class ViewModelBase : BindableBase, INavigationAware
     {
-        protected const string Region = "Region";
-        public IRegionNavigationService NavigationService { get; protected set; }
+        protected IRegionNavigationService _regionNavigationService;
         public DelegateCommand LoadCommand { get; set; }
 
-        public ViewModelBase()
+        public ViewModelBase(IRegionNavigationService regionNavigationService)
         {
-
+            _regionNavigationService = regionNavigationService ??
+                throw new ArgumentNullException(nameof(regionNavigationService));
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Alien.UI.ViewModels
         /// <summary>
         /// Asynchronious loading method
         /// </summary>
-        protected virtual async void LoadAsync()
+        protected virtual async Task LoadAsync()
         {
 
         }
@@ -46,7 +46,7 @@ namespace Alien.UI.ViewModels
         {
             NavigationParameters navigationParameters = new()
             {
-                { Global.NAVIGATION_SERVICE, NavigationService }
+                { Global.NAVIGATION_SERVICE, _regionNavigationService }
             };
 
             if(navigationParams is not null)
@@ -56,7 +56,7 @@ namespace Alien.UI.ViewModels
                     navigationParameters.Add(navigationParam.Key, navigationParam.Value);
                 }
             }
-            NavigationService.RequestNavigate(new Uri(view.ToString(), UriKind.Relative), navigationParameters);
+            _regionNavigationService.RequestNavigate(new Uri(view.ToString(), UriKind.Relative), navigationParameters);
         }
 
         public virtual bool IsNavigationTarget(NavigationContext navigationContext)
@@ -71,7 +71,7 @@ namespace Alien.UI.ViewModels
 
         public virtual void OnNavigatedTo(NavigationContext navigationContext)
         {
-            if (NavigationService is null) NavigationService = navigationContext.Parameters.GetValue<IRegionNavigationService>(Global.NAVIGATION_SERVICE);
+            if (_regionNavigationService is null) _regionNavigationService = navigationContext.Parameters.GetValue<IRegionNavigationService>(Global.NAVIGATION_SERVICE);
         }
     }
 }
