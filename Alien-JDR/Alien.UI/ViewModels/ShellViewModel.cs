@@ -7,66 +7,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Alien.UI.Views;
+using Prism.Commands;
+using Alien.UI.Helpers;
 
 namespace Alien.UI.ViewModels
 {
-    public class ShellViewModel : BindableBase
+    public class ShellViewModel : ViewModelBase
     {
         private readonly RegionManager _regionManager;
-        private readonly RegionNavigationService _regionNavigationService;
 
-        public ShellViewModel(RegionManager regionManager, RegionNavigationService regionNavigationService)
+        public DelegateCommand NavigateCharacterCommand { get; set; }
+        public DelegateCommand NavigatePartiesCommand { get; set; }
+        public DelegateCommand NavigateHistoryCommand { get; set; }
+        public DelegateCommand NavigateNotificationCommand { get; set; }
+
+        public ShellViewModel(RegionManager regionManager, IRegionNavigationService regionNavigationService)
+            : base(regionNavigationService)
         {
-            _regionManager = regionManager ?? throw new ArgumentNullException(nameof(regionManager));
-            _regionNavigationService = regionNavigationService ?? throw new ArgumentNullException(nameof(regionNavigationService));
+            _regionManager = regionManager ?? 
+                throw new ArgumentNullException(nameof(regionManager));
         }
 
-        public void Load()
+        protected override void LoadAsync()
         {
-            _regionNavigationService.Region = _regionManager.Regions["MainRegion"];
-            _regionNavigationService.RequestNavigate(new Uri("CharacterHomeView", UriKind.Relative), null);
+            _regionNavigationService.Region = _regionManager.Regions[Global.REGION_NAME];
+            Navigate(ViewsEnum.CharactersView);
         }
     }
-
-    //public class ShellViewModel : ObservableObject
-    //{
-    //    public RelayCommand CharacterHomeViewCommand { get; set; }
-
-    //    public RelayCommand GamesViewCommand { get; set; }
-
-    //    public CharacterHomeViewModel CharacterVM { get; set; }
-
-    //    public GameViewModel GamesVM { get; set; }
-
-    //    private object _currentView;
-
-    //    public object CurrentView
-    //    {
-    //        get { return _currentView; }
-    //        set
-    //        {
-    //            _currentView = value;
-    //            OnPropertyChanged();
-    //        }
-    //    }
-
-
-    //    public ShellViewModel()
-    //    {
-    //        CharacterVM = new CharacterHomeView();
-    //        GamesVM = new GameViewModel();
-
-    //        CurrentView = CharacterVM;
-
-    //        CharacterHomeViewCommand = new RelayCommand(o =>
-    //        {
-    //            CurrentView = CharacterVM;
-    //        });
-
-    //        GamesViewCommand = new RelayCommand(o =>
-    //        {
-    //            CurrentView = GamesVM;
-    //        });
-    //    }
-    //}
 }

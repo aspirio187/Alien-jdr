@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:prism="http://prismlibrary.com/"
+        xmlns:behavior="http://schemas.microsoft.com/xaml/behaviors"
+        prism:ViewModelLocator.AutoWireViewModel="True"
         xmlns:local="clr-namespace:Alien.UI.Views"
-        xmlns:viewModels="clr-namespace:Alien.UI.ViewModels"
         mc:Ignorable="d"
         Title="ShellView"
         Height="1920" Width="1080"
@@ -16,14 +17,9 @@
         MinHeight="600"
         MinWidth="400">
 
-
-    <!--<Window.DataContext>
-        <viewModels:ShellViewModel/>
-    </Window.DataContext>-->
-
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Images\alienMainUI.jpg"/>
+            <ImageBrush ImageSource="/Images/alienMainUI.jpg"/>
         </Grid.Background>
 
         <Grid.ColumnDefinitions>
@@ -89,7 +85,7 @@
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
-                             FontFamily="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Fonts\Alenia.otf"
+                             FontFamily="Alenia"
                              Command="{Binding CharacterHomeViewCommand}"
                              IsChecked="True"/>
 
@@ -127,13 +123,18 @@
         <WrapPanel Grid.Row="1"
                     Grid.Column="1">
 
-            <ContentControl Margin="10"
-                            Content="{Binding CurrentView}"/>
+            <ContentControl Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                            prism:RegionManager.RegionName="MainRegion">
+                <behavior:Interaction.Triggers>
+                    <behavior:EventTrigger EventName="Loaded">
+                        <prism:InvokeCommandAction Command="{Binding LoadCommand}"/>
+                    </behavior:EventTrigger>
+                </behavior:Interaction.Triggers>
+            </ContentControl>
 
         </WrapPanel>
 
 
     </Grid>
-
 </Window>
     
