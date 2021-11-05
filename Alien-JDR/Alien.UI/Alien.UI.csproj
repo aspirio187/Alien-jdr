@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <None Remove="Fonts\Alenia.otf" />
+    <None Remove="Images\alienMainUI.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,10 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Images\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Alien.BLL\Alien.BLL.csproj" />
   </ItemGroup>
 
@@ -32,6 +29,7 @@
     <Resource Include="Fonts\Alenia.otf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\alienMainUI.jpg" />
   </ItemGroup>
 
 </Project>

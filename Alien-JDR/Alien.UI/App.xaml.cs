@@ -24,7 +24,7 @@ namespace Alien.UI
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<CharacterView>();
+            containerRegistry.RegisterForNavigation<CharactersView>();
         }
     }
 }

@@ -14,14 +14,14 @@ namespace Alien.UI.ViewModels
 {
     public class ShellViewModel : ViewModelBase
     {
-        private readonly RegionManager _regionManager;
+        private readonly IRegionManager _regionManager;
 
         public DelegateCommand NavigateCharacterCommand { get; set; }
         public DelegateCommand NavigatePartiesCommand { get; set; }
         public DelegateCommand NavigateHistoryCommand { get; set; }
         public DelegateCommand NavigateNotificationCommand { get; set; }
 
-        public ShellViewModel(RegionManager regionManager, IRegionNavigationService regionNavigationService)
+        public ShellViewModel(IRegionManager regionManager, IRegionNavigationService regionNavigationService)
             : base(regionNavigationService)
         {
             _regionManager = regionManager ??
