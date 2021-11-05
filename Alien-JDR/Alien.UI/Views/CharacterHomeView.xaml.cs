@@ -18,7 +18,7 @@ namespace Alien.UI.Views
     /// <summary>
     /// Logique d'interaction pour CharacterHomeView.xaml
     /// </summary>
-    public partial class CharacterHomeView : ContentControl
+    public partial class CharacterHomeView : UserControl
     {
         public CharacterHomeView()
         {

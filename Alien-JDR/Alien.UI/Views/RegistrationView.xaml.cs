@@ -18,7 +18,7 @@ namespace Alien.UI.Views
     /// <summary>
     /// Logique d'interaction pour RegistrationView.xaml
     /// </summary>
-    public partial class RegistrationView : Page
+    public partial class RegistrationView : Window
     {
         public RegistrationView()
         {
