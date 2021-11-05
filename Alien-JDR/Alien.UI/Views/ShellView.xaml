@@ -88,12 +88,7 @@
                              FontFamily="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Fonts\Alenia.otf"
                              Command="{Binding GamesViewCommand}"/>
 
-            <RadioButton Content="Mes Parties"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"
-                             FontFamily="Fonts/#Alenia"/>
+            
 
             <RadioButton Content="Historique"
                         Height="50"
