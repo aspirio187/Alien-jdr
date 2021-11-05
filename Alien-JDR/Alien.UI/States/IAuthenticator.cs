@@ -1,0 +1,17 @@
+﻿using Alien.UI.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Alien.UI.States
+{
+    interface IAuthenticator
+    {
+        UserModel User { get; }
+        Task<bool> LogIn(string username, string password, string rememberMe);
+        Task Register();
+        void LogOut();
+    }
+}

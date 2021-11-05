@@ -9,18 +9,6 @@
                 <ResourceDictionary Source="Theme/GeneralButtonTheme.xaml"/>
                 <ResourceDictionary Source="Theme/MenuButtonTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-
-            <DataTemplate DataType="{x:Type ViewModels:CharacterHomeViewModel}">
-                <views:CharacterHomeView/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type ViewModels:GameViewModel}">
-                <views:GamesView/>
-            </DataTemplate>
-
-
-
-
         </ResourceDictionary>
     </Application.Resources>
 </prism:PrismApplication>
