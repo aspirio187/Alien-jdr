@@ -6,7 +6,7 @@
             xmlns:local="clr-namespace:Alien.UI.Views" 
             xmlns:iconPack="http://metro.mahapps.com/winfx/xaml/iconpacks"
             mc:Ignorable="d" 
-            d:DesignHeight="460" d:DesignWidth="380">
+            d:DesignHeight="400" d:DesignWidth="350">
 
 
     <!--Title="AuthenticationView"
@@ -16,12 +16,12 @@
         ResizeMode="NoResize" 
         MouseDown="Window_MouseDown"
         WindowStartupLocation="CenterScreen"-->
-    
-   <Grid>
+
+    <Grid>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="230"/>
-                <RowDefinition Height="230"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
 
@@ -29,92 +29,73 @@
                 <Border.Background>
                     <LinearGradientBrush>
                         <GradientStop Color="#000000" Offset="0.0"/>
-
                     </LinearGradientBrush>
                 </Border.Background>
             </Border>
 
-            <StackPanel>
+            <DockPanel>
 
-                <StackPanel.Background >
+                <DockPanel.Background >
                     <ImageBrush ImageSource="/Images/alien_banner_2000x1000-VF-1170x585.jpg"/>
-                </StackPanel.Background>
+                </DockPanel.Background>
 
-                <DockPanel>
-
-                    <Button x:Name="CloseButton" 
-                        Content="x" 
-                        VerticalAlignment="Top" 
-                        HorizontalAlignment="Right"
-                        FontFamily="Fonts/#Alenia" />
-
+                <DockPanel DockPanel.Dock="Top">
+                    <Button Width="20" Height="20" HorizontalAlignment="Right" Content="X" FontFamily="Alenia"/>
                 </DockPanel>
 
-                <TextBlock Text="authentification"
+                <TextBlock Text="Authentification"
                            FontFamily="Fonts/#Alenia"
                            FontWeight="Light"
                            FontSize="35" 
                            Foreground="White"
                            HorizontalAlignment="Center"
-                           Margin="0,170,0,0"/>
-            </StackPanel>
+                           VerticalAlignment="Bottom"
+                           DockPanel.Dock="Bottom"/>
+            </DockPanel>
 
-            <StackPanel Grid.Row="1" >
+            <DockPanel Grid.Row="1" Margin="0,10,0,0">
+                <StackPanel DockPanel.Dock="Top" >
+                    <DockPanel HorizontalAlignment="Center" Height="50">
+                        <TextBox FontFamily="Fonts/#Alenia"
+                                FontWeight="Light"
+                                Text="NOM D'UTILISATEUR"
+                                FontSize="20"
+                                Foreground="White"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Width="235"
+                                HorizontalContentAlignment="Left"
+                                VerticalContentAlignment="Center">
+                        </TextBox>
 
-                <DockPanel HorizontalAlignment="Center">
-                    <TextBox FontFamily="Fonts/#Alenia"
-                         FontWeight="Light"
-                         Text="Nom d'utilisateur"
-                         FontSize="20"
-                         HorizontalAlignment="Center"
-                         Foreground="White"
-                         Background="Transparent"
-                         BorderThickness="0"
-                         Width="235"
-                         HorizontalContentAlignment="Left"
-                         Height="25"
-                         Margin="0,30,0,0">
-                    </TextBox>
-
-                    <iconPack:PackIconMaterial Kind="Account" Margin="0,25,0,0" Foreground="White"
+                        <iconPack:PackIconMaterial Kind="Account" Foreground="White"
                                             VerticalAlignment="Center" HorizontalAlignment="Center" />
-                </DockPanel>
+                    </DockPanel>
 
-                <Border Width="250"
-                    Height="2"
-                    Background="White"
-                    Opacity="0.5"/>
+                    <Border Width="250" Height="2" Background="White" Opacity="0.5" HorizontalAlignment="Stretch"/>
 
-                <DockPanel HorizontalAlignment="Center" Margin="0,20,0,0">
-                    <PasswordBox FontFamily="Fonts/#Alenia"
-                         FontWeight="Light"
-                         Password="admin"
-                         FontSize="20"
-                         HorizontalAlignment="Center"
-                         Foreground="White"
-                         Background="Transparent"
-                         BorderThickness="0"
-                         Width="235"
-                         HorizontalContentAlignment="Left"
-                         Height="25"
-                         />
+                    <DockPanel HorizontalAlignment="Center" Height="50">
+                        <PasswordBox FontFamily="Fonts/#Alenia"
+                                     FontWeight="Light"
+                                     Password="admin"
+                                     FontSize="20"
+                                     Foreground="White"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     Width="235"
+                                     VerticalContentAlignment="Center"
+                                     HorizontalContentAlignment="Left" />
 
-                    <iconPack:PackIconMaterial Kind="FormTextboxPassword"
-                                           VerticalAlignment="Center" 
-                                           HorizontalAlignment="Center"
-                                           Foreground="White"/>
-                </DockPanel>
-
-                <Border Width="250"
-                    Height="2"
-                    Background="White"
-                    Opacity="0.5"/>
-
-                <StackPanel Orientation="Horizontal" Margin="0,50,0,0">
-                    <Button Width="120" Height="40" Content="CONNEXION" Margin="60,0,0,20" FontFamily="Fonts/#Alenia"/>
-                    <Button Width="120" Height="40" Content="ENREGISTREMENT" Margin="15,0,0,20" FontFamily="Fonts/#Alenia"/>
+                        <iconPack:PackIconMaterial Kind="FormTextboxPassword" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                    </DockPanel>
+                    <Border Width="250" Height="2" Background="White" Opacity="0.5"/>
                 </StackPanel>
-            </StackPanel>
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" DockPanel.Dock="Bottom">
+                    <Button Width="120" Height="40" Content="CONNEXION" Margin="60,0,0,20" FontFamily="Fonts/#Alenia" Command="{Binding ConnectionCommand}"/>
+                    <Button Width="120" Height="40" Content="ENREGISTREMENT" Margin="15,0,0,20" FontFamily="Fonts/#Alenia" Command="{Binding NavigateRegisterCommand}"/>
+                </StackPanel>
+            </DockPanel>
         </Grid>
     </Grid>
 </UserControl>
