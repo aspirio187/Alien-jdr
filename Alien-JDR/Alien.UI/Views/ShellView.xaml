@@ -9,7 +9,7 @@
         xmlns:local="clr-namespace:Alien.UI.Views"
         mc:Ignorable="d"
         Title="ShellView"
-        Height="1920" Width="1080"
+        Height="1080" Width="1920"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         MouseDown="Window_MouseDown"
