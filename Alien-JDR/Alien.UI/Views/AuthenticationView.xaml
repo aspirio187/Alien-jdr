@@ -46,7 +46,7 @@
                 <TextBlock Text="Authentification"
                            Style="{StaticResource CustomFont}"
                            FontWeight="Light"
-                           FontSize="35" 
+                           FontSize="25" 
                            Foreground="White"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Bottom"

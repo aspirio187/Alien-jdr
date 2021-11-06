@@ -7,7 +7,7 @@
         <ResourceDictionary>
             <Style x:Key="CustomFont">
                 <Setter Property="TextElement.FontFamily"
-                    Value="/Fonts/#Alenia">
+                    Value="/Fonts/#alenia">
                 </Setter>
             </Style>
             <ResourceDictionary.MergedDictionaries>
