@@ -4,10 +4,11 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <StartupObject>Alien.UI.App</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Fonts\Alenia.otf" />
+    <None Remove="Fonts\alenia.regular.ttf" />
     <None Remove="Images\alienMainUI.jpg" />
   </ItemGroup>
 
@@ -26,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Fonts\Alenia.otf">
+    <Resource Include="Fonts\alenia.regular.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\alienMainUI.jpg" />

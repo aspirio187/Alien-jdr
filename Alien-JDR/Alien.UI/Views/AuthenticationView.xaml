@@ -40,11 +40,11 @@
                 </DockPanel.Background>
 
                 <DockPanel DockPanel.Dock="Top">
-                    <Button Width="20" Height="20" HorizontalAlignment="Right" Content="X" FontFamily="Alenia"/>
+                    <Button Width="20" Height="20" HorizontalAlignment="Right" Content="X" Style="{StaticResource CustomFont}"/>
                 </DockPanel>
 
                 <TextBlock Text="Authentification"
-                           FontFamily="Fonts/#Alenia"
+                           Style="{StaticResource CustomFont}"
                            FontWeight="Light"
                            FontSize="35" 
                            Foreground="White"
@@ -57,7 +57,7 @@
                 <StackPanel DockPanel.Dock="Top" >
                     <DockPanel HorizontalAlignment="Center" Height="50">
                         <!-- Mettre le nom d'utilisateur en MAJ ? Faut l'adapter à la DB -->
-                        <TextBox FontFamily="Fonts/#Alenia"
+                        <TextBox Style="{StaticResource CustomFont}"
                                 FontWeight="Light"
                                 Text="NOM D'UTILISATEUR"
                                 FontSize="20"
@@ -76,7 +76,7 @@
                     <Border Width="250" Height="2" Background="White" Opacity="0.5" HorizontalAlignment="Stretch"/>
 
                     <DockPanel HorizontalAlignment="Center" Height="50">
-                        <PasswordBox FontFamily="Fonts/#Alenia"
+                        <PasswordBox  Style="{StaticResource CustomFont}"
                                      FontWeight="Light"
                                      Password="password"
                                      FontSize="20"
@@ -93,8 +93,8 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DockPanel.Dock="Bottom" >
-                    <Button Width="120" Height="40" Margin="5" Content="CONNEXION" FontFamily="Fonts/#Alenia" Command="{Binding ConnectionCommand}"/>
-                    <Button Width="120" Height="40" Margin="5" Content="ENREGISTREMENT" FontFamily="Fonts/#Alenia" Command="{Binding NavigateRegisterCommand}"/>
+                    <Button Width="120" Height="40" Margin="5" Content="CONNEXION"  Style="{StaticResource CustomFont}" Command="{Binding ConnectionCommand}"/>
+                    <Button Width="120" Height="40" Margin="5" Content="ENREGISTREMENT"  Style="{StaticResource CustomFont}" Command="{Binding NavigateRegisterCommand}"/>
                 </StackPanel>
             </DockPanel>
         </Grid>

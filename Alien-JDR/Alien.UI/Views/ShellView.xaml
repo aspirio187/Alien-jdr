@@ -37,10 +37,11 @@
                 <Button x:Name="MinimizeButton" 
                         Content="_"
                         FontSize="16"
-                        FontFamily="Alenia"
+                        Style="{StaticResource CustomFont}"
                         FontWeight="Bold"
                         Width="25"
-                        Height="25" Click="MinimizeButton_Click"/>
+                        Height="25" Click="MinimizeButton_Click"
+                        Margin="2"/>
 
                 <Button x:Name="MaximizeButton"
                         Content="M"
@@ -48,7 +49,8 @@
                         Height="25"
                         FontSize="16"
                         FontWeight="Bold"
-                        FontFamily="Alenia" Click="MaximizeButton_Click" />
+                        Style="{StaticResource CustomFont}" Click="MaximizeButton_Click" 
+                        Margin="2"/>
 
                 <Button x:Name="CloseButton" 
                         Content="X"
@@ -56,7 +58,8 @@
                         Height="25"
                         FontSize="16"
                         FontWeight="Bold"
-                        FontFamily="Alenia" Click="CloseButton_Click"/>
+                        Style="{StaticResource CustomFont}" Click="CloseButton_Click"
+                        Margin="2"/>
             </DockPanel>
 
         </DockPanel>
@@ -67,9 +70,9 @@
                        HorizontalAlignment="Stretch"
                        TextAlignment="Center"
                        Foreground="White"
-                       FontSize="25"
+                       FontSize="40"
                        Margin="5"
-                       FontFamily="Fonts/Alenia" />
+                       Style="{StaticResource CustomFont}" />
 
             <RadioButton Content="Personnages"
                         Height="50"

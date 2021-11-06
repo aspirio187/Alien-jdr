@@ -8,68 +8,76 @@
         mc:Ignorable="d" 
              d:DesignHeight="450" 
              d:DesignWidth="800"
-             Background="Transparent">
+             Background="Gray">
+
 
     <Grid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid Background="Transparent" Grid.Column="1">
-                <Grid Margin="0 20 0 0" Background="Transparent">
-                    <Grid Height="100" Background="Transparent" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
 
-                        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
-                        <WrapPanel Grid.Column="0">
-                            <TextBlock FontSize="30" Text="Partie 1" Foreground="White" Margin="15"/>
-                        </WrapPanel>
+        <StackPanel Grid.Row="0">
+            <DataGrid x:Name="GamesDataGrid"
+                  IsReadOnly="True"
+                  AutoGenerateColumns="False"
+                  Margin="10">
 
-                        <WrapPanel Grid.Column="1">
-                            <TextBlock FontSize="30" Text="Partie 2" Foreground="White" Margin="15"/>
-                        </WrapPanel>
+                <DataGrid.Resources>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background" Value="White"/>
+                        <Setter Property="FontSize" Value="25"/>
+                        <Setter Property="FontFamily" Value="Fonts/#alenia.regular.ttf"/>
+                        <Setter Property="BorderThickness" Value="0,0,1,2"/>
+                        <Setter Property="BorderBrush" Value="Black"/>
+                        <Setter Property="Margin" Value="10"/>
+                    </Style>
+                </DataGrid.Resources>
 
-                        <WrapPanel Grid.Column="2">
-                            <TextBlock FontSize="30" Text="Partie 3" Foreground="Black" Margin="15"/>
-                        </WrapPanel>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Parties"
+                                    MinWidth="150"
+                                    Width="*"
+                                    Binding="{Binding gameID}"/>
+                    <DataGridTextColumn Header="Joueurs"
+                                    MinWidth="150"
+                                    Width="*"
+                                    Binding="{Binding playerID}"/>
+                    <DataGridTextColumn Header="Mode"
+                                    MinWidth="150"
+                                    Width="*"
+                                    Binding="{Binding gameMode}"/>
+                    <DataGridTextColumn Header="Créateur"
+                                    MinWidth="150"
+                                    Width="*"
+                                    Binding="{Binding creator}"/>
+                </DataGrid.Columns>
 
-                        <WrapPanel Grid.Column="3">
-                            <TextBlock FontSize="30" Text="Partie 4" Foreground="Black" Margin="15"/>
-                        </WrapPanel>
+            </DataGrid>
 
-                        <WrapPanel Grid.Column="4">
-                            <TextBlock FontSize="30" Text="Partie 5" Foreground="Black" Margin="15"/>
-                        </WrapPanel>
+        </StackPanel>
 
-                        <WrapPanel Grid.Column="5">
-                            <TextBlock FontSize="30" Text="Partie 6" Foreground="Black" Margin="15"/>
-                        </WrapPanel>
+        <StackPanel Grid.Row="1">
+            <TextBox x:Name="gameID" HorizontalAlignment="Center" MinWidth="300" Margin="5"></TextBox>
+            <TextBox x:Name="playerID" HorizontalAlignment="Center" MinWidth="300" Margin="5"></TextBox>
+            <TextBox x:Name="gameMode" HorizontalAlignment="Center" MinWidth="300" Margin="5"></TextBox>
+            <TextBox x:Name="creator" HorizontalAlignment="Center" MinWidth="300" Margin="5"></TextBox>
+            
+            <Button x:Name="CreateAGame" 
+                    Content="CREER UN JEU" 
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Bottom" 
+                    Style="{StaticResource CustomFont}" 
+                    Width="200" 
+                    Margin="20"
+                    Click="CreateAGame_Click"/>
 
-                        <WrapPanel Grid.Column="6">
-                            <TextBlock FontSize="30" Text="Partie 7" Foreground="Black" Margin="15"/>
-                        </WrapPanel>
+        </StackPanel>
 
-                        <WrapPanel Grid.Column="7">
-                            <TextBlock FontSize="30" Text="Partie 8" Foreground="Black" Margin="15"/>
-                        </WrapPanel>
 
-                        <WrapPanel Grid.Column="8">
-                            <TextBlock FontSize="30" Text="Partie 9" Foreground="Black" Margin="15"/>
-                        </WrapPanel>
-                    </Grid>
-                </Grid>
-            </Grid>
-        </Grid>
+
+
+
     </Grid>
 </UserControl>
