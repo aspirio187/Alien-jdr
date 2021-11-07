@@ -18,11 +18,25 @@ namespace Alien.UI.Views
     /// <summary>
     /// Logique d'interaction pour AuthenticationView.xaml
     /// </summary>
-    public partial class AuthenticationView : UserControl
+    public partial class LoginView : UserControl
     {
-        public AuthenticationView()
+        public LoginView()
         {
             InitializeComponent();
+        }
+
+        private void DockPanel_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Window parent = Window.GetWindow(this);
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                parent.DragMove();
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Alien.UI.States
 {
-    interface IAuthenticator
+    public interface IAuthenticator
     {
         UserModel User { get; }
         Task<bool> LogIn(string username, string password, string rememberMe);

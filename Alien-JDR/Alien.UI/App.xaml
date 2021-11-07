@@ -5,14 +5,16 @@
              xmlns:views="clr-namespace:Alien.UI.Views">
     <Application.Resources>
         <ResourceDictionary>
-            <Style x:Key="CustomFont">
+            <!--<Style x:Key="CustomFont">
                 <Setter Property="TextElement.FontFamily"
                     Value="/Fonts/#alenia">
                 </Setter>
-            </Style>
+            </Style>-->
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Theme/FontTheme.xaml"/>
                 <ResourceDictionary Source="Theme/GeneralButtonTheme.xaml"/>
                 <ResourceDictionary Source="Theme/MenuButtonTheme.xaml"/>
+                <ResourceDictionary Source="Theme/WindowStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
         

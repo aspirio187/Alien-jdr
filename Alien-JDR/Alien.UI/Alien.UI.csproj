@@ -10,6 +10,7 @@
   <ItemGroup>
     <None Remove="Fonts\alenia.regular.ttf" />
     <None Remove="Images\alienMainUI.jpg" />
+    <None Remove="Images\alien_banner_2000x1000-VF-1170x585.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +32,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\alienMainUI.jpg" />
+    <Resource Include="Images\alien_banner_2000x1000-VF-1170x585.jpg" />
   </ItemGroup>
 
 </Project>
