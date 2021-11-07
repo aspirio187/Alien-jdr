@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Alien.UI.Views;
+using Alien.UI.States;
 
 namespace Alien.UI
 {
@@ -24,6 +25,8 @@ namespace Alien.UI
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterSingleton<IAuthenticator, Authenticator>();
+
             containerRegistry.RegisterForNavigation<CharactersView>();
         }
     }

@@ -9,19 +9,21 @@ using System.Threading.Tasks;
 using Alien.UI.Views;
 using Prism.Commands;
 using Alien.UI.Helpers;
+using Alien.UI.States;
 
 namespace Alien.UI.ViewModels
 {
     public class ShellViewModel : ViewModelBase
     {
         private readonly IRegionManager _regionManager;
+        private readonly IAuthenticator _authenticator;
 
         public DelegateCommand NavigateCharacterCommand { get; set; }
         public DelegateCommand NavigatePartiesCommand { get; set; }
         public DelegateCommand NavigateHistoryCommand { get; set; }
         public DelegateCommand NavigateNotificationCommand { get; set; }
 
-        public ShellViewModel(IRegionManager regionManager, IRegionNavigationService regionNavigationService)
+        public ShellViewModel(IRegionManager regionManager, IRegionNavigationService regionNavigationService, IAuthenticator authenticator)
             : base(regionNavigationService)
         {
             _regionManager = regionManager ??
@@ -30,6 +32,7 @@ namespace Alien.UI.ViewModels
             // Déclaration des commandes
             LoadCommand = new(Load);
             NavigateCharacterCommand = new(NavigateCharacter);
+            _authenticator = authenticator;
         }
 
         protected override void Load()
