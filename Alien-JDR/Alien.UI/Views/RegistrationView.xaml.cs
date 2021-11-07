@@ -18,11 +18,20 @@ namespace Alien.UI.Views
     /// <summary>
     /// Logique d'interaction pour RegistrationView.xaml
     /// </summary>
-    public partial class RegistrationView : Window
+    public partial class RegistrationView : UserControl
     {
         public RegistrationView()
         {
             InitializeComponent();
+        }
+
+        private void StackPanel_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Window parent = Window.GetWindow(this);
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                parent?.DragMove();
+            }
         }
     }
 }

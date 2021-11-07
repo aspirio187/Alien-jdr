@@ -44,7 +44,7 @@
 
         <Border CornerRadius="100"/>
 
-        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Right">
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Right" Background="Transparent" MouseDown="StackPanel_MouseDown">
 
             <Button x:Name="CloseButton" 
                         Content="x" 
