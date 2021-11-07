@@ -1,4 +1,5 @@
-﻿using Alien.UI.States;
+﻿using Alien.UI.Models;
+using Alien.UI.States;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using System;
@@ -12,6 +13,14 @@ namespace Alien.UI.ViewModels
     public class RegistrationViewModel : BindableBase, IDialogAware
     {
         private readonly IAuthenticator _authenticator;
+
+        private RegistrationModel _registration;
+
+        public RegistrationModel Registration
+        {
+            get { return _registration; }
+            set { SetProperty(ref _registration, value); }
+        }
 
         public string Title => "Inscription";
 
