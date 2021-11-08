@@ -6,13 +6,10 @@
 
   <ItemGroup>
     <Compile Remove="Exceptions\**" />
-    <Compile Remove="Extensions\**" />
     <Compile Remove="ValidationAttributes\**" />
     <EmbeddedResource Remove="Exceptions\**" />
-    <EmbeddedResource Remove="Extensions\**" />
     <EmbeddedResource Remove="ValidationAttributes\**" />
     <None Remove="Exceptions\**" />
-    <None Remove="Extensions\**" />
     <None Remove="ValidationAttributes\**" />
   </ItemGroup>
 

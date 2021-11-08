@@ -25,7 +25,7 @@ namespace Alien.UI.Views
             InitializeComponent();
         }
 
-        private void StackPanel_MouseDown(object sender, MouseButtonEventArgs e)
+        private void DockPanel_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Window parent = Window.GetWindow(this);
             if (e.ChangedButton == MouseButton.Left)

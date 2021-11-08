@@ -5,6 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
+        xmlns:helper="clr-namespace:Alien.UI.Helpers"
         xmlns:local="clr-namespace:Alien.UI.Views" 
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d" 
@@ -15,6 +16,8 @@
             <Setter Property="prism:Dialog.WindowStartupLocation" Value="CenterScreen"/>
             <Setter Property="WindowStyle" Value="None" />
             <Setter Property="AllowsTransparency" Value="True" />
+            <Setter Property="Height" Value="540" />
+            <Setter Property="Width" Value="960" />
         </Style>
     </prism:Dialog.WindowStyle>
     <!--Title="RegistrationView"
@@ -30,7 +33,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="pack://application:,,,/Images/AlienRegistration.jpg"/>
         </Grid.Background>
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="480"/>
             <ColumnDefinition Width="480"/>
@@ -42,30 +45,28 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <Border CornerRadius="100"/>
+        <!--<Border CornerRadius="100"/>-->
 
-        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Right" Background="Transparent" MouseDown="StackPanel_MouseDown">
+        <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="Transparent" MouseDown="DockPanel_MouseDown">
 
-            <Button x:Name="CloseButton" 
-                        Content="x" 
-                        VerticalAlignment="Top" 
-                        HorizontalAlignment="Right"
-                        Style="{StaticResource CustomFont}" />
+            <Button x:Name="CloseButton" Style="{StaticResource CustomFont}" Content="x" 
+                    VerticalAlignment="Top" HorizontalAlignment="Right"
+                    Width="25" Height="25"/>
 
-        </StackPanel>
+        </DockPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="1">
             <TextBlock Text="ENREGISTREMENT"
-                           Style="{StaticResource CustomFont}"
-                           FontWeight="Light"
-                           FontSize="35" 
-                           Foreground="White"
-                           HorizontalAlignment="Center"/>
+                       Style="{StaticResource CustomFont}"
+                       FontWeight="Light"
+                       FontSize="35" 
+                       Foreground="White"
+                       HorizontalAlignment="Center"/>
 
             <DockPanel HorizontalAlignment="Center" >
                 <TextBox Style="{StaticResource CustomFont}"
                          FontWeight="Light"
-                         Text="Nom"
+                         Text="{Binding Registration.LastName}"
                          FontSize="20"
                          HorizontalAlignment="Center"
                          Foreground="White"
@@ -93,7 +94,7 @@
             <DockPanel HorizontalAlignment="Center" >
                 <TextBox Style="{StaticResource CustomFont}"
                          FontWeight="Light"
-                         Text="PRENOM"
+                         Text="{Binding Registration.FirstName}"
                          FontSize="20"
                          HorizontalAlignment="Center"
                          Foreground="White"
@@ -120,7 +121,7 @@
             <DockPanel HorizontalAlignment="Center" >
                 <TextBox Style="{StaticResource CustomFont}"
                          FontWeight="Light"
-                         Text="MAIL"
+                         Text="{Binding Registration.Email}"
                          FontSize="20"
                          HorizontalAlignment="Center"
                          Foreground="White"
@@ -146,6 +147,8 @@
 
             <DockPanel HorizontalAlignment="Center" >
                 <PasswordBox  Style="{StaticResource CustomFont}"
+                              helper:PasswordBoxHelper.Attach="True"
+                              helper:PasswordBoxHelper.Password="{Binding Registration.Password, Mode=TwoWay}"
                          FontWeight="Light"
                          Password="admin"
                          FontSize="20"
@@ -174,6 +177,11 @@
             <DockPanel Margin="0,40,0,0" HorizontalAlignment="Center">
                 <Button Width="200" Height="40" Content="s'enregistrer" Margin="20"   Style="{StaticResource CustomFont}"/>
                 <Button Width="200" Height="40" Content="Retour a l'authentification"   Style="{StaticResource CustomFont}"/>
+            </DockPanel>
+            <DockPanel>
+                <ListView ItemsSource="{Binding Registration.ValidationResults}">
+                    
+                </ListView>
             </DockPanel>
 
         </StackPanel>

@@ -28,6 +28,7 @@ namespace Alien.UI
             containerRegistry.RegisterSingleton<IAuthenticator, Authenticator>();
 
             containerRegistry.RegisterDialog<LoginView>();
+            containerRegistry.RegisterDialog<RegistrationView>();
 
             containerRegistry.RegisterForNavigation<CharactersView>();
         }

@@ -107,7 +107,7 @@
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DockPanel.Dock="Bottom" >
                     <Button Width="120" Height="40" Margin="5" Content="CONNEXION"  Style="{StaticResource CustomFont}" Command="{Binding ConnectionCommand}"/>
-                    <Button Width="120" Height="40" Margin="5" Content="ENREGISTREMENT"  Style="{StaticResource CustomFont}" Command="{Binding NavigateRegisterCommand}"/>
+                    <Button Width="120" Height="40" Margin="5" Content="ENREGISTREMENT"  Style="{StaticResource CustomFont}" Command="{Binding NavigateRegistrationCommand}"/>
                 </StackPanel>
             </DockPanel>
         </Grid>

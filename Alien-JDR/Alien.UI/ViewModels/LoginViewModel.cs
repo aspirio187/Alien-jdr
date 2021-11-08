@@ -1,4 +1,5 @@
 ﻿using Alien.UI.States;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using System;
@@ -12,15 +13,37 @@ namespace Alien.UI.ViewModels
     public class LoginViewModel : BindableBase, IDialogAware
     {
         private readonly IAuthenticator _authenticator;
+        private readonly IDialogService _dialogService;
 
+        private DelegateCommand _navigateRegistrationCommand;
+
+        public DelegateCommand NavigateRegistrationCommand => _navigateRegistrationCommand ??= new DelegateCommand(NavigateRegister);
+
+
+        public LoginViewModel(IAuthenticator authenticator, IDialogService dialogService)
+        {
+            _authenticator = authenticator;
+            _dialogService = dialogService;
+        }
 
         public string Title => "Connexion";
 
         public event Action<IDialogResult> RequestClose;
 
+        public void RaiseRequestClose(IDialogResult dialogResult)
+        {
+            RequestClose?.Invoke(dialogResult);
+        }
+
+        public void CloseDialog(string parameter)
+        {
+            ButtonResult buttonResult = ButtonResult.None;
+            RaiseRequestClose(new DialogResult(buttonResult));
+        }
+
         public bool CanCloseDialog()
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public void OnDialogClosed()
@@ -30,7 +53,12 @@ namespace Alien.UI.ViewModels
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
-            //throw new NotImplementedException();
+
+        }
+
+        public void NavigateRegister()
+        {
+            _dialogService.ShowDialog("RegistrationView");
         }
     }
 }

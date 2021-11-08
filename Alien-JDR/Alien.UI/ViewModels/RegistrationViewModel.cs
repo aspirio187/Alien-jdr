@@ -14,7 +14,7 @@ namespace Alien.UI.ViewModels
     {
         private readonly IAuthenticator _authenticator;
 
-        private RegistrationModel _registration;
+        private RegistrationModel _registration = new RegistrationModel();
 
         public RegistrationModel Registration
         {
