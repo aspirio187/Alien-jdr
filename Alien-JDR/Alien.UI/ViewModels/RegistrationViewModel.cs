@@ -16,6 +16,11 @@ namespace Alien.UI.ViewModels
         private readonly IAuthenticator _authenticator;
 
         private RegistrationModel _registration = new RegistrationModel();
+        public RegistrationModel Registration
+        {
+            get => _registration;
+            set => SetProperty(ref _registration, value);
+        }
 
         private DelegateCommand _registerAccountCommand;
 
@@ -24,19 +29,20 @@ namespace Alien.UI.ViewModels
         private DelegateCommand _navigateBackToLoginCommand;
 
         public DelegateCommand NavigateBackToLoginCommand => _navigateBackToLoginCommand ??= new DelegateCommand(RaiseRequestClose);
-        public RegistrationModel Registration
-        {
-            get => _registration;
-            set => SetProperty(ref _registration, value);
-        }
 
         public string Title => "Inscription";
 
         public event Action<IDialogResult> RequestClose;
 
+        public RegistrationViewModel(IAuthenticator authenticator)
+        {
+            _authenticator = authenticator ??
+                throw new ArgumentNullException(nameof(authenticator));
+        }
+
         public async Task RegisterAccount()
         {
-            await _authenticator.Register(null);
+            await _authenticator.Register(Registration);
         }
 
         public void RaiseRequestClose()

@@ -20,9 +20,15 @@ namespace Alien.UI.Views
     /// </summary>
     public partial class RegistrationView : UserControl
     {
+        public const string USERNAME = "USERNAME";
         public RegistrationView()
         {
             InitializeComponent();
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            txbUsername.Text = USERNAME;
         }
 
         private void DockPanel_MouseDown(object sender, MouseButtonEventArgs e)
@@ -31,6 +37,14 @@ namespace Alien.UI.Views
             if (e.ChangedButton == MouseButton.Left)
             {
                 parent?.DragMove();
+            }
+        }
+
+        private void txbUsername_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (txbUsername.Text.Equals(USERNAME))
+            {
+                txbUsername.Text = string.Empty;
             }
         }
     }

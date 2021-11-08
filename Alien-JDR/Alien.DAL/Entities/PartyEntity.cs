@@ -18,6 +18,6 @@ namespace Alien.DAL.Entities
         public Guid CreatorId { get; set; }
         public UserEntity Creator { get; set; }
 
-        public ICollection<PartyPlayersEntity> PartyPlayers { get; set; }
+        //public ICollection<PartyPlayersEntity> PartyPlayers { get; set; }
     }
 }

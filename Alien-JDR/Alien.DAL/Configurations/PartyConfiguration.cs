@@ -24,10 +24,10 @@ namespace Alien.DAL.Configurations
             builder.Property(x => x.CreatorId)
                 .IsRequired(true);
 
-            builder.HasOne(x => x.Creator);
+            //builder.HasOne(x => x.Creator);
 
-            builder.HasMany(x => x.PartyPlayers)
-                .WithOne(x => x.Party);                
+            //builder.HasMany(x => x.PartyPlayers)
+            //    .WithOne(x => x.Party);                
         }
     }
 }

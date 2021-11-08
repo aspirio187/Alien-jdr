@@ -13,6 +13,12 @@ namespace Alien.UI.States
     {
         private readonly IUserService _userService;
 
+        public Authenticator(IUserService userService)
+        {
+            _userService = userService ??
+                throw new ArgumentNullException(nameof(userService));
+        }
+
         public UserModel User { get; private set; }
 
         public Task<bool> LogIn(string username, string password, string rememberMe)
@@ -35,7 +41,8 @@ namespace Alien.UI.States
                 Email = registrationModel.Email,
                 Firstname = registrationModel.FirstName,
                 Lastname = registrationModel.LastName,
-                Password = registrationModel.Password
+                Password = registrationModel.Password,
+                Username = registrationModel.Username
             };
             return _userService.SignUp(userSignUp);
         }

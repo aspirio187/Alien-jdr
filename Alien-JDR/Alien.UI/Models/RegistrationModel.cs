@@ -9,7 +9,14 @@ namespace Alien.UI.Models
 {
     public class RegistrationModel : ModelBase
     {
-        [EmailAddress]
+        private string _username;
+
+        public string Username
+        {
+            get { return _username; }
+            set { ValidateProperty(ref _username, value); }
+        }
+
         private string _email;
 
         public string Email
@@ -20,7 +27,6 @@ namespace Alien.UI.Models
 
         private string _firstName;
 
-        [MinLength(2)]
         public string FirstName
         {
             get { return _firstName; }
@@ -34,7 +40,6 @@ namespace Alien.UI.Models
             get { return _lastName; }
             set { ValidateProperty(ref _lastName, value); }
         }
-
 
         private string _password;
 

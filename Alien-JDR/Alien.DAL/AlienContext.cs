@@ -13,7 +13,7 @@ namespace Alien.DAL
     {
         public DbSet<UserEntity> Users { get; set; }
         public DbSet<PartyEntity> Parties { get; set; }
-        public DbSet<PartyPlayersEntity> PartyPlayers { get; set; }
+        //public DbSet<PartyPlayersEntity> PartyPlayers { get; set; }
 
         public AlienContext()
         {
