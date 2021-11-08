@@ -21,10 +21,23 @@ namespace Alien.UI.States
 
         public UserModel User { get; private set; }
 
-        public Task<bool> LogIn(string username, string password, string rememberMe)
+        public async Task<bool> LogIn(LoginModel loginModel)
         {
+            UserSignInDto userSignIn = new UserSignInDto()
+            {
+                Username = loginModel.Username,
+                Password = loginModel.Password
+            };
             // TODO : Logique de connexion
-            throw new NotImplementedException();
+            UserDto userFromRepo = await _userService.SignInAsync(userSignIn);
+            User = new UserModel()
+            {
+                Id = userFromRepo.Id,
+                Username = userFromRepo.Username,
+                ConnectedAt = DateTimeOffset.Now,
+                ExpiresAt = DateTimeOffset.Now.AddDays(15)
+            };
+            return true;
         }
 
         public void LogOut()

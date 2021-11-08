@@ -10,7 +10,7 @@ namespace Alien.UI.States
     public interface IAuthenticator
     {
         UserModel User { get; }
-        Task<bool> LogIn(string username, string password, string rememberMe);
+        Task<bool> LogIn(LoginModel loginModel);
         Task<bool> Register(RegistrationModel registrationModel);
         void LogOut();
     }
