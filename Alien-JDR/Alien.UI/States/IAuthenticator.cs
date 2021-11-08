@@ -11,7 +11,7 @@ namespace Alien.UI.States
     {
         UserModel User { get; }
         Task<bool> LogIn(string username, string password, string rememberMe);
-        Task Register();
+        Task<bool> Register(RegistrationModel registrationModel);
         void LogOut();
     }
 }

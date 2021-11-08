@@ -1,4 +1,6 @@
-﻿using Alien.UI.Models;
+﻿using Alien.BLL.Dtos;
+using Alien.BLL.Interfaces;
+using Alien.UI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,8 @@ namespace Alien.UI.States
 {
     public class Authenticator : IAuthenticator
     {
+        private readonly IUserService _userService;
+
         public UserModel User { get; private set; }
 
         public Task<bool> LogIn(string username, string password, string rememberMe)
@@ -23,10 +27,17 @@ namespace Alien.UI.States
             throw new NotImplementedException();
         }
 
-        public Task Register()
+        public async Task<bool> Register(RegistrationModel registrationModel)
         {
             // TODO : Logique d'enregistrement
-            throw new NotImplementedException();
+            UserSignUpDto userSignUp = new UserSignUpDto()
+            {
+                Email = registrationModel.Email,
+                Firstname = registrationModel.FirstName,
+                Lastname = registrationModel.LastName,
+                Password = registrationModel.Password
+            };
+            return _userService.SignUp(userSignUp);
         }
     }
 }

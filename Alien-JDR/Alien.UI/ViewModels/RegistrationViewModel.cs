@@ -1,5 +1,6 @@
 ﻿using Alien.UI.Models;
 using Alien.UI.States;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using System;
@@ -16,15 +17,32 @@ namespace Alien.UI.ViewModels
 
         private RegistrationModel _registration = new RegistrationModel();
 
+        private DelegateCommand _registerAccountCommand;
+
+        public DelegateCommand RegisterAccountCommand => _registerAccountCommand ??= new DelegateCommand(async () => await RegisterAccount());
+
+        private DelegateCommand _navigateBackToLoginCommand;
+
+        public DelegateCommand NavigateBackToLoginCommand => _navigateBackToLoginCommand ??= new DelegateCommand(RaiseRequestClose);
         public RegistrationModel Registration
         {
-            get { return _registration; }
-            set { SetProperty(ref _registration, value); }
+            get => _registration;
+            set => SetProperty(ref _registration, value);
         }
 
         public string Title => "Inscription";
 
         public event Action<IDialogResult> RequestClose;
+
+        public async Task RegisterAccount()
+        {
+            await _authenticator.Register();
+        }
+
+        public void RaiseRequestClose()
+        {
+            RequestClose?.Invoke(null);
+        }
 
         public bool CanCloseDialog()
         {
@@ -33,12 +51,12 @@ namespace Alien.UI.ViewModels
 
         public void OnDialogClosed()
         {
-            // TODO : Si l'inscription s'est bien passé, retourner en arrière, sinon fermer le programme
+
         }
 
         public void OnDialogOpened(IDialogParameters parameters)
         {
-            // TODO : Rien
+
         }
     }
 }

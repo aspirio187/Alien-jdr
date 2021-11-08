@@ -12,24 +12,6 @@ namespace Alien.UI.Models
     {
         public ObservableCollection<ValidationResult> ValidationResults { get; private set; } = new();
 
-        //protected void OnPropertyChanged(object? value, [CallerMemberName] string property = null)
-        //{
-        //    ICollection<ValidationResult> validationResults = new Collection<ValidationResult>();
-        //    bool result = Validator.TryValidateProperty(
-        //        value,
-        //        new ValidationContext(this)
-        //        {
-        //            MemberName = property
-        //        },
-        //        validationResults);
-
-        //    if(!result)
-        //    {
-        //        ValidationResults.AddRange(validationResults);
-        //    }
-        //    OnPropertyChanged(new PropertyChangedEventArgs(property));
-        //}
-
         protected void ValidateProperty<T>(ref T origin, T value, [CallerMemberName] string property = null)
         {
             ICollection<ValidationResult> validationResults = new Collection<ValidationResult>();
