@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Alien.UI.Views;
 using Alien.UI.States;
+using Alien.BLL;
 
 namespace Alien.UI
 {
@@ -25,12 +26,15 @@ namespace Alien.UI
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.InjectNTier();
+
             containerRegistry.RegisterSingleton<IAuthenticator, Authenticator>();
 
             containerRegistry.RegisterDialog<LoginView>();
             containerRegistry.RegisterDialog<RegistrationView>();
 
             containerRegistry.RegisterForNavigation<CharactersView>();
+
         }
     }
 }

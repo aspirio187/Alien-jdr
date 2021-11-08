@@ -36,7 +36,7 @@ namespace Alien.UI.ViewModels
 
         public async Task RegisterAccount()
         {
-            await _authenticator.Register();
+            await _authenticator.Register(null);
         }
 
         public void RaiseRequestClose()
