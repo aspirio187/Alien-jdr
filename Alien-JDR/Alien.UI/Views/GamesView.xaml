@@ -7,8 +7,8 @@
         xmlns:viewmodels="clr-namespace:Alien.UI.ViewModels"
         mc:Ignorable="d" 
              d:DesignHeight="450" 
-             d:DesignWidth="800"
-             Background="Gray">
+             d:DesignWidth="1000"
+             Background="Black">
 
 
     <Grid>
@@ -26,32 +26,46 @@
 
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridColumnHeader}">
-                        <Setter Property="Background" Value="White"/>
+                        <Setter Property="Background" Value="Black"/>
                         <Setter Property="FontSize" Value="25"/>
-                        <Setter Property="FontFamily" Value="Fonts/#alenia.regular.ttf"/>
-                        <Setter Property="BorderThickness" Value="0,0,1,2"/>
-                        <Setter Property="BorderBrush" Value="Black"/>
+                        <Setter Property="FontFamily" Value="Arial Black"/>
                         <Setter Property="Margin" Value="10"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                    </Style>
+
+                    <Style TargetType="{x:Type DataGrid}">
+                        <Setter Property="Background" Value="Black"/>
+                    </Style>
+
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <Setter Property="Background" Value="Black"/>
                     </Style>
                 </DataGrid.Resources>
 
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Parties"
                                     MinWidth="150"
-                                    Width="*"
-                                    Binding="{Binding gameID}"/>
-                    <DataGridTextColumn Header="Joueurs"
-                                    MinWidth="150"
-                                    Width="*"
-                                    Binding="{Binding playerID}"/>
+                                    Width="*"/>
                     <DataGridTextColumn Header="Mode"
                                     MinWidth="150"
-                                    Width="*"
-                                    Binding="{Binding gameMode}"/>
+                                    Width="*"/>
+                    <DataGridTextColumn Header="Mode"
+                                    MinWidth="150"
+                                    Width="*"/>
                     <DataGridTextColumn Header="Créateur"
                                     MinWidth="150"
-                                    Width="*"
-                                    Binding="{Binding creator}"/>
+                                    Width="*"/>
+                    <DataGridTextColumn Header="Etat"
+                                    MinWidth="150"
+                                    Width="*"/>
+                    <DataGridTemplateColumn Header="Détailes">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Name="DetailButton" Click="ViewGameDetails_Click" Content="Détailes"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
 
             </DataGrid>
@@ -59,10 +73,7 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1">
-            <TextBox x:Name="gameID" HorizontalAlignment="Center" MinWidth="300" Margin="5"></TextBox>
-            <TextBox x:Name="playerID" HorizontalAlignment="Center" MinWidth="300" Margin="5"></TextBox>
-            <TextBox x:Name="gameMode" HorizontalAlignment="Center" MinWidth="300" Margin="5"></TextBox>
-            <TextBox x:Name="creator" HorizontalAlignment="Center" MinWidth="300" Margin="5"></TextBox>
+            
             
             <Button x:Name="CreateAGame" 
                     Content="CREER UN JEU" 
@@ -71,7 +82,8 @@
                     Style="{StaticResource CustomFont}" 
                     Width="200" 
                     Margin="20"
-                    Click="CreateAGame_Click"/>
+                    Click="CreateAGame_Click" 
+                    FontFamily="Arial Black"/>
 
         </StackPanel>
 

@@ -16,10 +16,13 @@ using System.Windows.Shapes;
 namespace Alien.UI.Views
 {
     /// <summary>
-    /// Logique d'interaction pour GamesView.xaml
+    /// Interaction logic for NotificationsView.xaml
     /// </summary>
-    public partial class GamesView : UserControl
+    public partial class NotificationsView : UserControl
     {
-       
+        public NotificationsView()
+        {
+            InitializeComponent();
+        }
     }
 }

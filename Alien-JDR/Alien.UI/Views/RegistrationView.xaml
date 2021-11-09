@@ -49,15 +49,18 @@
 
         <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="Transparent" MouseDown="DockPanel_MouseDown">
 
-            <Button x:Name="CloseButton" Style="{StaticResource CustomFont}" Content="x" 
-                    VerticalAlignment="Top" HorizontalAlignment="Right"
+            <Button x:Name="CloseButton" 
+                    Style="{StaticResource CustomFont}" 
+                    Content="x" 
+                    VerticalAlignment="Top" 
+                    HorizontalAlignment="Right"
                     Width="25" Height="25"/>
 
         </DockPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="1">
             <TextBlock Text="ENREGISTREMENT"
-                       Style="{StaticResource CustomFont}"
+                       Style="{DynamicResource CustomFont}"
                        FontWeight="Light"
                        FontSize="35" 
                        Foreground="White"

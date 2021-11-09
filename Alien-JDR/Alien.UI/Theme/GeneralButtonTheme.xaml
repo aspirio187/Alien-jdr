@@ -4,7 +4,7 @@
     <Style TargetType="{x:Type Button}">
       
         <Setter Property="Foreground" Value="White"/>
-        <Setter Property="FontFamily" Value="Alenia"/>
+        <Setter Property="FontFamily" Value="Fonts/alenia.regular.ttf #Alenia"/>
         <Setter Property="FontWeight" Value="Light"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Template">
@@ -12,7 +12,7 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                    
                     <Border Background="{TemplateBinding Background}" CornerRadius="20" BorderThickness="2" BorderBrush="White">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.FontFamily="Fonts/#alenia.regular.ttf"/>
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.FontFamily="Fonts/alenia.regular.ttf #Alenia"/>
                         
                     </Border>
                 </ControlTemplate>
