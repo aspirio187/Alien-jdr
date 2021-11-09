@@ -17,7 +17,6 @@ namespace Alien.UI.ViewModels
     public class ShellViewModel : ViewModelBase
     {
         private readonly IRegionManager _regionManager;
-        private readonly IAuthenticator _authenticator;
         private readonly IDialogService _dialogService;
 
         private DelegateCommand _navigateCharacterCommand;
@@ -27,13 +26,11 @@ namespace Alien.UI.ViewModels
         public DelegateCommand NavigateNotificationCommand { get; set; }
         public override DelegateCommand LoadCommand => _loadCommand ??= new DelegateCommand(async () => await LoadAsync());
 
-        public ShellViewModel(IRegionManager regionManager, IAuthenticator authenticator, IDialogService dialogService, IRegionNavigationService regionNavigationService)
-            : base(regionNavigationService)
+        public ShellViewModel(IRegionManager regionManager, IDialogService dialogService, IRegionNavigationService regionNavigationService, IAuthenticator authenticator)
+            : base(regionNavigationService, authenticator)
         {
             _regionManager = regionManager ??
                 throw new ArgumentNullException(nameof(regionManager));
-            _authenticator = authenticator ??
-                throw new ArgumentNullException(nameof(authenticator));
             _dialogService = dialogService ??
                 throw new ArgumentNullException(nameof(dialogService));
         }

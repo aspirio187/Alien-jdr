@@ -1,4 +1,5 @@
 ﻿using Alien.UI.Helpers;
+using Alien.UI.States;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -12,15 +13,21 @@ namespace Alien.UI.ViewModels
 {
     public class ViewModelBase : BindableBase, INavigationAware
     {
+        protected readonly IAuthenticator _authenticator;
+
         protected IRegionNavigationService _regionNavigationService;
+
+        public IRegionNavigationService RegionNavigationService => _regionNavigationService;
 
         protected DelegateCommand _loadCommand;
         public virtual DelegateCommand LoadCommand => _loadCommand;
 
-        public ViewModelBase(IRegionNavigationService regionNavigationService)
+        public ViewModelBase(IRegionNavigationService regionNavigationService, IAuthenticator authenticator)
         {
             _regionNavigationService = regionNavigationService ??
                 throw new ArgumentNullException(nameof(regionNavigationService));
+            _authenticator = authenticator ??
+                throw new ArgumentNullException(nameof(authenticator));
         }
 
         /// <summary>
