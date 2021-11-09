@@ -24,11 +24,6 @@ namespace Alien.BLL.Services
                 throw new ArgumentNullException(nameof(mapper));
         }
 
-        public CharacterService()
-        {
-
-        }
-
         public async Task<IEnumerable<CharacterMiniatureDto>> GetCharactersMiniaturesAsync(Guid userId)
         {
             if (userId == Guid.Empty) throw new ArgumentException($"The user ID \"{userId}\" is empty!");
