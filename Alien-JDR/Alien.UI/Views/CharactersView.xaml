@@ -104,7 +104,12 @@
                         Height="150"
                         Background="Red"
                         CornerRadius="10"
-                        Margin="15,0,0,0"/>
+                        Margin="15,0,0,0">
+                    <Button Width="150" Height="150" Content="+" FontSize="150" 
+                            VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                            VerticalAlignment="Center" HorizontalAlignment="Center"
+                            Command="{Binding NavigateCreateCharacterCommand}"/>
+                </Border>
 
             </WrapPanel>
 
