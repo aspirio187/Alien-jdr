@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Alien.UI.ViewModels
 {
-    public class CharacterViewModel : ViewModelBase
+    public class CharactersViewModel : ViewModelBase
     {
         private readonly ICharacterService _characterService;
 
@@ -25,7 +25,7 @@ namespace Alien.UI.ViewModels
 
         public ObservableCollection<CharacterMiniatureDto> CharacterMiniatures { get; set; }
 
-        public CharacterViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, ICharacterService characterService)
+        public CharactersViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, ICharacterService characterService)
             : base(regionNavigationService, authenticator)
         {
             _characterService = characterService ??

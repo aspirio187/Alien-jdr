@@ -118,4 +118,10 @@
 
     </WrapPanel>
 
+    <behavior:Interaction.Triggers>
+        <behavior:EventTrigger EventName="Loaded">
+            <prism:InvokeCommandAction Command="{Binding LoadCommand}"/>
+        </behavior:EventTrigger>
+    </behavior:Interaction.Triggers>
+
 </ContentControl>
