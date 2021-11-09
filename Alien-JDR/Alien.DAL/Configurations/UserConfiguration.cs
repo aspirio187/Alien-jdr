@@ -36,6 +36,9 @@ namespace Alien.DAL.Configurations
 
             builder.HasIndex(x => x.Username)
                 .IsUnique();
+
+            builder.HasMany(u => u.Characters)
+                .WithOne(u => u.Owner);
         }
     }
 }

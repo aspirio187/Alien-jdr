@@ -30,7 +30,7 @@ namespace Alien.DAL.Entities
         public int RadiationPoints { get; set; }
         public int ExperiencePoints { get; set; }
         public int StoryPoints { get; set; }
-        public List<string> MajorWounds { get; set; }
+        //public ICollection<string> MajorWounds { get; set; }
 
         [IntegerValidator(MinValue = 2, MaxValue = 5, ExcludeRange = false)]
         public int Strength { get; set; }
