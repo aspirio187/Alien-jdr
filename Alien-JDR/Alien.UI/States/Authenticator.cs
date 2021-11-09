@@ -40,10 +40,13 @@ namespace Alien.UI.States
                 ConnectedAt = DateTimeOffset.Now,
                 ExpiresAt = DateTimeOffset.Now.AddDays(15)
             };
-            using (StreamWriter sw = new StreamWriter(Global.SESSION_PATH))
+            if(loginModel.RememberMe)
             {
-                string json = JsonConvert.SerializeObject(User);
-                await sw.WriteAsync(json);
+                using (StreamWriter sw = new StreamWriter(Global.SESSION_PATH))
+                {
+                    string json = JsonConvert.SerializeObject(User);
+                    await sw.WriteAsync(json);
+                }
             }
             return true;
         }

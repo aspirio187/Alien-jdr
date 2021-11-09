@@ -23,5 +23,7 @@ namespace Alien.UI.Models
             get { return _password; }
             set { ValidateProperty(ref _password, value); }
         }
+
+        public bool RememberMe { get; set; }
     }
 }
