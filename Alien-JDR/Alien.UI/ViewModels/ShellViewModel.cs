@@ -25,6 +25,7 @@ namespace Alien.UI.ViewModels
         public DelegateCommand NavigatePartiesCommand { get; set; }
         public DelegateCommand NavigateHistoryCommand { get; set; }
         public DelegateCommand NavigateNotificationCommand { get; set; }
+        public override DelegateCommand LoadCommand => _loadCommand ??= new DelegateCommand(async () => await LoadAsync());
 
         public ShellViewModel(IRegionManager regionManager, IAuthenticator authenticator, IDialogService dialogService, IRegionNavigationService regionNavigationService)
             : base(regionNavigationService)
@@ -35,16 +36,14 @@ namespace Alien.UI.ViewModels
                 throw new ArgumentNullException(nameof(authenticator));
             _dialogService = dialogService ??
                 throw new ArgumentNullException(nameof(dialogService));
-
-            // Déclaration des commandes
-            LoadCommand = new(Load);
         }
 
-        protected override void Load()
+        protected override async Task LoadAsync()
         {
-            // TODO : Check si le joueur a déjà une session active
-
-            _dialogService.ShowDialog("LoginView", null);
+            if(!await _authenticator.IsConnected())
+            {
+                _dialogService.ShowDialog("LoginView", null);
+            }
 
             _regionNavigationService.Region = _regionManager.Regions[Global.REGION_NAME];
             Navigate(ViewsEnum.CharactersView);

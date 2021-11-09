@@ -24,6 +24,21 @@ namespace Alien.UI.States
 
         public UserModel User { get; private set; }
 
+        public async Task<bool> IsConnected()
+        {
+            using (StreamReader sr = new(Global.SESSION_PATH))
+            {
+                string jsonSession = await sr.ReadToEndAsync();
+                if (!string.IsNullOrEmpty(jsonSession))
+                {
+                    User = JsonConvert.DeserializeObject<UserModel>(jsonSession);
+                    if (User is not null)
+                        return true;
+                }
+            }
+            return false;
+        }
+
         public async Task<bool> LogIn(LoginModel loginModel)
         {
             UserSignInDto userSignIn = new UserSignInDto()
@@ -40,7 +55,8 @@ namespace Alien.UI.States
                 ConnectedAt = DateTimeOffset.Now,
                 ExpiresAt = DateTimeOffset.Now.AddDays(15)
             };
-            if(loginModel.RememberMe)
+
+            if (loginModel.RememberMe)
             {
                 using (StreamWriter sw = new StreamWriter(Global.SESSION_PATH))
                 {

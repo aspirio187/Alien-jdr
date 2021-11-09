@@ -13,7 +13,9 @@ namespace Alien.UI.ViewModels
     public class ViewModelBase : BindableBase, INavigationAware
     {
         protected IRegionNavigationService _regionNavigationService;
-        public DelegateCommand LoadCommand { get; set; }
+
+        protected DelegateCommand _loadCommand;
+        public virtual DelegateCommand LoadCommand => _loadCommand;
 
         public ViewModelBase(IRegionNavigationService regionNavigationService)
         {
@@ -49,7 +51,7 @@ namespace Alien.UI.ViewModels
                 { Global.NAVIGATION_SERVICE, _regionNavigationService }
             };
 
-            if(navigationParams is not null)
+            if (navigationParams is not null)
             {
                 foreach (var navigationParam in navigationParams)
                 {
