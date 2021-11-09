@@ -99,7 +99,6 @@
 
             </WrapPanel>
         </ScrollViewer>
-
     </Grid>
 
     <behavior:Interaction.Triggers>
