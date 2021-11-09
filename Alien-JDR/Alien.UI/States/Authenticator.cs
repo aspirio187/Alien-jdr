@@ -26,14 +26,14 @@ namespace Alien.UI.States
 
         public async Task<bool> IsConnected()
         {
-            using (StreamReader sr = new(Global.SESSION_PATH))
+            if(File.Exists(Global.SESSION_PATH))
             {
+                using StreamReader sr = new(Global.SESSION_PATH);
                 string jsonSession = await sr.ReadToEndAsync();
                 if (!string.IsNullOrEmpty(jsonSession))
                 {
                     User = JsonConvert.DeserializeObject<UserModel>(jsonSession);
-                    if (User is not null)
-                        return true;
+                    if (User is not null) return true;
                 }
             }
             return false;
