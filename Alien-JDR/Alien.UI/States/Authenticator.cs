@@ -1,8 +1,11 @@
 ﻿using Alien.BLL.Dtos;
 using Alien.BLL.Interfaces;
+using Alien.UI.Helpers;
 using Alien.UI.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,7 +31,7 @@ namespace Alien.UI.States
                 Username = loginModel.Username,
                 Password = loginModel.Password
             };
-            // TODO : Logique de connexion
+
             UserDto userFromRepo = await _userService.SignInAsync(userSignIn);
             User = new UserModel()
             {
@@ -37,18 +40,22 @@ namespace Alien.UI.States
                 ConnectedAt = DateTimeOffset.Now,
                 ExpiresAt = DateTimeOffset.Now.AddDays(15)
             };
+            using (StreamWriter sw = new StreamWriter(Global.SESSION_PATH))
+            {
+                string json = JsonConvert.SerializeObject(User);
+                await sw.WriteAsync(json);
+            }
             return true;
         }
 
         public void LogOut()
         {
-            // TODO : Logique de déconnexion
-            throw new NotImplementedException();
+            // Supprimer le fichier json
+            User = null;
         }
 
         public async Task<bool> Register(RegistrationModel registrationModel)
         {
-            // TODO : Logique d'enregistrement
             UserSignUpDto userSignUp = new UserSignUpDto()
             {
                 Email = registrationModel.Email,
