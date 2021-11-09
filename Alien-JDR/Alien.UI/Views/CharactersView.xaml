@@ -9,20 +9,13 @@
                 xmlns:local="clr-namespace:Alien.UI.Views" 
                 mc:Ignorable="d" 
                 d:DesignHeight="450" d:DesignWidth="800">
-    <WrapPanel >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-        <WrapPanel>
-
-            <TextBlock Text="N'importe"
-                   Foreground="White"
-                   FontSize="28"
-                   HorizontalAlignment="Left"
-                   Margin="0,0,0,20"/>
-
-        </WrapPanel>
-
-
-        <WrapPanel Orientation="Horizontal"
+        <!--<WrapPanel Grid.Row="1" Orientation="Horizontal"
                     Margin="0,0,0,10">
             <Border Width="400"
                     Height="200">
@@ -72,51 +65,42 @@
 
             </Border>
 
-        </WrapPanel>
+        </WrapPanel>-->
 
-        <WrapPanel>
-            <TextBlock Text="N'importe 1.2"
-                   Foreground="White"
-                   FontSize="28"
-                   HorizontalAlignment="Left"
-                   Margin="0,0,0,20"/>
-
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
             <WrapPanel Orientation="Horizontal">
 
-                <Border Width="150"
-                        Height="150"
-                        Background="Red"
-                        CornerRadius="10"/>
+                <ItemsControl ItemsSource="{Binding CharacterMiniatures}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Width="150" Height="150" Background="Red" CornerRadius="10" Margin="5">
+                                <StackPanel>
+                                    <Image Source="{Binding ImagePath}" />
+                                    <TextBlock Text="{Binding Name}" />
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
 
-                <Border Width="150"
-                        Height="150"
-                        Background="Red"
-                        CornerRadius="10"
-                        Margin="15,0,0,0"/>
+                <Border Width="150" Height="150" Background="Red" CornerRadius="10"/>
 
-                <Border Width="150"
-                        Height="150"
-                        Background="Red"
-                        CornerRadius="10"
-                        Margin="15,0,0,0"/>
+                <Border Width="150" Height="150" Background="Red" CornerRadius="10" Margin="15,0,0,0"/>
 
-                <Border Width="150"
-                        Height="150"
-                        Background="Red"
-                        CornerRadius="10"
-                        Margin="15,0,0,0">
-                    <Button Width="150" Height="150" Content="+" FontSize="150" 
-                            VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                <Border Width="150" Height="150" Background="Red" CornerRadius="10" Margin="15,0,0,0"/>
+
+                <Border Width="150" Height="150" Background="Red" CornerRadius="10" Margin="15,0,0,0">
+
+                    <Button Width="150" Content="+" FontSize="150" 
                             VerticalAlignment="Center" HorizontalAlignment="Center"
+                            VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
                             Command="{Binding NavigateCreateCharacterCommand}"/>
                 </Border>
 
             </WrapPanel>
+        </ScrollViewer>
 
-        </WrapPanel>
-
-
-    </WrapPanel>
+    </Grid>
 
     <behavior:Interaction.Triggers>
         <behavior:EventTrigger EventName="Loaded">
