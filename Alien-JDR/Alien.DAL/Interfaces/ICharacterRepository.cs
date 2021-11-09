@@ -9,6 +9,6 @@ namespace Alien.DAL.Interfaces
 {
     public interface ICharacterRepository : IRepositoryBase<CharacterEntity, int>
     {
-
+        Task<IEnumerable<CharacterEntity>> GetUserCharactersAsync(Guid userId);
     }
 }
