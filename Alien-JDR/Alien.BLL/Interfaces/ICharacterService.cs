@@ -9,6 +9,6 @@ namespace Alien.BLL.Interfaces
 {
     public interface ICharacterService
     {
-        Task<IEnumerable<CharacterMiniatureDto>> GetCharactersMiniaturesAsync();
+        Task<IEnumerable<CharacterMiniatureDto>> GetCharactersMiniaturesAsync(Guid userId);
     }
 }
