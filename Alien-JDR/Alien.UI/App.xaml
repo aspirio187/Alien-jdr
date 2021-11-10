@@ -10,7 +10,9 @@
                     Value="/Fonts/#alenia">
                 </Setter>
             </Style>-->
+           
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Theme/DataGridStyle.xaml"/>
                 <ResourceDictionary Source="Theme/FontTheme.xaml"/>
                 <ResourceDictionary Source="Theme/GeneralButtonTheme.xaml"/>
                 <ResourceDictionary Source="Theme/MenuButtonTheme.xaml"/>
