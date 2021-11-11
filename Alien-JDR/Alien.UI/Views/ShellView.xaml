@@ -29,6 +29,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="2*"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
 
@@ -98,6 +99,22 @@
                         Style="{StaticResource MenuButtonTheme}"
                         FontFamily="Fonts/#Alenia"
                         Command="{Binding NavigateNotificationCommand}"/>
+
+            <RadioButton Content="Manuel"
+                        Height="50"
+                        Foreground="White"
+                        FontSize="14"
+                        Style="{StaticResource MenuButtonTheme}"/>
+
+            
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.RowSpan="2">
+            <RadioButton Content="Credits"
+                        Height="50"
+                        Foreground="White"
+                        FontSize="14"
+                        Style="{StaticResource MenuButtonTheme}"/>
         </StackPanel>
 
         <ContentControl Grid.Row="1" Grid.Column="1" Margin="5"

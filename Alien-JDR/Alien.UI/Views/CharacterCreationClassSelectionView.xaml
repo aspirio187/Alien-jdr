@@ -1,40 +1,230 @@
-﻿<ContentControl x:Class="Alien.UI.Views.CharacterCreationClassSelectionView"
-                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-                xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-                xmlns:prism="http://prismlibrary.com/"
-                xmlns:behavior="http://schemas.microsoft.com/xaml/behaviors"
-                prism:ViewModelLocator.AutoWireViewModel="True"
-                xmlns:local="clr-namespace:Alien.UI.Views"
-                mc:Ignorable="d" 
-                d:DesignHeight="450" d:DesignWidth="800">
+﻿<UserControl x:Class="Alien.UI.Views.CharacterCreationClassSelectionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Alien.UI.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="800"
+             Background="Black"
+             >
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="50" />
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="0">
-            <RadioButton>
-                <RadioButton.Content>
-                    <StackPanel Background="Blue">
-                        <Image Height="150" Width="150"/>
-                        <Border BorderThickness="0,0,0,5" BorderBrush="Black"/>
-                        <TextBlock Text="Carrière 1" />
-                    </StackPanel>
-                </RadioButton.Content>
-            </RadioButton>
-        </StackPanel>
-        
-        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="1">
-            <RadioButton Content="Femme" />
-            <RadioButton Content="Homme" />
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="9" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label Content="Carrieres" 
+                   Style="{StaticResource CustomFont}"
+                   Foreground="White"
+                   FontSize="30"/>
         </StackPanel>
 
-        <DockPanel Background="Red" Grid.Row="2" >
-            <Button Content="Suivant" Width="150" HorizontalAlignment="Right"/>
-        </DockPanel>
+        <StackPanel Grid.Row="1" Grid.Column="0" Width="200">
+            <RadioButton>
+                <StackPanel>
+                    
+                    <Image Source="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Images\AgentDeLaCompagne.png" 
+                           Height="80"
+                           Width="100"/>
+                    
+                    <Label Content="Agent de la Compagnie" 
+                         Style="{StaticResource CustomFont}" 
+                         Foreground="White"
+                           HorizontalAlignment="Center"/>
+                    
+                </StackPanel>
+            </RadioButton>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" Width="200">
+            <RadioButton>
+                <StackPanel>
+
+                    <Image Source="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Images\Gamin.png" 
+                           Height="80"
+                           Width="100"/>
+
+                    <Label Content="Gamin" 
+                         Style="{StaticResource CustomFont}" 
+                         Foreground="White"
+                           HorizontalAlignment="Center"/>
+
+                </StackPanel>
+            </RadioButton>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="2" Width="200">
+            <RadioButton>
+                <StackPanel>
+
+                    <Image Source="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Images\AgentDeLaCompagne.png" 
+                           Height="80"
+                           Width="100"/>
+
+                    <Label Content="Marine Colonial" 
+                         Style="{StaticResource CustomFont}" 
+                         Foreground="White"
+                           HorizontalAlignment="Center"/>
+
+                </StackPanel>
+            </RadioButton>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="0" Width="200">
+            <RadioButton>
+                <StackPanel>
+
+                    <Image Source="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Images\AgentDeLaCompagne.png" 
+                           Height="80"
+                           Width="100"/>
+
+                    <Label Content="Marshal Colonial" 
+                         Style="{StaticResource CustomFont}" 
+                         Foreground="White"
+                           HorizontalAlignment="Center"/>
+
+                </StackPanel>
+            </RadioButton>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="1" Width="200">
+            <RadioButton>
+                <StackPanel>
+
+                    <Image Source="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Images\AgentDeLaCompagne.png" 
+                           Height="80"
+                           Width="100"/>
+
+                    <Label Content="Medecin" 
+                         Style="{StaticResource CustomFont}" 
+                         Foreground="White"
+                           HorizontalAlignment="Center"/>
+
+                </StackPanel>
+            </RadioButton>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="2" Width="200">
+            <RadioButton>
+                <StackPanel>
+
+                    <Image Source="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Images\AgentDeLaCompagne.png" 
+                           Height="80"
+                           Width="100"/>
+
+                    <Label Content="Officier" 
+                         Style="{StaticResource CustomFont}" 
+                         Foreground="White"
+                           HorizontalAlignment="Center"/>
+
+                </StackPanel>
+            </RadioButton>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Grid.Column="0" Width="200">
+            <RadioButton>
+                <StackPanel>
+
+                    <Image Source="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Images\AgentDeLaCompagne.png" 
+                           Height="80"
+                           Width="100"/>
+
+                    <Label Content="Pilote" 
+                         Style="{StaticResource CustomFont}" 
+                         Foreground="White"
+                           HorizontalAlignment="Center"/>
+
+                </StackPanel>
+            </RadioButton>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Grid.Column="1" Width="200">
+            <RadioButton>
+                <StackPanel>
+
+                    <Image Source="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Images\AgentDeLaCompagne.png" 
+                           Height="80"
+                           Width="100"/>
+
+                    <Label Content="Prolo" 
+                         Style="{StaticResource CustomFont}" 
+                         Foreground="White"
+                           HorizontalAlignment="Center"/>
+
+                </StackPanel>
+            </RadioButton>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Grid.Column="2" Width="200">
+            <RadioButton>
+                <StackPanel>
+
+                    <Image Source="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Images\AgentDeLaCompagne.png" 
+                           Height="80"
+                           Width="100"/>
+
+                    <Label Content="Scientifique" 
+                         Style="{StaticResource CustomFont}" 
+                         Foreground="White"
+                         HorizontalAlignment="Center"/>
+
+                </StackPanel>
+            </RadioButton>
+        </StackPanel>
+
+        <StackPanel Grid.Row="4" Grid.ColumnSpan="9" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label Content="type" 
+                   Style="{StaticResource CustomFont}"
+                   Foreground="White"
+                   FontSize="30"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <RadioButton>
+                <StackPanel>
+                    <Label Content="humain" 
+                           Style="{StaticResource CustomFont}"
+                           Foreground="White"
+                           FontSize="15"/>
+                </StackPanel>
+            </RadioButton>
+        </StackPanel>
+
+        <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <RadioButton>
+                <StackPanel>
+                    <Label Content="android" 
+                           Style="{StaticResource CustomFont}"
+                           Foreground="White"
+                           FontSize="15"/>
+                </StackPanel>
+            </RadioButton>
+        </StackPanel>
+
+        <StackPanel Grid.Row="7" Grid.Column="0" Margin="0,0,0,10">
+            <Button Width="200" Height="40" Content="confirmer"   Style="{StaticResource CustomFont}"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="7" Grid.Column="3" Margin="0,0,0,10">
+            <Button Width="200" Height="40" Content="talents"   Style="{StaticResource CustomFont}"/>
+        </StackPanel>
+
+
+
+
     </Grid>
-</ContentControl>
+</UserControl>

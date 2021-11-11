@@ -16,18 +16,13 @@ using System.Windows.Shapes;
 namespace Alien.UI.Views
 {
     /// <summary>
-    /// Logique d'interaction pour CharacterView.xaml
+    /// Interaction logic for pdfViewer.xaml
     /// </summary>
-    public partial class CharactersView : ContentControl
+    public partial class pdfViewer : UserControl
     {
-        public CharactersView()
+        public pdfViewer()
         {
             InitializeComponent();
-        }
-
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
