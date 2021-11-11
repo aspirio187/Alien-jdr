@@ -14,7 +14,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0">
@@ -25,27 +25,19 @@
                    HorizontalAlignment="Center"/>
         </StackPanel>
 
-        
-
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
-            
-            <RadioButton Background="Black" Height="80" Width="100" Margin="10" Checked="RadioButton_Checked">
+
+            <Button Background="Black" Height="80" Width="100" Margin="10" >
                 <StackPanel Orientation="Horizontal" 
                             VerticalAlignment="Center" 
                             HorizontalAlignment="Center" 
                             Background="Transparent">
-                    
+
                     <Image Source="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Images\Create.jpg"/>
                 </StackPanel>
-            </RadioButton>
+            </Button>
 
         </StackPanel>
-
-        <StackPanel Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-            <Button Width="100" Height="40" Content="Confirmer" Margin="20" Style="{StaticResource CustomFont}"/>
-        </StackPanel>
-        
-        
 
     </Grid>
 
