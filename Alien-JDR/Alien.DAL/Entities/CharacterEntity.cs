@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Alien.DAL.Entities
 {
-    public enum CharacterTypeEnum
+    public enum RaceEnum
     {
         Human,
         Android
