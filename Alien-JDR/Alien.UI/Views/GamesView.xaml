@@ -62,7 +62,7 @@
                     <DataGridTemplateColumn Header="Détailes">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Name="DetailButton" Click="ViewGameDetails_Click" Content="Détailes"/>
+                                <Button Name="DetailButton" Content="Détailes"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -82,7 +82,6 @@
                     Style="{StaticResource CustomFont}" 
                     Width="200" 
                     Margin="20"
-                    Click="CreateAGame_Click" 
                     FontFamily="Arial Black"/>
 
         </StackPanel>

@@ -21,4 +21,22 @@ namespace Alien.UI.Helpers
         HistoryView,
         NotificationView
     }
+
+    public enum RaceEnum
+    {
+        Humain,
+        Android
+    }
+
+    public enum PartyModeEnum
+    {
+        Scenario,
+        Campagned
+    }
+
+    public enum NotificationStatusEnum
+    {
+        Accepted,
+        Denied
+    }
 }

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Alien.UI.Views"
+             xmlns:Global="clr-namespace:Alien.UI.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1000">
     <Grid>
@@ -49,7 +50,7 @@
                 <DataGridTemplateColumn Header="Accepter">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Name="AccepteInvitationButton" Click="AccepterInvitation_Click" Content="Accepter"/>
+                            <Button Name="AccepteInvitationButton" Content="Accepter"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -57,12 +58,15 @@
                 <DataGridTemplateColumn Header="Refuser">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Name="RefuserInvitationButton" Click="RefuserInvitation_Click" Content="Refuser"/>
+                            <Button Name="RefuserInvitationButton"  Content="Refuser"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
 
+
         </DataGrid>
+        <Button Content="Accepter" Command="{Binding RespondCommand}" CommandParameter="{x:Static Global:NotificationStatusEnum.Accepted}" />
+
     </Grid>
 </UserControl>

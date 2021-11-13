@@ -21,9 +21,6 @@ namespace Alien.DAL.Configurations
                 .IsRequired(true)
                 .HasMaxLength(15);
 
-            builder.Property(x => x.CreatorId)
-                .IsRequired(true);
-
             //builder.HasOne(x => x.Creator);
 
             //builder.HasMany(x => x.PartyPlayers)
