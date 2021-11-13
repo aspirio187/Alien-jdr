@@ -14,7 +14,12 @@ namespace Alien.DAL
         public DbSet<UserEntity> Users { get; set; }
         public DbSet<PartyEntity> Parties { get; set; }
         public DbSet<CharacterEntity> Characters { get; set; }
-        //public DbSet<PartyPlayersEntity> PartyPlayers { get; set; }
+        public DbSet<PartyPlayersEntity> PartyPlayers { get; set; }
+        public DbSet<RoleEntity> Roles { get; set; }
+        public DbSet<EquipmentEntity> Equipments { get; set; }
+        public DbSet<NotificationEntity> Notifications { get; set; }
+        public DbSet<TalentEntity> Talents { get; set; }
+        public DbSet<WoundEntity> Wounds { get; set; }
 
         public AlienContext()
         {
