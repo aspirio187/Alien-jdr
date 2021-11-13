@@ -19,19 +19,24 @@ namespace Alien.DAL.Entities
         public int Id { get; set; }
 
         public string Name { get; set; }
-        //public string PicturePath { get; set; }
-        public string Carriere { get; set; }
+        public string PicturePath { get; set; }
+        public string Carreer { get; set; }
+        public string Race { get; set; }
         public string Appearance { get; set; }
         public string Objectives { get; set; }
 
-        public int MyProperty { get; set; }
+        public string FetishItem { get; set; }
+        public string LittleItems { get; set; }
+        public string Friend { get; set; }
+        public string Rival { get; set; }
 
         public int StressPoints { get; set; }
         public int LifePoints { get; set; }
         public int RadiationPoints { get; set; }
         public int ExperiencePoints { get; set; }
         public int StoryPoints { get; set; }
-        //public ICollection<string> MajorWounds { get; set; }
+        public ICollection<TalentEntity> Talents { get; set; }
+        public ICollection<WoundEntity> MajorWounds { get; set; }
 
         [IntegerValidator(MinValue = 2, MaxValue = 5, ExcludeRange = false)]
         public int Strength { get; set; }
@@ -65,6 +70,8 @@ namespace Alien.DAL.Entities
         public Guid UsedById { get; set; }
         public UserEntity UsedBy { get; set; }
 
-        public bool IsOriginal { get; set; }
+        public bool IsEditable { get; set; }
+        public bool IsPublic { get; set; }
+        public Guid IdentificationStamp { get; set; }
     }
 }
