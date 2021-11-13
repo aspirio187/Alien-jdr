@@ -16,18 +16,13 @@ using System.Windows.Shapes;
 namespace Alien.UI.Views
 {
     /// <summary>
-    /// Logique d'interaction pour CharacterView.xaml
+    /// Interaction logic for CreditView.xaml
     /// </summary>
-    public partial class CharactersView : ContentControl
+    public partial class CreditView : UserControl
     {
-        public CharactersView()
+        public CreditView()
         {
             InitializeComponent();
-        }
-
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

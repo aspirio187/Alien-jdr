@@ -16,9 +16,9 @@ using System.Windows.Shapes;
 namespace Alien.UI.Views
 {
     /// <summary>
-    /// Logique d'interaction pour CharacterCreationClassSelectionView.xaml
+    /// Interaction logic for CharacterCreationClassSelectionView.xaml
     /// </summary>
-    public partial class CharacterCreationClassSelectionView : ContentControl
+    public partial class CharacterCreationClassSelectionView : UserControl
     {
         public CharacterCreationClassSelectionView()
         {
