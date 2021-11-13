@@ -17,5 +17,7 @@ namespace Alien.DAL.Entities
         public string Lastname { get; set; }
 
         public ICollection<CharacterEntity> Characters { get; set; }
+        public ICollection<EquipmentEntity> Equipments { get; set; }
+        public ICollection<RoleEntity> Roles { get; set; }
     }
 }

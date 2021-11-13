@@ -16,7 +16,9 @@ namespace Alien.DAL.Entities
         public int PartyId { get; set; }
         public PartyEntity Party { get; set; }
 
-        public int CharacterId { get; set; }
+        public int? CharacterId { get; set; }
         public CharacterEntity Character { get; set; }
+
+        public bool IsCreator { get; set; }
     }
 }

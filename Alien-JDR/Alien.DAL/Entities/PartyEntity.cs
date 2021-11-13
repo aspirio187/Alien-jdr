@@ -14,9 +14,7 @@ namespace Alien.DAL.Entities
         public int MaximumPlayers { get; set; }
         public bool IsStarted { get; set; }
         public bool IsOver { get; set; }
-
-        public Guid CreatorId { get; set; }
-        public UserEntity Creator { get; set; }
+        public string HostIp { get; set; }
 
         //public ICollection<PartyPlayersEntity> PartyPlayers { get; set; }
     }
