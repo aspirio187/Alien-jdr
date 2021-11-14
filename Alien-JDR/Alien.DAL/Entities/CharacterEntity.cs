@@ -25,7 +25,7 @@ namespace Alien.DAL.Entities
         public string Appearance { get; set; }
         public string Objectives { get; set; }
 
-        public string FetishItem { get; set; } 
+        public string FetishItem { get; set; }
         // Bool si l'objet est utilisé pendant la partie
         // Changer FetishItem en objet distinct
         public string LittleItems { get; set; }
