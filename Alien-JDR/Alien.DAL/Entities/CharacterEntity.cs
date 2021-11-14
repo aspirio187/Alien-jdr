@@ -21,11 +21,13 @@ namespace Alien.DAL.Entities
         public string Name { get; set; }
         public string PicturePath { get; set; }
         public string Carreer { get; set; }
-        public string Race { get; set; }
+        public RaceEnum Race { get; set; }
         public string Appearance { get; set; }
         public string Objectives { get; set; }
 
-        public string FetishItem { get; set; }
+        public string FetishItem { get; set; } 
+        // Bool si l'objet est utilisé pendant la partie
+        // Changer FetishItem en objet distinct
         public string LittleItems { get; set; }
         public string Friend { get; set; }
         public string Rival { get; set; }
@@ -36,6 +38,7 @@ namespace Alien.DAL.Entities
         public int ExperiencePoints { get; set; }
         public int StoryPoints { get; set; }
         public ICollection<TalentEntity> Talents { get; set; }
+        // Sur base de la carrière
         public ICollection<WoundEntity> MajorWounds { get; set; }
 
         [IntegerValidator(MinValue = 2, MaxValue = 5, ExcludeRange = false)]
