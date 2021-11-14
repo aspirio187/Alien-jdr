@@ -213,16 +213,10 @@
             </RadioButton>
         </StackPanel>
 
-        <StackPanel Grid.Row="7" Grid.Column="0" Margin="0,0,0,10">
-            <Button Width="200" Height="40" Content="confirmer"   Style="{StaticResource CustomFont}"/>
-        </StackPanel>
 
         <StackPanel Grid.Row="7" Grid.Column="3" Margin="0,0,0,10">
-            <Button Width="200" Height="40" Content="talents"   Style="{StaticResource CustomFont}"/>
+            <Button Width="200" Height="40" Content="Suivant"   Style="{StaticResource CustomFont}"/>
         </StackPanel>
-
-
-
 
     </Grid>
 </ContentControl>
