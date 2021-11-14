@@ -18,9 +18,9 @@ namespace Alien.UI.Views
     /// <summary>
     /// Interaction logic for CharacterCreationClassSelectionView.xaml
     /// </summary>
-    public partial class CharacterCarreerSelectionView : ContentControl
+    public partial class CharacterCareerSelectionView : ContentControl
     {
-        public CharacterCarreerSelectionView()
+        public CharacterCareerSelectionView()
         {
             InitializeComponent();
         }
