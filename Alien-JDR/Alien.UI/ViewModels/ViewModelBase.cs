@@ -80,7 +80,8 @@ namespace Alien.UI.ViewModels
 
         public virtual void OnNavigatedTo(NavigationContext navigationContext)
         {
-            if (_regionNavigationService is null) _regionNavigationService = navigationContext.Parameters.GetValue<IRegionNavigationService>(Global.NAVIGATION_SERVICE);
+            if (_regionNavigationService is null || _regionNavigationService.Region is null) 
+                _regionNavigationService = navigationContext.Parameters.GetValue<IRegionNavigationService>(Global.NAVIGATION_SERVICE);
         }
     }
 }

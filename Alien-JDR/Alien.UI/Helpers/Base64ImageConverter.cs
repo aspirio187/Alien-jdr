@@ -19,7 +19,8 @@ namespace Alien.UI.Helpers
 
             BitmapImage bitmapImage = new();
             bitmapImage.BeginInit();
-            bitmapImage.StreamSource = new MemoryStream(System.Convert.FromBase64String(url));
+            bitmapImage.UriSource = new Uri(url);
+            bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
             bitmapImage.EndInit();
 
             return bitmapImage;

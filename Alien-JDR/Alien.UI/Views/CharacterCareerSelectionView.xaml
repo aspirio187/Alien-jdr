@@ -8,197 +8,65 @@
              xmlns:global="clr-namespace:Alien.UI.Helpers"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="800" >
-    
+             d:DesignHeight="700" d:DesignWidth="800">
+
     <Grid Background="Black">
 
         <Grid.Resources>
             <global:ComparisonConverter x:Key="ComparisonConverter" />
             <global:Base64ImageConverter x:Key="ImageConverter" />
         </Grid.Resources>
-       
+
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-
-        <StackPanel Grid.Row="0" Grid.ColumnSpan="9" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label Content="Carrieres" 
                    Style="{StaticResource CustomFont}"
                    Foreground="White"
                    FontSize="30"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Grid.Column="0" Width="200">
-            <RadioButton IsChecked="{Binding CareerSelection.Career, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static global:CareerEnum.CompanyAgent}}">
+            <ItemsControl Grid.Row="1" ItemsSource="{Binding Careers}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <RadioButton IsChecked="{Binding SelectedCareer.Career, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static global:CareerEnum.CompanyAgent}}"
+                                     Margin="5" Width="150" Height="150">
+                            <StackPanel>
+                                <Image x:Name="CompanyAgent" Source="{Binding ImagePath, Converter={StaticResource ImageConverter}}" Stretch="Fill" Height="120" Width="130"/>
+                                <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Style="{StaticResource CustomFont}" Foreground="White" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </RadioButton>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" VerticalAlignment="Stretch"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+
+            <!--<RadioButton IsChecked="{Binding SelectedCareer.Career, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static global:CareerEnum.CompanyAgent}}"
+                                     Margin="5" Width="150" Height="150">
                 <StackPanel>
-                    <Image Source="{Binding CareerSelection.ImagePath, Converter={StaticResource ImageConverter}}"
-                           Height="80" Width="100"/>
-
-                    <Label Content="Agent de la Compagnie" 
-                         Style="{StaticResource CustomFont}" 
-                         Foreground="White"
-                           HorizontalAlignment="Center"/>
+                    <Image x:Name="CompanyAgent" Source="{Binding ImagePath, Converter={StaticResource ImageConverter}}" Height="120" Width="130"/>
+                    <TextBlock Text="Agent de la compagnie" TextWrapping="Wrap" Style="{StaticResource CustomFont}" Foreground="White" HorizontalAlignment="Center"/>
                 </StackPanel>
-            </RadioButton>
-        </StackPanel>
+            </RadioButton>-->
 
-        <StackPanel Grid.Row="1" Grid.Column="1" Width="200">
-            <RadioButton>
-                <StackPanel>
-
-                    <Image Source="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Images\Gamin.png" 
-                           Height="80"
-                           Width="100"/>
-
-                    <Label Content="Gamin" 
-                         Style="{StaticResource CustomFont}" 
-                         Foreground="White"
-                           HorizontalAlignment="Center"/>
-
-                </StackPanel>
-            </RadioButton>
-        </StackPanel>
-
-        <StackPanel Grid.Row="1" Grid.Column="2" Width="200">
-            <RadioButton>
-                <StackPanel>
-
-                    <Image Source="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Images\AgentDeLaCompagne.png" 
-                           Height="80"
-                           Width="100"/>
-
-                    <Label Content="Marine Colonial" 
-                         Style="{StaticResource CustomFont}" 
-                         Foreground="White"
-                           HorizontalAlignment="Center"/>
-
-                </StackPanel>
-            </RadioButton>
-        </StackPanel>
-
-        <StackPanel Grid.Row="2" Grid.Column="0" Width="200">
-            <RadioButton>
-                <StackPanel>
-
-                    <Image Source="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Images\AgentDeLaCompagne.png" 
-                           Height="80"
-                           Width="100"/>
-
-                    <Label Content="Marshal Colonial" 
-                         Style="{StaticResource CustomFont}" 
-                         Foreground="White"
-                           HorizontalAlignment="Center"/>
-
-                </StackPanel>
-            </RadioButton>
-        </StackPanel>
-
-        <StackPanel Grid.Row="2" Grid.Column="1" Width="200">
-            <RadioButton>
-                <StackPanel>
-
-                    <Image Source="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Images\AgentDeLaCompagne.png" 
-                           Height="80"
-                           Width="100"/>
-
-                    <Label Content="Medecin" 
-                         Style="{StaticResource CustomFont}" 
-                         Foreground="White"
-                           HorizontalAlignment="Center"/>
-
-                </StackPanel>
-            </RadioButton>
-        </StackPanel>
-
-        <StackPanel Grid.Row="2" Grid.Column="2" Width="200">
-            <RadioButton>
-                <StackPanel>
-
-                    <Image Source="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Images\AgentDeLaCompagne.png" 
-                           Height="80"
-                           Width="100"/>
-
-                    <Label Content="Officier" 
-                         Style="{StaticResource CustomFont}" 
-                         Foreground="White"
-                           HorizontalAlignment="Center"/>
-
-                </StackPanel>
-            </RadioButton>
-        </StackPanel>
-
-        <StackPanel Grid.Row="3" Grid.Column="0" Width="200">
-            <RadioButton>
-                <StackPanel>
-
-                    <Image Source="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Images\AgentDeLaCompagne.png" 
-                           Height="80"
-                           Width="100"/>
-
-                    <Label Content="Pilote" 
-                         Style="{StaticResource CustomFont}" 
-                         Foreground="White"
-                           HorizontalAlignment="Center"/>
-
-                </StackPanel>
-            </RadioButton>
-        </StackPanel>
-
-        <StackPanel Grid.Row="3" Grid.Column="1" Width="200">
-            <RadioButton>
-                <StackPanel>
-
-                    <Image Source="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Images\AgentDeLaCompagne.png" 
-                           Height="80"
-                           Width="100"/>
-
-                    <Label Content="Prolo" 
-                         Style="{StaticResource CustomFont}" 
-                         Foreground="White"
-                           HorizontalAlignment="Center"/>
-
-                </StackPanel>
-            </RadioButton>
-        </StackPanel>
-
-        <StackPanel Grid.Row="3" Grid.Column="2" Width="200">
-            <RadioButton>
-                <StackPanel>
-
-                    <Image Source="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Images\AgentDeLaCompagne.png" 
-                           Height="80"
-                           Width="100"/>
-
-                    <Label Content="Scientifique" 
-                         Style="{StaticResource CustomFont}" 
-                         Foreground="White"
-                         HorizontalAlignment="Center"/>
-
-                </StackPanel>
-            </RadioButton>
-        </StackPanel>
-
-        <StackPanel Grid.Row="4" Grid.ColumnSpan="9" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label Content="race" 
                    Style="{StaticResource CustomFont}"
                    Foreground="White"
                    FontSize="30"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <RadioButton>
                 <StackPanel>
                     <Label Content="humain" 
@@ -207,9 +75,7 @@
                            FontSize="15"/>
                 </StackPanel>
             </RadioButton>
-        </StackPanel>
 
-        <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <RadioButton>
                 <StackPanel>
                     <Label Content="android" 
@@ -220,7 +86,7 @@
             </RadioButton>
         </StackPanel>
 
-        <StackPanel Grid.Row="7" Grid.Column="3" Margin="0,0,0,10">
+        <StackPanel Grid.Row="4" Grid.Column="3" Margin="0,0,0,10">
             <Button Width="200" Height="40" Content="Suivant"   Style="{StaticResource CustomFont}"/>
         </StackPanel>
 
