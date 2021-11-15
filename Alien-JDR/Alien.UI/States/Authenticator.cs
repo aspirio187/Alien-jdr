@@ -48,6 +48,7 @@ namespace Alien.UI.States
             };
 
             UserDto userFromRepo = await _userService.SignInAsync(userSignIn);
+            if (userFromRepo is null) return false;
             User = new UserModel()
             {
                 Id = userFromRepo.Id,
@@ -75,7 +76,7 @@ namespace Alien.UI.States
 
         public async Task<bool> Register(RegistrationModel registrationModel)
         {
-            UserSignUpDto userSignUp = new UserSignUpDto()
+            UserSignUpDto userSignUp = new()
             {
                 Email = registrationModel.Email,
                 Firstname = registrationModel.FirstName,

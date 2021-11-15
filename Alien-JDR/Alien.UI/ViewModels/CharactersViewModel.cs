@@ -46,7 +46,7 @@ namespace Alien.UI.ViewModels
 
         public void NavigateCreateCharacter()
         {
-
+            Navigate(Helpers.ViewsEnum.CharacterCareerSelectionView);
         }
     }
 }

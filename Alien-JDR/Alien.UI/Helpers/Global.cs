@@ -19,7 +19,8 @@ namespace Alien.UI.Helpers
         CharactersView,
         PartiesView,
         HistoryView,
-        NotificationView
+        NotificationView,
+        CharacterCareerSelectionView
     }
 
     public enum RaceEnum
@@ -38,5 +39,10 @@ namespace Alien.UI.Helpers
     {
         Accepted,
         Denied
+    }
+
+    public enum CareerEnum
+    {
+        CompanyAgent
     }
 }

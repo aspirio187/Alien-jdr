@@ -27,7 +27,7 @@
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
 
-            <Button Background="Black" Height="80" Width="100" Margin="10" >
+            <Button Background="Black" Height="80" Width="100" Margin="10" Command="{Binding NavigateCreateCharacterCommand}">
                 <StackPanel Orientation="Horizontal" 
                             VerticalAlignment="Center" 
                             HorizontalAlignment="Center" 

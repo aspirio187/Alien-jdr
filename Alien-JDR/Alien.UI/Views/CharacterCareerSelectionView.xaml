@@ -3,10 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:prism="http://prismlibrary.com/"
              xmlns:local="clr-namespace:Alien.UI.Views"
+             xmlns:global="clr-namespace:Alien.UI.Helpers"
+             prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="800" >
+    
     <Grid Background="Black">
+
+        <Grid.Resources>
+            <global:ComparisonConverter x:Key="ComparisonConverter" />
+            <global:Base64ImageConverter x:Key="ImageConverter" />
+        </Grid.Resources>
+       
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
@@ -32,18 +42,15 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="0" Width="200">
-            <RadioButton>
+            <RadioButton IsChecked="{Binding CareerSelection.Career, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static global:CareerEnum.CompanyAgent}}">
                 <StackPanel>
-
-                    <Image Source="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Images\AgentDeLaCompagne.png" 
-                           Height="80"
-                           Width="100"/>
+                    <Image Source="{Binding CareerSelection.ImagePath, Converter={StaticResource ImageConverter}}"
+                           Height="80" Width="100"/>
 
                     <Label Content="Agent de la Compagnie" 
                          Style="{StaticResource CustomFont}" 
                          Foreground="White"
                            HorizontalAlignment="Center"/>
-
                 </StackPanel>
             </RadioButton>
         </StackPanel>
