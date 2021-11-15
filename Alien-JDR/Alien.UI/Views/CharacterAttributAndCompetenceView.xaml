@@ -868,7 +868,7 @@
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Center">
 
-            <Button Width="200" Height="40" Content="Talents"   Style="{StaticResource CustomFont}"/>
+            <Button Width="200" Height="40" Content="Retour"   Style="{StaticResource CustomFont}"/>
         </StackPanel>
 
 
@@ -879,7 +879,7 @@
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Center">
 
-            <Button Width="200" Height="40" Content="Recapitulatif"   Style="{StaticResource CustomFont}"/>
+            <Button Width="200" Height="40" Content="Suivant"   Style="{StaticResource CustomFont}"/>
         </StackPanel>
     </Grid>
 </UserControl>
