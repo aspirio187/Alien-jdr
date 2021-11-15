@@ -32,32 +32,51 @@
                    FontSize="30"/>
         </StackPanel>
 
-            <ItemsControl Grid.Row="1" ItemsSource="{Binding Careers}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <RadioButton IsChecked="{Binding SelectedCareer.Career, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static global:CareerEnum.CompanyAgent}}"
-                                     Margin="5" Width="150" Height="150">
-                            <StackPanel>
-                                <Image x:Name="CompanyAgent" Source="{Binding ImagePath, Converter={StaticResource ImageConverter}}" Stretch="Fill" Height="120" Width="130"/>
-                                <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Style="{StaticResource CustomFont}" Foreground="White" HorizontalAlignment="Center"/>
-                            </StackPanel>
-                        </RadioButton>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Horizontal" VerticalAlignment="Stretch"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
+        <ListBox Grid.Row="1" ItemsSource="{Binding Careers}" SelectedItem="{Binding SelectedCareer}">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="{x:Type ListBoxItem}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
 
-            <!--<RadioButton IsChecked="{Binding SelectedCareer.Career, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static global:CareerEnum.CompanyAgent}}"
+                                <RadioButton Margin="5" Width="150" Height="150" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsSelected}">
+                                    <StackPanel>
+                                        <Image x:Name="CompanyAgent" Source="{Binding ImagePath, Converter={StaticResource ImageConverter}}" Stretch="Fill" Height="120" Width="130"/>
+                                        <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Style="{StaticResource CustomFont}" Foreground="White" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                </RadioButton>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" VerticalAlignment="Stretch"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+
+        <!--<ItemsControl Grid.Row="1" ItemsSource="{Binding Careers}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <RadioButton IsChecked="{Binding SelectedCareer.Career, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static global:CareerEnum.CompanyAgent}, Mode=TwoWay}"
                                      Margin="5" Width="150" Height="150">
-                <StackPanel>
-                    <Image x:Name="CompanyAgent" Source="{Binding ImagePath, Converter={StaticResource ImageConverter}}" Height="120" Width="130"/>
-                    <TextBlock Text="Agent de la compagnie" TextWrapping="Wrap" Style="{StaticResource CustomFont}" Foreground="White" HorizontalAlignment="Center"/>
-                </StackPanel>
-            </RadioButton>-->
+                        <StackPanel>
+                            <Image x:Name="CompanyAgent" Source="{Binding ImagePath, Converter={StaticResource ImageConverter}}" Stretch="Fill" Height="120" Width="130"/>
+                            <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Style="{StaticResource CustomFont}" Foreground="White" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </RadioButton>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" VerticalAlignment="Stretch"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>-->
+
 
         <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label Content="race" 
