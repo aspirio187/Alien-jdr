@@ -9,9 +9,7 @@ namespace Alien.UI.Models
 {
     public class CharacterCareerSelectionModel : ModelBase
     {
-        public string ImagePath { get; 
-            set; }
-        public RaceEnum Career { get; set; }
+        public CareerModel SelectedCareer { get; set; }
         public RaceEnum Race { get; set; }
     }
 }

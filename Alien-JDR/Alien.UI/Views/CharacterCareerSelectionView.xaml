@@ -32,7 +32,7 @@
                    FontSize="30"/>
         </StackPanel>
 
-        <ListBox Grid.Row="1" ItemsSource="{Binding Careers}" SelectedItem="{Binding SelectedCareer}">
+        <ListBox Grid.Row="1" Background="Transparent" ItemsSource="{Binding Careers}" SelectedItem="{Binding CareerSelection.SelectedCareer}">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="{x:Type ListBoxItem}">
                     <Setter Property="Template">
@@ -86,7 +86,7 @@
         </StackPanel>
 
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <RadioButton>
+            <RadioButton IsChecked="{Binding CareerSelection.Race, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static global:RaceEnum.Humain}}">
                 <StackPanel>
                     <Label Content="humain" 
                            Style="{StaticResource CustomFont}"
@@ -95,7 +95,7 @@
                 </StackPanel>
             </RadioButton>
 
-            <RadioButton>
+            <RadioButton IsChecked="{Binding CareerSelection.Race, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static global:RaceEnum.Android}}">
                 <StackPanel>
                     <Label Content="android" 
                            Style="{StaticResource CustomFont}"
@@ -106,7 +106,8 @@
         </StackPanel>
 
         <StackPanel Grid.Row="4" Grid.Column="3" Margin="0,0,0,10">
-            <Button Width="200" Height="40" Content="Suivant"   Style="{StaticResource CustomFont}"/>
+            <Button Width="200" Height="40" Content="Suivant" Style="{StaticResource CustomFont}"
+                    Command="{Binding NavigateNextPageCommand}"/>
         </StackPanel>
 
     </Grid>

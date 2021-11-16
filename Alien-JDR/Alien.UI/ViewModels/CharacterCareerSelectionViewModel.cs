@@ -1,5 +1,6 @@
 ﻿using Alien.UI.Models;
 using Alien.UI.States;
+using Prism.Commands;
 using Prism.Regions;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,9 @@ namespace Alien.UI.ViewModels
 
         public ObservableCollection<CareerModel> Careers { get; set; }
 
-        public CareerModel SelectedCareer { get; set; }
+        private DelegateCommand _navigateNextPageCommand;
+
+        public DelegateCommand NavigateNextPageCommand => _navigateNextPageCommand ??= new DelegateCommand(NavigateNextPage, CanNavigateNextPage);
 
         public CharacterCareerSelectionViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator)
             : base(regionNavigationService, authenticator)
@@ -44,6 +47,19 @@ namespace Alien.UI.ViewModels
             };
 
             Careers = new ObservableCollection<CareerModel>(careers);
+        }
+
+        public void NavigateNextPage()
+        {
+
+        }
+
+        public bool CanNavigateNextPage()
+        {
+            if (CareerSelection is null) return false;
+            if (CareerSelection.SelectedCareer is null) return false;
+
+            return true;
         }
 
         public bool PersistInHistory()
