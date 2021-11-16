@@ -18,9 +18,9 @@ namespace Alien.UI.Views
     /// <summary>
     /// Logique d'interaction pour CharacterInfosView.xaml
     /// </summary>
-    public partial class CharacterInfosView : ContentControl
+    public partial class CharacterInfosCreationView : ContentControl
     {
-        public CharacterInfosView()
+        public CharacterInfosCreationView()
         {
             InitializeComponent();
         }

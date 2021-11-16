@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Alien.UI.Models
 {
-    public class CharacterInfosModel : ModelBase
+    public class CharacterInfosCreationModel : ModelBase
     {
         public string Name { get; set; }
         public string Appearance { get; set; }
@@ -15,5 +15,6 @@ namespace Alien.UI.Models
         public string Rivals { get; set; }
         public string FetishItem { get; set; }
         public List<string> LittleItems { get; set; }
+        public List<string> Equipments { get; set; }
     }
 }
