@@ -1,4 +1,5 @@
-﻿using Alien.UI.Models;
+﻿using Alien.UI.Helpers;
+using Alien.UI.Models;
 using Alien.UI.States;
 using Prism.Commands;
 using Prism.Regions;
@@ -51,7 +52,11 @@ namespace Alien.UI.ViewModels
 
         public void NavigateNextPage()
         {
-
+            Navigate(ViewsEnum.CharacterInfosView, new Dictionary<string, object>()
+            {
+                { "Career", CareerSelection.SelectedCareer },
+                { "Race", CareerSelection.Race }
+            });
         }
 
         public bool CanNavigateNextPage()

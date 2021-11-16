@@ -1,0 +1,80 @@
+﻿<ContentControl x:Class="Alien.UI.Views.CharacterInfosView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:local="clr-namespace:Alien.UI.Views"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             d:DesignWidth="800">
+    <Grid Background="White">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Column="0">
+            <StackPanel>
+                <TextBlock Text="Nom" />
+                <TextBox />
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="Apparence" />
+                <TextBox TextWrapping="Wrap"  AcceptsReturn="True" Height="80"/>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="Objectifs" />
+                <TextBox TextWrapping="Wrap" AcceptsReturn="True" Height="80" />
+            </StackPanel>
+            
+            <StackPanel>
+                <TextBlock Text="Amis" />
+                <TextBox TextWrapping="Wrap" AcceptsReturn="True" Height="80"/>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="Rivaux" />
+                <TextBox TextWrapping="Wrap" AcceptsReturn="True" Height="80"/>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <StackPanel>
+                <TextBlock Text="Objet fétiche" />
+                <TextBox />
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="Objets minuscule" />
+                <TextBox />
+                <Button Content="Ajouter" Foreground="Blue" />
+                <ListBox MinHeight="80" />
+                <Button Content="Supprimer" Foreground="blue" />
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Column="2" >
+            <TextBlock Text="Equipements" />
+            <Button Content="Creer" Foreground="Blue"/>
+            <TextBlock Text="Disponible(s)" />
+            <ListBox MinHeight="80" />
+            <Button Content="Ajouter" Foreground="Blue" />
+            <TextBlock Text="Equipé(s)" />
+            <ListBox MinHeight="80"/>
+            <Button Content="Supprimer" />
+        </StackPanel>
+
+        <Button Grid.Row="2" Grid.Column="0" Content="Retour" Foreground="Blue"/>
+        <Button Grid.Row="2" Grid.Column="2" Content="Suivant" Foreground="Blue" />
+    </Grid>
+</ContentControl>
