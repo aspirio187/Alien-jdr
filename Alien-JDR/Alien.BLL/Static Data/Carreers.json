@@ -1,4 +1,24 @@
 {
-  "Name": "Agent de la compagnie",
-  "ImagePath": "https://postimg.cc/G9yKmy5n",
+  "careers": [
+    {
+      "name": "Agent de la compagnie",
+      "image" : "url",
+      "description": "Lorem Ipsum",
+      "keyAttribute": "Esprit",
+      "competences": [
+        "Comtech",
+        "Manipulation",
+        "Observation"
+      ],
+      "talents": [
+        "Moi d'abord",
+        "Prise de contrôle",
+        "Ruse"
+      ],
+      "typicalNames": [
+        "Conrad Schmidt",
+        "Alexander Balconi"
+      ]
+    }
+  ]
 }
