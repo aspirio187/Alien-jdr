@@ -1,4 +1,5 @@
-﻿using Alien.UI.Helpers;
+﻿using Alien.BLL.Dtos;
+using Alien.UI.Helpers;
 using Alien.UI.Models;
 using Alien.UI.States;
 using Prism.Commands;
@@ -52,10 +53,15 @@ namespace Alien.UI.ViewModels
 
         public void NavigateNextPage()
         {
+            CharacterCreationDto characterCreation = new CharacterCreationDto()
+            {
+                Career = CareerSelection.SelectedCareer.Name,
+                Race = CareerSelection.Race.ConvertToString()
+            };
+
             Navigate(ViewsEnum.CharacterInfosView, new Dictionary<string, object>()
             {
-                { "Career", CareerSelection.SelectedCareer },
-                { "Race", CareerSelection.Race }
+                { Global.CHARACTER_CREATION, characterCreation }
             });
         }
 

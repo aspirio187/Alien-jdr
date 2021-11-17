@@ -12,6 +12,7 @@ namespace Alien.UI.Helpers
         public const string REGION_NAME = "MainRegion";
         public const string NAVIGATION_SERVICE = "NavigationService";
         public const string SESSION_PATH = "Session";
+        public const string CHARACTER_CREATION = "Creating Character";
     }
 
     public enum ViewsEnum
