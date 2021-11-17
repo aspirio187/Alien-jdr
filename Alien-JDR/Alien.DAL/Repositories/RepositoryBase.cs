@@ -68,10 +68,9 @@ namespace Alien.DAL.Repositories
         /// </summary>
         /// <param name="entity"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        public virtual void Delete(TKey key)
+        public virtual void Delete(TEntity entity)
         {
-            if (key is null) throw new ArgumentNullException(nameof(key));
-            TEntity entity = _context.Find<TEntity>(key);
+            if (entity is null) throw new ArgumentNullException(nameof(entity));
             _context.Remove(entity);
         }
 

@@ -5,6 +5,7 @@ using Alien.DAL.Interfaces;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,39 @@ namespace Alien.BLL.Services
                 throw new ArgumentNullException(nameof(characterRepository));
             _mapper = mapper ??
                 throw new ArgumentNullException(nameof(mapper));
+        }
+
+        public bool CreateCharacter(CharacterCreationDto character)
+        {
+            if (character is null) throw new ArgumentNullException(nameof(character));
+            CharacterEntity characterToCreate = _mapper.Map<CharacterEntity>(character);
+            try
+            {
+                CharacterEntity createdCharacter = _characterRepository.Create(characterToCreate);
+                if (createdCharacter is null) return false;
+                return _characterRepository.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteCharacter(int characterId)
+        {
+            CharacterEntity characterFromRepo = await _characterRepository.GetByKeyAsync(characterId);
+            if (characterFromRepo is null) return false;
+            try
+            {
+                _characterRepository.Delete(characterFromRepo);
+                return _characterRepository.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                return false;
+            }
         }
 
         public async Task<IEnumerable<CharacterMiniatureDto>> GetCharactersMiniaturesAsync(Guid userId)

@@ -13,7 +13,7 @@ namespace Alien.DAL.Interfaces
         Task<TEntity> GetByKeyAsync(TKey key);
         TEntity Create(TEntity entity);
         void Update(TEntity entity);
-        void Delete(TKey key);
+        void Delete(TEntity entity);
         bool SaveChanges();
     }
 }

@@ -20,7 +20,7 @@ namespace Alien.DAL.Entities
 
         public string Name { get; set; }
         public string PicturePath { get; set; }
-        public string Carreer { get; set; }
+        public string Career { get; set; }
         public RaceEnum Race { get; set; }
         public string Appearance { get; set; }
         public string Objectives { get; set; }
@@ -38,25 +38,25 @@ namespace Alien.DAL.Entities
         // Sur base de la carrière
         public ICollection<WoundEntity> MajorWounds { get; set; }
 
-        [IntegerValidator(MinValue = 2, MaxValue = 5, ExcludeRange = false)]
+        [IntegerValidator(MinValue = 2,  ExcludeRange = false)]
         public int Strength { get; set; }
         public int CloseCombat { get; set; }
         public int Stamina { get; set; }
         public int HeavyMachines { get; set; }
 
-        [IntegerValidator(MinValue = 2, MaxValue = 5, ExcludeRange = false)]
+        [IntegerValidator(MinValue = 2, ExcludeRange = false)]
         public int Agility { get; set; }
         public int RangedCombat { get; set; }
         public int Mobility { get; set; }
         public int Piloting { get; set; }
 
-        [IntegerValidator(MinValue = 2, MaxValue = 5, ExcludeRange = false)]
+        [IntegerValidator(MinValue = 2, ExcludeRange = false)]
         public int Empathy { get; set; }
         public int Commanding { get; set; }
         public int Manipulation { get; set; }
         public int MedicalCare { get; set; }
 
-        [IntegerValidator(MinValue = 2, MaxValue = 5, ExcludeRange = false)]
+        [IntegerValidator(MinValue = 2, ExcludeRange = false)]
         public int Mind { get; set; }
         public int Observer { get; set; }
         public int Survival { get; set; }
