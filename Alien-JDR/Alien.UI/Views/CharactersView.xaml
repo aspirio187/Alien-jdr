@@ -8,13 +8,13 @@
                 prism:ViewModelLocator.AutoWireViewModel="True"
                 xmlns:local="clr-namespace:Alien.UI.Views" 
                 mc:Ignorable="d" 
-                d:DesignHeight="450" d:DesignWidth="800">
+                d:DesignHeight="450" d:DesignWidth="800"
+                Background="Black">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
-            
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0">

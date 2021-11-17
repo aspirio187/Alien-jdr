@@ -29,7 +29,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="2*"/>
-            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
 
@@ -106,16 +105,16 @@
                         FontSize="14"
                         Style="{StaticResource MenuButtonTheme}"/>
 
-            
-        </StackPanel>
-
-        <StackPanel Grid.Row="2" Grid.RowSpan="2">
             <RadioButton Content="Credits"
                         Height="50"
                         Foreground="White"
                         FontSize="14"
-                        Style="{StaticResource MenuButtonTheme}"/>
+                        Style="{StaticResource MenuButtonTheme}"
+                         VerticalAlignment="Bottom"/>
+
+
         </StackPanel>
+
 
         <ContentControl Grid.Row="1" Grid.Column="1" Margin="5"
                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch"

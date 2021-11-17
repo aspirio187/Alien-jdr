@@ -33,13 +33,13 @@
                  <Expander>
                      <TextBlock FontFamily="arial black"
                        Foreground="White"
-                       FontSize="30">
+                       FontSize="15">
                          description
                      </TextBlock>
                      
                  </Expander>
             </TextBlock>
-            
+
         </StackPanel>
 
         <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
@@ -58,6 +58,8 @@
                      
                  </Expander>
             </TextBlock>
+
+
 
         </StackPanel>
 
@@ -99,6 +101,7 @@
 
         </StackPanel>
 
+
         <StackPanel Grid.Row="0" Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
 
             <TextBlock FontFamily="arial black"
@@ -117,18 +120,57 @@
             </TextBlock>
 
         </StackPanel>
-        
+
+        <ListBox ItemsSource="{Binding}" Grid.Row="0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+
+                    <StackPanel Grid.Row="0" Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+
+                        <TextBlock FontFamily="arial black"
+                       Foreground="White"
+                       FontSize="30">
+                Opponent 5
+                
+                 <Expander>
+                     <TextBlock FontFamily="arial black"
+                       Foreground="White"
+                       FontSize="30">
+                         description
+                     </TextBlock>
+                     
+                 </Expander>
+            </TextBlock>
+
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <DockPanel>
+                        
+                    </DockPanel>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemContainerStyle>
+                <Style>
+                    
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+
         <!--game-->
         <StackPanel Grid.Row="1" Grid.ColumnSpan="5">
-            
+
         </StackPanel>
-        
-        
-        
+
+
+
 
         <StackPanel Grid.Row="2" Grid.ColumnSpan="5" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
-            
-            
+
+
         </StackPanel>
 
     </Grid>
