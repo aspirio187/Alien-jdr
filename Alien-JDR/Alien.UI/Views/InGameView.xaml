@@ -1,0 +1,135 @@
+﻿<Window x:Class="Alien.UI.Views.InGameView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Alien.UI.Views"
+        mc:Ignorable="d"
+        Title="InGameView" Height="1500" Width="1225"
+        WindowStyle="None"
+        Background="Black">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+
+            <TextBlock FontFamily="arial black"
+                       Foreground="White"
+                       FontSize="30">
+                Opponent 1
+                
+                 <Expander>
+                     <TextBlock FontFamily="arial black"
+                       Foreground="White"
+                       FontSize="30">
+                         description
+                     </TextBlock>
+                     
+                 </Expander>
+            </TextBlock>
+            
+        </StackPanel>
+
+        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+
+            <TextBlock FontFamily="arial black"
+                       Foreground="White"
+                       FontSize="30">
+                Opponent 2
+                
+                 <Expander>
+                     <TextBlock FontFamily="arial black"
+                       Foreground="White"
+                       FontSize="30">
+                         description
+                     </TextBlock>
+                     
+                 </Expander>
+            </TextBlock>
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+
+            <TextBlock FontFamily="arial black"
+                       Foreground="White"
+                       FontSize="30">
+                Opponent 3
+                
+                 <Expander>
+                     <TextBlock FontFamily="arial black"
+                       Foreground="White"
+                       FontSize="30">
+                         description
+                     </TextBlock>
+                     
+                 </Expander>
+            </TextBlock>
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="0" Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+
+            <TextBlock FontFamily="arial black"
+                       Foreground="White"
+                       FontSize="30">
+                Opponent 4
+                
+                 <Expander>
+                     <TextBlock FontFamily="arial black"
+                       Foreground="White"
+                       FontSize="30">
+                         description
+                     </TextBlock>
+                     
+                 </Expander>
+            </TextBlock>
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="0" Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+
+            <TextBlock FontFamily="arial black"
+                       Foreground="White"
+                       FontSize="30">
+                Opponent 5
+                
+                 <Expander>
+                     <TextBlock FontFamily="arial black"
+                       Foreground="White"
+                       FontSize="30">
+                         description
+                     </TextBlock>
+                     
+                 </Expander>
+            </TextBlock>
+
+        </StackPanel>
+        
+        <!--game-->
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="5">
+            
+        </StackPanel>
+        
+        
+        
+
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="5" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+            
+            
+        </StackPanel>
+
+    </Grid>
+</Window>
