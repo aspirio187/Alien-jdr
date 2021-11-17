@@ -8,12 +8,6 @@ using System.Threading.Tasks;
 
 namespace Alien.DAL.Entities
 {
-    public enum RaceEnum
-    {
-        Human,
-        Android
-    }
-
     public class CharacterEntity
     {
         public int Id { get; set; }
@@ -21,7 +15,7 @@ namespace Alien.DAL.Entities
         public string Name { get; set; }
         public string PicturePath { get; set; }
         public string Career { get; set; }
-        public RaceEnum Race { get; set; }
+        public string Race { get; set; }
         public string Appearance { get; set; }
         public string Objectives { get; set; }
 
