@@ -12,10 +12,10 @@
 
     <Grid Background="Black">
 
-        <Grid.Resources>
+        <!--<Grid.Resources>
             <global:ComparisonConverter x:Key="ComparisonConverter" />
             <global:Base64ImageConverter x:Key="ImageConverter" />
-        </Grid.Resources>
+        </Grid.Resources>-->
 
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>

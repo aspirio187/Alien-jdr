@@ -21,6 +21,10 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+           
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
@@ -160,18 +164,83 @@
             </ListBox.ItemContainerStyle>
         </ListBox>
 
-        <!--game-->
+        
         <StackPanel Grid.Row="1" Grid.ColumnSpan="5">
+            <!--game-->
+        </StackPanel>
+
+
+        <StackPanel Grid.Row="2" Grid.Column="0"  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+
+            <TextBox Style="{StaticResource CustomFont}" Background="Black" Foreground="White" FontSize="20">
+                Avatar
+            </TextBox>
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Grid.Column="0"  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+
+            <TextBox Style="{StaticResource CustomFont}" Background="Black" Foreground="White" FontSize="20">
+                Nom du joueur
+            </TextBox>
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="1"  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+
+            <TextBox Style="{StaticResource CustomFont}" Background="Black" Foreground="White" FontSize="20">
+                Points de vie =
+            </TextBox>
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Grid.Column="1"  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+
+            <TextBox Style="{StaticResource CustomFont}" Background="Black" Foreground="White" FontSize="20">
+                Points de stresse =
+            </TextBox>
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="4" Grid.Column="1"  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+
+            <TextBox Style="{StaticResource CustomFont}" Background="Black" Foreground="White" FontSize="20">
+                XP
+            </TextBox>
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="5" 
+                    Grid.Column="1"  
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    Margin="10">
+
+            <Button Width="200" Height="40" Content="Plus d'infos..."   Style="{StaticResource CustomFont}"/>
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" 
+                    Grid.RowSpan="5" 
+                    Grid.Column="3" 
+                    Grid.ColumnSpan="2"  
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    Margin="10">
+
+            <Button Width="150" Height="150">
+                <StackPanel>
+                    <Image Source="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Images\dice.png"/>
+                </StackPanel>
+            </Button>
 
         </StackPanel>
 
 
 
 
-        <StackPanel Grid.Row="2" Grid.ColumnSpan="5" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
-
-
-        </StackPanel>
 
     </Grid>
 </Window>
