@@ -1,4 +1,5 @@
 ﻿using Alien.BLL.Dtos;
+using Alien.BLL.Interfaces;
 using Alien.UI.Helpers;
 using Alien.UI.Models;
 using Alien.UI.States;
@@ -15,6 +16,8 @@ namespace Alien.UI.ViewModels
 {
     public class CharacterCareerSelectionViewModel : ViewModelBase, IJournalAware
     {
+        private readonly ICharacterService _characterService;
+
         private CharacterCareerSelectionModel _careerSelection = new();
 
         public CharacterCareerSelectionModel CareerSelection
@@ -29,26 +32,13 @@ namespace Alien.UI.ViewModels
 
         public DelegateCommand NavigateNextPageCommand => _navigateNextPageCommand ??= new DelegateCommand(NavigateNextPage, CanNavigateNextPage);
 
-        public CharacterCareerSelectionViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator)
+        public CharacterCareerSelectionViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, ICharacterService characterService)
             : base(regionNavigationService, authenticator)
         {
-            List<CareerModel> careers = new List<CareerModel>()
-            {
-                new CareerModel()
-                {
-                    Name = "Agent de la compagnie",
-                    Career = Helpers.CareerEnum.CompanyAgent,
-                    ImagePath = "https://i.postimg.cc/ryhPgGGs/Agent-De-La-Compagne.png"
-                },
-                new CareerModel()
-                {
-                    Name = "Marshal de l'espace",
-                    Career = Helpers.CareerEnum.CompanyAgent,
-                    ImagePath = "https://i.postimg.cc/ryhPgGGs/Agent-De-La-Compagne.png"
-                }
-            };
+            _characterService = characterService ??
+                throw new ArgumentNullException(nameof(characterService));
 
-            Careers = new ObservableCollection<CareerModel>(careers);
+            LoadCareers();
         }
 
         public void NavigateNextPage()
@@ -76,6 +66,25 @@ namespace Alien.UI.ViewModels
         public bool PersistInHistory()
         {
             return true;
+        }
+
+        private void LoadCareers()
+        {
+            IEnumerable<CareerFromJsonDto> careersFromFile = _characterService.GetCareersFromJson();
+
+            List<CareerModel> careers = new List<CareerModel>();
+
+            foreach (var career in careersFromFile)
+            {
+                careers.Add(new CareerModel()
+                {
+                    Name = career.Name,
+                    ImagePath = career.Image,
+                    Description = career.Description
+                });
+            }
+
+            Careers = new ObservableCollection<CareerModel>(careers);
         }
     }
 }

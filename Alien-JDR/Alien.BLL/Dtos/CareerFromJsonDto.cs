@@ -9,6 +9,7 @@ namespace Alien.BLL.Dtos
     public class CareerFromJsonDto
     {
         public string Name { get; set; }
+        public string Image { get; set; }
         public string Description { get; set; }
         public string KeyAttribute { get; set; }
         public IEnumerable<string> Competences { get; set; }

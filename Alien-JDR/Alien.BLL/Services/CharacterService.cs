@@ -3,6 +3,7 @@ using Alien.BLL.Interfaces;
 using Alien.DAL.Entities;
 using Alien.DAL.Interfaces;
 using AutoMapper;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -63,6 +64,11 @@ namespace Alien.BLL.Services
             if (userId == Guid.Empty) throw new ArgumentException($"The user ID \"{userId}\" is empty!");
             IEnumerable<CharacterEntity> charactersFromRepo = await _characterRepository.GetUserCharactersAsync(userId);
             return _mapper.Map<IEnumerable<CharacterMiniatureDto>>(charactersFromRepo);
+        }
+
+        public IEnumerable<CareerFromJsonDto> GetCareersFromJson()
+        {
+            return JsonConvert.DeserializeObject<IEnumerable<CareerFromJsonDto>>("../../Static Data/Careers.json");
         }
     }
 }

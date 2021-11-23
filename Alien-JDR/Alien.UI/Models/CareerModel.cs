@@ -11,6 +11,6 @@ namespace Alien.UI.Models
     {
         public string Name { get; set; }
         public string ImagePath { get; set; }
-        public CareerEnum Career { get; set; }
+        public string Description { get; set; }
     }
 }

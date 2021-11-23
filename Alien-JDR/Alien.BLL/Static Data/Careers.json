@@ -2,7 +2,7 @@
   "careers": [
     {
       "name": "Agent de la compagnie",
-      "image" : "url",
+      "image": "https://i.postimg.cc/ryhPgGGs/Agent-De-La-Compagne.png",
       "description": "Vous avez les dents longues. Dans l'espace, les occasions à saisir sont légion, et on vous a affecté à la Frontière dans l'espoir que vous dénichiez la prochaine. Qu'il s'agisse de récupérer des informations secrètes ou localiser de nouveau filon de minéraux, voir une forme de vie jusqu'ici inconnue à exploiter, c'est à vous de marquer un essai pour la compagnie et de vous en servir pour gravir à vitesse grand V les échelons hiérarchiques. Vous avez tendance à éviter de vous attacher, considérant plutôt tous ceux que vous croisez comme des ressources. Vous vous préoccuperez de votre prochain plus tard. Pour le moment, tout ce qui compte, ce sont les bénéfices.",
       "keyAttribute": "Esprit",
       "competences": [
