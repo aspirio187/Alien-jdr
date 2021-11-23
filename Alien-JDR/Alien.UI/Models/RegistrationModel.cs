@@ -9,6 +9,7 @@ namespace Alien.UI.Models
 {
     public class RegistrationModel : ModelBase
     {
+        [MaxLength(50, ErrorMessage = "La taille maximale est de 50!")]
         private string _username;
 
         public string Username
