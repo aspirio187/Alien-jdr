@@ -3,7 +3,7 @@
     {
       "name": "Agent de la compagnie",
       "image" : "url",
-      "description": "Lorem Ipsum",
+      "description": "Vous avez les dents longues. Dans l'espace, les occasions à saisir sont légion, et on vous a affecté à la Frontière dans l'espoir que vous dénichiez la prochaine. Qu'il s'agisse de récupérer des informations secrètes ou localiser de nouveau filon de minéraux, voir une forme de vie jusqu'ici inconnue à exploiter, c'est à vous de marquer un essai pour la compagnie et de vous en servir pour gravir à vitesse grand V les échelons hiérarchiques. Vous avez tendance à éviter de vous attacher, considérant plutôt tous ceux que vous croisez comme des ressources. Vous vous préoccuperez de votre prochain plus tard. Pour le moment, tout ce qui compte, ce sont les bénéfices.",
       "keyAttribute": "Esprit",
       "competences": [
         "Comtech",
@@ -18,6 +18,166 @@
       "typicalNames": [
         "Conrad Schmidt",
         "Alexander Balconi"
+      ]
+    },
+	{
+      "name": "Gamin",
+      "image" : "url",
+      "description": "Vous n'avez jamais demandé à vivre à la Frontière: vos parents vous y ont traîné bien malgré vous. Les adultes vous demandent sans arrêt ce que vous voulez devenir plus tard, mais tout ce qui vous intéresse vous, c'est de rester gosse. Autrefois, vous fantasmiez sur cette vie d'adulte où on peut veillez tard et bouffer n'importe quoi n'importe quand. Mais en réalité, la plupart des adultes que vous côtoyez à la Frontière sont tout le temps crevés et malheureux. Il n'y a pas grand chose à faire pour s'occuper, là où vous vivez, alors vous vous trouver des loisirs. Vous aurez bien le temps de grandir plus tard. Pour le moment, jouer à cache-cache dans les conduits de ventilation suffit à votre bonheur.",
+      "keyAttribute": "Agilité",
+      "competences": [
+        "Mobilité",
+        "Observation",
+        "Survie"
+      ],
+      "talents": [
+        "Esquive",
+        "Passe-partout",
+        "Vif"
+      ],
+      "typicalNames": [
+        "Hugo Turner",
+        "Becca David"
+      ]
+    },
+	{
+      "name": "Marine colonial",
+      "image" : "url",
+      "description": "La plupart de vos amis ne verront jamais d’autre monde... mais vous, si. Dès que vous avez été en âge, vous vous êtes engagés dans l’USCMC. Ca ne paie quasiment rien, et ne parlons même pas de la bouffe, mais vous avez toujours un lit où pioncer, et vous pouvez canarder des tas de trucs avec des tas de flingues. Au sein des Marines, on ne s’ennuie jamais... mais vous commencez à voir le revers de la médaille. Vous avez été témoin de chose que vous n’oublierez jamais, et d’autre que vous rêveriez de pouvoir effacer de votre mémoire.",
+      "keyAttribute": "Force",
+      "competences": [
+        "Combat à distance",
+        "Combat rapproché",
+        "Endurance"
+      ],
+      "talents": [
+        "Déconnade",
+        "Dépassement de soi",
+        "Folie meutrière"
+      ],
+      "typicalNames": [
+        "Marcus Mullaney",
+        "Chrissy Lopez"
+      ]
+    },
+	{
+      "name": "Marshal colonial",
+      "image" : "url",
+      "description": "A la frontière, on croise des individus sans foi ni loi. Les Marines Coloniaux ne sont pas assez nombreux: ils n’ont ni le temps ni l’envie de faire respecter l’ordre et la justice. Mais pas de panique, il y a un nouveau shérif en ville: vous. La plupart des officiers des forces de l’ordre de la Frontière ne sont que des marionnettes à la solde d’une compagnie ou d’une autre, mais pas vous. Vous n’acceptez pas les pots-de-vin, vous ne fermez jamais les yeux sur un délit. Vous vous êtes fait beaucoup d’ennemis, des deux cotés de la barrière de la loi, mais c’est dans votre colonie que l’on constate le taux de criminalité le plus bas de tout le système. Ce n’est qu’une question de temps avant que vous fassiez chier le mauvais PDG et qu’on envoie quelqu’un s’occuper de votre cas, mais ça ne vous fait ni chaud ni froid. Vous serez prêt.",
+      "keyAttribute": "Esprit",
+      "competences": [
+        "Combat à distance",
+        "Manipulation",
+        "Observation"
+      ],
+      "talents": [
+        "Autorité",
+        "Investigateur",
+        "Neutralisation"
+      ],
+      "typicalNames": [
+        "Jack Kitani",
+        "Angela Harris"
+      ]
+    },
+	{
+      "name": "Médecin",
+      "image" : "url",
+      "description": "Il existe mille et une façons de mourir dans l’espace: exposé au vide spatial, contaminé par des organismes monstrueux, abattu par la balle perdue d’un prolo bourré... Dans tous ces cas de figure, c’est vous qui apportez les bandages et les injections d’adrénaline. Quand quelqu’un a subi un traumatisme, ce sont les premières minutes qui comptent. Si la victime survit assez longtemps pour arriver jusqu’à un médipod, vous avez fait votre job. Au début, vous faisiez partie des médecins altruistes de la Frontière, mais à force d’en voir de toutes les couleurs, vous voilà désormais blasé. Vous avez croisé trop d’accros aux antidouleurs dans le Voile Extérieur, et la plupart des colonies ne répondent pas aux critères sanitaires et sécuritaires de base. Par conséquent, il y aura toujours des gens blessés. Votre travail ne s’arrêtera jamais.",
+      "keyAttribute": "Empathie",
+      "competences": [
+        "Mobilité",
+        "Observation",
+        "Soins médicaux"
+      ],
+      "talents": [
+        "Chirurgien de terrain",
+        "Compassion",
+        "Présence apaisante"
+      ],
+      "typicalNames": [
+        "Anna Kasnakiv",
+        "Sullivan Ward"
+      ]
+    },
+	{
+      "name": "Officier",
+      "image" : "url",
+      "description": "Quand tout se barre en sucette - la compagnie retient le salaire de votre équipe en otage, il faut remplir une vraie montagne de paperasse après ce dernier incident près de Thedus, et tout le monde se sent sous pression à cause de Dieu sait combien de proches restés à la maison -, vous ne regrettez pas tout ces années passées à apprendre ce métier. Vous êtes la figure d’autorité, le modèle, la voix de vos supérieurs et l’avocat de tout les membres d’équipage. Mais c’est aussi vous qu’ils se fichent au mess quand vous avez le dos tourné... jusqu’à ce que la situation s’aggrave et qu’ils se tournent vers vous pour savoir quoi faire. Espérons que votre entraînement vous ait préparé à ça aussi.",
+      "keyAttribute": "Empathie",
+      "competences": [
+        "Combat à distance",
+        "Commandement",
+        "Manipulation"
+      ],
+      "talents": [
+        "Influence",
+        "Jouer du galon",
+        "Officier de terrain"
+      ],
+      "typicalNames": [
+        "Oliver Bryant",
+        "Julia Kwang"
+      ]
+    },
+	{
+      "name": "Pilote",
+      "image" : "url",
+      "description": "La seule limite, ce sont les étoiles, et les étoiles sont infinies. Garder les pieds sur terre, ça ne vous suffit pas, et à la Frontière, vous n’êtes pas obligé. Des chasseurs aux vaisseaux de largage, des cargos aux frégates, il y a toujours quelque chose à faire voler, et des acrobaties aériennes à effectuer de main de maître. Vous n’avez pas choisi ce job pour le salaire, même si vous ne crachez pas dessus. Vous, ce qui vous botte, c’est le frisson, l’adrénaline. Vous vivez pour le danger, mais attention: gardez votre sang-froid, de peur que la prochaine fois que vous vous faufilerez dans une ceinture d’astéroïdes ou que vous piquerez vers le sol ne soit votre dernière balade.",
+      "keyAttribute": "Agilité",
+      "competences": [
+        "Combat à distance",
+        "Comtech",
+        "Pilotage"
+      ],
+      "talents": [
+        "Pleins gaz",
+        "Sur le bout des doigts",
+        "Téméraire"
+      ],
+      "typicalNames": [
+        "Casper Edmonton",
+        "Igraine Turner"
+      ]
+    },
+	{
+      "name": "Prolo",
+      "image" : "url",
+      "description": "Il faut bien que quelqu’un se charge du travail manuel à la Frontière, et ce quelqu’un, c’est vous. La vie ne vous a pas fait de cadeau, mais vous lui avez toujours rendu les coups. Vous avez participé à d’innombrables bagarres de bar, vous jurez comme un charretier et vous rotez à table. Bref, tout le monde vous prend pour un rustre. Vous, vous n’en avez rien à cirer: la politesse, ça ne vous fait ni chaud ni froid dorénavant. Personne ne travaille plus dur que vous. Vous vous levez avant l’aube et vous finissez votre journée de taf tard le soir. Vous êtes ce rouage qui permet à la machine de la Frontière de continuer à tourner. Vous avez les mains calleuses, la gueule crasseuse, et même si vous bossez comme un dingue, vous vous déchaînez encore plus qu’il s’agit de faire la java.",
+      "keyAttribute": "Force",
+      "competences": [
+        "Combat rapproché",
+        "Endurance",
+        "Machines lourdes"
+      ],
+      "talents": [
+        "Blasé",
+        "Coriace",
+        "Cran"
+      ],
+      "typicalNames": [
+        "Kip Tranter",
+        "Sassy Diaz"
+      ]
+    },
+	{
+      "name": "Scientifique",
+      "image" : "url",
+      "description": "Chaque jour on découvre de nouvelles pièces du puzzle de l’existence à la Frontière. En comprenant comment les associer, l’humanité pourrait franchir d’un bond le prochain obstacle que lui oppose la nature; une petite thèse et vous recevez le respect qui vous est dû. Certains vous trouvent froid et détaché, mais ils ne comprennent pas votre passion pour le savoir. Quand vous vous spécialisez en xénobiologie, en astrophysique, en robotique ou même en archéologie, l’espace recèle d’innombrables trésors: il suffirait de tomber sur le bon astéroïde pour les dénicher. Que ce soit vous qui accomplissiez cette prouesse ou non, vous êtes le plus qualifié pour comprendre réellement les trésors en question.",
+      "keyAttribute": "Esprit",
+      "competences": [
+        "Comtech",
+        "Observation",
+        "Survie"
+      ],
+      "talents": [
+        "Analyse",
+        "Curiosité",
+        "Découverte"
+      ],
+      "typicalNames": [
+        "Elena Sanchez",
+        "Louise Mallory"
       ]
     }
   ]
