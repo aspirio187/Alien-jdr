@@ -13,6 +13,9 @@ namespace Alien.DAL.Configurations
     {
         public void Configure(EntityTypeBuilder<UserEntity> builder)
         {
+            builder.Property(p => p.Id)
+                .IsRequired(true);
+
             builder.Property(x => x.Username)
                 .IsRequired()
                 .HasMaxLength(50);
