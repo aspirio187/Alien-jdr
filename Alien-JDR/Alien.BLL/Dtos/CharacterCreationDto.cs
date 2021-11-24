@@ -14,7 +14,7 @@ namespace Alien.BLL.Dtos
         public string Race { get; set; }
         public string Appearance { get; set; }
         public string Objectives { get; set; }
-        public List<string> Items { get; set; }
+        public List<ItemCreationDto> Items { get; set; }
         public string Friends { get; set; }
         public string Rivals { get; set; }
         public TalentDto Talent { get; set; }

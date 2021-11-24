@@ -16,6 +16,11 @@ namespace Alien.UI.ViewModels
 
         }
 
+        public override void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            base.OnNavigatedTo(navigationContext);
+        }
+
         public bool PersistInHistory()
         {
             return true;
