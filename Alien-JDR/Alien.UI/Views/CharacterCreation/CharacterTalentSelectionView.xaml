@@ -33,6 +33,39 @@
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
 
+        <ListBox Grid.Row="1" Background="Transparent" ItemsSource="{Binding Talents}" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 SelectedItem="{Binding SelectedTalent}">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="{x:Type ListBoxItem}">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
+
+                                <RadioButton Margin="5" Width="150" Height="150" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsSelected}">
+                                    <StackPanel>
+                                        <Expander>
+                                            
+                                        </Expander>
+                                        <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Style="{StaticResource CustomFont}" Foreground="White" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                </RadioButton>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" VerticalAlignment="Stretch" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+
+        <Expander Header="{Binding Name}" Foreground="Blue" Width="200" Background="Blue">
+            <TextBlock Text="{Binding Description}" TextWrapping="Wrap" />
+        </Expander>
+        
         <StackPanel Grid.Row="0" 
                     Orientation="Horizontal" 
                     HorizontalAlignment="Center" 
