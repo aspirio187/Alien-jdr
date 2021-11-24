@@ -19,7 +19,7 @@ namespace Alien.UI.Helpers
 
             BitmapImage bitmapImage = new();
             bitmapImage.BeginInit();
-            bitmapImage.UriSource = new Uri(url);
+            bitmapImage.UriSource = !url.Equals("url") ? new Uri(url) : new Uri("https://i.postimg.cc/ryhPgGGs/Agent-De-La-Compagne.png");
             bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
             bitmapImage.EndInit();
 

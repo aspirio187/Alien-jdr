@@ -22,7 +22,7 @@ namespace Alien.UI.Helpers
         HistoryView,
         NotificationView,
         CharacterCareerSelectionView,
-        CharacterInfosView,
+        CharacterInfosCreationView,
     }
 
     public enum RaceEnum

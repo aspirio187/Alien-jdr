@@ -23,14 +23,18 @@ namespace Alien.UI.ViewModels
         public CharacterCareerSelectionModel CareerSelection
         {
             get { return _careerSelection; }
-            set { SetProperty(ref _careerSelection, value); }
+            set 
+            { 
+                SetProperty(ref _careerSelection, value);
+                NavigateNextPageCommand.RaiseCanExecuteChanged();
+            }
         }
 
         public ObservableCollection<CareerModel> Careers { get; set; }
 
         private DelegateCommand _navigateNextPageCommand;
 
-        public DelegateCommand NavigateNextPageCommand => _navigateNextPageCommand ??= new DelegateCommand(NavigateNextPage, CanNavigateNextPage);
+        public DelegateCommand NavigateNextPageCommand => _navigateNextPageCommand ??= new DelegateCommand(NavigateNextPage);
 
         public CharacterCareerSelectionViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, ICharacterService characterService)
             : base(regionNavigationService, authenticator)
@@ -43,24 +47,16 @@ namespace Alien.UI.ViewModels
 
         public void NavigateNextPage()
         {
-            CharacterCreationDto characterCreation = new CharacterCreationDto()
+            CharacterCreationDto characterCreation = new()
             {
                 Career = CareerSelection.SelectedCareer.Name,
                 Race = CareerSelection.Race.ConvertToString()
             };
 
-            Navigate(ViewsEnum.CharacterInfosView, new Dictionary<string, object>()
+            Navigate(ViewsEnum.CharacterInfosCreationView, new Dictionary<string, object>()
             {
                 { Global.CHARACTER_CREATION, characterCreation }
             });
-        }
-
-        public bool CanNavigateNextPage()
-        {
-            if (CareerSelection is null) return false;
-            if (CareerSelection.SelectedCareer is null) return false;
-
-            return true;
         }
 
         public bool PersistInHistory()
@@ -70,11 +66,11 @@ namespace Alien.UI.ViewModels
 
         private void LoadCareers()
         {
-            IEnumerable<CareerFromJsonDto> careersFromFile = _characterService.GetCareersFromJson();
+            CareerFromJsonDto[] careersFromFile = _characterService.GetCareersFromJson();
 
-            List<CareerModel> careers = new List<CareerModel>();
+            List<CareerModel> careers = new();
 
-            foreach (var career in careersFromFile)
+            foreach (CareerFromJsonDto career in careersFromFile)
             {
                 careers.Add(new CareerModel()
                 {

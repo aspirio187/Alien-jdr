@@ -12,8 +12,8 @@ namespace Alien.BLL.Dtos
         public string Image { get; set; }
         public string Description { get; set; }
         public string KeyAttribute { get; set; }
-        public IEnumerable<string> Competences { get; set; }
-        public IEnumerable<string> Talents { get; set; }
-        public IEnumerable<string> TypicalNames { get; set; }
+        public string[] Competences { get; set; }
+        public string[] Talents { get; set; }
+        public string[] TypicalNames { get; set; }
     }
 }

@@ -7,7 +7,9 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -66,9 +68,12 @@ namespace Alien.BLL.Services
             return _mapper.Map<IEnumerable<CharacterMiniatureDto>>(charactersFromRepo);
         }
 
-        public IEnumerable<CareerFromJsonDto> GetCareersFromJson()
+        public CareerFromJsonDto[] GetCareersFromJson()
         {
-            return JsonConvert.DeserializeObject<IEnumerable<CareerFromJsonDto>>("../../Static Data/Careers.json");
+            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Static Data\Careers.json");
+            string file = File.ReadAllText("../../../../Alien.BLL/Static Data/Careers.json", Encoding.GetEncoding("iso-8859-1"));
+
+            return JsonConvert.DeserializeObject<CareerFromJsonDto[]>(file.Trim());
         }
     }
 }
