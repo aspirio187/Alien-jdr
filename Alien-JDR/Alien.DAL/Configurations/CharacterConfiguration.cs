@@ -16,6 +16,9 @@ namespace Alien.DAL.Configurations
             builder.Property(p => p.OwnerId)
                 .IsRequired(true);
 
+            builder.Property(p => p.IdentificationStamp)
+                .IsRequired(true);
+
             builder.HasOne(p => p.Owner)
                 .WithMany(c => c.Characters)
                 .IsRequired(true)
@@ -23,8 +26,9 @@ namespace Alien.DAL.Configurations
 
             builder.HasOne(p => p.UsedBy)
                 .WithOne()
-                .IsRequired(false)
+                .IsRequired(true)
                 .OnDelete(DeleteBehavior.NoAction);
+
         }
     }
 }
