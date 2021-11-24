@@ -53,7 +53,8 @@ namespace Alien.UI.ViewModels
 
         public void NavigateNextPage()
         {
-            //
+            if (CharacterInfos is null) return;
+
         }
 
         public bool PersistInHistory()

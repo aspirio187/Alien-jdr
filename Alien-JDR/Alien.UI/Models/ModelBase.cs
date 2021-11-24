@@ -12,6 +12,8 @@ namespace Alien.UI.Models
     {
         public ObservableCollection<ValidationResult> ValidationResults { get; private set; } = new();
 
+        public bool IsValid { get => ValidationResults.Count <= 0; }
+
         protected void ValidateProperty<T>(ref T origin, T value, [CallerMemberName] string property = null)
         {
             ICollection<ValidationResult> validationResults = new Collection<ValidationResult>();
