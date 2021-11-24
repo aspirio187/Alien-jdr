@@ -47,6 +47,7 @@ namespace Alien.UI.ViewModels
 
         public void NavigateNextPage()
         {
+            if (CareerSelection.SelectedCareer is null) return;
             CharacterCreationDto characterCreation = new()
             {
                 Career = CareerSelection.SelectedCareer.Name,
