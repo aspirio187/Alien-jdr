@@ -20,6 +20,10 @@ namespace Alien.UI.ViewModels
 
         private DelegateCommand _navigateBackCommand;
         private DelegateCommand _navigateNextPageCommand;
+        private DelegateCommand _addItemCommand;
+        private DelegateCommand _removeItemCommand;
+        private DelegateCommand _addEquipmentCommand;
+        private DelegateCommand _removeEquipmentCommand;
 
         public CharacterInfosCreationModel CharacterInfos
         {
@@ -33,11 +37,57 @@ namespace Alien.UI.ViewModels
 
         public DelegateCommand NavigateBackCommand => _navigateBackCommand ??= new DelegateCommand(NavigateBack);
         public DelegateCommand NavigateNextPageCommand => _navigateNextPageCommand ??= new DelegateCommand(NavigateNextPage, CanNavigateNextPage);
+        public DelegateCommand AddItemCommand => _addItemCommand ??= new(AddItem);
+        public DelegateCommand RemoveItemCommand => _removeItemCommand ??= new(RemoveItem);
+        public DelegateCommand AddEquipmentCommand => _addEquipmentCommand ??= new(AddEquipment);
+        public DelegateCommand RemoveEquipmentCommand => _removeEquipmentCommand ??= new(RemoveEquipment);
 
         public CharacterInfosCreationViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator)
             : base(regionNavigationService, authenticator)
         {
 
+        }
+
+        public void AddItem()
+        {
+            if (!string.IsNullOrEmpty(CharacterInfos.NewItem.Trim()))
+            {
+                if (!CharacterInfos.LittleItems.Any(i => i.Equals(CharacterInfos.NewItem)))
+                {
+                    CharacterInfos.LittleItems.Add(CharacterInfos.NewItem);
+                    CharacterInfos.NewItem = string.Empty;
+                }
+            }
+        }
+
+        public void RemoveItem()
+        {
+            if (CharacterInfos.SelectedItem is not null)
+            {
+                CharacterInfos.LittleItems.Remove(CharacterInfos.SelectedItem);
+                CharacterInfos.SelectedItem = null;
+            }
+        }
+
+        public void AddEquipment()
+        {
+            if (!string.IsNullOrEmpty(CharacterInfos.NewEquipment))
+            {
+                if (!CharacterInfos.Equipments.Any(e => e.Equals(CharacterInfos.NewEquipment)))
+                {
+                    CharacterInfos.Equipments.Add(CharacterInfos.NewEquipment);
+                    CharacterInfos.NewEquipment = string.Empty;
+                }
+            }
+        }
+
+        public void RemoveEquipment()
+        {
+            if (CharacterInfos.SelectedItem is not null)
+            {
+                CharacterInfos.Equipments.Remove(CharacterInfos.SelectedEquipment);
+                CharacterInfos.SelectedEquipment = null;
+            }
         }
 
         public override void OnNavigatedTo(NavigationContext navigationContext)
@@ -57,8 +107,40 @@ namespace Alien.UI.ViewModels
 
         public void NavigateNextPage()
         {
-            if (CharacterInfos is null) return;
-            if (!CharacterInfos.IsValid) return;
+            CharacterCreation.Name = CharacterInfos.Name;
+            CharacterCreation.Appearance = CharacterInfos.Appearance;
+            CharacterCreation.Objectives = CharacterInfos.Objectives;
+            CharacterCreation.Friends = CharacterInfos.Friends;
+            CharacterCreation.Rivals = CharacterInfos.Rivals;
+            CharacterCreation.Items = new List<ItemCreationDto>();
+
+            CharacterCreation.Items.Add(new ItemCreationDto()
+            {
+                Name = CharacterInfos.FetishItem,
+                IsFetish = true
+            });
+
+            foreach (string item in CharacterInfos.LittleItems)
+            {
+                CharacterCreation.Items.Add(new ItemCreationDto()
+                {
+                    Name = item,
+                    IsFetish = false
+                });
+            }
+
+            CharacterCreation.Equipments = new List<string>();
+            foreach (string equipment in CharacterInfos.Equipments)
+            {
+                CharacterCreation.Equipments.Add(equipment);
+            }
+
+            Dictionary<string, object> parameters = new Dictionary<string, object>()
+            {
+                { Global.CHARACTER_CREATION, CharacterCreation }
+            };
+
+            Navigate(ViewsEnum.CharacterTalentSelectionView, parameters);
         }
 
         public bool CanNavigateNextPage()
@@ -66,6 +148,8 @@ namespace Alien.UI.ViewModels
             if (CharacterInfos is null) return false;
             if (!CharacterInfos.IsValid) return false;
             if (CharacterCreation is null) return false;
+            if (string.IsNullOrEmpty(CharacterInfos.FetishItem)) return false;
+            if (CharacterInfos.LittleItems.Count <= 0) return false;
 
             return true;
         }

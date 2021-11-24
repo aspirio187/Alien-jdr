@@ -24,57 +24,55 @@
         <StackPanel Grid.Column="0">
             <StackPanel>
                 <TextBlock Text="Nom" />
-                <TextBox />
+                <TextBox Text="{Binding CharacterInfos.Name}"/>
             </StackPanel>
 
             <StackPanel>
                 <TextBlock Text="Apparence" />
-                <TextBox TextWrapping="Wrap"  AcceptsReturn="True" Height="80"/>
+                <TextBox Text="{Binding CharacterInfos.Appearance}" TextWrapping="Wrap"  AcceptsReturn="True" Height="80"/>
             </StackPanel>
 
             <StackPanel>
                 <TextBlock Text="Objectifs" />
-                <TextBox TextWrapping="Wrap" AcceptsReturn="True" Height="80" />
+                <TextBox Text="{Binding CharacterInfos.Objectives}" TextWrapping="Wrap" AcceptsReturn="True" Height="80" />
             </StackPanel>
             
             <StackPanel>
                 <TextBlock Text="Amis" />
-                <TextBox TextWrapping="Wrap" AcceptsReturn="True" Height="80"/>
+                <TextBox Text="{Binding CharacterInfos.Friends}" TextWrapping="Wrap" AcceptsReturn="True" Height="80"/>
             </StackPanel>
 
             <StackPanel>
                 <TextBlock Text="Rivaux" />
-                <TextBox TextWrapping="Wrap" AcceptsReturn="True" Height="80"/>
+                <TextBox Text="{Binding CharacterInfos.Rivals}" TextWrapping="Wrap" AcceptsReturn="True" Height="80"/>
             </StackPanel>
         </StackPanel>
 
         <StackPanel Grid.Row="0" Grid.Column="1">
             <StackPanel>
                 <TextBlock Text="Objet fétiche" />
-                <TextBox />
+                <TextBox Text="{Binding CharacterInfos.FetishItem}"/>
             </StackPanel>
 
             <StackPanel>
                 <TextBlock Text="Objets minuscule" />
-                <TextBox />
-                <Button Content="Ajouter" Foreground="Blue" />
-                <ListBox MinHeight="80" />
-                <Button Content="Supprimer" Foreground="blue" />
+                <TextBox Text="{Binding NewItem}"/>
+                <Button Content="Ajouter" Foreground="Blue" Command="{Binding AddItemCommand}"/>
+                <ListBox MinHeight="80" ItemsSource="{Binding CharacterInfos.LittleItems}" SelectedItem="{Binding SelectedItem}"/>
+                <Button Content="Supprimer" Foreground="blue" Command="{Binding RemoveItemCommand}"/>
             </StackPanel>
         </StackPanel>
 
         <StackPanel Grid.Column="2" >
             <TextBlock Text="Equipements" />
-            <Button Content="Creer" Foreground="Blue"/>
-            <TextBlock Text="Disponible(s)" />
-            <ListBox MinHeight="80" />
-            <Button Content="Ajouter" Foreground="Blue" />
+            <TextBox Text="{Binding NewEquipment}" />
+            <Button Content="Ajouter" Foreground="Blue" Command="{Binding AddEquipmentCommand}"/>
             <TextBlock Text="Equipé(s)" />
-            <ListBox MinHeight="80"/>
-            <Button Content="Supprimer" />
+            <ListBox MinHeight="80" ItemsSource="{Binding CharacterInfos.Equipments}" SelectedItem="{Binding SelectedEquipment}"/>
+            <Button Content="Supprimer" Foreground="Blue" Command="{Binding RemoveEquipmentCommand}"/>
         </StackPanel>
 
-        <Button Grid.Row="2" Grid.Column="0" Content="Retour" Foreground="Blue"/>
-        <Button Grid.Row="2" Grid.Column="2" Content="Suivant" Foreground="Blue" />
+        <Button Grid.Row="2" Grid.Column="0" Content="Retour" Foreground="Blue" Command="{Binding NavigateBackCommand}"/>
+        <Button Grid.Row="2" Grid.Column="2" Content="Suivant" Foreground="Blue" Command="{Binding NavigateNextPageCommand}"/>
     </Grid>
 </ContentControl>

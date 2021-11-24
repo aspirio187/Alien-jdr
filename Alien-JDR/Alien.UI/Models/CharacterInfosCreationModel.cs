@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,11 @@ namespace Alien.UI.Models
         public string Friends { get; set; }
         public string Rivals { get; set; }
         public string FetishItem { get; set; }
-        public List<string> LittleItems { get; set; }
-        public List<string> Equipments { get; set; }
+        public string NewItem { get; set; }
+        public string SelectedItem { get; set; }
+        public ObservableCollection<string> LittleItems { get; set; }
+        public string NewEquipment { get; set; }
+        public string SelectedEquipment { get; set; }
+        public ObservableCollection<string> Equipments { get; set; }
     }
 }
