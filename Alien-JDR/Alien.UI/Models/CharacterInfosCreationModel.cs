@@ -17,9 +17,9 @@ namespace Alien.UI.Models
         public string FetishItem { get; set; }
         public string NewItem { get; set; }
         public string SelectedItem { get; set; }
-        public ObservableCollection<string> LittleItems { get; set; }
+        public ObservableCollection<string> LittleItems { get; set; } = new();
         public string NewEquipment { get; set; }
         public string SelectedEquipment { get; set; }
-        public ObservableCollection<string> Equipments { get; set; }
+        public ObservableCollection<string> Equipments { get; set; } = new();
     }
 }

@@ -24,5 +24,11 @@ namespace Alien.UI.Views
         {
             InitializeComponent();
         }
+
+        private void Add_GotFocus(object sender, RoutedEventArgs e)
+        {
+            var textbox = sender as TextBox;
+            textbox.Text = string.Empty;
+        }
     }
 }

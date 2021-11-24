@@ -16,7 +16,7 @@ namespace Alien.UI.ViewModels
     {
         public CharacterCreationDto CharacterCreation { get; private set; }
 
-        private CharacterInfosCreationModel _characterInfos;
+        private CharacterInfosCreationModel _characterInfos = new();
 
         private DelegateCommand _navigateBackCommand;
         private DelegateCommand _navigateNextPageCommand;
@@ -36,7 +36,7 @@ namespace Alien.UI.ViewModels
         }
 
         public DelegateCommand NavigateBackCommand => _navigateBackCommand ??= new DelegateCommand(NavigateBack);
-        public DelegateCommand NavigateNextPageCommand => _navigateNextPageCommand ??= new DelegateCommand(NavigateNextPage, CanNavigateNextPage);
+        public DelegateCommand NavigateNextPageCommand => _navigateNextPageCommand ??= new DelegateCommand(NavigateNextPage);
         public DelegateCommand AddItemCommand => _addItemCommand ??= new(AddItem);
         public DelegateCommand RemoveItemCommand => _removeItemCommand ??= new(RemoveItem);
         public DelegateCommand AddEquipmentCommand => _addEquipmentCommand ??= new(AddEquipment);
@@ -50,7 +50,7 @@ namespace Alien.UI.ViewModels
 
         public void AddItem()
         {
-            if (!string.IsNullOrEmpty(CharacterInfos.NewItem.Trim()))
+            if (!string.IsNullOrEmpty(CharacterInfos.NewItem))
             {
                 if (!CharacterInfos.LittleItems.Any(i => i.Equals(CharacterInfos.NewItem)))
                 {
@@ -141,17 +141,6 @@ namespace Alien.UI.ViewModels
             };
 
             Navigate(ViewsEnum.CharacterTalentSelectionView, parameters);
-        }
-
-        public bool CanNavigateNextPage()
-        {
-            if (CharacterInfos is null) return false;
-            if (!CharacterInfos.IsValid) return false;
-            if (CharacterCreation is null) return false;
-            if (string.IsNullOrEmpty(CharacterInfos.FetishItem)) return false;
-            if (CharacterInfos.LittleItems.Count <= 0) return false;
-
-            return true;
         }
 
         public bool PersistInHistory()

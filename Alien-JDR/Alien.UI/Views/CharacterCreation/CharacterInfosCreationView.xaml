@@ -56,19 +56,19 @@
 
             <StackPanel>
                 <TextBlock Text="Objets minuscule" />
-                <TextBox Text="{Binding NewItem}"/>
+                <TextBox Text="{Binding CharacterInfos.NewItem}" GotFocus="Add_GotFocus"/>
                 <Button Content="Ajouter" Foreground="Blue" Command="{Binding AddItemCommand}"/>
-                <ListBox MinHeight="80" ItemsSource="{Binding CharacterInfos.LittleItems}" SelectedItem="{Binding SelectedItem}"/>
+                <ListBox MinHeight="80" ItemsSource="{Binding CharacterInfos.LittleItems}" SelectedItem="{Binding CharacterInfos.SelectedItem}"/>
                 <Button Content="Supprimer" Foreground="blue" Command="{Binding RemoveItemCommand}"/>
             </StackPanel>
         </StackPanel>
 
         <StackPanel Grid.Column="2" >
             <TextBlock Text="Equipements" />
-            <TextBox Text="{Binding NewEquipment}" />
+            <TextBox Text="{Binding CharacterInfos.NewEquipment}" GotFocus="Add_GotFocus" />
             <Button Content="Ajouter" Foreground="Blue" Command="{Binding AddEquipmentCommand}"/>
             <TextBlock Text="Equipé(s)" />
-            <ListBox MinHeight="80" ItemsSource="{Binding CharacterInfos.Equipments}" SelectedItem="{Binding SelectedEquipment}"/>
+            <ListBox MinHeight="80" ItemsSource="{Binding CharacterInfos.Equipments}" SelectedItem="{Binding CharacterInfos.SelectedEquipment}"/>
             <Button Content="Supprimer" Foreground="Blue" Command="{Binding RemoveEquipmentCommand}"/>
         </StackPanel>
 
