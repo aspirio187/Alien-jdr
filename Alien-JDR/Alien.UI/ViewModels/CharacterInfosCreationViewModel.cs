@@ -24,11 +24,15 @@ namespace Alien.UI.ViewModels
         public CharacterInfosCreationModel CharacterInfos
         {
             get { return _characterInfos; }
-            set { SetProperty(ref _characterInfos, value); }
+            set
+            {
+                SetProperty(ref _characterInfos, value);
+                NavigateNextPageCommand.RaiseCanExecuteChanged();
+            }
         }
 
         public DelegateCommand NavigateBackCommand => _navigateBackCommand ??= new DelegateCommand(NavigateBack);
-        public DelegateCommand NavigateNextPageCommand => _navigateNextPageCommand ??= new DelegateCommand(NavigateNextPage);
+        public DelegateCommand NavigateNextPageCommand => _navigateNextPageCommand ??= new DelegateCommand(NavigateNextPage, CanNavigateNextPage);
 
         public CharacterInfosCreationViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator)
             : base(regionNavigationService, authenticator)
@@ -54,7 +58,16 @@ namespace Alien.UI.ViewModels
         public void NavigateNextPage()
         {
             if (CharacterInfos is null) return;
+            if (!CharacterInfos.IsValid) return;
+        }
 
+        public bool CanNavigateNextPage()
+        {
+            if (CharacterInfos is null) return false;
+            if (!CharacterInfos.IsValid) return false;
+            if (CharacterCreation is null) return false;
+
+            return true;
         }
 
         public bool PersistInHistory()
