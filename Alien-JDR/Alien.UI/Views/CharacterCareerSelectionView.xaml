@@ -32,7 +32,8 @@
                    FontSize="30"/>
         </StackPanel>
 
-        <ListBox Grid.Row="1" Background="Transparent" ItemsSource="{Binding Careers}" SelectedItem="{Binding CareerSelection.SelectedCareer}">
+        <ListBox Grid.Row="1" Background="Transparent" ItemsSource="{Binding Careers}" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 SelectedItem="{Binding CareerSelection.SelectedCareer}">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="{x:Type ListBoxItem}">
                     <Setter Property="Template">
@@ -53,7 +54,7 @@
             
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal" VerticalAlignment="Stretch"/>
+                    <WrapPanel Orientation="Horizontal" VerticalAlignment="Stretch" />
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>
