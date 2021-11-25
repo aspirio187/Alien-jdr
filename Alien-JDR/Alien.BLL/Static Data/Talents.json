@@ -1,0 +1,22 @@
+[
+  {
+    "name": "APPÉTIT D'OISEAU",
+    "description": "quand vous faites un test de Réserve de Nourriture, vous pouvez lancer deux dés de moins que votre Réserve actuelle (minimum 1 dé)",
+    "career": "Général"
+  },
+  {
+    "name": "ESPRIT DE CONTRADICTION",
+    "description": "vous n'aimez pas qu'on vous dise quoi faire. Vous bénéficiez d'un modificateur de +2 aux tests opposés de MANIPULATION quand on vous donne des ordres. Ce talent peut également être utilisé pour résister au talent Jouer du galon des Officiers.",
+    "career": "Général"
+  },
+  {
+    "name": "PRISE DE CONTRÔLE",
+    "description": "vous savez comment forcer autrui à faire ce que vous voulez, et vous n'avez aucun scrupule à employer ce talent. Vous pouvez faire vos tests de MANIPULATION avec votre ESPRIT plutôt que votre EMPATHIE.",
+    "career": "Agent de la compagnie"
+  },
+  {
+    "name": "ESQUIVE ",
+    "description": "quand on vous attaque en combat rapproché, vous pouvez esquiver. L'esquive fonctionne comme un blocage (cf. page 92), mais vous utilisez votre MOBILITÉ au lieu de votre COMBAT RAPPROCHÉ et vous ne pouvez vous en servir que pour réduire les dégâts, jamais pour contre-atta- quer ou désarmer. Vous pouvez même esquiver l'attaque spéciale d'une créature (cf. chapitre 11).",
+    "career": "Gamin"
+  }
+]
