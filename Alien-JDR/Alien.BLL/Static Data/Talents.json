@@ -1,7 +1,7 @@
 [
   {
     "name": "APPÉTIT D'OISEAU",
-    "description": "Quand vous faites un test de Réserve de Nourriture, vous pouvez lancer deux dés de moins que votre Réserve actuelle (minimum 1 dé)",
+    "description": "Quand vous faites un test de Réserve de Nourriture, vous pouvez lancer deux dés de moins que votre Réserve actuelle (minimum 1 dé).",
     "career": "Général"
   },
   {
@@ -10,10 +10,146 @@
     "career": "Général"
   },
   {
+    "name": "ARTILLEUR DE VAISSEAU",
+    "description": "Lors que vous tenez lieu d'artilleur d'un vaisseau dans un combat, vous bénéficiez d'un modificateur +2 à tous vos test de COMBAT A DISTANCE.",
+    "career": "Général"
+  },
+  {
+    "name": "FURTIF",
+    "description": "Vous bénéficiez d'un modificateur de +2 aux tests de MOBILITE destinés à vous déplacer sans être repéré.",
+    "career": "Général"
+  },
+  {
+    "name": "BON REFLEXES",
+    "description": "Vous pouvez piocher deux cartes au lieu d'une lors du tirage de l'initiative. Choisissez celle que vous voulez utiliser, puis remettez l'autre dans le paquet avant que les autres joueurs ne piochent la leur.",
+    "career": "Général"
+  },
+  {
+    "name": "GARDE DU CORPS",
+    "description": "Quand un personnage situé à COURTE portée de vous est touché par une attaque, vous pouvez plonger pour la subir à sa place. Faites un test de MOBILITE, qui ne compte pas comme une action au combat. Si vous obtenez au moins un 1, c'est vous qui subissez les dégât. Vous pouvez forcer ce test.",
+    "career": "Général"
+  },
+  {
+    "name": "BRUTAL",
+    "description": "Vous bénéficiez d'un bonus de +2 au COMBAT RAPPROCHE si vous sacrifiez votre action rapide.",
+    "career": "Général"
+  },
+  {
+    "name": "IMPITOYABLE",
+    "description": "Vous pouvez porter un coup de grâce sans avoir à faire de test d'EMPATHIE. En outre, votre NIVEAU DE STRESS décroît de 1 point chaque fois qu'un ennemi est Brisé à cause de vous.",
+    "career": "Général"
+  },
+  {
+    "name": "CHEVAL DE TRAIT",
+    "description": "Vous pouvez porter le double d'objets sans être encombré.",
+    "career": "Général"
+  },
+  {
+    "name": "COMMANDANT DE VAISSEAU",
+    "description": "Lorsque vous jouez le rôle de capitaine d'un vaisseau lors d'un combat spatial, vous pouvez piocher deux cartes au lieu d'une lors du tirage d'initiative. Choisissez celle que vous gardez.",
+    "career": "Général"
+  },
+  {
+    "name": "MECANO DE VAISSEAU",
+    "description": "Vous bénéficiez d'un modificateur de +2 lorsque vous utilisez MACHINES LOURDES ou COMTECH pour réparer les avaries d'un vaisseau.",
+    "career": "Général"
+  },
+  {
+    "name": "CONSEILLER",
+    "description": "Une fois par Tour, vous pouvez utiliser la compétence COMMANDEMENT pour réduire le NIVEAU DE STRESS d'un autre personnage situé à COURTE portée. Pour chaque 1 obtenu, le NIVEAU DE STRESS de ce personnage descend de 1 point supplémentaire (en plus du point habituel). Vous ne pouvez pas utiliser ce talent pour vous-même.",
+    "career": "Général"
+  },
+  {
+    "name": "MENACANT",
+    "description": "Votre présence physique vous permet d'intimider facilement votre entourage. Vous pouvez faire des tests de MANIPULATION avec votre FORCE plutôt que votre EMPATHIE quand vous menacez quelqu'un pour le forcer à faire ce que vous lui dites. En cas de succès, votre interlocuteur ne peut rien exiger de votre part en échange. Il peut toujours choisir de vous attaquer plutôt que de céder.",
+    "career": "Général"
+  },
+  {
+    "name": "DEUXIEME SOUFFLE",
+    "description": "Quand vous êtes Brisé, vous pouvez vous remettre sur pied immédiatement, sans recevoir les premiers secours de quinconque. Faites un test d'ENDURANCE. Pour chaque 1 obtenu, vous récupérez 1 point de Santé et vous pouvez continuer à vous battre un peu plus longtemps. Ce talent ne peut être utilisé qu'une fois par Tour et n'a aucun effet sur les blessures critiques.",
+    "career": "Général"
+  },
+  {
+    "name": "MITRAILLEUR",
+    "description": "Selon vous, le mode automatique, y a que ça de vrau. Quand vous tirez en mode automatique, votre NIVEAU DE STRESS n'augmente pas.",
+    "career": "Général"
+  },
+  {
+    "name": "NERF D'ACIER",
+    "description": "Vous agrdez la tête froide en toute situation, et bénficiez d'un modificateur de -2 à tous les tests de Panique.",
+    "career": "Général"
+  },
+  {
+    "name": "ENTRAINEMENT EN GRAVITE ZERO",
+    "description": "Votre sens de l'équilibre est adapté aux environnements sans gravité. Vous bénéficiez d'un modificateur de +2 aux test de MOBILITE effectués dans ceux-ci.",
+    "career": "Général"
+  },
+  {
+    "name": "POIDS MOUCHE",
+    "description": "Quand vous effectuez un blocage en combat rapproché, vous pouvez utiliser votre AGILITE plutôt que votre FORCE.",
+    "career": "Général"
+  },
+  {
+    "name": "RESERVE CACHEE",
+    "description": "Vous commencez chaque séance de jeu avec un objet supplémentaire de votre choix, dissimulé sur votre personne ou dans une cachette sûre. Il doit s'agir d'un objet que vous pouvez raisonnablement vous procurer. Maman a le dernier mot en la matière. Si elle le permet, vous pouvez même attendre le moment idéal durant la séance pour choisir de quoi il s'agit.",
+    "career": "Général"
+  },
+  {
+    "name": "SPECIALISTE EXTRAVEHICULAIRE",
+    "description": "Vous bénéficiez d'un modificateur de +2 aux tests de MACHINES LOURDES et de COMTECH lorsque vous sortez en combinaison dans l'espace.",
+    "career": "Général"
+  },
+  {
+    "name": "STOIQUE",
+    "description": "Vous pouvez fiare vos tests d'ENDURANCE avec votre ESPRIT plutôt qu'avec votre FORCE.",
+    "career": "Général"
+  },
+  {
+    "name": "ROBUSTE",
+    "description": "Vous avez l'habitude d'encaisser les coups. Votre Santé augmente de 2 (c'est-à-dire qu'elle est égale à votre FORCE plus 2).",
+    "career": "Général"
+  },
+  {
+    "name": "TIR RAPIDE",
+    "description": "Vous pouvez tirer avec un pistolet ou un fusil au prix d'une action rapide plutôt que d'une action lente, mais en subissant un modificateur de -2.",
+    "career": "Général"
+  },
+  {
+    "name": "SOMMEIL REPARATEUR",
+    "description": "Vous avez besoin de moins de sommeil que la plupart des gens. Vous n'avez besoin de dormir qu'un Quart tous les deux jours plutôt qu'un Quart tous les jours.",
+    "career": "Général"
+  },
+  {
+    "name": "TUEUR",
+    "description": "Vous savez où frapper pour que l'ennemi reste au tapis. Définitivement. Quand vous adversaire subit une blessure critique, vous pouvez intervertir les dés de votre jet de D66, le dé des unités devenant celui des dizaines et inversement. Ce talent ne peut être utilisé que contre les humains.",
+    "career": "Général"
+  },
+  {
+    "name": "SOUFFLE CALME",
+    "description": "Quand vous faites un test de Résevre d'Air, vous pouvez lancer deux dés de moins que votre Réserve actuelle (minimum 1 dé).",
+    "career": "Général"
+  },
+  {
+    "name": "VIF COMME L'ECLAIR",
+    "description": "Vous dégainez votre arme si vite qu'il ne vous en coûte même pas une action.",
+    "career": "Général"
+  },
+  {
+    "name": "SPECIALISTE DES ARMES",
+    "description": "Vous êtes passé maître dans l'art utiliser une arme particulière, à choisir dans la liste des armes. Quand vous l'utilisez, vous bénéficiez d'un modificateur de +2. Vous pouvez prendre ce talent à plusieurs reprise en l'appliquant à des armes différentes chaque fois. Vous pouvez également être un spécialiste du combat à mains nues.",
+    "career": "Général"
+  },
+  {
+    "name": "VIGILANT",
+    "description": "Les cheveux se dressent sur votre nuque quand les ennemis rôdent aux alentours. Vous bénéficiez d'un modificateur de +2 aux tests d'OBSERVATION destinés à percevoir une attaque furtive.",
+    "career": "Général"
+  },
+  {
     "name": "PRISE DE CONTRÔLE",
     "description": "Vous savez comment forcer autrui à faire ce que vous voulez, et vous n'avez aucun scrupule à employer ce talent. Vous pouvez faire vos tests de MANIPULATION avec votre ESPRIT plutôt que votre EMPATHIE.",
     "career": "Agent de la compagnie"
   },
+  
   {
     "name": "ESQUIVE ",
     "description": "Quand on vous attaque en combat rapproché, vous pouvez esquiver. L'esquive fonctionne comme un blocage (cf. page 92), mais vous utilisez votre MOBILITÉ au lieu de votre COMBAT RAPPROCHÉ et vous ne pouvez vous en servir que pour réduire les dégâts, jamais pour contre-atta- quer ou désarmer. Vous pouvez même esquiver l'attaque spéciale d'une créature (cf. chapitre 11).",
