@@ -74,10 +74,12 @@ namespace Alien.BLL.Services
             return JsonConvert.DeserializeObject<CareerFromJsonDto[]>(file.Trim());
         }
 
-        public TalentFromJsonDto[] GetTalentsFromJson()
+        public TalentFromJsonDto[] GetTalentsFromJson(string careerName)
         {
             string file = File.ReadAllText("../../../../Alien.BLL/Static Data/Talents.json", Encoding.GetEncoding("iso-8859-1"));
-            return JsonConvert.DeserializeObject<TalentFromJsonDto[]>(file.Trim());
+            return JsonConvert.DeserializeObject<TalentFromJsonDto[]>(file.Trim())
+                .Where(t => t.Career.Equals(careerName) || t.Career.Equals("Général"))
+                .ToArray();
         }
     }
 }

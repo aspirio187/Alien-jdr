@@ -17,7 +17,7 @@ namespace Alien.BLL.Dtos
         public List<ItemCreationDto> Items { get; set; }
         public string Friends { get; set; }
         public string Rivals { get; set; }
-        public TalentDto Talent { get; set; }
+        public string Talent { get; set; }
         public List<string> Equipments { get; set; }
 
         [IntegerValidator(MinValue = 2, MaxValue = 8, ExcludeRange = false)]

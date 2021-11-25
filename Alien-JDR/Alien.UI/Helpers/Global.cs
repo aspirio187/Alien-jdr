@@ -24,6 +24,7 @@ namespace Alien.UI.Helpers
         CharacterCareerSelectionView,
         CharacterInfosCreationView,
         CharacterTalentSelectionView,
+        CharacterAttributAndCompetenceView
     }
 
     public enum RaceEnum
