@@ -70,10 +70,14 @@ namespace Alien.BLL.Services
 
         public CareerFromJsonDto[] GetCareersFromJson()
         {
-            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Static Data\Careers.json");
             string file = File.ReadAllText("../../../../Alien.BLL/Static Data/Careers.json", Encoding.GetEncoding("iso-8859-1"));
-
             return JsonConvert.DeserializeObject<CareerFromJsonDto[]>(file.Trim());
+        }
+
+        public TalentFromJsonDto[] GetTalentsFromJson()
+        {
+            string file = File.ReadAllText("../../../../Alien.BLL/Static Data/Talents.json", Encoding.GetEncoding("iso-8859-1"));
+            return JsonConvert.DeserializeObject<TalentFromJsonDto[]>(file.Trim());
         }
     }
 }

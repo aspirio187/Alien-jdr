@@ -13,5 +13,6 @@ namespace Alien.BLL.Interfaces
         bool CreateCharacter(CharacterCreationDto character);
         Task<bool> DeleteCharacter(int characterId);
         CareerFromJsonDto[] GetCareersFromJson();
+        TalentFromJsonDto[] GetTalentsFromJson();
     }
 }
