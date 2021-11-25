@@ -16,7 +16,6 @@ namespace Alien.DAL.Entities
 
         public int UsedById { get; set; }
         public CharacterEntity UsedBy { get; set; }
-        // TODO : add le bol 
         public bool IsUsed { get; set; }
     }
 }

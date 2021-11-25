@@ -21,10 +21,22 @@ namespace Alien.DAL.Configurations
                 .IsRequired(true)
                 .HasMaxLength(15);
 
+            builder.Property(p => p.Id)
+                .IsRequired(true);
+
+            builder.Property(p => p.MaximumPlayers)
+                .IsRequired(true);
+
+            builder.Property(x => x.HostIp)
+                .IsRequired()
+                .HasMaxLength(50);
+
+// TODO : ADD les bools
+
             //builder.HasOne(x => x.Creator);
 
             //builder.HasMany(x => x.PartyPlayers)
-            //    .WithOne(x => x.Party);                
+            //    .WithOne(x => x.Party);        .WithMany x players ?          
         }
     }
 }

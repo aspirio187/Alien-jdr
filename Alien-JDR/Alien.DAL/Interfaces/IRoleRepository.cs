@@ -9,6 +9,6 @@ namespace Alien.DAL.Interfaces
 {
     public interface IRoleRepository : IRepositoryBase<RoleEntity, Guid>
     {
-        Task<IEnumerable<RoleEntity>> GetUserRoleAsync(Guid userId);
+        Task<IEnumerable<RoleEntity>> GetUserRolesAsync(Guid userId);
     }
 }

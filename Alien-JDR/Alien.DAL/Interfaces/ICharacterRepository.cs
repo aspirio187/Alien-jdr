@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Alien.DAL.Interfaces
 {
-    public interface ICharacterRepository : IRepositoryBase<CharacterEntity, int>
+    public interface ICharacterRepository : IRepositoryBase<CharacterEntity, Guid>
     {
         Task<IEnumerable<CharacterEntity>> GetUserCharactersAsync(Guid userId);
     }

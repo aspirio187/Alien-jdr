@@ -16,6 +16,9 @@ namespace Alien.DAL.Entities
         public bool IsOver { get; set; }
         public string HostIp { get; set; }
 
+        public ICollection<NotificationEntity> Notifications { get; set; }
+
         //public ICollection<PartyPlayersEntity> PartyPlayers { get; set; }
+        // TODO : ADD Partyplayers( many, required false ), creator ( unique et required ) 
     }
 }
