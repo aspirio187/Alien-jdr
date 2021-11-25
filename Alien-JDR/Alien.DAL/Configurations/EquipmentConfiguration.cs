@@ -34,9 +34,10 @@ namespace Alien.DAL.Configurations
 
             builder.HasOne(p => p.UsedBy)
                 .WithOne()
-                .IsRequired(false)
+                .IsRequired(true)
                 .OnDelete(DeleteBehavior.NoAction);
 
+            // TODO : ADD le bool
         }
 
     }

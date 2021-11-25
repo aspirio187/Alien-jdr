@@ -17,7 +17,7 @@ namespace Alien.DAL.Repositories
 
         }
 
-        public async Task<IEnumerable<RoleEntity>> GetUserRoleAsync(Guid userId)
+        public async Task<IEnumerable<RoleEntity>> GetUserRolesAsync(Guid userId)
         {
             if (userId == Guid.Empty) throw new ArgumentException($"User ID \"{userId}\" is empty!");
             if (!await _context.Users.AnyAsync(u => u.Id == userId)) throw new Exception($"The user with ID \"{userId}\" doesn't exist!");

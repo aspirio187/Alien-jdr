@@ -9,28 +9,26 @@ using System.Threading.Tasks;
 
 namespace Alien.DAL.Configurations
 {
-    class ItemConfiguration : IEntityTypeConfiguration<ItemEntity>
+    class WoundConfiguration : IEntityTypeConfiguration<WoundEntity>
     {
-        public void Configure(EntityTypeBuilder<ItemEntity> builder)
+        public void Configure(EntityTypeBuilder<WoundEntity> builder)
+        
         {
             builder.Property(p => p.Id)
-             .IsRequired(true);
+                .IsRequired(true);
 
             builder.Property(p => p.CharacterId)
-             .IsRequired(true);
-
-            builder.Property(x => x.Name)
-                .IsRequired()
-                .HasMaxLength(50);
+                .IsRequired(true);
 
             builder.HasOne(p => p.Character)
-                .WithMany(c => c.Items)
+                .WithOne()
                 .IsRequired(true)
                 .OnDelete(DeleteBehavior.NoAction);
 
+            builder.Property(x => x.Name)
+                .IsRequired()
+                .HasMaxLength(500);
 
-            // TODO : Add le bool
         }
-
     }
 }

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Alien.DAL.Entities;
+using Alien.DAL.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +9,17 @@ using System.Threading.Tasks;
 
 namespace Alien.DAL.Repositories
 {
-    class TalentRepository
-    {
-    }
+  //  public class TalentRepository : RepositoryBase<TalentEntity, int>, ITalentRepository
+    //{
+      //  public TalentRepository(AlienContext context)
+        //    : base(context)
+       // {
+
+//        }
+
+     //   public async Task<IEnumerable<TalentEntity>> GetUserTalentsAsync(int characterId)
+     //   {
+       // TODO : Comment lier characterid à talent ?     return await _context.Talents.Where(t => t.CharacterEntity.id == characterId).ToListAsync();
+     //   }
+  //  }
 }

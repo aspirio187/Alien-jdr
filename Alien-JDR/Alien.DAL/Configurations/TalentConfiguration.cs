@@ -23,8 +23,6 @@ namespace Alien.DAL.Configurations
             builder.Property(x => x.Description)
              .IsRequired()
              .HasMaxLength(500);
-
-            // max ? 
         }
     }
 }
