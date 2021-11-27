@@ -25,8 +25,8 @@ namespace Alien.DAL.Configurations
                  .IsRequired()
                  .HasMaxLength(500);
 
-            builder.HasOne(p => p.Character)
-                .WithOne()
+            builder.HasOne(e => e.Character)
+                .WithMany(c => c.Equipments)
                 .IsRequired(true)
                 .OnDelete(DeleteBehavior.Cascade);
 

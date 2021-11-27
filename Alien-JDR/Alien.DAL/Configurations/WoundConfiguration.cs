@@ -20,8 +20,8 @@ namespace Alien.DAL.Configurations
             builder.Property(p => p.CharacterId)
                 .IsRequired(true);
 
-            builder.HasOne(p => p.Character)
-                .WithOne()
+            builder.HasOne(w => w.Character)
+                .WithMany(c => c.MajorWounds)
                 .IsRequired(true)
                 .OnDelete(DeleteBehavior.Cascade);
 
