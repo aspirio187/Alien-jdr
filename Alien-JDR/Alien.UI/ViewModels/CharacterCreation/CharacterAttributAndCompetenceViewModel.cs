@@ -77,20 +77,14 @@ namespace Alien.UI.ViewModels
         {
             if (AttributePoints <= 0) return false;
 
-            switch (attribute)
+            return attribute switch
             {
-                case Attributes.Force:
-                    if(CharacterAttributesCompetences.Strength )
-                    break;
-                case Attributes.Agilité:
-                    break;
-                case Attributes.Esprit:
-                    break;
-                case Attributes.Empathie:
-                    break;
-                default:
-                    break;
-            }
+                Attributes.Force => IsKeyAttribute(attribute) ? CharacterAttributesCompetences.Strength < 5 : CharacterAttributesCompetences.Strength < 4,
+                Attributes.Agilité => IsKeyAttribute(attribute) ? CharacterAttributesCompetences.Agility < 5 : CharacterAttributesCompetences.Agility < 4,
+                Attributes.Esprit => IsKeyAttribute(attribute) ? CharacterAttributesCompetences.Mind < 5 : CharacterAttributesCompetences.Mind < 4,
+                Attributes.Empathie => IsKeyAttribute(attribute) ? CharacterAttributesCompetences.Empathy < 5 : CharacterAttributesCompetences.Empathy < 4,
+                _ => false,
+            };
         }
 
         public void IncreaseAttribute(Attributes attribute)
