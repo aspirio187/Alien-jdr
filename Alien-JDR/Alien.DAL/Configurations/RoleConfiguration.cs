@@ -20,7 +20,9 @@ namespace Alien.DAL.Configurations
             builder.Property(x => x.Name)
              .IsRequired()
              .HasMaxLength(50);
-        }
 
+            builder.HasMany(r => r.Users)
+                .WithMany(u => u.Roles);
+        }
     }
 }

@@ -42,6 +42,8 @@ namespace Alien.DAL.Configurations
 
             builder.HasMany(u => u.Characters)
                 .WithOne(u => u.Owner);
+
+
         }
     }
 }

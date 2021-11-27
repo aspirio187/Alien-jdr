@@ -19,7 +19,8 @@ namespace Alien.DAL.Entities
         public ICollection<CharacterEntity> Characters { get; set; }
         public ICollection<EquipmentEntity> Equipments { get; set; }
         public ICollection<RoleEntity> Roles { get; set; }
-        public ICollection<NotificationEntity> Notifications { get; set; }
+        public ICollection<NotificationEntity> SentNotifications { get; set; }
+        public ICollection<NotificationEntity> ReceivedNotifications { get; set; }
         public ICollection<PartyPlayersEntity> PartyPlayers { get; set; }
     }
 }

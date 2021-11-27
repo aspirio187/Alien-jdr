@@ -17,29 +17,29 @@ namespace Alien.DAL.Configurations
              .IsRequired(true);
 
             builder.Property(p => p.UserFromId)
-             .IsRequired(true);
+             .IsRequired(false);
 
             builder.Property(p => p.UserToId)
-             .IsRequired(true);
+             .IsRequired(false);
 
             builder.Property(p => p.PartyId)
-             .IsRequired(true);
+             .IsRequired(false);
 
 
             builder.HasOne(p => p.UserFrom)
-                .WithOne()
-                .IsRequired(true)
+                .WithMany(u => u.SentNotifications)
+                .IsRequired(false)
                 .OnDelete(DeleteBehavior.NoAction);
 
 
             builder.HasOne(p => p.UserTo)
-                .WithOne()
-                .IsRequired(true)
+                .WithMany(u => u.ReceivedNotifications)
+                .IsRequired(false)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne(p => p.PartyFor)
+            builder.HasOne(p => p.Party)
                 .WithMany(c => c.Notifications)
-                .IsRequired(true)
+                .IsRequired(false)
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.Property(n => n.SendTime)
