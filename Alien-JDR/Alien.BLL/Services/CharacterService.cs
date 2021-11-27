@@ -81,5 +81,12 @@ namespace Alien.BLL.Services
                 .Where(t => t.Career.Equals(careerName) || t.Career.Equals("Général"))
                 .ToArray();
         }
+
+        public CareerFromJsonDto GetCareer(string careerName)
+        {
+            if (careerName is null) throw new ArgumentNullException(nameof(careerName));
+            CareerFromJsonDto[] careers = GetCareersFromJson();
+            return careers.FirstOrDefault(c => c.Name.Equals(careerName));
+        }
     }
 }

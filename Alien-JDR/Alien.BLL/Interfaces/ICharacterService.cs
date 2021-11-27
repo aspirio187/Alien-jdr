@@ -14,5 +14,6 @@ namespace Alien.BLL.Interfaces
         Task<bool> DeleteCharacter(int characterId);
         CareerFromJsonDto[] GetCareersFromJson();
         TalentFromJsonDto[] GetTalentsFromJson(string careerName);
+        CareerFromJsonDto GetCareer(string careerName);
     }
 }
