@@ -28,7 +28,7 @@ namespace Alien.DAL.Configurations
             builder.HasOne(p => p.Character)
                 .WithOne()
                 .IsRequired(true)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Cascade);
 
             // TODO : ADD le bool
         }
