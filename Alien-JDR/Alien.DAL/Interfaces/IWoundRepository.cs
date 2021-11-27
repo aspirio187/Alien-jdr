@@ -9,6 +9,6 @@ namespace Alien.DAL.Interfaces
 {
     public interface IWoundRepository : IRepositoryBase<WoundEntity, int>
     {
-        Task<IEnumerable<WoundEntity>> GetUserWoundsAsync(int userId);
+        Task<IEnumerable<WoundEntity>> GetCharacterWoundsAsync(int characterId);
     }
 }

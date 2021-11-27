@@ -17,7 +17,7 @@ namespace Alien.DAL.Repositories
 
         }
 
-        public async Task<IEnumerable<WoundEntity>> GetUserWoundsAsync(int characterId)
+        public async Task<IEnumerable<WoundEntity>> GetCharacterWoundsAsync(int characterId)
         {
             return await _context.Wounds.Where(t => t.CharacterId == characterId).ToListAsync();
         }

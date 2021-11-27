@@ -42,6 +42,8 @@ namespace Alien.DAL.Configurations
                 .IsRequired(true)
                 .OnDelete(DeleteBehavior.NoAction);
 
+            builder.Property(n => n.SendTime)
+                .IsRequired(true);
             // TODO : Add la date ! + le bool
         }
 

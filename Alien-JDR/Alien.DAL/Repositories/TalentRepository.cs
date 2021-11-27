@@ -17,7 +17,7 @@ namespace Alien.DAL.Repositories
 
         }
 
-        public async Task<IEnumerable<TalentEntity>> GetUserTalentsAsync(int characterId)
+        public async Task<IEnumerable<TalentEntity>> GetCharacterTalentsAsync(int characterId)
         {
             return await _context.Talents.Where(t => t.Characters.Any(c => c.Id == characterId)).ToListAsync();
         }

@@ -16,8 +16,6 @@ namespace Alien.DAL.Configurations
                 builder.Property(p => p.Id)       
                  .IsRequired(true);
             
-                builder.Property(p => p.OwnerId)
-                 .IsRequired(true);
 
              builder.Property(x => x.Name)
                  .IsRequired()
@@ -27,12 +25,7 @@ namespace Alien.DAL.Configurations
                  .IsRequired()
                  .HasMaxLength(500);
 
-            builder.HasOne(p => p.Owner)
-                 .WithMany(c => c.Equipments)
-                 .IsRequired(false)
-                 .OnDelete(DeleteBehavior.NoAction);
-
-            builder.HasOne(p => p.UsedBy)
+            builder.HasOne(p => p.Character)
                 .WithOne()
                 .IsRequired(true)
                 .OnDelete(DeleteBehavior.NoAction);

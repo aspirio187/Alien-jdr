@@ -23,11 +23,13 @@ namespace Alien.DAL.Configurations
                 .IsRequired()
                 .HasMaxLength(50);
 
-            builder.HasOne(p => p.Character)
+            builder.HasOne(i => i.Character)
                 .WithMany(c => c.Items)
                 .IsRequired(true)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Cascade);
 
+            builder.Property(i => i.IsFetish)
+                .IsRequired(true);
 
             // TODO : Add le bool
         }

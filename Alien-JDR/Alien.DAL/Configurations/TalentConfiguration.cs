@@ -13,6 +13,8 @@ namespace Alien.DAL.Configurations
     {
         public void Configure(EntityTypeBuilder<TalentEntity> builder)
         {
+            builder.HasKey(t => t.Id);
+
             builder.Property(p => p.Id)
              .IsRequired(true);
 
@@ -23,6 +25,9 @@ namespace Alien.DAL.Configurations
             builder.Property(x => x.Description)
              .IsRequired()
              .HasMaxLength(500);
+
+            builder.HasMany(t => t.Characters)
+                .WithMany(c => c.Talents);
         }
     }
 }

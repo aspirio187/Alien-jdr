@@ -9,6 +9,6 @@ namespace Alien.DAL.Interfaces
 {
     public interface ITalentRepository : IRepositoryBase<TalentEntity, int>
     {
-        Task<IEnumerable<TalentEntity>> GetUserTalentsAsync(int userId); 
+        Task<IEnumerable<TalentEntity>> GetCharacterTalentsAsync(int characterId); 
     }
 }
