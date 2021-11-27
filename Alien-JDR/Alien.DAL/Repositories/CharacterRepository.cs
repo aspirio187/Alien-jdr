@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Alien.DAL.Repositories
 {
-    public class CharacterRepository : RepositoryBase<CharacterEntity, Guid>, ICharacterRepository
+    public class CharacterRepository : RepositoryBase<CharacterEntity, int>, ICharacterRepository
     {
         public CharacterRepository(AlienContext context)
             : base(context)

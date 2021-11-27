@@ -62,67 +62,67 @@ namespace Alien.DAL.Configurations
                 .HasMaxLength(50);
 // TALENTS 
             builder.Property(p => p.StressPoints)
-                .IsRequired(false);
+                .IsRequired(true);
 
             builder.Property(p => p.LifePoints)
-                .IsRequired(false);
+                .IsRequired(true);
 
             builder.Property(p => p.RadiationPoints)
-                .IsRequired(false);
+                .IsRequired(true);
 
             builder.Property(p => p.ExperiencePoints)
-                .IsRequired(false);
+                .IsRequired(true);
 
             builder.Property(p => p.StoryPoints)
-                .IsRequired(false);
+                .IsRequired(true);
 
             builder.Property(p => p.Strength)
-                .IsRequired(false);
+                .IsRequired(true);
 
             builder.Property(p => p.CloseCombat)
-                .IsRequired(false);
+                .IsRequired(true);
 
             builder.Property(p => p.Stamina)
-                .IsRequired(false);
+                .IsRequired(true);
 
             builder.Property(p => p.HeavyMachines)
-                .IsRequired(false);
+                .IsRequired(true);
 
             builder.Property(p => p.Agility)
-               .IsRequired(false);
+               .IsRequired(true);
 
             builder.Property(p => p.RangedCombat)
-               .IsRequired(false);
+               .IsRequired(true);
 
             builder.Property(p => p.Mobility)
-               .IsRequired(false);
+               .IsRequired(true);
 
             builder.Property(p => p.Piloting)
-               .IsRequired(false);
+               .IsRequired(true);
 
             builder.Property(p => p.Empathy)
-               .IsRequired(false);
+               .IsRequired(true);
 
             builder.Property(p => p.Commanding)
-               .IsRequired(false);
+               .IsRequired(true);
 
             builder.Property(p => p.Manipulation)
-               .IsRequired(false);
+               .IsRequired(true);
 
             builder.Property(p => p.MedicalCare)
-               .IsRequired(false);
+               .IsRequired(true);
 
             builder.Property(p => p.Mind)
-               .IsRequired(false);
+               .IsRequired(true);
 
             builder.Property(p => p.Observer)
-               .IsRequired(false);
+               .IsRequired(true);
 
             builder.Property(p => p.Survival)
-               .IsRequired(false);
+               .IsRequired(true);
 
             builder.Property(p => p.Contech)
-               .IsRequired(false);
+               .IsRequired(true);
 
 // TODO : 2bool
         }
