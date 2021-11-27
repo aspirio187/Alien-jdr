@@ -49,4 +49,12 @@ namespace Alien.UI.Helpers
     {
         CompanyAgent
     }
+
+    public enum Attributes
+    {
+        Force,
+        Agilité,
+        Esprit,
+        Empathie
+    }
 }

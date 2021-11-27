@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:prism="http://prismlibrary.com/"
              xmlns:local="clr-namespace:Alien.UI.Views"
+             xmlns:global="clr-namespace:Alien.UI.Helpers"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="800"
@@ -58,71 +59,31 @@
                     VerticalAlignment="Center"
                     Margin="0,0,10,0">
 
-            <TextBlock FontFamily="arial black"
-                       Foreground="White"
-                       FontSize="25">
-                14
-            </TextBlock>
+            <TextBlock Text="{Binding AttributePoints}" FontFamily="arial black" Foreground="White" FontSize="25"/>
 
         </StackPanel>
 
-        <StackPanel Grid.Row="1" 
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
+        <StackPanel Grid.Row="1"  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-            <TextBlock Style="{StaticResource CustomFont}"
-                       Foreground="White"
-                       FontSize="20">
-                Force
-            </TextBlock>
-
+            <TextBlock Text="Force" Style="{StaticResource CustomFont}" Foreground="White" FontSize="20" />
         </StackPanel>
 
-        <StackPanel Grid.Row="2" 
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-            <TextBlock Style="{StaticResource CustomFont}"
-                       Foreground="White"
-                       FontSize="20">
-                Agilite
-            </TextBlock>
-
+            <TextBlock Text="Agilité" Style="{StaticResource CustomFont}" Foreground="White" FontSize="20"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="3" 
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-            <TextBlock Style="{StaticResource CustomFont}"
-                       Foreground="White"
-                       FontSize="20">
-                Esprit
-            </TextBlock>
-
+            <TextBlock Text="Esprit" Style="{StaticResource CustomFont}" Foreground="White" FontSize="20" />
         </StackPanel>
 
-        <StackPanel Grid.Row="4" 
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-            <TextBlock Style="{StaticResource CustomFont}"
-                       Foreground="White"
-                       FontSize="20">
-                Empathie
-            </TextBlock>
-
+            <TextBlock Text="Empathie" Style="{StaticResource CustomFont}" Foreground="White" FontSize="20" />
         </StackPanel>
 
-        <StackPanel Grid.Row="5" 
-                    Orientation="Horizontal" 
-                    Grid.ColumnSpan="2"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
+        <StackPanel Grid.Row="5" Orientation="Horizontal" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
 
             <TextBlock Style="{StaticResource CustomFont}"
                        Foreground="White"
@@ -319,23 +280,12 @@
 
             </Button>
 
-            <TextBlock FontFamily="arial black"
-                       Foreground="White"
-                       FontSize="20"
-                       Margin="10,0,10,0">
-                0
-            </TextBlock>
+            <TextBlock Text="{Binding CharacterAttributesCompetences.Strength}" FontFamily="arial black" Foreground="White"
+                       FontSize="20" Margin="10,0,10,0" />
 
-            <Button Content="+"
-                    Style="{StaticResource CustomFont}"
-                    FontSize="15"
-                    Width="20"
-                    Height="20"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-
-            </Button>
-
+            <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Command="{Binding IncreaseAttributeCommand}" CommandParameter="{x:Static global:Attributes.Force}"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2" 
@@ -354,23 +304,12 @@
 
             </Button>
 
-            <TextBlock FontFamily="arial black"
-                       Foreground="White"
-                       FontSize="20"
-                       Margin="10,0,10,0">
-                0
-            </TextBlock>
+            <TextBlock Text="{Binding CharacterAttributesCompetences.Agility}" FontFamily="arial black" Foreground="White"
+                       FontSize="20" Margin="10,0,10,0" />
 
-            <Button Content="+"
-                    Style="{StaticResource CustomFont}"
-                    FontSize="15"
-                    Width="20"
-                    Height="20"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-
-            </Button>
-
+            <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Command="{Binding IncreaseAttributeCommand}" CommandParameter="{x:Static global:Attributes.Agilité}" />
         </StackPanel>
 
         <StackPanel Grid.Row="3" 
@@ -389,23 +328,12 @@
 
             </Button>
 
-            <TextBlock FontFamily="arial black"
-                       Foreground="White"
-                       FontSize="20"
-                       Margin="10,0,10,0">
-                0
-            </TextBlock>
+            <TextBlock Text="{Binding CharacterAttributesCompetences.Mind}" FontFamily="arial black" Foreground="White"
+                       FontSize="20" Margin="10,0,10,0" />
 
-            <Button Content="+"
-                    Style="{StaticResource CustomFont}"
-                    FontSize="15"
-                    Width="20"
-                    Height="20"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-
-            </Button>
-
+            <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Command="{Binding IncreaseAttributeCommand}" CommandParameter="{x:Static global:Attributes.Esprit}" />
         </StackPanel>
 
         <StackPanel Grid.Row="4" 
@@ -424,23 +352,12 @@
 
             </Button>
 
-            <TextBlock FontFamily="arial black"
-                       Foreground="White"
-                       FontSize="20"
-                       Margin="10,0,10,0">
-                0
-            </TextBlock>
+            <TextBlock Text="{Binding CharacterAttributesCompetences.Empathy}" FontFamily="arial black" Foreground="White"
+                       FontSize="20" Margin="10,0,10,0" />
 
-            <Button Content="+"
-                    Style="{StaticResource CustomFont}"
-                    FontSize="15"
-                    Width="20"
-                    Height="20"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-
-            </Button>
-
+            <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Command="{Binding IncreaseAttributeCommand}" CommandParameter="{x:Static global:Attributes.Empathie}" />
         </StackPanel>
 
         <StackPanel Grid.Row="6" 

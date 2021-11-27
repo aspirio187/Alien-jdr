@@ -14,14 +14,6 @@ using System.Threading.Tasks;
 
 namespace Alien.UI.ViewModels
 {
-    public enum Attributes
-    {
-        Force,
-        Agilité,
-        Esprit,
-        Empathie
-    }
-
     public enum Competences
     {
 
@@ -33,7 +25,7 @@ namespace Alien.UI.ViewModels
 
         public CharacterCreationDto CharacterCreation { get; set; }
 
-        private CharacterAttributesCompetencesModel _characterAttributesCompetences;
+        private CharacterAttributesCompetencesModel _characterAttributesCompetences = new();
 
         public CharacterAttributesCompetencesModel CharacterAttributesCompetences
         {
@@ -57,10 +49,10 @@ namespace Alien.UI.ViewModels
             set { SetProperty(ref _competencePoints, value); }
         }
 
-        private DelegateCommand<Attributes> _increaseAttributeCommand;
+        private DelegateCommand<Attributes?> _increaseAttributeCommand;
         private DelegateCommand<Attributes> _decreaseAttributeCommand;
 
-        public DelegateCommand<Attributes> IncreaseAttributeCommand => _increaseAttributeCommand ??= new DelegateCommand<Attributes>(IncreaseAttribute, CanIncreaseAttributes);
+        public DelegateCommand<Attributes?> IncreaseAttributeCommand => _increaseAttributeCommand ??= new DelegateCommand<Attributes?>(IncreaseAttribute, CanIncreaseAttributes);
         public DelegateCommand<Attributes> DecreaseAttributeCommand => _decreaseAttributeCommand ??= new DelegateCommand<Attributes>(DecreaseAttribute);
 
         public CharacterAttributAndCompetenceViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, ICharacterService characterService)
@@ -73,21 +65,23 @@ namespace Alien.UI.ViewModels
             CompetencePoints = 10;
         }
 
-        public bool CanIncreaseAttributes(Attributes attribute)
+        public bool CanIncreaseAttributes(Attributes? attribute)
         {
-            if (AttributePoints <= 0) return false;
-
-            return attribute switch
-            {
-                Attributes.Force => IsKeyAttribute(attribute) ? CharacterAttributesCompetences.Strength < 5 : CharacterAttributesCompetences.Strength < 4,
-                Attributes.Agilité => IsKeyAttribute(attribute) ? CharacterAttributesCompetences.Agility < 5 : CharacterAttributesCompetences.Agility < 4,
-                Attributes.Esprit => IsKeyAttribute(attribute) ? CharacterAttributesCompetences.Mind < 5 : CharacterAttributesCompetences.Mind < 4,
-                Attributes.Empathie => IsKeyAttribute(attribute) ? CharacterAttributesCompetences.Empathy < 5 : CharacterAttributesCompetences.Empathy < 4,
-                _ => false,
-            };
+            return AttributePoints <= 0
+                ? false
+                : attribute is null
+                ? false
+                : attribute switch
+                {
+                    Attributes.Force => IsKeyAttribute(attribute) ? CharacterAttributesCompetences.Strength < 5 : CharacterAttributesCompetences.Strength < 4,
+                    Attributes.Agilité => IsKeyAttribute(attribute) ? CharacterAttributesCompetences.Agility < 5 : CharacterAttributesCompetences.Agility < 4,
+                    Attributes.Esprit => IsKeyAttribute(attribute) ? CharacterAttributesCompetences.Mind < 5 : CharacterAttributesCompetences.Mind < 4,
+                    Attributes.Empathie => IsKeyAttribute(attribute) ? CharacterAttributesCompetences.Empathy < 5 : CharacterAttributesCompetences.Empathy < 4,
+                    _ => false,
+                };
         }
 
-        public void IncreaseAttribute(Attributes attribute)
+        public void IncreaseAttribute(Attributes? attribute)
         {
             switch (attribute)
             {
@@ -105,6 +99,8 @@ namespace Alien.UI.ViewModels
                     break;
                 default: break;
             }
+
+            IncreaseAttributeCommand.RaiseCanExecuteChanged();
         }
 
         public void DecreaseAttribute(Attributes attributes)
@@ -152,6 +148,7 @@ namespace Alien.UI.ViewModels
             base.OnNavigatedTo(navigationContext);
 
             CharacterCreation = navigationContext.Parameters.GetValue<CharacterCreationDto>(Global.CHARACTER_CREATION);
+            IncreaseAttributeCommand.RaiseCanExecuteChanged();
         }
 
         public bool PersistInHistory()
@@ -159,8 +156,10 @@ namespace Alien.UI.ViewModels
             return true;
         }
 
-        private bool IsKeyAttribute(Attributes attribute)
+        private bool IsKeyAttribute(Attributes? attribute)
         {
+            if (CharacterCreation is null) return false;
+            if (attribute is null) return false;
             string characterKeyAttribute = _characterService.GetCareer(CharacterCreation.Career).KeyAttribute;
             if (Equals(characterKeyAttribute, attribute.ToString())) return true;
             return false;
