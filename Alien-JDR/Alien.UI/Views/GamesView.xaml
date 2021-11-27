@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Alien.UI.Views.GamesView"
+﻿<ContentControl x:Class="Alien.UI.Views.GamesView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -91,4 +91,4 @@
 
 
     </Grid>
-</UserControl>
+</ContentControl>

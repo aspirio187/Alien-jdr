@@ -10,7 +10,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="800">
 
-    <Grid Background="Black">
+    <Grid Background="Transparent">
 
         <Grid.Resources>
             <global:ComparisonConverter x:Key="ComparisonConverter" />
