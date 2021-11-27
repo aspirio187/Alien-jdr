@@ -9,17 +9,17 @@ using System.Threading.Tasks;
 
 namespace Alien.DAL.Repositories
 {
-  //  public class TalentRepository : RepositoryBase<TalentEntity, int>, ITalentRepository
-    //{
-      //  public TalentRepository(AlienContext context)
-        //    : base(context)
-       // {
+    public class TalentRepository : RepositoryBase<TalentEntity, int>, ITalentRepository
+    {
+        public TalentRepository(AlienContext context)
+            : base(context)
+        {
 
-//        }
+        }
 
-     //   public async Task<IEnumerable<TalentEntity>> GetUserTalentsAsync(int characterId)
-     //   {
-       // TODO : Comment lier characterid à talent ?     return await _context.Talents.Where(t => t.CharacterEntity.id == characterId).ToListAsync();
-     //   }
-  //  }
+        public async Task<IEnumerable<TalentEntity>> GetUserTalentsAsync(int characterId)
+        {
+            return await _context.Talents.Where(t => t.Characters.Any(c => c.Id == characterId)).ToListAsync();
+        }
+    }
 }
