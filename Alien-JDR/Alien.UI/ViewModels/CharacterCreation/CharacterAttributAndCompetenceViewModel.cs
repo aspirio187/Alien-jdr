@@ -1,7 +1,10 @@
 ﻿using Alien.BLL.Dtos;
 using Alien.BLL.Interfaces;
+using Alien.Tools.Helpers;
 using Alien.UI.Helpers;
+using Alien.UI.Models;
 using Alien.UI.States;
+using Prism.Commands;
 using Prism.Regions;
 using System;
 using System.Collections.Generic;
@@ -13,10 +16,15 @@ namespace Alien.UI.ViewModels
 {
     public enum Attributes
     {
-        Strenght,
-        Agility,
-        Mind,
-        Empathy
+        Force,
+        Agilité,
+        Esprit,
+        Empathie
+    }
+
+    public enum Competences
+    {
+
     }
 
     public class CharacterAttributAndCompetenceViewModel : ViewModelBase, IJournalAware
@@ -24,6 +32,14 @@ namespace Alien.UI.ViewModels
         private readonly ICharacterService _characterService;
 
         public CharacterCreationDto CharacterCreation { get; set; }
+
+        private CharacterAttributesCompetencesModel _characterAttributesCompetences;
+
+        public CharacterAttributesCompetencesModel CharacterAttributesCompetences
+        {
+            get { return _characterAttributesCompetences; }
+            set { SetProperty(ref _characterAttributesCompetences, value); }
+        }
 
         private int _attributePoints;
 
@@ -41,6 +57,12 @@ namespace Alien.UI.ViewModels
             set { SetProperty(ref _competencePoints, value); }
         }
 
+        private DelegateCommand<Attributes> _increaseAttributeCommand;
+        private DelegateCommand<Attributes> _decreaseAttributeCommand;
+
+        public DelegateCommand<Attributes> IncreaseAttributeCommand => _increaseAttributeCommand ??= new DelegateCommand<Attributes>(IncreaseAttribute, CanIncreaseAttributes);
+        public DelegateCommand<Attributes> DecreaseAttributeCommand => _decreaseAttributeCommand ??= new DelegateCommand<Attributes>(DecreaseAttribute);
+
         public CharacterAttributAndCompetenceViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, ICharacterService characterService)
             : base(regionNavigationService, authenticator)
         {
@@ -51,20 +73,65 @@ namespace Alien.UI.ViewModels
             CompetencePoints = 10;
         }
 
-        public void AddAtribute(Attributes attribute)
+        public bool CanIncreaseAttributes(Attributes attribute)
+        {
+            if (AttributePoints <= 0) return false;
+
+            switch (attribute)
+            {
+                case Attributes.Force:
+                    if(CharacterAttributesCompetences.Strength )
+                    break;
+                case Attributes.Agilité:
+                    break;
+                case Attributes.Esprit:
+                    break;
+                case Attributes.Empathie:
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public void IncreaseAttribute(Attributes attribute)
         {
             switch (attribute)
             {
-                case Attributes.Strenght:
+                case Attributes.Force:
+                    if (IsKeyAttribute(attribute))
+                    {
+                        if ()
+                    }
                     break;
-                case Attributes.Agility:
+                case Attributes.Agilité:
                     break;
-                case Attributes.Mind:
+                case Attributes.Esprit:
                     break;
-                case Attributes.Empathy:
+                case Attributes.Empathie:
                     break;
-                default: break;
+                default:
+                    break;
             }
+        }
+
+        public void DecreaseAttribute(Attributes attributes)
+        {
+
+        }
+
+        public bool CanIncreaseCompetence()
+        {
+            return CompetencePoints > 0;
+        }
+
+        public void IncreaseCompetence(Competences competences)
+        {
+
+        }
+
+        public void DecreaseCompetence(Competences competences)
+        {
+
         }
 
         public void NavigateBack()
@@ -97,6 +164,13 @@ namespace Alien.UI.ViewModels
         public bool PersistInHistory()
         {
             return true;
+        }
+
+        private bool IsKeyAttribute(Attributes attribute)
+        {
+            string characterKeyAttribute = _characterService.GetCareer(CharacterCreation.Career).KeyAttribute;
+            if (Equals(characterKeyAttribute, attribute.ToString())) return true;
+            return false;
         }
     }
 }
