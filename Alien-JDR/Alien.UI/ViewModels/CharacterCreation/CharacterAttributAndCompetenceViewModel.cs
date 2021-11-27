@@ -92,19 +92,18 @@ namespace Alien.UI.ViewModels
             switch (attribute)
             {
                 case Attributes.Force:
-                    if (IsKeyAttribute(attribute))
-                    {
-                        if ()
-                    }
+                    CharacterAttributesCompetences.Strength += 1;
                     break;
                 case Attributes.Agilité:
+                    CharacterAttributesCompetences.Agility += 1;
                     break;
                 case Attributes.Esprit:
+                    CharacterAttributesCompetences.Mind += 1;
                     break;
                 case Attributes.Empathie:
+                    CharacterAttributesCompetences.Empathy += 1;
                     break;
-                default:
-                    break;
+                default: break;
             }
         }
 
