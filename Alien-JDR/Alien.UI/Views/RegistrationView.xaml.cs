@@ -47,5 +47,45 @@ namespace Alien.UI.Views
                 txbUsername.Text = string.Empty;
             }
         }
+
+        private void txbUsername_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void txbName_GotFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void txbName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void txbSurName_GotFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void txbSurName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void txbEmail_GotFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void txbEmail_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void txbPassword_GotFocus(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

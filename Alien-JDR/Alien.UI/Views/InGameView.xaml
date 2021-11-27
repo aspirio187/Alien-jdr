@@ -223,8 +223,7 @@
 
         <StackPanel Grid.Row="2" 
                     Grid.RowSpan="5" 
-                    Grid.Column="3" 
-                    Grid.ColumnSpan="2"  
+                    Grid.Column="2" 
                     Orientation="Horizontal" 
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Center" 
@@ -235,6 +234,19 @@
                     <Image Source="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Images\dice.png"/>
                 </StackPanel>
             </Button>
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" 
+                    Grid.RowSpan="5" 
+                    Grid.Column="3" 
+                    Grid.ColumnSpan="2"
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    Margin="10">
+
+            
 
         </StackPanel>
 
