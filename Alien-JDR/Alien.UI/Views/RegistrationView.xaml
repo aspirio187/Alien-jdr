@@ -9,6 +9,7 @@
         xmlns:local="clr-namespace:Alien.UI.Views" 
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d" 
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         d:DesignHeight="540" d:DesignWidth="960" Loaded="UserControl_Loaded">
 
     <prism:Dialog.WindowStyle>
@@ -67,13 +68,14 @@
                        HorizontalAlignment="Center"/>
 
             <DockPanel HorizontalAlignment="Center" >
-                <TextBox x:Name="txbUsername" Style="{StaticResource CustomFont}"
+                <TextBox x:Name="txbUsername" 
+                         FontFamily="arial black"
+                         materialDesign:HintAssist.Hint="Nom d'utilisateur" 
                          FontWeight="Light" FontSize="20"
-                         Text="{Binding Registration.Username}"
                          HorizontalAlignment="Center" HorizontalContentAlignment="Left"
                          Foreground="White" Background="Transparent"
                          BorderThickness="0" Margin="0,30,0,0"
-                         Width="400" Height="25" GotFocus="txbUsername_GotFocus"
+                         Width="400" GotFocus="txbUsername_GotFocus" TextChanged="txbUsername_TextChanged"
                          >
                 </TextBox>
 
@@ -90,7 +92,10 @@
                     Opacity="0.5"/>
 
             <DockPanel HorizontalAlignment="Center" >
-                <TextBox Style="{StaticResource CustomFont}"
+                <TextBox 
+                         x:Name="txbSurName" 
+                         FontFamily="arial black"
+                         materialDesign:HintAssist.Hint="Nom"
                          FontWeight="Light"
                          Text="{Binding Registration.LastName}"
                          FontSize="20"
@@ -100,8 +105,9 @@
                          BorderThickness="0"
                          Width="400"
                          HorizontalContentAlignment="Left"
-                         Height="25"
-                         Margin="0,30,0,0">
+                         Margin="0,30,0,0"
+                         GotFocus="txbSurName_GotFocus" 
+                         TextChanged="txbSurName_TextChanged"  >
                 </TextBox>
 
                 <iconPacks:PackIconMaterial Kind="Account"
@@ -118,7 +124,8 @@
                     Opacity="0.5"/>
 
             <DockPanel HorizontalAlignment="Center" >
-                <TextBox Style="{StaticResource CustomFont}"
+                <TextBox FontFamily="arial black"
+                         materialDesign:HintAssist.Hint="Prénom"
                          FontWeight="Light"
                          Text="{Binding Registration.FirstName}"
                          FontSize="20"
@@ -128,8 +135,10 @@
                          BorderThickness="0"
                          Width="400"
                          HorizontalContentAlignment="Left"
-                         Height="25"
-                         Margin="0,30,0,0">
+                         Margin="0,30,0,0"
+                         x:Name="txbName"
+                         GotFocus="txbName_GotFocus" 
+                         TextChanged="txbName_TextChanged">
                 </TextBox>
 
                 <iconPacks:PackIconMaterial Kind="Account"
@@ -145,7 +154,8 @@
                     Opacity="0.5"/>
 
             <DockPanel HorizontalAlignment="Center" >
-                <TextBox Style="{StaticResource CustomFont}"
+                <TextBox FontFamily="arial black"
+                         materialDesign:HintAssist.Hint="Adresse mail"
                          FontWeight="Light"
                          Text="{Binding Registration.Email}"
                          FontSize="20"
@@ -155,8 +165,10 @@
                          BorderThickness="0"
                          Width="400"
                          HorizontalContentAlignment="Left"
-                         Height="25"
-                         Margin="0,30,0,0">
+                         Margin="0,30,0,0"
+                         x:Name="txbEmail"
+                         GotFocus="txbEmail_GotFocus" 
+                         TextChanged="txbEmail_TextChanged">
                 </TextBox>
 
                 <iconPacks:PackIconMaterial Kind="Mail"
@@ -172,9 +184,10 @@
                     Opacity="0.5"/>
 
             <DockPanel HorizontalAlignment="Center" >
-                <PasswordBox  Style="{StaticResource CustomFont}"
-                              helper:PasswordBoxHelper.Attach="True"
-                              helper:PasswordBoxHelper.Password="{Binding Registration.Password, Mode=TwoWay}"
+                <PasswordBox  FontFamily="arial black"
+                         materialDesign:HintAssist.Hint="Mot de passe"
+                         helper:PasswordBoxHelper.Attach="True"
+                         helper:PasswordBoxHelper.Password="{Binding Registration.Password, Mode=TwoWay}"
                          FontWeight="Light"
                          Password="admin"
                          FontSize="20"
@@ -184,8 +197,10 @@
                          BorderThickness="0"
                          Width="400"
                          HorizontalContentAlignment="Left"
-                         Height="25"
-                         Margin="0,30,0,0">
+                         Margin="0,30,0,0"
+                         x:Name="txbPassword"
+                         GotFocus="txbPassword_GotFocus" 
+                         >
                 </PasswordBox>
 
                 <iconPacks:PackIconMaterial Kind="FormTextboxPassword"
