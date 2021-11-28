@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Alien.UI.Views
 {
     /// <summary>
-    /// Interaction logic for NotificationsView.xaml
+    /// Interaction logic for GmInGameView.xaml
     /// </summary>
-    public partial class NotificationsView : ContentControl
+    public partial class GmInGameView : Window
     {
-        public NotificationsView()
+        public GmInGameView()
         {
             InitializeComponent();
         }

@@ -5,14 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Alien.UI.Views"
         mc:Ignorable="d"
-        Title="CharacterSheetView" Height="600" Width="800"
+        Title="CharacterSheetView" Height="900" Width="1000"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Images\Fiche de personnage.png"/>
+            <ImageBrush ImageSource="pack://application:,,,/Images/Fiche de personnage.png"/>
         </Grid.Background>
-        
+
+
+        <TextBox HorizontalAlignment="Left" Margin="59,84,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="255" Height="39" RenderTransformOrigin="0.5,0.5">
+        </TextBox>
+
+        <TextBox HorizontalAlignment="Left" Margin="390,86,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="224" Height="28"/>
+
+        <TextBox HorizontalAlignment="Left" Margin="423,137,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" Height="23"/>
+        <TextBox HorizontalAlignment="Center" Margin="0,189,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="307"/>
+
     </Grid>
 </Window>

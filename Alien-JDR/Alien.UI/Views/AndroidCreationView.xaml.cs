@@ -18,7 +18,7 @@ namespace Alien.UI.Views
     /// <summary>
     /// Logique d'interaction pour AndroidCreationView.xaml
     /// </summary>
-    public partial class AndroidCreationView : UserControl
+    public partial class AndroidCreationView : ContentControl
     {
         public AndroidCreationView()
         {

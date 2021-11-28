@@ -40,7 +40,8 @@
                         Style="{StaticResource CustomFont}"
                         FontWeight="Bold"
                         Width="25"
-                        Height="25" Click="MinimizeButton_Click"
+                        Height="25" 
+                        Click="MinimizeButton_Click"
                         Margin="2"/>
 
                 <Button x:Name="MaximizeButton"
@@ -58,7 +59,8 @@
                         Height="25"
                         FontSize="16"
                         FontWeight="Bold"
-                        Style="{StaticResource CustomFont}" Click="CloseButton_Click"
+                        Style="{StaticResource CustomFont}" 
+                        Click="CloseButton_Click"
                         Margin="2"/>
             </DockPanel>
 

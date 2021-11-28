@@ -40,6 +40,11 @@ namespace Alien.UI.Views
             }
         }
 
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
         private void txbUsername_GotFocus(object sender, RoutedEventArgs e)
         {
             if (txbUsername.Text.Equals(USERNAME))
@@ -48,44 +53,6 @@ namespace Alien.UI.Views
             }
         }
 
-        private void txbUsername_TextChanged(object sender, TextChangedEventArgs e)
-        {
 
-        }
-
-        private void txbName_GotFocus(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void txbName_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void txbSurName_GotFocus(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void txbSurName_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void txbEmail_GotFocus(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void txbEmail_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void txbPassword_GotFocus(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
