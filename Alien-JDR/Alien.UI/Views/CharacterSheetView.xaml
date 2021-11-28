@@ -15,6 +15,8 @@
         </Grid.Background>
 
 
+
+
         <TextBox HorizontalAlignment="Left" Margin="59,84,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="255" Height="39" RenderTransformOrigin="0.5,0.5">
         </TextBox>
 
@@ -22,6 +24,14 @@
 
         <TextBox HorizontalAlignment="Left" Margin="423,137,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="159" Height="23"/>
         <TextBox HorizontalAlignment="Center" Margin="0,189,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="307"/>
+        
+        <Button Content="X" 
+                Style="{StaticResource CustomFont}"
+                HorizontalAlignment="Center" 
+                Margin="953,10,0,0" 
+                VerticalAlignment="Top"
+                FontSize="20"
+                Click="CloseButton_Click"/>
 
     </Grid>
 </Window>
