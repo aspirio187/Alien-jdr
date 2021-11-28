@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Alien.UI.Views"
         mc:Ignorable="d"
-        Title="CharacterSheetView" Height="600" Width="800"
+        Title="CharacterSheetView" Height="900" Width="1000"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Images\Fiche de personnage.png"/>
+            <ImageBrush ImageSource="pack://application:,,,/Images/Fiche de personnage.png"/>
         </Grid.Background>
         
     </Grid>
