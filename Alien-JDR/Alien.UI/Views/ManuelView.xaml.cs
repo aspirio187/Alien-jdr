@@ -18,9 +18,9 @@ namespace Alien.UI.Views
     /// <summary>
     /// Interaction logic for pdfViewer.xaml
     /// </summary>
-    public partial class pdfViewer : UserControl
+    public partial class ManuelView : ContentControl
     {
-        public pdfViewer()
+        public ManuelView()
         {
             InitializeComponent();
         }

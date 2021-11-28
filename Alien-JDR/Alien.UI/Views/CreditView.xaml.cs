@@ -18,7 +18,7 @@ namespace Alien.UI.Views
     /// <summary>
     /// Interaction logic for CreditView.xaml
     /// </summary>
-    public partial class CreditView : UserControl
+    public partial class CreditView : ContentControl
     {
         public CreditView()
         {

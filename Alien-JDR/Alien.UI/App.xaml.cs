@@ -33,6 +33,8 @@ namespace Alien.UI
             containerRegistry.RegisterDialog<LoginView>();
             containerRegistry.RegisterDialog<RegistrationView>();
 
+            containerRegistry.RegisterForNavigation<ManuelView>();
+            containerRegistry.RegisterForNavigation<CreditView>();
             containerRegistry.RegisterForNavigation<CharactersView>();
             containerRegistry.RegisterForNavigation<CharacterCareerSelectionView>();
             containerRegistry.RegisterForNavigation<CharacterInfosCreationView>();
