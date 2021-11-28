@@ -21,6 +21,8 @@ namespace Alien.UI.Helpers
         PartiesView,
         HistoryView,
         NotificationView,
+        ManuelView,
+        CreditView,
         CharacterCareerSelectionView,
         CharacterInfosCreationView,
         CharacterTalentSelectionView,

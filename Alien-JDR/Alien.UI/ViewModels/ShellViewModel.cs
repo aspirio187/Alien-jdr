@@ -19,10 +19,12 @@ namespace Alien.UI.ViewModels
         private readonly IDialogService _dialogService;
 
         private DelegateCommand _navigateCharacterCommand;
+        private DelegateCommand _navigateManuelCommand;
+        private DelegateCommand _navigateCreditCommand;
+
         public DelegateCommand NavigateCharacterCommand => _navigateCharacterCommand ??= new DelegateCommand(NavigateCharacter);
-        public DelegateCommand NavigatePartiesCommand { get; set; }
-        public DelegateCommand NavigateHistoryCommand { get; set; }
-        public DelegateCommand NavigateNotificationCommand { get; set; }
+        public DelegateCommand NavigateManuelCommand => _navigateManuelCommand ??= new DelegateCommand(NavigateManuel);
+        public DelegateCommand NavigateCreditCommand => _navigateCreditCommand ??= new DelegateCommand(NavigateCredit);
         public override DelegateCommand LoadCommand => _loadCommand ??= new DelegateCommand(async () => await LoadAsync());
 
         public ShellViewModel(IRegionManager regionManager, IDialogService dialogService, IRegionNavigationService regionNavigationService, IAuthenticator authenticator)
@@ -48,6 +50,16 @@ namespace Alien.UI.ViewModels
         public void NavigateCharacter()
         {
             Navigate(ViewsEnum.CharactersView);
+        }
+
+        public void NavigateManuel()
+        {
+            Navigate(ViewsEnum.ManuelView);
+        }
+
+        public void NavigateCredit()
+        {
+            Navigate(ViewsEnum.CreditView);
         }
     }
 }

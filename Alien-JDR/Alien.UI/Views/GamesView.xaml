@@ -50,9 +50,6 @@
                     <DataGridTextColumn Header="Mode"
                                     MinWidth="150"
                                     Width="*"/>
-                    <DataGridTextColumn Header="Mode"
-                                    MinWidth="150"
-                                    Width="*"/>
                     <DataGridTextColumn Header="Créateur"
                                     MinWidth="150"
                                     Width="*"/>
