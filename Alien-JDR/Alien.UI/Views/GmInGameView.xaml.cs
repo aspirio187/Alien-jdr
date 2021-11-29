@@ -15,20 +15,13 @@ using System.Windows.Shapes;
 namespace Alien.UI.Views
 {
     /// <summary>
-    /// Interaction logic for CharacterSheetView.xaml
+    /// Interaction logic for GmInGameView.xaml
     /// </summary>
-    public partial class CharacterSheetView : Window
+    public partial class GmInGameView : Window
     {
-        public CharacterSheetView()
+        public GmInGameView()
         {
             InitializeComponent();
         }
-
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-
     }
 }

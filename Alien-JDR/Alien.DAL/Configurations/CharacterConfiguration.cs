@@ -29,6 +29,10 @@ namespace Alien.DAL.Configurations
                 .IsRequired(false)
                 .OnDelete(DeleteBehavior.NoAction);
 
+            builder.HasMany(c => c.Talents)
+                .WithMany(t => t.Characters)
+                .UsingEntity(join => join.ToTable("CharacterTalent"));
+
             builder.Property(x => x.Name)
                 .IsRequired()
                 .HasMaxLength(50);
@@ -52,7 +56,7 @@ namespace Alien.DAL.Configurations
             builder.Property(x => x.Objectives)
                 .IsRequired()
                 .HasMaxLength(150);
-    
+
             builder.Property(x => x.Friend)
                 .IsRequired()
                 .HasMaxLength(50);
@@ -60,7 +64,7 @@ namespace Alien.DAL.Configurations
             builder.Property(x => x.Rival)
                 .IsRequired()
                 .HasMaxLength(50);
-// TALENTS 
+ 
             builder.Property(p => p.StressPoints)
                 .IsRequired(true);
 
@@ -123,9 +127,6 @@ namespace Alien.DAL.Configurations
 
             builder.Property(p => p.Contech)
                .IsRequired(true);
-
-// TODO : 2bool
         }
-        
     }
 }

@@ -10,7 +10,7 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d" 
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        d:DesignHeight="540" d:DesignWidth="960" Loaded="UserControl_Loaded">
+        d:DesignHeight="540" d:DesignWidth="960" >
 
     <prism:Dialog.WindowStyle>
         <Style TargetType="Window">
@@ -48,14 +48,19 @@
 
         <!--<Border CornerRadius="100"/>-->
 
-        <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="Transparent" MouseDown="DockPanel_MouseDown">
+        <DockPanel Grid.Row="0" Grid.Column="0" 
+                   Grid.ColumnSpan="2" 
+                   Background="Transparent" 
+                   MouseDown="DockPanel_MouseDown"
+                   Margin="5">
 
             <Button x:Name="CloseButton" 
                     Style="{StaticResource CustomFont}" 
                     Content="x" 
                     VerticalAlignment="Top" 
                     HorizontalAlignment="Right"
-                    Width="25" Height="25"/>
+                    Width="25" Height="25"
+/>
 
         </DockPanel>
 
@@ -75,9 +80,7 @@
                          HorizontalAlignment="Center" HorizontalContentAlignment="Left"
                          Foreground="White" Background="Transparent"
                          BorderThickness="0" Margin="0,30,0,0"
-                         Width="400" GotFocus="txbUsername_GotFocus" TextChanged="txbUsername_TextChanged"
-                         >
-                </TextBox>
+                         Width="400" />
 
                 <iconPacks:PackIconMaterial Kind="Account"
                                            VerticalAlignment="Center" 
@@ -105,10 +108,7 @@
                          BorderThickness="0"
                          Width="400"
                          HorizontalContentAlignment="Left"
-                         Margin="0,30,0,0"
-                         GotFocus="txbSurName_GotFocus" 
-                         TextChanged="txbSurName_TextChanged"  >
-                </TextBox>
+                         Margin="0,30,0,0" />
 
                 <iconPacks:PackIconMaterial Kind="Account"
                                            VerticalAlignment="Center" 
@@ -136,10 +136,8 @@
                          Width="400"
                          HorizontalContentAlignment="Left"
                          Margin="0,30,0,0"
-                         x:Name="txbName"
-                         GotFocus="txbName_GotFocus" 
-                         TextChanged="txbName_TextChanged">
-                </TextBox>
+                         x:Name="txbName" />
+
 
                 <iconPacks:PackIconMaterial Kind="Account"
                                            VerticalAlignment="Center" 
@@ -166,10 +164,8 @@
                          Width="400"
                          HorizontalContentAlignment="Left"
                          Margin="0,30,0,0"
-                         x:Name="txbEmail"
-                         GotFocus="txbEmail_GotFocus" 
-                         TextChanged="txbEmail_TextChanged">
-                </TextBox>
+                         x:Name="txbEmail" />
+
 
                 <iconPacks:PackIconMaterial Kind="Mail"
                                            VerticalAlignment="Center" 
@@ -197,11 +193,7 @@
                          BorderThickness="0"
                          Width="400"
                          HorizontalContentAlignment="Left"
-                         Margin="0,30,0,0"
-                         x:Name="txbPassword"
-                         GotFocus="txbPassword_GotFocus" 
-                         >
-                </PasswordBox>
+                         Margin="0,30,0,0" />
 
                 <iconPacks:PackIconMaterial Kind="FormTextboxPassword"
                                            VerticalAlignment="Center" 

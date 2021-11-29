@@ -32,7 +32,7 @@ namespace Alien.DAL.Entities
         // Sur base de la carrière
         public ICollection<WoundEntity> MajorWounds { get; set; }
 
-        [IntegerValidator(MinValue = 2,  ExcludeRange = false)]
+        [IntegerValidator(MinValue = 2, ExcludeRange = false)]
         public int Strength { get; set; }
         public int CloseCombat { get; set; }
         public int Stamina { get; set; }
