@@ -18,7 +18,7 @@ namespace Alien.UI.Views
     /// <summary>
     /// Interaction logic for NotificationsView.xaml
     /// </summary>
-    public partial class NotificationsView : UserControl
+    public partial class NotificationsView : ContentControl
     {
         public NotificationsView()
         {

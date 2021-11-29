@@ -167,6 +167,8 @@
                     Grid.Column="0"
                     Margin="10">
             <Button 
+                Width="200"
+                Height="40"
                 Content="Retour" 
                 Foreground="Black"
                 Style="{StaticResource CustomFont}" 
@@ -179,6 +181,8 @@
                     Grid.Column="2" >
 
             <Button 
+                Width="200"
+                Height="40"
                 Content="Suivant" 
                 Foreground="Black"
                 Style="{StaticResource CustomFont}" 
