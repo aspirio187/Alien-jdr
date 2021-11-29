@@ -27,7 +27,8 @@ namespace Alien.DAL.Configurations
              .HasMaxLength(500);
 
             builder.HasMany(t => t.Characters)
-                .WithMany(c => c.Talents);
+                .WithMany(c => c.Talents)
+                .UsingEntity(join => join.ToTable("CharacterTalent"));
         }
     }
 }
