@@ -22,7 +22,8 @@ namespace Alien.DAL.Configurations
              .HasMaxLength(50);
 
             builder.HasMany(r => r.Users)
-                .WithMany(u => u.Roles);
+                .WithMany(u => u.Roles)
+                .UsingEntity(join => join.ToTable("UserRole"));
         }
     }
 }

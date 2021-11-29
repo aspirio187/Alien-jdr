@@ -127,9 +127,6 @@ namespace Alien.DAL.Configurations
 
             builder.Property(p => p.Contech)
                .IsRequired(true);
-
-            // TODO : 2bool
         }
-
     }
 }
