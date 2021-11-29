@@ -19,14 +19,14 @@
         <TextBlock Text="Talents" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10" 
                        Style="{StaticResource CustomFont}" Foreground="White" FontSize="25" />
 
-        <ListBox Grid.Row="1" Background="Transparent" ItemsSource="{Binding Talents}" SelectedItem="{Binding SelectedTalent}" 
+        <ListBox  Grid.Row="1" Background="Transparent" ItemsSource="{Binding Talents}" SelectedItem="{Binding SelectedTalent}" 
                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="{x:Type ListBoxItem}">
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                                <RadioButton Margin="5" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsSelected}">
+                                <RadioButton BorderBrush="Black" BorderThickness="1" Margin="5" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsSelected}">
                                     <StackPanel>
                                         <Expander Foreground="White" MaxWidth="280" Style="{StaticResource CustomFont}" FontSize="20">
                                             <Expander.Header>
@@ -51,10 +51,22 @@
             </ListBox.ItemsPanel>
         </ListBox>
         
-        <DockPanel Grid.Row="2" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Center">
-            <Button Width="200" Height="40" Content="Retour" HorizontalAlignment="Left" Style="{StaticResource CustomFont}"
+        <DockPanel Grid.Row="2" 
+                   Margin="10" 
+                   HorizontalAlignment="Stretch" 
+                   VerticalAlignment="Center">
+            
+            <Button Width="200" 
+                    Height="40" 
+                    Content="Retour" 
+                    HorizontalAlignment="Left" 
+                    Style="{StaticResource CustomFont}"
                     Command="{Binding NavigateBackCommand}"/>
-            <Button Width="200" Height="40" Content="Suivant" Style="{StaticResource CustomFont}" HorizontalAlignment="Right" 
+            
+            <Button Width="200" 
+                    Height="40" 
+                    Content="Suivant" 
+                    Style="{StaticResource CustomFont}" HorizontalAlignment="Right" 
                     Command="{Binding NavigateNextPageCommand}"/>
         </DockPanel>
 

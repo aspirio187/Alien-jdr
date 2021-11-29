@@ -48,14 +48,19 @@
 
         <!--<Border CornerRadius="100"/>-->
 
-        <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="Transparent" MouseDown="DockPanel_MouseDown">
+        <DockPanel Grid.Row="0" Grid.Column="0" 
+                   Grid.ColumnSpan="2" 
+                   Background="Transparent" 
+                   MouseDown="DockPanel_MouseDown"
+                   Margin="5">
 
             <Button x:Name="CloseButton" 
                     Style="{StaticResource CustomFont}" 
                     Content="x" 
                     VerticalAlignment="Top" 
                     HorizontalAlignment="Right"
-                    Width="25" Height="25"/>
+                    Width="25" Height="25"
+/>
 
         </DockPanel>
 

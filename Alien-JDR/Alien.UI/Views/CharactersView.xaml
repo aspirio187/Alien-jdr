@@ -33,10 +33,10 @@
                             HorizontalAlignment="Center" 
                             Background="Transparent">
 
-                    <Image Source="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Images\Create.jpg"/>
+                    <Image Source="pack://application:,,,/Images/Create.jpg"/>
                 </StackPanel>
             </Button>
-
+           
         </StackPanel>
 
     </Grid>

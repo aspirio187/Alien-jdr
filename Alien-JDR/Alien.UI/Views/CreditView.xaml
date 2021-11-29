@@ -9,7 +9,7 @@
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
@@ -38,12 +38,12 @@
         <StackPanel Grid.Row="1" Orientation="Horizontal" 
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Center"
-                    Margin="0,10">
+                    Margin="0,0">
             <TextBlock Style="{StaticResource CustomFont}"
                        Foreground="White"
                        FontSize="20">
                 
-                Analyse<LineBreak/>
+                Analyse
 
             </TextBlock>
         </StackPanel>
@@ -71,9 +71,9 @@
             <TextBlock Style="{StaticResource CustomFont}"
                        Foreground="White"
                        FontSize="20"
-                       Margin="0,10">
+                       >
                 
-                Back end<LineBreak/>
+                Back end
                 
             </TextBlock>
         </StackPanel>
@@ -87,7 +87,8 @@
                        Foreground="White"
                        FontSize="15"
                        FontStyle="Italic">
-                
+                        BOELS Diego 
+                        <LineBreak/>
                         HATSIJEV Soultan
                         <LineBreak/>
                         HOUTHOOFD Guillaume 
@@ -104,9 +105,9 @@
             <TextBlock Style="{StaticResource CustomFont}"
                        Foreground="White"
                        FontSize="20"
-                       Margin="0,10">
+                       >
                 
-                Front end<LineBreak/>
+                Front end
 
             </TextBlock>
         </StackPanel>
@@ -121,7 +122,8 @@
                        FontSize="15"
                        FontStyle="Italic">
                 
-                        ARUSTAMYAN David
+                        ARUSTAMYAN David<LineBreak/>
+                        LÉTHEM Benjamin <LineBreak/>
 
             </TextBlock>
         </StackPanel>
@@ -133,9 +135,9 @@
             <TextBlock Style="{StaticResource CustomFont}"
                        Foreground="White"
                        FontSize="20"
-                       Margin="0,10">
+                       >
                 
-                Autres<LineBreak/>
+                Autres
 
             </TextBlock>
         </StackPanel>
@@ -150,8 +152,8 @@
                        FontSize="15"
                        FontStyle="Italic">
                 
-                       BOELS Diego  <LineBreak/>
-                       LÉTHEM Benjamin <LineBreak/>
+                       
+                       
                        BRESSAN Louthiern <LineBreak/>
 
             </TextBlock>

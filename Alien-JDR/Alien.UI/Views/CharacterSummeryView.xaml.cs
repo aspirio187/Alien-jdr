@@ -18,7 +18,7 @@ namespace Alien.UI.Views
     /// <summary>
     /// Interaction logic for CharacterSummeryView.xaml
     /// </summary>
-    public partial class CharacterSummeryView : UserControl
+    public partial class CharacterSummeryView : ContentControl
     {
         public CharacterSummeryView()
         {
