@@ -76,7 +76,7 @@ namespace Alien.UI.ViewModels
                 { Global.CHARACTER_CREATION, CharacterCreation }
             };
 
-            Navigate(ViewsEnum.CharacterAttributAndCompetenceView, parameters);
+            Navigate(ViewsEnum.CharacterAttributesCompetencesView, parameters);
         }
 
         public override void OnNavigatedTo(NavigationContext navigationContext)
