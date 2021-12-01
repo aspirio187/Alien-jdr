@@ -1,6 +1,7 @@
 ﻿using Alien.UI.Helpers;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace Alien.UI.Models
     {
         private string _name;
 
+        [Required(AllowEmptyStrings = false)]
         public string Name
         {
             get { return _name; }
@@ -21,6 +23,7 @@ namespace Alien.UI.Models
             }
         }
 
+        [Required(AllowEmptyStrings = false)]
         private string _imagePath;
 
         public string ImagePath
@@ -33,6 +36,7 @@ namespace Alien.UI.Models
             }
         }
 
+        [Required(AllowEmptyStrings = false)]
         private string _description;
 
         public string Description

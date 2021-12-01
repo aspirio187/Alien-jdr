@@ -18,14 +18,14 @@ namespace Alien.UI.ViewModels
     {
         private readonly ICharacterService _characterService;
 
-        private CharacterCareerSelectionModel _careerSelection = new();
+        private CharacterCareerSelectionModel _selectedCareer;
 
         public CharacterCareerSelectionModel SelectedCareer
         {
-            get { return _careerSelection; }
+            get { return _selectedCareer; }
             set
             {
-                SetProperty(ref _careerSelection, value);
+                SetProperty(ref _selectedCareer, value);
                 NavigateNextPageCommand.RaiseCanExecuteChanged();
             }
         }
@@ -56,11 +56,13 @@ namespace Alien.UI.ViewModels
                 throw new ArgumentNullException(nameof(characterService));
 
             LoadCareers();
+
+            NavigateNextPageCommand.RaiseCanExecuteChanged();
         }
 
         public bool CanNavigateNextPage()
         {
-            return SelectedCareer is null ? false : SelectedCareer.IsValid ? true : false;
+            return SelectedCareer is not null && (SelectedCareer.IsValid);
         }
 
         public void NavigateNextPage()

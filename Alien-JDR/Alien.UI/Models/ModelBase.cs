@@ -11,24 +11,7 @@ namespace Alien.UI.Models
 {
     public abstract class ModelBase : INotifyPropertyChanged
     {
-        //private ObservableCollection<ValidationResult> _validationResults = new();
-
-        //public ObservableCollection<ValidationResult> ValidationResults
-        //{
-        //    get { return _validationResults; }
-        //    set
-        //    {
-        //        _validationResults = value;
-        //        NotifyPropertyChanged();
-        //    }
-        //}
-
         public ObservableCollection<ValidationResult> ValidationResults { get; set; } = new();
-
-        public void t()
-        {
-            string s = ValidationResults[0].ErrorMessage;
-        }
 
         public bool IsValid { get => ValidationResults.Count <= 0; }
 
