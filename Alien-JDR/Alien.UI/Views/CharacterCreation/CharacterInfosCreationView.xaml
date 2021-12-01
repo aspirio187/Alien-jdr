@@ -17,180 +17,105 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" 
-                    Grid.ColumnSpan="3" 
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-            
-            <TextBlock Foreground="White" 
-                       Style="{StaticResource CustomFont}"
-                       FontSize="35"
-                       Text="Fiche Personnage"/>
-        </StackPanel>
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="Fiche Personnage" Style="{StaticResource CustomFont}" Foreground="White" FontSize="35"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"/>
 
-        <StackPanel Grid.Row="1" 
-                    Grid.Column="0" 
-                    Width="auto" 
-                    HorizontalAlignment="Left" 
-                    VerticalAlignment="Center"
-                    >
-            
+        <StackPanel Grid.Row="1" Grid.Column="0" Width="auto" VerticalAlignment="Stretch" >
+
             <StackPanel Margin="10">
-                <TextBlock Text="Nom" 
-                           Style="{StaticResource CustomFont}"
-                           Foreground="White"/>
                 
-                <TextBox Text="{Binding CharacterInfos.Name}" 
-                         Height="auto"
-                         />
+                <TextBlock Text="Nom" Style="{StaticResource CustomFont}" Foreground="White"/>
+                <TextBox Text="{Binding CharacterInfos.Name}" Height="auto" />
+            </StackPanel>
+
+            <StackPanel Margin="10">
+
+                <TextBlock Text="Apparence" Style="{StaticResource CustomFont}" Foreground="White"/>
+
+                <TextBox Text="{Binding CharacterInfos.Appearance}" TextWrapping="Wrap" AcceptsReturn="True" Height="auto"/>
+            </StackPanel>
+
+            <StackPanel Margin="10">
+
+                <TextBlock Text="Objectifs" Foreground="White" Style="{StaticResource CustomFont}"/>
+
+                <TextBox Text="{Binding CharacterInfos.Objectives}" TextWrapping="Wrap" AcceptsReturn="True" Height="auto" />
             </StackPanel>
 
             <StackPanel Margin="10">
                 
-                <TextBlock Text="Apparence" 
-                           Style="{StaticResource CustomFont}"
-                           Foreground="White"/>
-                
-                <TextBox Text="{Binding CharacterInfos.Appearance}" 
-                         TextWrapping="Wrap"  
-                         AcceptsReturn="True" 
-                         Height="auto"/>
-                
+                <TextBlock Text="Amis" Foreground="White" Style="{StaticResource CustomFont}"/>
+
+                <TextBox FontFamily="Arial Black" Text="{Binding CharacterInfos.Friends}" TextWrapping="Wrap" AcceptsReturn="True" Height="auto"/>
             </StackPanel>
 
             <StackPanel Margin="10">
                 
-                <TextBlock Text="Objectifs" 
-                           Foreground="White"
-                           Style="{StaticResource CustomFont}"/>
-                
-                <TextBox Text="{Binding CharacterInfos.Objectives}" 
-                         TextWrapping="Wrap" 
-                         AcceptsReturn="True" 
-                         Height="auto" />
-                
-            </StackPanel>
-            
-            <StackPanel Margin="10">
-                <TextBlock Text="Amis" 
-                           Foreground="White"
-                           Style="{StaticResource CustomFont}"/>
-                
-                <TextBox FontFamily="Arial Black" 
-                         Text="{Binding CharacterInfos.Friends}"             
-                         TextWrapping="Wrap" 
-                         AcceptsReturn="True" 
-                         Height="auto"/>
-            </StackPanel>
-
-            <StackPanel Margin="10">
-                <TextBlock Text="Rivaux" 
-                           Foreground="White"
-                           Style="{StaticResource CustomFont}"/>
-                <TextBox Text="{Binding CharacterInfos.Rivals}" 
-                         TextWrapping="Wrap" 
-                         AcceptsReturn="True" 
-                         Height="auto"/>
+                <TextBlock Text="Rivaux" Foreground="White" Style="{StaticResource CustomFont}"/>
+                <TextBox Text="{Binding CharacterInfos.Rivals}" TextWrapping="Wrap" AcceptsReturn="True" Height="auto"/>
             </StackPanel>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="1">
-            
+
             <StackPanel Margin="10">
-                
-                <TextBlock Text="Objet fétiche"
-                           Foreground="White"
-                           Style="{StaticResource CustomFont}"/>
-                
+
+                <TextBlock Text="Objet fétiche" Foreground="White" Style="{StaticResource CustomFont}"/>
                 <TextBox Text="{Binding CharacterInfos.FetishItem}"/>
             </StackPanel>
 
             <StackPanel Margin="10">
-                <TextBlock Text="Objets minuscule"
-                           Foreground="White"
-                           Style="{StaticResource CustomFont}"/>
-                
-                <TextBox Text="{Binding CharacterInfos.NewItem}" 
-                         GotFocus="Add_GotFocus"/>
-                
-                <Button Content="Ajouter" Foreground="Black"
-                        Style="{StaticResource CustomFont}" 
-                        Command="{Binding AddItemCommand}"/>
-                
-                <ListBox MinHeight="80" 
-                         ItemsSource="{Binding CharacterInfos.LittleItems}" 
-                         SelectedItem="{Binding CharacterInfos.SelectedItem}"/>
-                
-                <Button Content="Supprimer" Foreground="Black"
-                        Style="{StaticResource CustomFont}" 
-                        Command="{Binding RemoveItemCommand}"/>
-                
+
+                <TextBlock Text="Objets minuscule" Foreground="White" Style="{StaticResource CustomFont}"/>
+                <TextBox Text="{Binding CharacterInfos.NewItem}" GotFocus="Add_GotFocus"/>
+                <Button Content="Ajouter" Foreground="Black" Style="{StaticResource CustomFont}" Command="{Binding AddItemCommand}"/>
+
+                <ListBox MinHeight="80" ItemsSource="{Binding CharacterInfos.LittleItems}" SelectedItem="{Binding CharacterInfos.SelectedItem}"/>
+                <Button Content="Supprimer" Foreground="Black" Style="{StaticResource CustomFont}" Command="{Binding RemoveItemCommand}"/>
             </StackPanel>
-            
+
         </StackPanel>
 
-        <StackPanel Grid.Row="1" 
-                    Margin="10" 
-                    Grid.Column="2">
-            
-            <TextBlock Text="Equipements" 
-                       Foreground="White"
-                       Style="{StaticResource CustomFont}"/>
-            
-            <TextBox Text="{Binding CharacterInfos.NewEquipment}" 
-                     GotFocus="Add_GotFocus" />
-            
-            <Button Content="Ajouter"
-                    Foreground="Black"
-                    Style="{StaticResource CustomFont}" 
-                    Command="{Binding AddEquipmentCommand}"/>
-            
-            <TextBlock Text="Equipé(s)" 
-                       Foreground="White"
-                       Style="{StaticResource CustomFont}" />
-            
-            <ListBox MinHeight="80" 
-                     ItemsSource="{Binding CharacterInfos.Equipments}" 
-                     SelectedItem="{Binding CharacterInfos.SelectedEquipment}"/>
-            
-            <Button Content="Supprimer" Foreground="Black"
-                    Style="{StaticResource CustomFont}" 
-                    Command="{Binding RemoveEquipmentCommand}"/>
+        <StackPanel Grid.Row="1" Margin="10" Grid.Column="2">
+
+            <TextBlock Text="Equipements" Foreground="White" Style="{StaticResource CustomFont}"/>
+
+            <TextBox Text="{Binding CharacterInfos.NewEquipment}" GotFocus="Add_GotFocus" />
+
+            <Button Content="Ajouter" Foreground="Black" Style="{StaticResource CustomFont}" Command="{Binding AddEquipmentCommand}"/>
+
+            <TextBlock Text="Equipé(s)" Foreground="White" Style="{StaticResource CustomFont}" />
+
+            <ListBox MinHeight="80" ItemsSource="{Binding CharacterInfos.Equipments}" SelectedItem="{Binding CharacterInfos.SelectedEquipment}"/>
+
+            <Button Content="Supprimer" Foreground="Black" Style="{StaticResource CustomFont}" Command="{Binding RemoveEquipmentCommand}"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="2"
-                    Grid.Column="0"
-                    Margin="10">
-            <Button 
-                Width="200"
-                Height="40"
-                Content="Retour" 
-                Foreground="Black"
-                Style="{StaticResource CustomFont}" 
-                Command="{Binding NavigateBackCommand}"/>
-            
-        </StackPanel>
+        <ItemsControl Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="5"
+                      ItemsSource="{Binding CharacterInfos.ValidationResults}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding ErrorMessage}" Margin="5" Foreground="DarkRed" Style="{StaticResource CustomFont}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Vertical"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
 
-        <StackPanel Margin="10" 
-                    Grid.Row="2" 
-                    Grid.Column="2" >
-
-            <Button 
-                Width="200"
-                Height="40"
-                Content="Suivant" 
-                Foreground="Black"
-                Style="{StaticResource CustomFont}" 
-                Command="{Binding NavigateNextPageCommand}"/>
-        </StackPanel>
-        
-        
-        
-       
+        <DockPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="10">
+            <Button Width="200" Height="40" Content="Retour" Foreground="Black" Style="{StaticResource CustomFont}" HorizontalAlignment="Left"
+                    Command="{Binding NavigateBackCommand}"/>
+            <Button Width="200" Height="40" Content="Suivant" Foreground="Black" Style="{StaticResource CustomFont}" HorizontalAlignment="Right"
+                    Command="{Binding NavigateNextPageCommand}"/>
+        </DockPanel>
     </Grid>
 </ContentControl>

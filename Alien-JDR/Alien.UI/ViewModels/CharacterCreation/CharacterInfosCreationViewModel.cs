@@ -18,22 +18,18 @@ namespace Alien.UI.ViewModels
 
         private CharacterInfosCreationModel _characterInfos = new();
 
+        public CharacterInfosCreationModel CharacterInfos
+        {
+            get { return _characterInfos; }
+            set { SetProperty(ref _characterInfos, value); }
+        }
+
         private DelegateCommand _navigateBackCommand;
         private DelegateCommand _navigateNextPageCommand;
         private DelegateCommand _addItemCommand;
         private DelegateCommand _removeItemCommand;
         private DelegateCommand _addEquipmentCommand;
         private DelegateCommand _removeEquipmentCommand;
-
-        public CharacterInfosCreationModel CharacterInfos
-        {
-            get { return _characterInfos; }
-            set
-            {
-                SetProperty(ref _characterInfos, value);
-                NavigateNextPageCommand.RaiseCanExecuteChanged();
-            }
-        }
 
         public DelegateCommand NavigateBackCommand => _navigateBackCommand ??= new DelegateCommand(NavigateBack);
         public DelegateCommand NavigateNextPageCommand => _navigateNextPageCommand ??= new DelegateCommand(NavigateNextPage);
