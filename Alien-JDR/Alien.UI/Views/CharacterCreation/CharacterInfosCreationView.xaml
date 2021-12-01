@@ -120,7 +120,9 @@
                 
                 <Button Content="Ajouter" Foreground="Black"
                         Style="{StaticResource CustomFont}" 
-                        Command="{Binding AddItemCommand}"/>
+                        Command="{Binding AddItemCommand}"
+                        Width="150"
+                        Height="30"/>
                 
                 <ListBox MinHeight="80" 
                          ItemsSource="{Binding CharacterInfos.LittleItems}" 
@@ -128,7 +130,9 @@
                 
                 <Button Content="Supprimer" Foreground="Black"
                         Style="{StaticResource CustomFont}" 
-                        Command="{Binding RemoveItemCommand}"/>
+                        Command="{Binding RemoveItemCommand}"
+                        Width="150"
+                        Height="30"/>
                 
             </StackPanel>
             
@@ -148,7 +152,9 @@
             <Button Content="Ajouter"
                     Foreground="Black"
                     Style="{StaticResource CustomFont}" 
-                    Command="{Binding AddEquipmentCommand}"/>
+                    Command="{Binding AddEquipmentCommand}"
+                    Width="150"
+                    Height="30"/>
             
             <TextBlock Text="Equipé(s)" 
                        Foreground="White"
@@ -160,7 +166,9 @@
             
             <Button Content="Supprimer" Foreground="Black"
                     Style="{StaticResource CustomFont}" 
-                    Command="{Binding RemoveEquipmentCommand}"/>
+                    Command="{Binding RemoveEquipmentCommand}"
+                    Width="150"
+                    Height="30"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2"
