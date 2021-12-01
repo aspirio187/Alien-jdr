@@ -13,6 +13,24 @@ namespace Alien.UI.Helpers
         public const string NAVIGATION_SERVICE = "NavigationService";
         public const string SESSION_PATH = "Session";
         public const string CHARACTER_CREATION = "Creating Character";
+
+        public const string CHANEL_PING = "CPing";
+
+        public static readonly Dictionary<Competences?, string> Competences = new()
+        {
+            { Helpers.Competences.HeavyMachines, "Machines lourdes" },
+            { Helpers.Competences.Stamina, "Endurance" },
+            { Helpers.Competences.CloseCombat, "Combat rapproché" },
+            { Helpers.Competences.Mobility, "Mobilité" },
+            { Helpers.Competences.Piloting, "Pilotage" },
+            { Helpers.Competences.RangeCombat, "Combat à distance" },
+            { Helpers.Competences.Observation, "Observation" },
+            { Helpers.Competences.Comtech, "Comtech" },
+            { Helpers.Competences.Survival, "Survie" },
+            { Helpers.Competences.Manipulation, "Manipulation" },
+            { Helpers.Competences.Commandment, "Commandement" },
+            { Helpers.Competences.MedicalCare, "Soins médicaux" }
+        };
     }
 
     public enum ViewsEnum
@@ -58,5 +76,21 @@ namespace Alien.UI.Helpers
         Agilité,
         Esprit,
         Empathie
+    }
+
+    public enum Competences
+    {
+        HeavyMachines,
+        Stamina,
+        CloseCombat,
+        Mobility,
+        Piloting,
+        RangeCombat,
+        Observation,
+        Comtech,
+        Survival,
+        Manipulation,
+        Commandment,
+        MedicalCare
     }
 }

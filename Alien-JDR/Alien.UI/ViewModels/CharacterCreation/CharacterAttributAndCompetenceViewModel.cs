@@ -14,11 +14,6 @@ using System.Threading.Tasks;
 
 namespace Alien.UI.ViewModels
 {
-    public enum Competences
-    {
-
-    }
-
     public class CharacterAttributAndCompetenceViewModel : ViewModelBase, IJournalAware
     {
         private readonly ICharacterService _characterService;
@@ -50,10 +45,14 @@ namespace Alien.UI.ViewModels
         }
 
         private DelegateCommand<Attributes?> _increaseAttributeCommand;
-        private DelegateCommand<Attributes> _decreaseAttributeCommand;
+        private DelegateCommand<Attributes?> _decreaseAttributeCommand;
+        private DelegateCommand<Competences?> _increaseCompetenceCommand;
+        private DelegateCommand<Competences?> _decreaseCompetenceCommand;
 
         public DelegateCommand<Attributes?> IncreaseAttributeCommand => _increaseAttributeCommand ??= new DelegateCommand<Attributes?>(IncreaseAttribute, CanIncreaseAttributes);
-        public DelegateCommand<Attributes> DecreaseAttributeCommand => _decreaseAttributeCommand ??= new DelegateCommand<Attributes>(DecreaseAttribute);
+        public DelegateCommand<Attributes?> DecreaseAttributeCommand => _decreaseAttributeCommand ??= new DelegateCommand<Attributes?>(DecreaseAttribute, CanDecreaseAttribute);
+        public DelegateCommand<Competences?> IncreaseCompetenceCommand => _increaseCompetenceCommand ??= new DelegateCommand<Competences?>(IncreaseCompetence, CanIncreaseCompetence);
+        public DelegateCommand<Competences?> DecreaseCompetenceCommand => _decreaseCompetenceCommand ??= new DelegateCommand<Competences?>(DecreaseCompetence, CanDecreaseCompetence);
 
         public CharacterAttributAndCompetenceViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, ICharacterService characterService)
             : base(regionNavigationService, authenticator)
@@ -63,6 +62,11 @@ namespace Alien.UI.ViewModels
 
             AttributePoints = 14;
             CompetencePoints = 10;
+
+            IncreaseAttributeCommand.RaiseCanExecuteChanged();
+            DecreaseAttributeCommand.RaiseCanExecuteChanged();
+            IncreaseCompetenceCommand.RaiseCanExecuteChanged();
+            DecreaseCompetenceCommand.RaiseCanExecuteChanged();
         }
 
         public bool CanIncreaseAttributes(Attributes? attribute)
@@ -100,27 +104,186 @@ namespace Alien.UI.ViewModels
                 default: break;
             }
 
+            AttributePoints--;
             IncreaseAttributeCommand.RaiseCanExecuteChanged();
         }
 
-        public void DecreaseAttribute(Attributes attributes)
+        public bool CanDecreaseAttribute(Attributes? attribute)
         {
-
+            return AttributePoints >= 14
+                ? false
+                : attribute is null
+                ? false
+                : attribute switch
+                {
+                    Attributes.Force => CharacterAttributesCompetences.Strength > 2,
+                    Attributes.Agilité => CharacterAttributesCompetences.Agility > 2,
+                    Attributes.Esprit => CharacterAttributesCompetences.Mind > 2,
+                    Attributes.Empathie => CharacterAttributesCompetences.Empathy > 2,
+                    _ => false,
+                };
         }
 
-        public bool CanIncreaseCompetence()
+        public void DecreaseAttribute(Attributes? attribute)
         {
-            return CompetencePoints > 0;
+            switch (attribute)
+            {
+                case Attributes.Force:
+                    CharacterAttributesCompetences.Strength -= 1;
+                    break;
+                case Attributes.Agilité:
+                    CharacterAttributesCompetences.Agility -= 1;
+                    break;
+                case Attributes.Esprit:
+                    CharacterAttributesCompetences.Mind -= 1;
+                    break;
+                case Attributes.Empathie:
+                    CharacterAttributesCompetences.Empathy -= 1;
+                    break;
+            }
+
+            AttributePoints++;
+            DecreaseAttributeCommand.RaiseCanExecuteChanged();
         }
 
-        public void IncreaseCompetence(Competences competences)
+        public bool CanIncreaseCompetence(Competences? competence)
         {
-
+            return CompetencePoints <= 0
+                ? false
+                : competence is null
+                ? false
+                : competence switch
+                {
+                    Competences.HeavyMachines => IsKeyCompetence(competence) ? CharacterAttributesCompetences.HeavyMachines < 3 : CharacterAttributesCompetences.HeavyMachines < 1,
+                    Competences.Stamina => IsKeyCompetence(competence) ? CharacterAttributesCompetences.Stamina < 3 : CharacterAttributesCompetences.Stamina < 1,
+                    Competences.CloseCombat => IsKeyCompetence(competence) ? CharacterAttributesCompetences.CloseCombat < 3 : CharacterAttributesCompetences.CloseCombat < 1,
+                    Competences.Mobility => IsKeyCompetence(competence) ? CharacterAttributesCompetences.Mobility < 3 : CharacterAttributesCompetences.Mobility < 1,
+                    Competences.Piloting => IsKeyCompetence(competence) ? CharacterAttributesCompetences.Piloting < 3 : CharacterAttributesCompetences.Piloting < 1,
+                    Competences.RangeCombat => IsKeyCompetence(competence) ? CharacterAttributesCompetences.RangeCombat < 3 : CharacterAttributesCompetences.RangeCombat < 1,
+                    Competences.Observation => IsKeyCompetence(competence) ? CharacterAttributesCompetences.Observation < 3 : CharacterAttributesCompetences.Observation < 1,
+                    Competences.Comtech => IsKeyCompetence(competence) ? CharacterAttributesCompetences.Comtech < 3 : CharacterAttributesCompetences.Comtech < 1,
+                    Competences.Survival => IsKeyCompetence(competence) ? CharacterAttributesCompetences.Survival < 3 : CharacterAttributesCompetences.Survival < 1,
+                    Competences.Manipulation => IsKeyCompetence(competence) ? CharacterAttributesCompetences.Manipulation < 3 : CharacterAttributesCompetences.Manipulation < 1,
+                    Competences.Commandment => IsKeyCompetence(competence) ? CharacterAttributesCompetences.Commandment < 3 : CharacterAttributesCompetences.Commandment < 1,
+                    Competences.MedicalCare => IsKeyCompetence(competence) ? CharacterAttributesCompetences.MedicalCare < 3 : CharacterAttributesCompetences.MedicalCare < 1,
+                    _ => false,
+                };
         }
 
-        public void DecreaseCompetence(Competences competences)
+        public void IncreaseCompetence(Competences? competence)
         {
+            switch (competence)
+            {
+                case Competences.HeavyMachines:
+                    CharacterAttributesCompetences.HeavyMachines++;
+                    break;
+                case Competences.Stamina:
+                    CharacterAttributesCompetences.Stamina++;
+                    break;
+                case Competences.CloseCombat:
+                    CharacterAttributesCompetences.CloseCombat++;
+                    break;
+                case Competences.Mobility:
+                    CharacterAttributesCompetences.Mobility++;
+                    break;
+                case Competences.Piloting:
+                    CharacterAttributesCompetences.Piloting++;
+                    break;
+                case Competences.RangeCombat:
+                    CharacterAttributesCompetences.RangeCombat++;
+                    break;
+                case Competences.Observation:
+                    CharacterAttributesCompetences.Observation++;
+                    break;
+                case Competences.Comtech:
+                    CharacterAttributesCompetences.Comtech++;
+                    break;
+                case Competences.Survival:
+                    CharacterAttributesCompetences.Survival++;
+                    break;
+                case Competences.Manipulation:
+                    CharacterAttributesCompetences.Manipulation++;
+                    break;
+                case Competences.Commandment:
+                    CharacterAttributesCompetences.Commandment++;
+                    break;
+                case Competences.MedicalCare:
+                    CharacterAttributesCompetences.MedicalCare++;
+                    break;
+            }
 
+            CompetencePoints--;
+            IncreaseCompetenceCommand.RaiseCanExecuteChanged();
+        }
+
+        public bool CanDecreaseCompetence(Competences? competence)
+        {
+            return CompetencePoints >= 10
+                ? false
+                : competence is null
+                ? false
+                : competence switch
+                {
+                    Competences.HeavyMachines => CharacterAttributesCompetences.HeavyMachines > 0,
+                    Competences.Stamina => CharacterAttributesCompetences.Stamina > 0,
+                    Competences.CloseCombat => CharacterAttributesCompetences.CloseCombat > 0,
+                    Competences.Mobility => CharacterAttributesCompetences.Mobility > 0,
+                    Competences.Piloting => CharacterAttributesCompetences.Piloting > 0,
+                    Competences.RangeCombat => CharacterAttributesCompetences.RangeCombat > 0,
+                    Competences.Observation => CharacterAttributesCompetences.Observation > 0,
+                    Competences.Comtech => CharacterAttributesCompetences.Comtech > 0,
+                    Competences.Survival => CharacterAttributesCompetences.Survival > 0,
+                    Competences.Manipulation => CharacterAttributesCompetences.Manipulation > 0,
+                    Competences.Commandment => CharacterAttributesCompetences.Commandment > 0,
+                    Competences.MedicalCare => CharacterAttributesCompetences.MedicalCare > 0,
+                    _ => false,
+                };
+        }
+
+        public void DecreaseCompetence(Competences? competence)
+        {
+            switch (competence)
+            {
+                case Competences.HeavyMachines:
+                    CharacterAttributesCompetences.HeavyMachines--;
+                    break;
+                case Competences.Stamina:
+                    CharacterAttributesCompetences.Stamina--;
+                    break;
+                case Competences.CloseCombat:
+                    CharacterAttributesCompetences.CloseCombat--;
+                    break;
+                case Competences.Mobility:
+                    CharacterAttributesCompetences.Mobility--;
+                    break;
+                case Competences.Piloting:
+                    CharacterAttributesCompetences.Piloting--;
+                    break;
+                case Competences.RangeCombat:
+                    CharacterAttributesCompetences.RangeCombat--;
+                    break;
+                case Competences.Observation:
+                    CharacterAttributesCompetences.Observation--;
+                    break;
+                case Competences.Comtech:
+                    CharacterAttributesCompetences.Comtech--;
+                    break;
+                case Competences.Survival:
+                    CharacterAttributesCompetences.Survival--;
+                    break;
+                case Competences.Manipulation:
+                    CharacterAttributesCompetences.Manipulation--;
+                    break;
+                case Competences.Commandment:
+                    CharacterAttributesCompetences.Commandment--;
+                    break;
+                case Competences.MedicalCare:
+                    CharacterAttributesCompetences.MedicalCare--;
+                    break;
+            }
+
+            CompetencePoints++;
+            DecreaseCompetenceCommand.RaiseCanExecuteChanged();
         }
 
         public void NavigateBack()
@@ -163,6 +326,17 @@ namespace Alien.UI.ViewModels
             string characterKeyAttribute = _characterService.GetCareer(CharacterCreation.Career).KeyAttribute;
             if (Equals(characterKeyAttribute, attribute.ToString())) return true;
             return false;
+        }
+
+        private bool IsKeyCompetence(Competences? competence)
+        {
+            if (CharacterCreation is null || competence is null) return false;
+            IEnumerable<string> characterCompetences = _characterService.GetCareer(CharacterCreation.Career).Competences;
+            if (characterCompetences.Count() <= 0) return false;
+            string competenceString = Global.Competences.GetValueOrDefault(competence);
+            if (string.IsNullOrEmpty(competenceString)) return false;
+
+            return characterCompetences.Contains(competenceString);
         }
     }
 }
