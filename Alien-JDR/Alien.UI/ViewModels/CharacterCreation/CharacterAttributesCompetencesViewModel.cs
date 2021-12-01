@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Alien.UI.ViewModels
 {
-    public class CharacterAttributAndCompetenceViewModel : ViewModelBase, IJournalAware
+    public class CharacterAttributesCompetencesViewModel : ViewModelBase, IJournalAware
     {
         private readonly ICharacterService _characterService;
 
@@ -54,7 +54,7 @@ namespace Alien.UI.ViewModels
         public DelegateCommand<Competences?> IncreaseCompetenceCommand => _increaseCompetenceCommand ??= new DelegateCommand<Competences?>(IncreaseCompetence, CanIncreaseCompetence);
         public DelegateCommand<Competences?> DecreaseCompetenceCommand => _decreaseCompetenceCommand ??= new DelegateCommand<Competences?>(DecreaseCompetence, CanDecreaseCompetence);
 
-        public CharacterAttributAndCompetenceViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, ICharacterService characterService)
+        public CharacterAttributesCompetencesViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, ICharacterService characterService)
             : base(regionNavigationService, authenticator)
         {
             _characterService = characterService ??
