@@ -8,6 +8,7 @@
             xmlns:helper="clr-namespace:Alien.UI.Helpers"
             xmlns:local="clr-namespace:Alien.UI.Views" 
             xmlns:iconPack="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
             mc:Ignorable="d" 
             d:DesignHeight="400" d:DesignWidth="350">
 
@@ -72,8 +73,10 @@
                 <StackPanel DockPanel.Dock="Top" >
                     <DockPanel HorizontalAlignment="Center" Height="50">
                         <!-- Mettre le nom d'utilisateur en MAJ ? Faut l'adapter à la DB -->
-                        <TextBox Style="{StaticResource CustomFont}"
+                        <TextBox 
                                 FontWeight="Light"
+                                materialDesign:HintAssist.Hint="Nom d'utilisateur" 
+                                FontFamily="Arial Black"
                                 Text="{Binding Login.Username}"
                                 FontSize="20"
                                 Foreground="White"
@@ -91,9 +94,11 @@
                     <Border Width="250" Height="2" Background="White" Opacity="0.5" HorizontalAlignment="Stretch"/>
 
                     <DockPanel HorizontalAlignment="Center" Height="50">
-                        <PasswordBox  Style="{StaticResource CustomFont}"
+                        <PasswordBox  
+                                      materialDesign:HintAssist.Hint="Mot de passe" 
                                       helper:PasswordBoxHelper.Attach="True"
                                       helper:PasswordBoxHelper.Password="{Binding Login.Password, Mode=TwoWay}"
+                                      FontFamily="Arial Black"
                                      FontWeight="Light"
                                      FontSize="20"
                                      Foreground="White"
@@ -106,8 +111,13 @@
                         <iconPack:PackIconMaterial Kind="FormTextboxPassword" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" />
                     </DockPanel>
                     <Border Width="250" Height="2" Background="White" Opacity="0.5"/>
-                    <CheckBox Content="Remember Me" Foreground="White" 
-                              HorizontalAlignment="Center" IsChecked="{Binding Login.RememberMe}"/>
+                    
+                    <CheckBox Content="Remember Me" 
+                              Foreground="White" 
+                              HorizontalAlignment="Center" 
+                              IsChecked="{Binding Login.RememberMe}"
+                              Style="{StaticResource CustomFont}"
+                              Margin="0,10,0,0"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DockPanel.Dock="Bottom" >

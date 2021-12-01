@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Alien.UI.Views"
         mc:Ignorable="d"
-        Title="InGameView" Height="1500" Width="1225"
+        Title="InGameView" Height="1500" Width="1250"
         WindowStyle="None"
         Background="Black">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -239,41 +239,41 @@
 
         <StackPanel Grid.Row="3" Grid.Column="0"  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
 
-            <TextBox Style="{StaticResource CustomFont}" Background="Black" Foreground="White" FontSize="20">
+            <TextBlock Style="{StaticResource CustomFont}" Background="Black" Foreground="White" FontSize="20">
                 Avatar
-            </TextBox>
+            </TextBlock>
 
         </StackPanel>
 
         <StackPanel Grid.Row="4" Grid.Column="0"  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
 
-            <TextBox Style="{StaticResource CustomFont}" Background="Black" Foreground="White" FontSize="20">
+            <TextBlock Style="{StaticResource CustomFont}" Background="Black" Foreground="White" FontSize="20">
                 Nom du joueur
-            </TextBox>
+            </TextBlock>
 
         </StackPanel>
 
         <StackPanel Grid.Row="3" Grid.Column="1"  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
 
-            <TextBox Style="{StaticResource CustomFont}" Background="Black" Foreground="White" FontSize="20">
+            <TextBlock Style="{StaticResource CustomFont}" Background="Black" Foreground="White" FontSize="20">
                 Points de vie =
-            </TextBox>
+            </TextBlock>
 
         </StackPanel>
 
         <StackPanel Grid.Row="4" Grid.Column="1"  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
 
-            <TextBox Style="{StaticResource CustomFont}" Background="Black" Foreground="White" FontSize="20">
+            <TextBlock Style="{StaticResource CustomFont}" Background="Black" Foreground="White" FontSize="20">
                 Points de stresse =
-            </TextBox>
+            </TextBlock>
 
         </StackPanel>
 
         <StackPanel Grid.Row="5" Grid.Column="1"  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
 
-            <TextBox Style="{StaticResource CustomFont}" Background="Black" Foreground="White" FontSize="20">
+            <TextBlock Style="{StaticResource CustomFont}" Background="Black" Foreground="White" FontSize="20">
                 XP
-            </TextBox>
+            </TextBlock>
 
         </StackPanel>
 
@@ -289,33 +289,285 @@
         </StackPanel>
 
         <StackPanel Grid.Row="3" 
-                    Grid.RowSpan="5" 
                     Grid.Column="2" 
                     Orientation="Horizontal" 
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Center" 
                     Margin="10">
 
-            <Button Width="150" Height="150">
-                <StackPanel>
-                    <Image Source="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Images\dice.png"/>
-                </StackPanel>
-            </Button>
+            <TextBlock 
+                Style="{StaticResource CustomFont}" 
+                Foreground="White"
+                FontSize="20"
+                Text="Attribut"/>
+
+            <ComboBox Foreground="Black" 
+                      Style="{StaticResource CustomFont}"
+                      FontSize="20">
+                <ComboBoxItem IsSelected="True">Force</ComboBoxItem>
+                <ComboBoxItem >Agilité</ComboBoxItem>
+                <ComboBoxItem>Esprit</ComboBoxItem>
+                <ComboBoxItem>Empathie</ComboBoxItem>
+            </ComboBox>
 
         </StackPanel>
 
         <StackPanel Grid.Row="3" 
-                    Grid.RowSpan="5" 
                     Grid.Column="3" 
-                    Grid.ColumnSpan="2"
                     Orientation="Horizontal" 
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Center" 
                     Margin="10">
 
-            
+            <TextBlock 
+                Style="{StaticResource CustomFont}" 
+                Foreground="White"
+                FontSize="20"
+                Text="Competances"/>
+
+            <ComboBox Foreground="Black" 
+                      Style="{StaticResource CustomFont}"
+                      FontSize="20">
+                <ComboBoxItem IsSelected="True">Binding</ComboBoxItem>
+                <ComboBoxItem >Binding</ComboBoxItem>
+                <ComboBoxItem>Binding</ComboBoxItem>
+                <ComboBoxItem>Binding</ComboBoxItem>
+            </ComboBox>
 
         </StackPanel>
+
+        <StackPanel Grid.Row="3" 
+                    Grid.Column="4" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    Margin="10">
+
+            <TextBlock 
+                Style="{StaticResource CustomFont}" 
+                Foreground="White"
+                FontSize="20"
+                Text="Bonus"/>
+
+            <ComboBox Foreground="Black" 
+                      Style="{StaticResource CustomFont}"
+                      FontSize="20">
+                <ComboBoxItem IsSelected="True">Binding</ComboBoxItem>
+                <ComboBoxItem >Binding</ComboBoxItem>
+                <ComboBoxItem>Binding</ComboBoxItem>
+                <ComboBoxItem>Binding</ComboBoxItem>
+            </ComboBox>
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="4" 
+                    Grid.Column="2" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    Margin="10">
+
+            <TextBlock 
+                Style="{StaticResource CustomFont}" 
+                Foreground="White"
+                FontSize="20"
+                Text="Normaux"/>
+
+        </StackPanel>
+        
+        <StackPanel Grid.Row="5" 
+                    Grid.Column="2" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    Margin="10">
+
+            <TextBlock 
+                Style="{StaticResource CustomFont}" 
+                Foreground="White"
+                FontSize="20"
+                Text="Bonus"/>
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="6" 
+                    Grid.Column="2" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    Margin="10">
+
+            <TextBlock 
+                Style="{StaticResource CustomFont}" 
+                Foreground="White"
+                FontSize="20"
+                Text="Stress"/>
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="4" 
+                    Grid.Column="3" 
+                    Grid.ColumnSpan="2"
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    Margin="0,0,0,15">
+
+            <Button Width="40" 
+                    Margin="0,0,20,0" 
+                    Height="40" 
+                    FontSize="30" 
+                    Content="D"
+                    Style="{StaticResource CustomFont}"/>
+
+            <Button Width="40" 
+                    Margin="0,0,20,0" 
+                    Height="40" 
+                    FontSize="30" 
+                    Content="D"
+                    Style="{StaticResource CustomFont}"/>
+
+            <Button Width="40" 
+                    Margin="0,0,20,0" 
+                    Height="40" 
+                    FontSize="30" 
+                    Content="D"
+                    Style="{StaticResource CustomFont}"/>
+
+            <Button Width="40" 
+                    Margin="0,0,20,0" 
+                    Height="40" 
+                    FontSize="30" 
+                    Content="D"
+                    Style="{StaticResource CustomFont}"/>
+
+            <Button Width="40" 
+                    Margin="0,0,20,0" 
+                    Height="40" 
+                    FontSize="30" 
+                    Content="D"
+                    Style="{StaticResource CustomFont}"/>
+
+            <Button Width="40" 
+                    Margin="0,0,20,0" 
+                    Height="40" 
+                    FontSize="30" 
+                    Content="D"
+                    Style="{StaticResource CustomFont}"/>
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="5" 
+                    Grid.Column="3" 
+                    Grid.ColumnSpan="2"
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    Margin="0,0,0,15">
+
+            <Button Width="40" 
+                    Margin="0,0,20,0" 
+                    Height="40" 
+                    FontSize="30" 
+                    Content="D"
+                    Style="{StaticResource CustomFont}"/>
+
+            <Button Width="40" 
+                    Margin="0,0,20,0" 
+                    Height="40" 
+                    FontSize="30" 
+                    Content="D"
+                    Style="{StaticResource CustomFont}"/>
+
+            <Button Width="40" 
+                    Margin="0,0,20,0" 
+                    Height="40" 
+                    FontSize="30" 
+                    Content="D"
+                    Style="{StaticResource CustomFont}"/>
+
+            <Button Width="40" 
+                    Margin="0,0,20,0" 
+                    Height="40" 
+                    FontSize="30" 
+                    Content="D"
+                    Style="{StaticResource CustomFont}"/>
+
+            <Button Width="40" 
+                    Margin="0,0,20,0" 
+                    Height="40" 
+                    FontSize="30" 
+                    Content="D"
+                    Style="{StaticResource CustomFont}"/>
+
+            <Button Width="40" 
+                    Margin="0,0,20,0" 
+                    Height="40" 
+                    FontSize="30" 
+                    Content="D"
+                    Style="{StaticResource CustomFont}"/>
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="6" 
+                    Grid.Column="3" 
+                    Grid.ColumnSpan="2"
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    Margin="0,0,0,15">
+
+            <Button Width="40" 
+                    Margin="0,0,20,0" 
+                    Height="40" 
+                    FontSize="30" 
+                    Content="D"
+                    Foreground="Red"
+                    Style="{StaticResource CustomFont}"/>
+
+            <Button Width="40" 
+                    Margin="0,0,20,0" 
+                    Height="40" 
+                    FontSize="30" 
+                    Content="D"
+                    Foreground="Red"
+                    Style="{StaticResource CustomFont}"/>
+
+            <Button Width="40" 
+                    Margin="0,0,20,0" 
+                    Height="40" 
+                    FontSize="30" 
+                    Content="D"
+                    Foreground="Red"
+                    Style="{StaticResource CustomFont}"/>
+
+            <Button Width="40" 
+                    Margin="0,0,20,0" 
+                    Height="40" 
+                    FontSize="30" 
+                    Content="D"
+                    Foreground="Red"
+                    Style="{StaticResource CustomFont}"/>
+
+            <Button Width="40" 
+                    Margin="0,0,20,0" 
+                    Height="40" 
+                    FontSize="30" 
+                    Content="D"
+                    Foreground="Red"
+                    Style="{StaticResource CustomFont}"/>
+
+            <Button Width="40" 
+                    Margin="0,0,20,0" 
+                    Height="40" 
+                    FontSize="30" 
+                    Content="D"
+                    Foreground="Red"
+                    Style="{StaticResource CustomFont}"/>
+
+        </StackPanel>
+
+
 
 
 
