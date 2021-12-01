@@ -115,12 +115,10 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
 
-            <TextBlock Style="{StaticResource CustomFont}"
-                       Foreground="White"
-                       FontSize="20">
-                Binding
-            </TextBlock>
-
+            <StackPanel Orientation="Vertical">
+                <Image Source="{Binding }" Stretch="UniformToFill" />
+                <TextBlock Text="Carriere" Style="{StaticResource CustomFont}" Foreground="White" FontSize="20" />
+            </StackPanel>
         </StackPanel>
 
         <StackPanel Grid.Row="2" 

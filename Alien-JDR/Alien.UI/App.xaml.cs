@@ -35,11 +35,14 @@ namespace Alien.UI
 
             containerRegistry.RegisterForNavigation<ManuelView>();
             containerRegistry.RegisterForNavigation<CreditView>();
+
             containerRegistry.RegisterForNavigation<CharactersView>();
             containerRegistry.RegisterForNavigation<CharacterCareerSelectionView>();
             containerRegistry.RegisterForNavigation<CharacterInfosCreationView>();
             containerRegistry.RegisterForNavigation<CharacterTalentSelectionView>();
             containerRegistry.RegisterForNavigation<CharacterAttributesCompetencesView>();
+            containerRegistry.RegisterForNavigation<CharacterAndroidCreationView>();
+            containerRegistry.RegisterForNavigation<CharacterCreationSummaryView>();
 
         }
     }
