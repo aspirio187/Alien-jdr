@@ -1,4 +1,4 @@
-﻿<ContentControl x:Class="Alien.UI.Views.CharacterAttributAndCompetenceView"
+﻿<ContentControl x:Class="Alien.UI.Views.CharacterAttributesCompetencesView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -135,7 +135,7 @@
 
         <StackPanel Grid.Row="17" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-            <TextBlock Text="Soins médicaux (Empathie)" Style="{StaticResource CustomFont}" Foreground="White" FontSize="20" />
+            <TextBlock Text="Soins medicaux (Empathie)" Style="{StaticResource CustomFont}" Foreground="White" FontSize="20" />
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">

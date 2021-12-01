@@ -39,7 +39,7 @@ namespace Alien.UI
             containerRegistry.RegisterForNavigation<CharacterCareerSelectionView>();
             containerRegistry.RegisterForNavigation<CharacterInfosCreationView>();
             containerRegistry.RegisterForNavigation<CharacterTalentSelectionView>();
-            containerRegistry.RegisterForNavigation<CharacterAttributAndCompetenceView>();
+            containerRegistry.RegisterForNavigation<CharacterAttributesCompetencesView>();
 
         }
     }

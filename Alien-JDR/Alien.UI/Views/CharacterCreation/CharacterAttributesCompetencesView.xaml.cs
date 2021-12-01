@@ -18,9 +18,9 @@ namespace Alien.UI.Views
     /// <summary>
     /// Interaction logic for CharacterAttributAndCompetenceView.xaml
     /// </summary>
-    public partial class CharacterAttributAndCompetenceView : ContentControl
+    public partial class CharacterAttributesCompetencesView : ContentControl
     {
-        public CharacterAttributAndCompetenceView()
+        public CharacterAttributesCompetencesView()
         {
             InitializeComponent();
         }

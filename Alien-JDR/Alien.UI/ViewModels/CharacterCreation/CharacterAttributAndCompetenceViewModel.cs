@@ -300,13 +300,36 @@ namespace Alien.UI.ViewModels
 
         public void NavigateNextPage()
         {
+            CharacterCreation.Strength = CharacterAttributesCompetences.Strength;
+            CharacterCreation.Agility = CharacterAttributesCompetences.Agility;
+            CharacterCreation.Mind = CharacterAttributesCompetences.Mind;
+            CharacterCreation.Empathy = CharacterAttributesCompetences.Empathy;
+
+            CharacterCreation.HeavyMachines = CharacterAttributesCompetences.HeavyMachines;
+            CharacterCreation.Stamina = CharacterAttributesCompetences.Stamina;
+            CharacterCreation.CloseCombat = CharacterAttributesCompetences.CloseCombat;
+            CharacterCreation.Mobility = CharacterAttributesCompetences.Mobility;
+            CharacterCreation.Piloting = CharacterAttributesCompetences.Piloting;
+            CharacterCreation.RangedCombat = CharacterAttributesCompetences.RangeCombat;
+            CharacterCreation.Observation = CharacterAttributesCompetences.Observation;
+            CharacterCreation.Comtech = CharacterAttributesCompetences.Comtech;
+            CharacterCreation.Survival = CharacterAttributesCompetences.Survival;
+            CharacterCreation.Manipulation = CharacterAttributesCompetences.Manipulation;
+            CharacterCreation.Commandment = CharacterAttributesCompetences.Commandment;
+            CharacterCreation.MedicalCare = CharacterAttributesCompetences.MedicalCare;
+
+            Dictionary<string, object> parameters = new Dictionary<string, object>()
+            {
+                { Global.CHARACTER_CREATION, CharacterCreation }
+            };
+
             if (CharacterCreation.Race.Equals(RaceEnum.Android.ToString()))
             {
-                // TODO : Navigue vers la page pour les android
+                Navigate(ViewsEnum.CharacterAndroidCreationView, parameters);
             }
             else
             {
-                // TODO : Navigue vers la page pour récapitulative
+                Navigate(ViewsEnum.CharacterCreationSummaryView, parameters);
             }
         }
 

@@ -34,15 +34,15 @@ namespace Alien.BLL.Dtos
 
         [IntegerValidator(MinValue = 2, MaxValue = 8, ExcludeRange = false)]
         public int Empathy { get; set; }
-        public int Commanding { get; set; }
+        public int Commandment { get; set; }
         public int Manipulation { get; set; }
         public int MedicalCare { get; set; }
 
         [IntegerValidator(MinValue = 2, MaxValue = 8, ExcludeRange = false)]
         public int Mind { get; set; }
-        public int Observer { get; set; }
+        public int Observation { get; set; }
         public int Survival { get; set; }
-        public int Contech { get; set; }
+        public int Comtech { get; set; }
 
         public Guid OwnerId { get; set; }
 
