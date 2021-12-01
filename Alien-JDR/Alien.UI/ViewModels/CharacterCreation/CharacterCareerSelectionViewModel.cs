@@ -20,21 +20,34 @@ namespace Alien.UI.ViewModels
 
         private CharacterCareerSelectionModel _careerSelection = new();
 
-        public CharacterCareerSelectionModel CareerSelection
+        public CharacterCareerSelectionModel SelectedCareer
         {
             get { return _careerSelection; }
-            set 
-            { 
+            set
+            {
                 SetProperty(ref _careerSelection, value);
                 NavigateNextPageCommand.RaiseCanExecuteChanged();
             }
         }
 
-        public ObservableCollection<CareerModel> Careers { get; set; }
+        private RaceEnum _selectedRace;
+
+        public RaceEnum SelectedRace
+        {
+            get { return _selectedRace; }
+            set
+            {
+                SetProperty(ref _selectedRace, value);
+                NavigateNextPageCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+
+        public ObservableCollection<CharacterCareerSelectionModel> Careers { get; set; }
 
         private DelegateCommand _navigateNextPageCommand;
 
-        public DelegateCommand NavigateNextPageCommand => _navigateNextPageCommand ??= new DelegateCommand(NavigateNextPage);
+        public DelegateCommand NavigateNextPageCommand => _navigateNextPageCommand ??= new DelegateCommand(NavigateNextPage, CanNavigateNextPage);
 
         public CharacterCareerSelectionViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, ICharacterService characterService)
             : base(regionNavigationService, authenticator)
@@ -45,13 +58,17 @@ namespace Alien.UI.ViewModels
             LoadCareers();
         }
 
+        public bool CanNavigateNextPage()
+        {
+            return SelectedCareer is null ? false : SelectedCareer.IsValid ? true : false;
+        }
+
         public void NavigateNextPage()
         {
-            if (CareerSelection.SelectedCareer is null) return;
             CharacterCreationDto characterCreation = new()
             {
-                Career = CareerSelection.SelectedCareer.Name,
-                Race = CareerSelection.Race.ConvertToString()
+                Career = SelectedCareer.Name,
+                Race = SelectedRace.ToString()
             };
 
             Navigate(ViewsEnum.CharacterInfosCreationView, new Dictionary<string, object>()
@@ -69,11 +86,11 @@ namespace Alien.UI.ViewModels
         {
             CareerFromJsonDto[] careersFromFile = _characterService.GetCareersFromJson();
 
-            List<CareerModel> careers = new();
+            List<CharacterCareerSelectionModel> careers = new();
 
             foreach (CareerFromJsonDto career in careersFromFile)
             {
-                careers.Add(new CareerModel()
+                careers.Add(new CharacterCareerSelectionModel()
                 {
                     Name = career.Name,
                     ImagePath = career.Image,
@@ -81,7 +98,7 @@ namespace Alien.UI.ViewModels
                 });
             }
 
-            Careers = new ObservableCollection<CareerModel>(careers);
+            Careers = new ObservableCollection<CharacterCareerSelectionModel>(careers);
         }
     }
 }
