@@ -55,7 +55,7 @@
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-            <TextBlock Text="Agilité" Style="{StaticResource CustomFont}" Foreground="White" FontSize="20"/>
+            <TextBlock Text="Agilite" Style="{StaticResource CustomFont}" Foreground="White" FontSize="20"/>
         </StackPanel>
 
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -141,7 +141,8 @@
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
 
             <Button Content="-" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" 
-                    HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    HorizontalAlignment="Center" VerticalAlignment="Center" 
+                    Command="{Binding DecreaseAttributeCommand}" CommandParameter="{x:Static global:Attributes.Force}"/>
 
             <TextBlock Text="{Binding CharacterAttributesCompetences.Strength}" FontFamily="arial black" Foreground="White"
                        FontSize="20" Margin="10,0,10,0" />
@@ -154,7 +155,8 @@
         <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
 
             <Button Content="-" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" 
-                    HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    HorizontalAlignment="Center" VerticalAlignment="Center" 
+                    Command="{Binding DecreaseAttributeCommand}" CommandParameter="{x:Static global:Attributes.Agilité}"/>
 
             <TextBlock Text="{Binding CharacterAttributesCompetences.Agility}" FontFamily="arial black" Foreground="White"
                        FontSize="20" Margin="10,0,10,0" />
@@ -167,7 +169,8 @@
         <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
 
             <Button Content="-" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" 
-                    HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    HorizontalAlignment="Center" VerticalAlignment="Center" 
+                    Command="{Binding DecreaseAttributeCommand}" CommandParameter="{x:Static global:Attributes.Esprit}"/>
 
             <TextBlock Text="{Binding CharacterAttributesCompetences.Mind}" FontFamily="arial black" Foreground="White"
                        FontSize="20" Margin="10,0,10,0" />
@@ -177,21 +180,11 @@
                     Command="{Binding IncreaseAttributeCommand}" CommandParameter="{x:Static global:Attributes.Esprit}" />
         </StackPanel>
 
-        <StackPanel Grid.Row="4" 
-                    Grid.Column="1"
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
+        <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-            <Button Content="-"
-                    Style="{StaticResource CustomFont}"
-                    FontSize="15"
-                    Width="20"
-                    Height="20"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-
-            </Button>
+            <Button Content="-" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" 
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Command="{Binding DecreaseAttributeCommand}" CommandParameter="{x:Static global:Attributes.Empathie}" />
 
             <TextBlock Text="{Binding CharacterAttributesCompetences.Empathy}" FontFamily="arial black" Foreground="White"
                        FontSize="20" Margin="10,0,10,0" />
@@ -203,17 +196,8 @@
 
         <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-            <Button Content="-"
-                    Style="{StaticResource CustomFont}"
-                    FontSize="15"
-                    Width="20"
-                    Height="20"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Command="{Binding DecreaseCompetenceCommand}"
-                    CommandParameter="{x:Static global:Competences.HeavyMachines}">
-
-            </Button>
+            <Button Content="-" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Command="{Binding DecreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.HeavyMachines}" />
 
             <TextBlock Text="{Binding CharacterAttributesCompetences.HeavyMachines}" FontFamily="arial black" Foreground="White"
                        FontSize="20" Margin="10,0,10,0" />
