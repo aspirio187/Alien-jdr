@@ -29,7 +29,7 @@
         <StackPanel Grid.Row="1" Grid.Column="0" Width="auto" VerticalAlignment="Stretch" >
 
             <StackPanel Margin="10">
-                
+
                 <TextBlock Text="Nom" Style="{StaticResource CustomFont}" Foreground="White"/>
                 <TextBox Text="{Binding CharacterInfos.Name}" Height="auto" />
             </StackPanel>
@@ -49,14 +49,14 @@
             </StackPanel>
 
             <StackPanel Margin="10">
-                
+
                 <TextBlock Text="Amis" Foreground="White" Style="{StaticResource CustomFont}"/>
 
                 <TextBox FontFamily="Arial Black" Text="{Binding CharacterInfos.Friends}" TextWrapping="Wrap" AcceptsReturn="True" Height="auto"/>
             </StackPanel>
 
             <StackPanel Margin="10">
-                
+
                 <TextBlock Text="Rivaux" Foreground="White" Style="{StaticResource CustomFont}"/>
                 <TextBox Text="{Binding CharacterInfos.Rivals}" TextWrapping="Wrap" AcceptsReturn="True" Height="auto"/>
             </StackPanel>
@@ -86,7 +86,7 @@
 
             <TextBlock Text="Equipements" Foreground="White" Style="{StaticResource CustomFont}"/>
 
-            <TextBox Text="{Binding CharacterInfos.NewEquipment}" GotFocus="Add_GotFocus" />
+            <TextBox Text="{Binding CharacterInfos.NewEquipment}" />
 
             <Button Content="Ajouter" Foreground="Black" Style="{StaticResource CustomFont}" Command="{Binding AddEquipmentCommand}"/>
 
@@ -101,7 +101,7 @@
                       ItemsSource="{Binding CharacterInfos.ValidationResults}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding ErrorMessage}" Margin="5" Foreground="DarkRed" Style="{StaticResource CustomFont}" />
+                    <TextBlock Text="{Binding ErrorMessage}" Margin="5" Foreground="DarkRed" FontSize="20" FontFamily="Arial" />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
             <ItemsControl.ItemsPanel>

@@ -89,10 +89,13 @@
                        FontStyle="Italic">
                         BOELS Diego 
                         <LineBreak/>
+                        BRESSAN Louthiern
+                        <LineBreak/>
                         HATSIJEV Soultan
                         <LineBreak/>
                         HOUTHOOFD Guillaume 
                         <LineBreak/>
+                
 
             </TextBlock>
         </StackPanel>
@@ -128,36 +131,9 @@
             </TextBlock>
         </StackPanel>
 
-        <StackPanel Grid.Row="7" 
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-            <TextBlock Style="{StaticResource CustomFont}"
-                       Foreground="White"
-                       FontSize="20"
-                       >
-                
-                Autres
+     
 
-            </TextBlock>
-        </StackPanel>
-
-        <StackPanel Grid.Row="8"
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center">
-            
-            <TextBlock FontFamily="Comic Sans MS"
-                       Foreground="White"
-                       FontSize="15"
-                       FontStyle="Italic">
-                
-                       
-                       
-                       BRESSAN Louthiern <LineBreak/>
-
-            </TextBlock>
-        </StackPanel>
+       
 
 
     </Grid>
