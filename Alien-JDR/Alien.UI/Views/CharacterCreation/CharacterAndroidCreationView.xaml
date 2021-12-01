@@ -4,190 +4,67 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Alien.UI.Views"
+             xmlns:global="clr-namespace:Alien.UI.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
     <Grid>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+        <TextBlock Text="Bonus d'attribut pour Android" Style="{StaticResource CustomFont}" FontSize="25" Foreground="White" Margin="10"
+                   HorizontalAlignment="Center"/>
 
-            <StackPanel Grid.Row="0" 
-                    Orientation="Horizontal" 
-                    Grid.ColumnSpan="2"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Margin="15">
+        <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-                <TextBlock Style="{StaticResource CustomFont}"
-                       Foreground="White"
-                       FontSize="25">
-                Attributs Android
-                </TextBlock>
+            <DockPanel HorizontalAlignment="Center">
+                <TextBlock Text="Force" Style="{StaticResource CustomFont}" Foreground="White" Width="100" FontSize="20" Margin="10"
+                           VerticalAlignment="Center"/>
 
-            </StackPanel>
+                <Button Content="+3" FontWeight="Bold" FontSize="15" Width="40" Height="40" HorizontalAlignment="Center" Margin="10"
+                        Command="{Binding SelectAttributeCommand}" CommandParameter="{x:Static global:Attributes.Force}" />
 
-            <StackPanel Grid.Row="1" 
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Margin="10">
+                <CheckBox IsEnabled="False" IsChecked="{Binding CharacterAndroids[0].IsSelected}" HorizontalAlignment="Center" />
+            </DockPanel>
 
-                <TextBlock Style="{StaticResource CustomFont}"
-                       Foreground="White"
-                       FontSize="20">
-                Force
-                </TextBlock>
+            <DockPanel HorizontalAlignment="Center">
+                <TextBlock Text="Agilite"  Style="{StaticResource CustomFont}" Foreground="White" Width="100" FontSize="20" Margin="10"
+                           VerticalAlignment="Center"/>
 
-            </StackPanel>
+                <Button Content="+3" FontWeight="Bold" FontSize="15" Width="40" Height="40" HorizontalAlignment="Center" Margin="10"
+                        Command="{Binding SelectAttributeCommand}" CommandParameter="{x:Static global:Attributes.Agilité}" />
 
-            <StackPanel Grid.Row="2" 
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Margin="10">
+                <CheckBox IsEnabled="False" IsChecked="{Binding CharacterAndroids[1].IsSelected}" HorizontalAlignment="Center" />
+            </DockPanel>
 
-                <TextBlock Style="{StaticResource CustomFont}"
-                       Foreground="White"
-                       FontSize="20">
-                Agilite
-                </TextBlock>
+            <DockPanel HorizontalAlignment="Center">
 
-            </StackPanel>
+                <TextBlock Text="Esprit"  Style="{StaticResource CustomFont}" Foreground="White" Width="100" FontSize="20" Margin="10"
+                           VerticalAlignment="Center"/>
+                <Button Content="+3" FontWeight="Bold" FontSize="15" Width="40" Height="40" HorizontalAlignment="Center" Margin="10"
+                        Command="{Binding SelectAttributeCommand}" CommandParameter="{x:Static global:Attributes.Esprit}" />
 
-            <StackPanel Grid.Row="3" 
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Margin="10">
+                <CheckBox IsEnabled="False" IsChecked="{Binding CharacterAndroids[2].IsSelected}" HorizontalAlignment="Center" />
+            </DockPanel>
 
-                <TextBlock Style="{StaticResource CustomFont}"
-                       Foreground="White"
-                       FontSize="20">
-                Esprit
-                </TextBlock>
+            <DockPanel HorizontalAlignment="Center">
 
-            </StackPanel>
+                <TextBlock Text="Empathie"  Style="{StaticResource CustomFont}" Foreground="White" Width="100" FontSize="20" Margin="10"
+                           VerticalAlignment="Center"/>
 
-            <StackPanel Grid.Row="4" 
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Margin="10">
+                <Button Content="+3" FontWeight="Bold" FontSize="15" Width="40" Height="40" HorizontalAlignment="Center" Margin="10"
+                        Command="{Binding SelectAttributeCommand}" CommandParameter="{x:Static global:Attributes.Empathie}" />
 
-                <TextBlock Style="{StaticResource CustomFont}"
-                       Foreground="White"
-                       FontSize="20">
-                Empathie
-                </TextBlock>
+                <CheckBox IsEnabled="False" IsChecked="{Binding CharacterAndroids[3].IsSelected}" HorizontalAlignment="Center" />
+            </DockPanel>
+        </StackPanel>
 
-            </StackPanel>
-
-
-            <StackPanel Grid.Row="1" 
-                    Grid.Column="1"
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-
-                <Button Content="+3"
-                    FontWeight="Bold"
-                    FontSize="15"
-                    Width="45"
-                    Height="20"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-
-                </Button>
-
-            </StackPanel>
-
-            <StackPanel Grid.Row="2" 
-                    Grid.Column="1"
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-
-                <Button Content="+3"
-                    FontWeight="Bold"
-                    FontSize="15"
-                    Width="45"
-                    Height="20"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-
-                </Button>
-
-            </StackPanel>
-
-            <StackPanel Grid.Row="3" 
-                    Grid.Column="1"
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-
-                <Button Content="+3"
-                    FontWeight="Bold"
-                    FontSize="15"
-                    Width="45"
-                    Height="20"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-
-                </Button>
-
-            </StackPanel>
-
-            <StackPanel Grid.Row="4" 
-                    Grid.Column="1"
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-
-                <Button Content="+3"
-                    FontWeight="Bold"
-                    FontSize="15"
-                    Width="45"
-                    Height="20"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-
-                </Button>
-
-            </StackPanel>
-
-            <StackPanel Grid.Row="18" 
-                    Grid.Column="0" 
-                    Margin="10" 
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Bottom">
-
-                <Button Width="200" Height="40" Content="Retour"   Style="{StaticResource CustomFont}"/>
-            </StackPanel>
-
-
-            <StackPanel Grid.Row="18" 
-                    Grid.Column="1" 
-                    Margin="10" 
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Bottom">
-
-                <Button Width="200" Height="40" Content="Suivant"   Style="{StaticResource CustomFont}"/>
-            </StackPanel>
-        </Grid>
-
-
+        <DockPanel Grid.Row="2" HorizontalAlignment="Stretch" Margin="5">
+            <Button Width="200" Height="40" Content="Retour" Style="{StaticResource CustomFont}" HorizontalAlignment="Left"/>
+            <Button Width="200" Height="40" Content="Suivant" Style="{StaticResource CustomFont}" HorizontalAlignment="Right" />
+        </DockPanel>
     </Grid>
 </ContentControl>
