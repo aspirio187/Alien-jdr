@@ -62,9 +62,7 @@ namespace Alien.UI.ViewModels
 
         public bool CanNavigateNextPage()
         {
-            if (SelectedTalent is null) return false;
-            if (string.IsNullOrEmpty(SelectedTalent.Name)) return false;
-            return true;
+            return SelectedTalent is not null && string.IsNullOrEmpty(SelectedTalent.Name);
         }
 
         public void NavigateNextPage()
