@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Alien.UI.ViewModels
 {
-    class CharacterSummeryViewModel
+    class CharacterCreationSummaryViewModel
     {
     }
 }
