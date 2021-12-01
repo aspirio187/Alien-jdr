@@ -106,6 +106,7 @@ namespace Alien.UI.ViewModels
 
             AttributePoints--;
             IncreaseAttributeCommand.RaiseCanExecuteChanged();
+            DecreaseAttributeCommand.RaiseCanExecuteChanged();
         }
 
         public bool CanDecreaseAttribute(Attributes? attribute)
@@ -143,6 +144,7 @@ namespace Alien.UI.ViewModels
             }
 
             AttributePoints++;
+            IncreaseAttributeCommand.RaiseCanExecuteChanged();
             DecreaseAttributeCommand.RaiseCanExecuteChanged();
         }
 
@@ -214,6 +216,7 @@ namespace Alien.UI.ViewModels
 
             CompetencePoints--;
             IncreaseCompetenceCommand.RaiseCanExecuteChanged();
+            DecreaseCompetenceCommand.RaiseCanExecuteChanged();
         }
 
         public bool CanDecreaseCompetence(Competences? competence)
@@ -283,6 +286,7 @@ namespace Alien.UI.ViewModels
             }
 
             CompetencePoints++;
+            IncreaseCompetenceCommand.RaiseCanExecuteChanged();
             DecreaseCompetenceCommand.RaiseCanExecuteChanged();
         }
 
