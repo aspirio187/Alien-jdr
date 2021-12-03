@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Alien.UI.Views"
                 xmlns:global="clr-namespace:Alien.UI.Helpers"
              mc:Ignorable="d" >
-    <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden">
+    <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
         <Grid>
             <Grid.Resources>
                 <global:Base64ImageConverter x:Key="ImageConverter" />
