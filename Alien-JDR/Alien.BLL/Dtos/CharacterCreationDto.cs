@@ -20,25 +20,21 @@ namespace Alien.BLL.Dtos
         public string Talent { get; set; }
         public List<string> Equipments { get; set; }
 
-        [IntegerValidator(MinValue = 2, MaxValue = 8, ExcludeRange = false)]
         public int Strength { get; set; }
         public int CloseCombat { get; set; }
         public int Stamina { get; set; }
         public int HeavyMachines { get; set; }
 
-        [IntegerValidator(MinValue = 2, MaxValue = 8, ExcludeRange = false)]
         public int Agility { get; set; }
         public int RangedCombat { get; set; }
         public int Mobility { get; set; }
         public int Piloting { get; set; }
 
-        [IntegerValidator(MinValue = 2, MaxValue = 8, ExcludeRange = false)]
         public int Empathy { get; set; }
         public int Commandment { get; set; }
         public int Manipulation { get; set; }
         public int MedicalCare { get; set; }
 
-        [IntegerValidator(MinValue = 2, MaxValue = 8, ExcludeRange = false)]
         public int Mind { get; set; }
         public int Observation { get; set; }
         public int Survival { get; set; }
