@@ -21,7 +21,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
@@ -40,9 +40,9 @@
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type ListBoxItem}">
 
-                                <RadioButton Margin="5" Width="150" Height="150" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsSelected}">
+                                <RadioButton Margin="5" MaxWidth="400" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsSelected}">
                                     <StackPanel>
-                                        <Image x:Name="CompanyAgent" Source="{Binding ImagePath, Converter={StaticResource ImageConverter}}" Stretch="Fill" Height="120" Width="130"/>
+                                        <Image Stretch="Fill" Source="{Binding ImagePath, Converter={StaticResource ImageConverter}}" />
                                         <TextBlock Text="{Binding Name}" TextWrapping="Wrap" Style="{StaticResource CustomFont}" Foreground="White" HorizontalAlignment="Center"/>
                                     </StackPanel>
                                 </RadioButton>
@@ -64,7 +64,7 @@
             <Label Content="race" Style="{StaticResource CustomFont}" Foreground="White" FontSize="30"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel Grid.Row="3" Margin="20" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             
             <RadioButton IsChecked="{Binding SelectedRace, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static global:RaceEnum.Humain}}">
                 

@@ -24,10 +24,5 @@ namespace Alien.UI.Views
         {
             InitializeComponent();
         }
-
-        private void ContentControl_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
