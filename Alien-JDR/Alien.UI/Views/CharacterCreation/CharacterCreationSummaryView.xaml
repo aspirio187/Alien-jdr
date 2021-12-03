@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Alien.UI.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignWidth="800">
     <Grid>
 
         <Grid.RowDefinitions>
@@ -15,198 +15,202 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+        <TextBlock Text="Recapitulatif" Grid.Row="0" Style="{StaticResource CustomFont}" Margin="10" 
+                   Foreground="White" FontSize="25" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-        <StackPanel Grid.Row="0" 
-                    Orientation="Horizontal" 
-                    Grid.ColumnSpan="2"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Margin="10">
+        <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Stretch">
 
-            <TextBlock Style="{StaticResource CustomFont}"
-                       Foreground="White"
-                       FontSize="25">
-                Recapitulatif
-            </TextBlock>
+            <TextBlock Text="informations" Margin="10" Style="{StaticResource CustomFont}" Foreground="White" FontSize="22"  HorizontalAlignment="Center"/>
+            <DockPanel>
 
+                <Border BorderBrush="White" BorderThickness="1" >
+                    <Image Height="250" Width="250"/>
+                </Border>
+                <StackPanel Orientation="Vertical" Margin="5,0,0,0">
+
+                    <DockPanel>
+                        <TextBlock Text="nom" Width="150" Style="{StaticResource CustomFont}" Foreground="white" FontSize="20" />
+                        <TextBlock Text="{Binding}" Foreground="White" FontSize="20" />
+                    </DockPanel>
+
+                    <DockPanel>
+                        <TextBlock Text="race" Width="150" Style="{StaticResource CustomFont}" Foreground="white" FontSize="20" />
+                        <TextBlock Text="{Binding}" Foreground="White" FontSize="20" />
+                    </DockPanel>
+
+                    <DockPanel>
+                        <TextBlock Text="carriere" Width="150" Style="{StaticResource CustomFont}" Foreground="White" FontSize="20" />
+                        <TextBlock Text="{Binding}" Foreground="White" FontSize="20" />
+                    </DockPanel>
+
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="description" Style="{StaticResource CustomFont}" Foreground="White" FontSize="20" />
+                        <TextBlock Text="{Binding}" MinHeight="150" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </StackPanel>
+            </DockPanel>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" 
-                    Orientation="Horizontal" 
-                    Margin="10"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
+        <StackPanel Grid.Row="2">
+            <TextBlock Text="description" Style="{StaticResource CustomFont}" Foreground="White" FontSize="22" Margin="10" HorizontalAlignment="Center" />
 
-            <TextBlock Style="{StaticResource CustomFont}"
-                       Foreground="White"
-                       FontSize="20">
-                Carriere
-            </TextBlock>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="apparence" Style="{StaticResource CustomFont}" Foreground="white" FontSize="20" HorizontalAlignment="Center" TextAlignment="Center"/>
+                    <TextBlock Text="{Binding}" MinHeight="100" TextWrapping="Wrap" Foreground="White" FontSize="18" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="objectifs" Style="{StaticResource CustomFont}" Foreground="white" FontSize="20" HorizontalAlignment="Center" TextAlignment="Center" />
+                    <TextBlock Text="{Binding}" MinHeight="100" TextWrapping="Wrap" Foreground="White" FontSize="20" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="2">
+                    <TextBlock Text="amis" Style="{StaticResource CustomFont}" Foreground="white" FontSize="20" HorizontalAlignment="Center" TextAlignment="Center"/>
+                    <TextBlock Text="{Binding}" MinHeight="100" TextWrapping="Wrap" Foreground="White" FontSize="20" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="3">
+                    <TextBlock Text="rivaux" Style="{StaticResource CustomFont}" Foreground="white" FontSize="20" HorizontalAlignment="Center" TextAlignment="Center" />
+                    <TextBlock Text="{Binding}" MinHeight="100" TextWrapping="Wrap" Foreground="White" FontSize="20" />
+                </StackPanel>
+            </Grid>
         </StackPanel>
 
-        <StackPanel Grid.Row="2" 
-                    Orientation="Horizontal" 
-                    Margin="10"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
+        <StackPanel Grid.Row="3">
+            <TextBlock Text="objets et equipements" Style="{StaticResource CustomFont}" Foreground="White" Margin="10" FontSize="22" HorizontalAlignment="Center"/>
 
-            <TextBlock Style="{StaticResource CustomFont}"
-                       Foreground="White"
-                       FontSize="20">
-                Race
-            </TextBlock>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="objets" Style="{StaticResource CustomFont}" Foreground="white" FontSize="18" HorizontalAlignment="Center"/>
+                    <ListBox ItemsSource="{Binding}" MinHeight="100"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="equipement" Style="{StaticResource CustomFont}" Foreground="white" FontSize="18" HorizontalAlignment="Center" />
+                    <ListBox ItemsSource="{Binding}" MinHeight="100" />
+                </StackPanel>
+            </Grid>
         </StackPanel>
 
-        <StackPanel Grid.Row="3" 
-                    Orientation="Horizontal" 
-                    Margin="10"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
+        <StackPanel Grid.Row="4">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <TextBlock Style="{StaticResource CustomFont}"
-                       Foreground="White"
-                       FontSize="20">
-                Talent
-            </TextBlock>
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="attributs" Style="{StaticResource CustomFont}" Foreground="white" FontSize="20" HorizontalAlignment="Center" Margin="10"/>
 
+                    <DockPanel HorizontalAlignment="Left">
+                        <TextBlock Text="Force" Width="100" Style="{StaticResource CustomFont}" Foreground="white" FontSize="15" />
+                        <TextBlock Text="{Binding}" Foreground="white" FontSize="15" />
+                    </DockPanel>
+
+                    <DockPanel HorizontalAlignment="Left">
+                        <TextBlock Text="agilite" Width="100" Style="{StaticResource CustomFont}" Foreground="white" FontSize="15" />
+                        <TextBlock Text="{Binding}" Foreground="white" FontSize="15" />
+                    </DockPanel>
+
+                    <DockPanel HorizontalAlignment="Left">
+                        <TextBlock Text="esprit" Width="100" Style="{StaticResource CustomFont}" Foreground="white" FontSize="15" />
+                        <TextBlock Text="{Binding}" Foreground="white" FontSize="15" />
+                    </DockPanel>
+
+                    <DockPanel HorizontalAlignment="Left">
+                        <TextBlock Text="empathie" Width="100" Style="{StaticResource CustomFont}" Foreground="white" FontSize="15" />
+                        <TextBlock Text="{Binding}" Foreground="white" FontSize="15" />
+                    </DockPanel>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="competences" Style="{StaticResource CustomFont}" Foreground="white" FontSize="20" Margin="10" HorizontalAlignment="Center" />
+
+                    <DockPanel HorizontalAlignment="Left">
+                        <TextBlock Text="Force" Width="100" Style="{StaticResource CustomFont}" Foreground="white" FontSize="15" />
+                        <TextBlock Text="{Binding}" Foreground="white" FontSize="15" />
+                    </DockPanel>
+                    
+                    <DockPanel HorizontalAlignment="Left">
+                        <TextBlock Text="Force" Width="100" Style="{StaticResource CustomFont}" Foreground="white" FontSize="15" />
+                        <TextBlock Text="{Binding}" Foreground="white" FontSize="15" />
+                    </DockPanel>
+                    
+                    <DockPanel HorizontalAlignment="Left">
+                        <TextBlock Text="Force" Width="100" Style="{StaticResource CustomFont}" Foreground="white" FontSize="15" />
+                        <TextBlock Text="{Binding}" Foreground="white" FontSize="15" />
+                    </DockPanel>
+                    
+                    <DockPanel HorizontalAlignment="Left">
+                        <TextBlock Text="Force" Width="100" Style="{StaticResource CustomFont}" Foreground="white" FontSize="15" />
+                        <TextBlock Text="{Binding}" Foreground="white" FontSize="15" />
+                    </DockPanel>
+                    
+                    <DockPanel HorizontalAlignment="Left">
+                        <TextBlock Text="Force" Width="100" Style="{StaticResource CustomFont}" Foreground="white" FontSize="15" />
+                        <TextBlock Text="{Binding}" Foreground="white" FontSize="15" />
+                    </DockPanel>
+                    
+                    <DockPanel HorizontalAlignment="Left">
+                        <TextBlock Text="Force" Width="100" Style="{StaticResource CustomFont}" Foreground="white" FontSize="15" />
+                        <TextBlock Text="{Binding}" Foreground="white" FontSize="15" />
+                    </DockPanel>
+                    
+                    <DockPanel HorizontalAlignment="Left">
+                        <TextBlock Text="Force" Width="100" Style="{StaticResource CustomFont}" Foreground="white" FontSize="15" />
+                        <TextBlock Text="{Binding}" Foreground="white" FontSize="15" />
+                    </DockPanel>
+                    
+                    <DockPanel HorizontalAlignment="Left">
+                        <TextBlock Text="Force" Width="100" Style="{StaticResource CustomFont}" Foreground="white" FontSize="15" />
+                        <TextBlock Text="{Binding}" Foreground="white" FontSize="15" />
+                    </DockPanel>
+                    
+                    <DockPanel HorizontalAlignment="Left">
+                        <TextBlock Text="Force" Width="100" Style="{StaticResource CustomFont}" Foreground="white" FontSize="15" />
+                        <TextBlock Text="{Binding}" Foreground="white" FontSize="15" />
+                    </DockPanel>
+                    
+                    <DockPanel HorizontalAlignment="Left">
+                        <TextBlock Text="Force" Width="100" Style="{StaticResource CustomFont}" Foreground="white" FontSize="15" />
+                        <TextBlock Text="{Binding}" Foreground="white" FontSize="15" />
+                    </DockPanel>
+                    
+                    <DockPanel HorizontalAlignment="Left">
+                        <TextBlock Text="Force" Width="100" Style="{StaticResource CustomFont}" Foreground="white" FontSize="15" />
+                        <TextBlock Text="{Binding}" Foreground="white" FontSize="15" />
+                    </DockPanel>
+                    
+                    <DockPanel HorizontalAlignment="Left">
+                        <TextBlock Text="Force" Width="100" Style="{StaticResource CustomFont}" Foreground="white" FontSize="15" />
+                        <TextBlock Text="{Binding}" Foreground="white" FontSize="15" />
+                    </DockPanel>
+                </StackPanel>
+            </Grid>
         </StackPanel>
 
-        <StackPanel Grid.Row="4" 
-                    Orientation="Horizontal" 
-                    Margin="10"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-
-            <TextBlock Style="{StaticResource CustomFont}"
-                       Foreground="White"
-                       FontSize="20">
-                Attributs
-            </TextBlock>
-
+        <StackPanel Grid.Row="5">
+            <DockPanel Margin="10">
+                <Button Content="Retour" Width="200" Height="40" Foreground="Black" Style="{StaticResource CustomFont}" HorizontalAlignment="Left" 
+                        Command="{Binding NavigateBackCommand}"/>
+                <Button Content="Terminer" Width="200" Height="40" Foreground="Black" Style="{StaticResource CustomFont}" HorizontalAlignment="Right" 
+                        Command="{Binding CreateCharacterCommand}"/>
+            </DockPanel>
         </StackPanel>
-
-        <StackPanel Grid.Row="5" 
-                    Orientation="Horizontal" 
-                    Margin="10"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-
-            <TextBlock Style="{StaticResource CustomFont}"
-                       Foreground="White"
-                       FontSize="20">
-                Combetences
-            </TextBlock>
-
-        </StackPanel>
-
-        <StackPanel Grid.Row="1" 
-                    Grid.Column="1"
-                    Orientation="Horizontal" 
-                    Margin="10"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-
-            <StackPanel Orientation="Vertical">
-                <Image Source="{Binding }" Stretch="UniformToFill" />
-                <TextBlock Text="Binding" Style="{StaticResource CustomFont}" Foreground="White" FontSize="20" />
-            </StackPanel>
-        </StackPanel>
-
-        <StackPanel Grid.Row="2" 
-                    Grid.Column="1"
-                    Orientation="Horizontal" 
-                    Margin="10"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-
-            <TextBlock Style="{StaticResource CustomFont}"
-                       Foreground="White"
-                       FontSize="20">
-                Binding
-            </TextBlock>
-
-        </StackPanel>
-
-        <StackPanel Grid.Row="3" 
-                    Grid.Column="1"
-                    Orientation="Horizontal" 
-                    Margin="10"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-
-            <TextBlock Style="{StaticResource CustomFont}"
-                       Foreground="White"
-                       FontSize="20">
-                Binding
-            </TextBlock>
-
-        </StackPanel>
-
-        <StackPanel Grid.Row="4" 
-                    Grid.Column="1"
-                    Orientation="Horizontal" 
-                    Margin="10"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-
-            <TextBlock Style="{StaticResource CustomFont}"
-                       Foreground="White"
-                       FontSize="20">
-                Binding
-            </TextBlock>
-
-        </StackPanel>
-
-        <StackPanel Grid.Row="5" 
-                    Grid.Column="1"
-                    Orientation="Horizontal" 
-                    Margin="10"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-
-            <TextBlock Style="{StaticResource CustomFont}"
-                       Foreground="White"
-                       FontSize="20">
-                Binding
-            </TextBlock>
-
-        </StackPanel>
-
-
-
-        <StackPanel Grid.Row="6" 
-                    Orientation="Horizontal" 
-                    Margin="10"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-
-            <Button Width="200" Height="40" Content="Retour"   Style="{StaticResource CustomFont}"/>
-
-        </StackPanel>
-
-        <StackPanel Grid.Row="6" 
-                    Grid.Column="1"
-                    Orientation="Horizontal" 
-                    Margin="10"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-
-            <Button Width="200" Height="40" Content="Terminer"   Style="{StaticResource CustomFont}"/>
-
-        </StackPanel>
-
-
-
-
-
     </Grid>
 </ContentControl>
