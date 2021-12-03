@@ -10,6 +10,7 @@ namespace Alien.BLL.Dtos
     public class CharacterCreationDto
     {
         public string Name { get; set; }
+        public string Image { get; set; }
         public string Career { get; set; }
         public string Race { get; set; }
         public string Appearance { get; set; }
