@@ -31,34 +31,35 @@
             <StackPanel Margin="10">
 
                 <TextBlock Text="Nom" Style="{StaticResource CustomFont}" Foreground="White"/>
-                <TextBox Text="{Binding CharacterInfos.Name}" Height="auto" />
+                <TextBox Text="{Binding CharacterInfos.Name}" FontFamily="Arial" Foreground="white" FontSize="15" Height="auto" />
             </StackPanel>
 
             <StackPanel Margin="10">
 
                 <TextBlock Text="Apparence" Style="{StaticResource CustomFont}" Foreground="White"/>
-
-                <TextBox Text="{Binding CharacterInfos.Appearance}" TextWrapping="Wrap" AcceptsReturn="True" Height="auto"/>
+                <TextBox Text="{Binding CharacterInfos.Appearance}" FontFamily="Arial" Foreground="white" FontSize="15" MinHeight="50" 
+                         TextWrapping="Wrap" AcceptsReturn="True" Height="auto"/>
             </StackPanel>
 
             <StackPanel Margin="10">
 
                 <TextBlock Text="Objectifs" Foreground="White" Style="{StaticResource CustomFont}"/>
-
-                <TextBox Text="{Binding CharacterInfos.Objectives}" TextWrapping="Wrap" AcceptsReturn="True" Height="auto" />
+                <TextBox Text="{Binding CharacterInfos.Objectives}" FontFamily="Arial" Foreground="white" FontSize="15" MinHeight="50" 
+                         TextWrapping="Wrap" AcceptsReturn="True" Height="auto" />
             </StackPanel>
 
             <StackPanel Margin="10">
 
                 <TextBlock Text="Amis" Foreground="White" Style="{StaticResource CustomFont}"/>
-
-                <TextBox FontFamily="Arial Black" Text="{Binding CharacterInfos.Friends}" TextWrapping="Wrap" AcceptsReturn="True" Height="auto"/>
+                <TextBox Text="{Binding CharacterInfos.Friends}" FontFamily="Arial" Foreground="white" FontSize="15" MinHeight="50" 
+                         TextWrapping="Wrap" AcceptsReturn="True" Height="auto"/>
             </StackPanel>
 
             <StackPanel Margin="10">
 
                 <TextBlock Text="Rivaux" Foreground="White" Style="{StaticResource CustomFont}"/>
-                <TextBox Text="{Binding CharacterInfos.Rivals}" TextWrapping="Wrap" AcceptsReturn="True" Height="auto"/>
+                <TextBox Text="{Binding CharacterInfos.Rivals}" FontFamily="Arial" Foreground="white" FontSize="15" MinHeight="50" 
+                         TextWrapping="Wrap" AcceptsReturn="True" Height="auto"/>
             </StackPanel>
         </StackPanel>
 
@@ -67,16 +68,17 @@
             <StackPanel Margin="10">
 
                 <TextBlock Text="Objet fetiche" Foreground="White" Style="{StaticResource CustomFont}"/>
-                <TextBox Text="{Binding CharacterInfos.FetishItem}"/>
+                <TextBox Text="{Binding CharacterInfos.FetishItem}" FontFamily="Arial" Foreground="white" FontSize="15" />
             </StackPanel>
 
             <StackPanel Margin="10">
 
                 <TextBlock Text="Objets minuscule" Foreground="White" Style="{StaticResource CustomFont}"/>
-                <TextBox Text="{Binding CharacterInfos.NewItem}" GotFocus="Add_GotFocus"/>
+                <TextBox Text="{Binding CharacterInfos.NewItem}" FontFamily="Arial" Foreground="white" FontSize="15" />
                 <Button Content="Ajouter" Foreground="Black" Style="{StaticResource CustomFont}" Command="{Binding AddItemCommand}"/>
 
-                <ListBox MinHeight="80" ItemsSource="{Binding CharacterInfos.LittleItems}" SelectedItem="{Binding CharacterInfos.SelectedItem}"/>
+                <ListBox MinHeight="80" ItemsSource="{Binding CharacterInfos.LittleItems}" SelectedItem="{Binding CharacterInfos.SelectedItem}"
+                         FontFamily="Arial" Foreground="white" FontSize="15" />
                 <Button Content="Supprimer" Foreground="Black" Style="{StaticResource CustomFont}" Command="{Binding RemoveItemCommand}"/>
             </StackPanel>
 
@@ -86,13 +88,14 @@
 
             <TextBlock Text="Equipements" Foreground="White" Style="{StaticResource CustomFont}"/>
 
-            <TextBox Text="{Binding CharacterInfos.NewEquipment}" />
+            <TextBox Text="{Binding CharacterInfos.NewEquipment}" FontFamily="Arial" Foreground="white" FontSize="15" />
 
             <Button Content="Ajouter" Margin="0,5,0,5" Foreground="Black" Style="{StaticResource CustomFont}" Command="{Binding AddEquipmentCommand}"/>
 
             <TextBlock Text="Equipe(s)" Foreground="White" Style="{StaticResource CustomFont}" />
 
-            <ListBox MinHeight="80" Margin="0,10,0,10" ItemsSource="{Binding CharacterInfos.Equipments}" SelectedItem="{Binding CharacterInfos.SelectedEquipment}"/>
+            <ListBox MinHeight="80" Margin="0,10,0,10" ItemsSource="{Binding CharacterInfos.Equipments}" SelectedItem="{Binding CharacterInfos.SelectedEquipment}"
+                     FontFamily="Arial" Foreground="white" FontSize="15" />
 
             <Button Content="Supprimer" Foreground="Black" Style="{StaticResource CustomFont}" Command="{Binding RemoveEquipmentCommand}"/>
         </StackPanel>
