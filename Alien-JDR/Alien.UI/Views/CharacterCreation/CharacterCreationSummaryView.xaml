@@ -111,7 +111,7 @@
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <DockPanel>
-                                        <TextBlock Text="{Binding Name}" Width="200" />
+                                        <TextBlock Text="{Binding Name}" Width="200" Foreground="White" FontSize="20"/>
                                         <CheckBox IsChecked="{Binding IsFetish}" IsEnabled="False" />
                                     </DockPanel>
                                 </DataTemplate>
@@ -121,7 +121,7 @@
 
                     <StackPanel Grid.Column="1">
                         <TextBlock Text="equipement" Style="{StaticResource CustomFont}" Foreground="white" Margin="10" FontSize="18" HorizontalAlignment="Center" />
-                        <ListBox ItemsSource="{Binding CharacterCreation.Equipments}" MinHeight="100" />
+                        <ListBox ItemsSource="{Binding CharacterCreation.Equipments}" MinHeight="100"  Foreground="White" FontSize="20"/>
                     </StackPanel>
                 </Grid>
             </StackPanel>
@@ -187,7 +187,7 @@
 
                     <DockPanel HorizontalAlignment="Left" Margin="5">
                         <TextBlock Text="combat a distance" Width="200" Style="{StaticResource CustomFont}" Foreground="white" FontSize="15" />
-                        <TextBlock Text="{Binding CharacterCreation.RangeCombat}" Foreground="white" FontSize="15" />
+                        <TextBlock Text="{Binding CharacterCreation.RangedCombat}" Foreground="white" FontSize="15" />
                     </DockPanel>
 
                     <DockPanel HorizontalAlignment="Left" Margin="5">

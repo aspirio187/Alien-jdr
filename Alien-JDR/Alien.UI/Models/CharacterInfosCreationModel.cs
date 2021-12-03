@@ -114,9 +114,10 @@ namespace Alien.UI.Models
             get
             {
                 return NewItem is not null &&
-                    Validator.TryValidateProperty(NewItem, new ValidationContext(this) { MemberName = nameof(NewItem) }, CleanResults(ValidationResults)) ||
-                    NewItem?.Length > 2 ||
-                    !LittleItems.Contains(NewItem);
+                    Validator.TryValidateProperty(NewItem, new ValidationContext(this) { MemberName = nameof(NewItem) }, CleanResults(ValidationResults)) &&
+                    NewItem?.Length > 2 &&
+                    !LittleItems.Contains(NewItem) &&
+                    !string.Equals(NewItem, FetishItem);
             }
         }
 
@@ -141,9 +142,9 @@ namespace Alien.UI.Models
             get
             {
                 return NewEquipment is not null &&
-                    Validator.TryValidateProperty(NewEquipment, new ValidationContext(this) { MemberName = nameof(NewEquipment) }, CleanResults(ValidationResults)) ||
-                    NewEquipment?.Length > 2 ||
-                    !Equipments.Contains(NewEquipment);
+                    Validator.TryValidateProperty(NewEquipment, new ValidationContext(this) { MemberName = nameof(NewEquipment) }, CleanResults(ValidationResults)) &&
+                    NewEquipment?.Length > 2 &&
+                    !Equipments.Any(e => e.Equals(NewEquipment));
             }
         }
 

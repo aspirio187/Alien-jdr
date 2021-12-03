@@ -69,6 +69,7 @@ namespace Alien.UI.ViewModels
         {
             CharacterCreationDto characterCreation = new()
             {
+                Image = SelectedCareer.ImagePath,
                 Career = SelectedCareer.Name,
                 Race = SelectedRace.ToString()
             };

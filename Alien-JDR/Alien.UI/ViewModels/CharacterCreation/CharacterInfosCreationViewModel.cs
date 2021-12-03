@@ -65,13 +65,10 @@ namespace Alien.UI.ViewModels
 
         public void AddEquipment()
         {
-            if (!string.IsNullOrEmpty(CharacterInfos.NewEquipment))
+            if (CharacterInfos.NewEquipmentIsValid)
             {
-                if (!CharacterInfos.Equipments.Any(e => e.Equals(CharacterInfos.NewEquipment)))
-                {
-                    CharacterInfos.Equipments.Add(CharacterInfos.NewEquipment);
-                    CharacterInfos.NewEquipment = string.Empty;
-                }
+                CharacterInfos.Equipments.Add(CharacterInfos.NewEquipment);
+                CharacterInfos.NewEquipment = string.Empty;
             }
         }
 
