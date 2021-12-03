@@ -11,9 +11,20 @@ namespace Alien.UI.Models
 {
     public abstract class ModelBase : INotifyPropertyChanged
     {
-        public ObservableCollection<ValidationResult> ValidationResults { get; set; } = new();
+        private ObservableCollection<ValidationResult> _validationResults = new();
+        public ObservableCollection<ValidationResult> ValidationResults
+        {
+            get => _validationResults;
+            set => _validationResults = CleanResults(value);
+        }
 
-        public bool IsValid { get => ValidationResults.Count <= 0; }
+        public bool IsValid
+        {
+            get
+            {
+                return Validator.TryValidateObject(this, new ValidationContext(this), ValidationResults);
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -50,6 +61,11 @@ namespace Alien.UI.Models
             ValidationResults.RemoveRange(removable);
 
             origin = value;
+        }
+
+        protected ObservableCollection<ValidationResult> CleanResults(ObservableCollection<ValidationResult> validationResults)
+        {
+            return new(validationResults.Distinct());
         }
     }
 }

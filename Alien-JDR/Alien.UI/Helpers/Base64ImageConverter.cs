@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -18,11 +19,18 @@ namespace Alien.UI.Helpers
             if (url is null) return false;
 
             BitmapImage bitmapImage = new();
-            bitmapImage.BeginInit();
-            bitmapImage.UriSource = url.Equals("url") || string.IsNullOrEmpty(url) ? new Uri("https://i.postimg.cc/xjGdXzC7/VIDE.png") : new Uri(url);
-            bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-            bitmapImage.EndInit();
+            try
+            {
+                bitmapImage.BeginInit();
+                bitmapImage.UriSource = url.Equals("url") || string.IsNullOrEmpty(url) ? new Uri("https://i.postimg.cc/xjGdXzC7/VIDE.png") : new Uri(url);
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.EndInit();
 
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
             return bitmapImage;
         }
 

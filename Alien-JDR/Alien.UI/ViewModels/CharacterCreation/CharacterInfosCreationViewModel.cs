@@ -6,6 +6,7 @@ using Prism.Commands;
 using Prism.Regions;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,13 +47,10 @@ namespace Alien.UI.ViewModels
 
         public void AddItem()
         {
-            if (!string.IsNullOrEmpty(CharacterInfos.NewItem))
+            if (CharacterInfos.NewItemIsValid)
             {
-                if (!CharacterInfos.LittleItems.Any(i => i.Equals(CharacterInfos.NewItem)))
-                {
-                    CharacterInfos.LittleItems.Add(CharacterInfos.NewItem);
-                    CharacterInfos.NewItem = string.Empty;
-                }
+                CharacterInfos.LittleItems.Add(CharacterInfos.NewItem);
+                CharacterInfos.NewItem = string.Empty;
             }
         }
 
@@ -103,40 +101,43 @@ namespace Alien.UI.ViewModels
 
         public void NavigateNextPage()
         {
-            CharacterCreation.Name = CharacterInfos.Name;
-            CharacterCreation.Appearance = CharacterInfos.Appearance;
-            CharacterCreation.Objectives = CharacterInfos.Objectives;
-            CharacterCreation.Friends = CharacterInfos.Friends;
-            CharacterCreation.Rivals = CharacterInfos.Rivals;
-            CharacterCreation.Items = new List<ItemCreationDto>();
-
-            CharacterCreation.Items.Add(new ItemCreationDto()
+            if (CharacterInfos.IsValid)
             {
-                Name = CharacterInfos.FetishItem,
-                IsFetish = true
-            });
+                CharacterCreation.Name = CharacterInfos.Name;
+                CharacterCreation.Appearance = CharacterInfos.Appearance;
+                CharacterCreation.Objectives = CharacterInfos.Objectives;
+                CharacterCreation.Friends = CharacterInfos.Friends;
+                CharacterCreation.Rivals = CharacterInfos.Rivals;
+                CharacterCreation.Items = new List<ItemCreationDto>();
 
-            foreach (string item in CharacterInfos.LittleItems)
-            {
                 CharacterCreation.Items.Add(new ItemCreationDto()
                 {
-                    Name = item,
-                    IsFetish = false
+                    Name = CharacterInfos.FetishItem,
+                    IsFetish = true
                 });
+
+                foreach (string item in CharacterInfos.LittleItems)
+                {
+                    CharacterCreation.Items.Add(new ItemCreationDto()
+                    {
+                        Name = item,
+                        IsFetish = false
+                    });
+                }
+
+                CharacterCreation.Equipments = new List<string>();
+                foreach (string equipment in CharacterInfos.Equipments)
+                {
+                    CharacterCreation.Equipments.Add(equipment);
+                }
+
+                Dictionary<string, object> parameters = new Dictionary<string, object>()
+                {
+                    { Global.CHARACTER_CREATION, CharacterCreation }
+                };
+
+                Navigate(ViewsEnum.CharacterTalentSelectionView, parameters);
             }
-
-            CharacterCreation.Equipments = new List<string>();
-            foreach (string equipment in CharacterInfos.Equipments)
-            {
-                CharacterCreation.Equipments.Add(equipment);
-            }
-
-            Dictionary<string, object> parameters = new Dictionary<string, object>()
-            {
-                { Global.CHARACTER_CREATION, CharacterCreation }
-            };
-
-            Navigate(ViewsEnum.CharacterTalentSelectionView, parameters);
         }
 
         public bool PersistInHistory()

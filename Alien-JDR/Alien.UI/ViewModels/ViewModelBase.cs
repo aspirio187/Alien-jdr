@@ -5,6 +5,7 @@ using Prism.Mvvm;
 using Prism.Regions;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,19 +54,26 @@ namespace Alien.UI.ViewModels
         /// <param name="navigationParams">Dictionnary containing all the parameters of all type</param>
         protected virtual void Navigate(ViewsEnum view, Dictionary<string, object> navigationParams = null)
         {
-            NavigationParameters navigationParameters = new()
+            try
             {
-                { Global.NAVIGATION_SERVICE, _regionNavigationService }
-            };
-
-            if (navigationParams is not null)
-            {
-                foreach (var navigationParam in navigationParams)
+                NavigationParameters navigationParameters = new()
                 {
-                    navigationParameters.Add(navigationParam.Key, navigationParam.Value);
+                    { Global.NAVIGATION_SERVICE, _regionNavigationService }
+                };
+
+                if (navigationParams is not null)
+                {
+                    foreach (var navigationParam in navigationParams)
+                    {
+                        navigationParameters.Add(navigationParam.Key, navigationParam.Value);
+                    }
                 }
+                _regionNavigationService.RequestNavigate(new Uri(view.ToString(), UriKind.Relative), navigationParameters);
             }
-            _regionNavigationService.RequestNavigate(new Uri(view.ToString(), UriKind.Relative), navigationParameters);
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
         }
 
         public virtual bool IsNavigationTarget(NavigationContext navigationContext)
@@ -80,7 +88,7 @@ namespace Alien.UI.ViewModels
 
         public virtual void OnNavigatedTo(NavigationContext navigationContext)
         {
-            if (_regionNavigationService is null || _regionNavigationService.Region is null) 
+            if (_regionNavigationService is null || _regionNavigationService.Region is null)
                 _regionNavigationService = navigationContext.Parameters.GetValue<IRegionNavigationService>(Global.NAVIGATION_SERVICE);
         }
     }

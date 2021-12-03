@@ -84,7 +84,7 @@ namespace Alien.UI.Models
 
         private string _fetishItem;
 
-        [Required(AllowEmptyStrings = false)]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "L'objet fétiche est requis!")]
         [StringLength(50, MinimumLength = 2, ErrorMessage = "L'élément fétiche doit faire entre 2 et 50 caractères!")]
         public string FetishItem
         {
@@ -98,7 +98,7 @@ namespace Alien.UI.Models
 
         private string _newItem;
 
-        [StringLength(50, MinimumLength = 2, ErrorMessage = "Un élément doit faire entre 2 et 50 caractères!")]
+        [StringLength(50, ErrorMessage = "Un élément doit faire entre 2 et 50 caractères!")]
         public string NewItem
         {
             get { return _newItem; }
@@ -109,12 +109,23 @@ namespace Alien.UI.Models
             }
         }
 
+        public bool NewItemIsValid
+        {
+            get
+            {
+                return NewItem is not null &&
+                    Validator.TryValidateProperty(NewItem, new ValidationContext(this) { MemberName = nameof(NewItem) }, CleanResults(ValidationResults)) ||
+                    NewItem?.Length > 2 ||
+                    !LittleItems.Contains(NewItem);
+            }
+        }
+
         public string SelectedItem { get; set; }
         public ObservableCollection<string> LittleItems { get; set; } = new();
 
         private string _newEquipment;
 
-        [StringLength(50, MinimumLength = 2, ErrorMessage = "L'équipement doit faire entre 2 et 50 caractères!")]
+        [StringLength(50, ErrorMessage = "L'équipement doit faire entre 2 et 50 caractères!")]
         public string NewEquipment
         {
             get { return _newEquipment; }
@@ -122,6 +133,17 @@ namespace Alien.UI.Models
             {
                 ValidateProperty(ref _newEquipment, value);
                 NotifyPropertyChanged();
+            }
+        }
+
+        public bool NewEquipmentIsValid
+        {
+            get
+            {
+                return NewEquipment is not null &&
+                    Validator.TryValidateProperty(NewEquipment, new ValidationContext(this) { MemberName = nameof(NewEquipment) }, CleanResults(ValidationResults)) ||
+                    NewEquipment?.Length > 2 ||
+                    !Equipments.Contains(NewEquipment);
             }
         }
 
