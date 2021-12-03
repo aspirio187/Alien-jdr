@@ -36,7 +36,7 @@ namespace Alien.UI.ViewModels
         public CharacterAndroidCreationViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator)
             : base(regionNavigationService, authenticator)
         {
-
+            SelectAttributeCommand.RaiseCanExecuteChanged();
         }
 
         public void NavigateBack()
@@ -49,28 +49,12 @@ namespace Alien.UI.ViewModels
 
         public bool CanSelectAttribute(Attributes? attribute)
         {
-            if (attribute is null) return false;
-            return SelectedAttributes.Count(a => a) == 2;
+            return attribute is not null && (SelectedAttributes.Count(a => a) < 2 || SelectedAttributes[(int)attribute]);
         }
 
         public void SelectAttribute(Attributes? attribute)
         {
-            switch (attribute)
-            {
-                case Attributes.Force:
-                    SelectedAttributes[0] = !SelectedAttributes[0];
-                    break;
-                case Attributes.Agilité:
-                    SelectedAttributes[1] = !SelectedAttributes[1];
-                    break;
-                case Attributes.Esprit:
-                    SelectedAttributes[2] = !SelectedAttributes[2];
-                    break;
-                case Attributes.Empathie:
-                    SelectedAttributes[3] = !SelectedAttributes[3];
-                    break;
-            }
-
+            SelectedAttributes[(int)attribute] = !SelectedAttributes[(int)attribute];
             NavigateNextPageCommand.RaiseCanExecuteChanged();
             SelectAttributeCommand.RaiseCanExecuteChanged();
         }

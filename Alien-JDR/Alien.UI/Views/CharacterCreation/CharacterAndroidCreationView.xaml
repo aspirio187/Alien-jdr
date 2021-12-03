@@ -63,8 +63,8 @@
         </StackPanel>
 
         <DockPanel Grid.Row="2" HorizontalAlignment="Stretch" Margin="5">
-            <Button Width="200" Height="40" Content="Retour" Style="{StaticResource CustomFont}" HorizontalAlignment="Left"/>
-            <Button Width="200" Height="40" Content="Suivant" Style="{StaticResource CustomFont}" HorizontalAlignment="Right" />
+            <Button Width="200" Height="40" Content="Retour" Style="{StaticResource CustomFont}" HorizontalAlignment="Left" Command="{Binding NavigateBackCommand}"/>
+            <Button Width="200" Height="40" Content="Suivant" Style="{StaticResource CustomFont}" HorizontalAlignment="Right" Command="{Binding NavigateNextPageCommand}"/>
         </DockPanel>
     </Grid>
 </ContentControl>
