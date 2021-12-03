@@ -48,18 +48,14 @@ namespace Alien.UI.ViewModels
         private DelegateCommand<Attributes?> _decreaseAttributeCommand;
         private DelegateCommand<Competences?> _increaseCompetenceCommand;
         private DelegateCommand<Competences?> _decreaseCompetenceCommand;
+        private DelegateCommand _navigateBackCommand;
+        private DelegateCommand _navigateNextPageCommand;
 
         public DelegateCommand<Attributes?> IncreaseAttributeCommand => _increaseAttributeCommand ??= new DelegateCommand<Attributes?>(IncreaseAttribute, CanIncreaseAttributes);
         public DelegateCommand<Attributes?> DecreaseAttributeCommand => _decreaseAttributeCommand ??= new DelegateCommand<Attributes?>(DecreaseAttribute, CanDecreaseAttribute);
         public DelegateCommand<Competences?> IncreaseCompetenceCommand => _increaseCompetenceCommand ??= new DelegateCommand<Competences?>(IncreaseCompetence, CanIncreaseCompetence);
         public DelegateCommand<Competences?> DecreaseCompetenceCommand => _decreaseCompetenceCommand ??= new DelegateCommand<Competences?>(DecreaseCompetence, CanDecreaseCompetence);
-
-        private DelegateCommand _navigateBackCommand;
-
         public DelegateCommand NavigateBackCommand => _navigateBackCommand ??= new DelegateCommand(NavigateBack);
-
-        private DelegateCommand _navigateNextPageCommand;
-
         public DelegateCommand NavigateNextPageCommand => _navigateNextPageCommand ??= new DelegateCommand(NavigateNextPage);
 
         public CharacterAttributesCompetencesViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, ICharacterService characterService)
