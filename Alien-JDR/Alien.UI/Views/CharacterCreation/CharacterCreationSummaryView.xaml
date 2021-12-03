@@ -52,7 +52,7 @@
 
                         <StackPanel Orientation="Vertical">
                             <TextBlock Text="description" Style="{StaticResource CustomFont}" Foreground="White" Margin="5" FontSize="20" />
-                            <TextBlock Text="{Binding CharacterCareerDescription}" MinHeight="150" TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding CareerDescription}" MinHeight="150" TextWrapping="Wrap"/>
                         </StackPanel>
                     </StackPanel>
                 </DockPanel>

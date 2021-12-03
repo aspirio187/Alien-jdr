@@ -23,6 +23,13 @@ namespace Alien.UI.ViewModels
             set { SetProperty(ref _characterCreation, value); }
         }
 
+        private string _careerDescription;
+
+        public string CareerDescription
+        {
+            get { return _careerDescription; }
+            set { SetProperty(ref _careerDescription, value); }
+        }
 
         public CharacterCreationSummaryViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, ICharacterService characterService)
             : base(regionNavigationService, authenticator)
@@ -49,6 +56,10 @@ namespace Alien.UI.ViewModels
             base.OnNavigatedTo(navigationContext);
 
             CharacterCreation = navigationContext.Parameters.GetValue<CharacterCreationDto>(Global.CHARACTER_CREATION);
+            if (CharacterCreation is not null && !string.IsNullOrEmpty(CharacterCreation.Career))
+            {
+                CareerDescription = _characterService.GetCareer(CharacterCreation.Career).Description;
+            }
         }
 
         public bool PersistInHistory()
