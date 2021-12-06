@@ -9,6 +9,10 @@
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d">
     <Grid>
+        <Grid.Resources>
+            <global:ComparisonConverter x:Key="ComparisonConverter" />
+        </Grid.Resources>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
@@ -32,27 +36,29 @@
                    Margin="5" HorizontalAlignment="Center" />
 
         <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
-            <RadioButton Margin="10">
+
+            <RadioButton Margin="10" IsChecked="{Binding Race, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static global:RaceEnum.Humain}}" >
                 <Label Content="Humain" Style="{StaticResource CustomFont}" Foreground="White" FontSize="20"/>
             </RadioButton>
-            <RadioButton Margin="10" >
+
+            <RadioButton Margin="10" IsChecked="{Binding Race, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static global:RaceEnum.Android}}" >
                 <Label Content="Android" Style="{StaticResource CustomFont}" Foreground="White" FontSize="20" />
             </RadioButton>
         </StackPanel>
 
         <StackPanel Grid.Row="3" Grid.Column="0" Margin="5">
             <TextBlock Text="Objectifs" Style="{StaticResource CustomFont}" Foreground="White" FontSize="20" HorizontalAlignment="Center"/>
-            <TextBox Text="Objectifs du personnage" MinHeight="100" Foreground="White" FontFamily="Arial" FontSize="15" />
+            <TextBox Text="{Binding PublicCharacter.Objectives}" MinHeight="100" Foreground="White" FontFamily="Arial" FontSize="15" />
         </StackPanel>
 
         <StackPanel Grid.Row="3" Grid.Column="1" Margin="5">
             <TextBlock Text="Amis" Style="{StaticResource CustomFont}" Foreground="White" FontSize="20" HorizontalAlignment="Center"/>
-            <TextBox Text="Objectifs du personnage" MinHeight="100" Foreground="White" FontFamily="Arial" FontSize="15" />
+            <TextBox Text="{Binding PublicCharacter.Friends}" MinHeight="100" Foreground="White" FontFamily="Arial" FontSize="15" />
         </StackPanel>
 
         <StackPanel Grid.Row="3" Grid.Column="2" Margin="5">
             <TextBlock Text="Rivaux" Style="{StaticResource CustomFont}" Foreground="White" FontSize="20" HorizontalAlignment="Center"/>
-            <TextBox Text="Objectifs du personnage" MinHeight="100" Foreground="White" FontFamily="Arial" FontSize="15" />
+            <TextBox Text="{Binding PublicCharacter.Rivals}" MinHeight="100" Foreground="White" FontFamily="Arial" FontSize="15" />
         </StackPanel>
 
         <StackPanel Grid.Row="4" Grid.Column="1">
@@ -74,7 +80,7 @@
                                     HorizontalAlignment="Center" VerticalAlignment="Center" 
                                     Command="{Binding DecreaseAttributeCommand}" CommandParameter="{x:Static global:Attributes.Force}"/>
 
-                            <TextBlock Text="{Binding CharacterAttributesCompetences.Strength}" FontFamily="arial black" Foreground="White" 
+                            <TextBlock Text="{Binding PublicCharacter.Strength}" FontFamily="arial black" Foreground="White" 
                                        FontSize="20" Margin="10,0,10,0" />
 
                             <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20"
@@ -98,7 +104,7 @@
                                     HorizontalAlignment="Center" VerticalAlignment="Center" 
                                     Command="{Binding DecreaseAttributeCommand}" CommandParameter="{x:Static global:Attributes.Agilité}"/>
 
-                            <TextBlock Text="{Binding CharacterAttributesCompetences.Agility}" FontFamily="arial black" Foreground="White" 
+                            <TextBlock Text="{Binding PublicCharacter.Agility}" FontFamily="arial black" Foreground="White" 
                                        FontSize="20" Margin="10,0,10,0" />
 
                             <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20"
@@ -122,7 +128,7 @@
                                     HorizontalAlignment="Center" VerticalAlignment="Center" 
                                     Command="{Binding DecreaseAttributeCommand}" CommandParameter="{x:Static global:Attributes.Esprit}"/>
 
-                            <TextBlock Text="{Binding CharacterAttributesCompetences.Mind}" FontFamily="arial black" Foreground="White" 
+                            <TextBlock Text="{Binding PublicCharacter.Mind}" FontFamily="arial black" Foreground="White" 
                                        FontSize="20" Margin="10,0,10,0" />
 
                             <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20"
@@ -147,7 +153,7 @@
                                     HorizontalAlignment="Center" VerticalAlignment="Center" 
                                     Command="{Binding DecreaseAttributeCommand}" CommandParameter="{x:Static global:Attributes.Empathie}"/>
 
-                            <TextBlock Text="{Binding CharacterAttributesCompetences.Strength}" FontFamily="arial black" Foreground="White" 
+                            <TextBlock Text="{Binding PublicCharacter.Empathy}" FontFamily="arial black" Foreground="White" 
                                        FontSize="20" Margin="10,0,10,0" />
 
                             <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20"
@@ -182,7 +188,7 @@
                         <Button Content="-" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
                             Command="{Binding DecreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.HeavyMachines}" />
 
-                        <TextBlock Text="{Binding CharacterAttributesCompetences.HeavyMachines}" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
+                        <TextBlock Text="{Binding PublicCharacter.HeavyMachines}" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
 
                         <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
                             Command="{Binding IncreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.HeavyMachines}" />
@@ -199,7 +205,7 @@
                         <Button Content="-" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
                             Command="{Binding DecreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.Stamina}" />
 
-                        <TextBlock Text="{Binding }" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
+                        <TextBlock Text="{Binding PublicCharacter.Stamina}" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
 
                         <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
                             Command="{Binding IncreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.Stamina}" />
@@ -216,7 +222,7 @@
                         <Button Content="-" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
                             Command="{Binding DecreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.CloseCombat}" />
 
-                        <TextBlock Text="{Binding }" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
+                        <TextBlock Text="{Binding PublicCharacter.CloseCombat}" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
 
                         <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
                             Command="{Binding IncreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.CloseCombat}" />
@@ -233,7 +239,7 @@
                         <Button Content="-" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
                             Command="{Binding DecreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.Mobility}" />
 
-                        <TextBlock Text="{Binding CharacterAttributesCompetences.HeavyMachines}" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
+                        <TextBlock Text="{Binding PublicCharacter.Mobility}" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
 
                         <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
                             Command="{Binding IncreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.Mobility}" />
@@ -250,7 +256,7 @@
                         <Button Content="-" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
                             Command="{Binding DecreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.Piloting}" />
 
-                        <TextBlock Text="{Binding CharacterAttributesCompetences.HeavyMachines}" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
+                        <TextBlock Text="{Binding PublicCharacter.Piloting}" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
 
                         <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
                             Command="{Binding IncreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.Piloting}" />
@@ -267,7 +273,7 @@
                         <Button Content="-" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
                             Command="{Binding DecreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.RangeCombat}" />
 
-                        <TextBlock Text="{Binding CharacterAttributesCompetences.HeavyMachines}" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
+                        <TextBlock Text="{Binding PublicCharacter.RangeCombat}" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
 
                         <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
                             Command="{Binding IncreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.RangeCombat}" />
@@ -284,7 +290,7 @@
                         <Button Content="-" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
                             Command="{Binding DecreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.Observation}" />
 
-                        <TextBlock Text="{Binding CharacterAttributesCompetences.HeavyMachines}" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
+                        <TextBlock Text="{Binding PublicCharacter.Observation}" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
 
                         <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
                             Command="{Binding IncreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.Observation}" />
@@ -301,7 +307,7 @@
                         <Button Content="-" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
                             Command="{Binding DecreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.Comtech}" />
 
-                        <TextBlock Text="{Binding CharacterAttributesCompetences.HeavyMachines}" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
+                        <TextBlock Text="{Binding PublicCharacter.Comtech}" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
 
                         <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
                             Command="{Binding IncreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.Comtech}" />
@@ -318,7 +324,7 @@
                         <Button Content="-" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
                             Command="{Binding DecreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.Survival}" />
 
-                        <TextBlock Text="{Binding CharacterAttributesCompetences.HeavyMachines}" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
+                        <TextBlock Text="{Binding PublicCharacter.Survival}" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
 
                         <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
                             Command="{Binding IncreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.Survival}" />
@@ -335,7 +341,7 @@
                         <Button Content="-" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
                             Command="{Binding DecreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.Manipulation}" />
 
-                        <TextBlock Text="{Binding CharacterAttributesCompetences.HeavyMachines}" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
+                        <TextBlock Text="{Binding PublicCharacter.Manipulation}" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
 
                         <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
                             Command="{Binding IncreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.Manipulation}" />
@@ -352,7 +358,7 @@
                         <Button Content="-" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
                             Command="{Binding DecreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.Commandment}" />
 
-                        <TextBlock Text="{Binding CharacterAttributesCompetences.HeavyMachines}" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
+                        <TextBlock Text="{Binding PublicCharacter.Commandment}" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
 
                         <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
                             Command="{Binding IncreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.Commandment}" />
@@ -369,7 +375,7 @@
                         <Button Content="-" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
                             Command="{Binding DecreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.MedicalCare}" />
 
-                        <TextBlock Text="{Binding CharacterAttributesCompetences.HeavyMachines}" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
+                        <TextBlock Text="{Binding PublicCharacter.MedicalCare}" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
 
                         <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
                             Command="{Binding IncreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.MedicalCare}" />
@@ -387,7 +393,7 @@
             <Button Width="200" Height="40" Content="Retour" Foreground="Black" Style="{StaticResource CustomFont}" HorizontalAlignment="Left"
                     Command="{Binding NavigateBackCommand}"/>
             <Button Width="200" Height="40" Content="Terminer" Foreground="Black" Style="{StaticResource CustomFont}" HorizontalAlignment="Right"
-                    Command="{Binding NavigateNextPageCommand}"/>
+                    Command="{Binding CreatePublicCharacterCommand}"/>
         </DockPanel>
     </Grid>
 </ContentControl>

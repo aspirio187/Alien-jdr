@@ -43,6 +43,21 @@ namespace Alien.UI.ViewModels
             false
         };
 
+        private int _attributePoints;
+
+        public int AttributePoints
+        {
+            get { return _attributePoints; }
+            set { SetProperty(ref _attributePoints, value); }
+        }
+
+        private int _competencePoints;
+
+        public int CompetencePoints
+        {
+            get { return _competencePoints; }
+            set {SetProperty(ref _competencePoints, value); }
+        }
 
         private DelegateCommand _navigateBackCommand;
         private DelegateCommand _createPublicCharacterCommand;
