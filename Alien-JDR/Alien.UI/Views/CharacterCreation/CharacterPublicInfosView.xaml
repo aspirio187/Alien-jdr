@@ -7,9 +7,387 @@
              xmlns:local="clr-namespace:Alien.UI.Views"
              xmlns:global="clr-namespace:Alien.UI.Helpers"
              prism:ViewModelLocator.AutoWireViewModel="True"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="Fiche public" Style="{StaticResource CustomFont}" Foreground="white" FontSize="25"
+                   Margin="10" HorizontalAlignment="Center" />
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="Informations" Style="{StaticResource CustomFont}" Foreground="White" FontSize="22"
+                   Margin="5" HorizontalAlignment="Center" />
+
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <RadioButton Margin="10">
+                <Label Content="Humain" Style="{StaticResource CustomFont}" Foreground="White" FontSize="20"/>
+            </RadioButton>
+            <RadioButton Margin="10" >
+                <Label Content="Android" Style="{StaticResource CustomFont}" Foreground="White" FontSize="20" />
+            </RadioButton>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Grid.Column="0" Margin="5">
+            <TextBlock Text="Objectifs" Style="{StaticResource CustomFont}" Foreground="White" FontSize="20" HorizontalAlignment="Center"/>
+            <TextBox Text="Objectifs du personnage" MinHeight="100" Foreground="White" FontFamily="Arial" FontSize="15" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Grid.Column="1" Margin="5">
+            <TextBlock Text="Amis" Style="{StaticResource CustomFont}" Foreground="White" FontSize="20" HorizontalAlignment="Center"/>
+            <TextBox Text="Objectifs du personnage" MinHeight="100" Foreground="White" FontFamily="Arial" FontSize="15" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Grid.Column="2" Margin="5">
+            <TextBlock Text="Rivaux" Style="{StaticResource CustomFont}" Foreground="White" FontSize="20" HorizontalAlignment="Center"/>
+            <TextBox Text="Objectifs du personnage" MinHeight="100" Foreground="White" FontFamily="Arial" FontSize="15" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="4" Grid.Column="1">
+            <TextBlock Text="Caracteristiques" Style="{StaticResource CustomFont}" Foreground="White" FontSize="22" HorizontalAlignment="Center" />
+        </StackPanel>
+        
+        <DockPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" LastChildFill="False">
+            <StackPanel DockPanel.Dock="Left">
+                <TextBlock Text="Attributs" Style="{StaticResource CustomFont}" Foreground="White" FontSize="22" HorizontalAlignment="Center" Margin="10" />
+                <StackPanel>
+                    <DockPanel>
+                        
+                        <TextBlock Text="Force" Style="{StaticResource CustomFont}" Foreground="white" FontSize="20" MinWidth="150"
+                                   VerticalAlignment="Center" TextAlignment="Center" Margin="5"/>
+                        
+                        <DockPanel Margin="5" >
+                            
+                            <Button Content="-" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" 
+                                    HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                    Command="{Binding DecreaseAttributeCommand}" CommandParameter="{x:Static global:Attributes.Force}"/>
+
+                            <TextBlock Text="{Binding CharacterAttributesCompetences.Strength}" FontFamily="arial black" Foreground="White" 
+                                       FontSize="20" Margin="10,0,10,0" />
+
+                            <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20"
+                                    HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                    Command="{Binding IncreaseAttributeCommand}" CommandParameter="{x:Static global:Attributes.Force}"/>
+                        </DockPanel>
+
+                        <Button Content="+3" FontWeight="Bold" FontSize="15" Width="40" Height="40" HorizontalAlignment="Center" Margin="10"
+                                Command="{Binding SelectAttributeCommand}" CommandParameter="{x:Static global:Attributes.Force}" />
+                        
+                        <CheckBox IsEnabled="True" IsChecked="{Binding SelectedAttributes[0]}" HorizontalAlignment="Center" />
+                    </DockPanel>
+                    <DockPanel>
+
+                        <TextBlock Text="agilite" Style="{StaticResource CustomFont}" Foreground="white" FontSize="20" MinWidth="150"
+                                   VerticalAlignment="Center" TextAlignment="Center" Margin="5"/>
+                        
+                        <DockPanel Margin="5" >
+                            
+                            <Button Content="-" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" 
+                                    HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                    Command="{Binding DecreaseAttributeCommand}" CommandParameter="{x:Static global:Attributes.Agilité}"/>
+
+                            <TextBlock Text="{Binding CharacterAttributesCompetences.Agility}" FontFamily="arial black" Foreground="White" 
+                                       FontSize="20" Margin="10,0,10,0" />
+
+                            <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20"
+                                    HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                    Command="{Binding IncreaseAttributeCommand}" CommandParameter="{x:Static global:Attributes.Agilité}"/>
+                        </DockPanel>
+
+                        <Button Content="+3" FontWeight="Bold" FontSize="15" Width="40" Height="40" HorizontalAlignment="Center" Margin="10"
+                                Command="{Binding SelectAttributeCommand}" CommandParameter="{x:Static global:Attributes.Agilité}" />
+                        
+                        <CheckBox IsEnabled="True" IsChecked="{Binding SelectedAttributes[0]}" HorizontalAlignment="Center" />
+                    </DockPanel>
+                    
+                    <DockPanel>
+
+                        <TextBlock Text="esprit" Style="{StaticResource CustomFont}" Foreground="white" FontSize="20" MinWidth="150" 
+                                   VerticalAlignment="Center" TextAlignment="Center" Margin="5"/>
+                        
+                        <DockPanel Margin="5" >
+                            <Button Content="-" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" 
+                                    HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                    Command="{Binding DecreaseAttributeCommand}" CommandParameter="{x:Static global:Attributes.Esprit}"/>
+
+                            <TextBlock Text="{Binding CharacterAttributesCompetences.Mind}" FontFamily="arial black" Foreground="White" 
+                                       FontSize="20" Margin="10,0,10,0" />
+
+                            <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20"
+                                    HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                    Command="{Binding IncreaseAttributeCommand}" CommandParameter="{x:Static global:Attributes.Esprit}"/>
+                        </DockPanel>
+
+                        <Button Content="+3" FontWeight="Bold" FontSize="15" Width="40" Height="40" HorizontalAlignment="Center" Margin="10"
+                                Command="{Binding SelectAttributeCommand}" CommandParameter="{x:Static global:Attributes.Esprit}" />
+
+                        <CheckBox IsEnabled="True" IsChecked="{Binding SelectedAttributes[0]}" HorizontalAlignment="Center" />
+                    </DockPanel>
+                    
+                    <DockPanel>
+
+                        <TextBlock Text="empathie" Style="{StaticResource CustomFont}" Foreground="white" FontSize="20" MinWidth="150" 
+                                   VerticalAlignment="Center" TextAlignment="Center" Margin="5"/>
+                        
+                        <DockPanel Margin="5" >
+                            
+                            <Button Content="-" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" 
+                                    HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                    Command="{Binding DecreaseAttributeCommand}" CommandParameter="{x:Static global:Attributes.Empathie}"/>
+
+                            <TextBlock Text="{Binding CharacterAttributesCompetences.Strength}" FontFamily="arial black" Foreground="White" 
+                                       FontSize="20" Margin="10,0,10,0" />
+
+                            <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20"
+                                    HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                    Command="{Binding IncreaseAttributeCommand}" CommandParameter="{x:Static global:Attributes.Empathie}"/>
+                        </DockPanel>
+
+                        <Button Content="+3" FontWeight="Bold" FontSize="15" Width="40" Height="40" HorizontalAlignment="Center" Margin="10"
+                                Command="{Binding SelectAttributeCommand}" CommandParameter="{x:Static global:Attributes.Empathie}" />
+                        
+                        <CheckBox IsEnabled="True" IsChecked="{Binding SelectedAttributes[0]}" HorizontalAlignment="Center" />
+                    </DockPanel>
+
+                    <DockPanel HorizontalAlignment="Right" Margin="10">
+                        <TextBlock Text="points d'attributs restants :" Style="{StaticResource CustomFont}" Foreground="White" FontSize="22" />
+                        <TextBlock Text="{Binding AttributePoints}" TextAlignment="Center" FontFamily="arial black" Foreground="White" Width="50" FontSize="22" FontWeight="Bold" />
+                    </DockPanel>
+                    
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel DockPanel.Dock="Right">
+                <TextBlock Text="competences" Style="{StaticResource CustomFont}" Foreground="White" FontSize="20" HorizontalAlignment="Center" Margin="10" />
+
+                <DockPanel>
+
+                    <TextBlock Text="machines lourdes (force)" Style="{StaticResource CustomFont}" Foreground="white" FontSize="20" MinWidth="300" 
+                                   VerticalAlignment="Center" TextAlignment="Center" Margin="5"/>
+
+                    <DockPanel Margin="5" >
+
+                        <Button Content="-" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Command="{Binding DecreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.HeavyMachines}" />
+
+                        <TextBlock Text="{Binding CharacterAttributesCompetences.HeavyMachines}" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
+
+                        <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Command="{Binding IncreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.HeavyMachines}" />
+                    </DockPanel>
+                </DockPanel>
+
+                <DockPanel>
+
+                    <TextBlock Text="endurance (force)" Style="{StaticResource CustomFont}" Foreground="white" FontSize="20" MinWidth="300" 
+                                   VerticalAlignment="Center" TextAlignment="Center" Margin="5"/>
+
+                    <DockPanel Margin="5" >
+
+                        <Button Content="-" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Command="{Binding DecreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.Stamina}" />
+
+                        <TextBlock Text="{Binding }" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
+
+                        <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Command="{Binding IncreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.Stamina}" />
+                    </DockPanel>
+                </DockPanel>
+
+                <DockPanel>
+
+                    <TextBlock Text="combat rapproche (force)" Style="{StaticResource CustomFont}" Foreground="white" FontSize="20" MinWidth="300" 
+                                   VerticalAlignment="Center" TextAlignment="Center" Margin="5"/>
+
+                    <DockPanel Margin="5" >
+
+                        <Button Content="-" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Command="{Binding DecreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.CloseCombat}" />
+
+                        <TextBlock Text="{Binding }" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
+
+                        <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Command="{Binding IncreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.CloseCombat}" />
+                    </DockPanel>
+                </DockPanel>
+
+                <DockPanel>
+
+                    <TextBlock Text="mobilite (agilite)" Style="{StaticResource CustomFont}" Foreground="white" FontSize="20" MinWidth="300" 
+                                   VerticalAlignment="Center" TextAlignment="Center" Margin="5"/>
+
+                    <DockPanel Margin="5" >
+
+                        <Button Content="-" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Command="{Binding DecreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.Mobility}" />
+
+                        <TextBlock Text="{Binding CharacterAttributesCompetences.HeavyMachines}" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
+
+                        <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Command="{Binding IncreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.Mobility}" />
+                    </DockPanel>
+                </DockPanel>
+
+                <DockPanel>
+
+                    <TextBlock Text="pilotage (agilite)" Style="{StaticResource CustomFont}" Foreground="white" FontSize="20" MinWidth="300" 
+                                   VerticalAlignment="Center" TextAlignment="Center" Margin="5"/>
+
+                    <DockPanel Margin="5" >
+
+                        <Button Content="-" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Command="{Binding DecreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.Piloting}" />
+
+                        <TextBlock Text="{Binding CharacterAttributesCompetences.HeavyMachines}" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
+
+                        <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Command="{Binding IncreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.Piloting}" />
+                    </DockPanel>
+                </DockPanel>
+
+                <DockPanel>
+
+                    <TextBlock Text="combat a distance (agilite)" Style="{StaticResource CustomFont}" Foreground="white" FontSize="20" MinWidth="300" 
+                                   VerticalAlignment="Center" TextAlignment="Center" Margin="5"/>
+
+                    <DockPanel Margin="5" >
+
+                        <Button Content="-" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Command="{Binding DecreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.RangeCombat}" />
+
+                        <TextBlock Text="{Binding CharacterAttributesCompetences.HeavyMachines}" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
+
+                        <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Command="{Binding IncreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.RangeCombat}" />
+                    </DockPanel>
+                </DockPanel>
+
+                <DockPanel>
+
+                    <TextBlock Text="observation (esprit)" Style="{StaticResource CustomFont}" Foreground="white" FontSize="20" MinWidth="300" 
+                                   VerticalAlignment="Center" TextAlignment="Center" Margin="5"/>
+
+                    <DockPanel Margin="5" >
+
+                        <Button Content="-" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Command="{Binding DecreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.Observation}" />
+
+                        <TextBlock Text="{Binding CharacterAttributesCompetences.HeavyMachines}" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
+
+                        <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Command="{Binding IncreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.Observation}" />
+                    </DockPanel>
+                </DockPanel>
+
+                <DockPanel>
+
+                    <TextBlock Text="comtech (esprit)" Style="{StaticResource CustomFont}" Foreground="white" FontSize="20" MinWidth="300" 
+                                   VerticalAlignment="Center" TextAlignment="Center" Margin="5"/>
+
+                    <DockPanel Margin="5" >
+
+                        <Button Content="-" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Command="{Binding DecreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.Comtech}" />
+
+                        <TextBlock Text="{Binding CharacterAttributesCompetences.HeavyMachines}" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
+
+                        <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Command="{Binding IncreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.Comtech}" />
+                    </DockPanel>
+                </DockPanel>
+
+                <DockPanel>
+
+                    <TextBlock Text="survie (esprit)" Style="{StaticResource CustomFont}" Foreground="white" FontSize="20" MinWidth="300" 
+                                   VerticalAlignment="Center" TextAlignment="Center" Margin="5"/>
+
+                    <DockPanel Margin="5" >
+
+                        <Button Content="-" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Command="{Binding DecreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.Survival}" />
+
+                        <TextBlock Text="{Binding CharacterAttributesCompetences.HeavyMachines}" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
+
+                        <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Command="{Binding IncreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.Survival}" />
+                    </DockPanel>
+                </DockPanel>
+
+                <DockPanel>
+
+                    <TextBlock Text="manipulation (empathie)" Style="{StaticResource CustomFont}" Foreground="white" FontSize="20" MinWidth="300" 
+                                   VerticalAlignment="Center" TextAlignment="Center" Margin="5"/>
+
+                    <DockPanel Margin="5" >
+
+                        <Button Content="-" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Command="{Binding DecreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.Manipulation}" />
+
+                        <TextBlock Text="{Binding CharacterAttributesCompetences.HeavyMachines}" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
+
+                        <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Command="{Binding IncreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.Manipulation}" />
+                    </DockPanel>
+                </DockPanel>
+
+                <DockPanel>
+
+                    <TextBlock Text="commandement (empathie)" Style="{StaticResource CustomFont}" Foreground="white" FontSize="20" MinWidth="300" 
+                                   VerticalAlignment="Center" TextAlignment="Center" Margin="5"/>
+
+                    <DockPanel Margin="5" >
+
+                        <Button Content="-" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Command="{Binding DecreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.Commandment}" />
+
+                        <TextBlock Text="{Binding CharacterAttributesCompetences.HeavyMachines}" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
+
+                        <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Command="{Binding IncreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.Commandment}" />
+                    </DockPanel>
+                </DockPanel>
+
+                <DockPanel>
+
+                    <TextBlock Text="soins medicaux (empathie)" Style="{StaticResource CustomFont}" Foreground="white" FontSize="20" MinWidth="300" 
+                                   VerticalAlignment="Center" TextAlignment="Center" Margin="5"/>
+
+                    <DockPanel Margin="5" >
+
+                        <Button Content="-" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Command="{Binding DecreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.MedicalCare}" />
+
+                        <TextBlock Text="{Binding CharacterAttributesCompetences.HeavyMachines}" FontFamily="arial black" Foreground="White" FontSize="20" Margin="10,0,10,0" />
+
+                        <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            Command="{Binding IncreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.MedicalCare}" />
+                    </DockPanel>
+                </DockPanel>
+
+                <DockPanel HorizontalAlignment="Right" Margin="10">
+                    <TextBlock Text="points de competence restants :" Style="{StaticResource CustomFont}" Foreground="White" FontSize="22" HorizontalAlignment="Right" />
+                    <TextBlock Text="{Binding CompetencePoints}" TextAlignment="Center" FontFamily="arial black" Foreground="White" Width="50" FontSize="22" FontWeight="Bold" />
+                </DockPanel>
+            </StackPanel>
+        </DockPanel>
+
+        <DockPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Margin="10">
+            <Button Width="200" Height="40" Content="Retour" Foreground="Black" Style="{StaticResource CustomFont}" HorizontalAlignment="Left"
+                    Command="{Binding NavigateBackCommand}"/>
+            <Button Width="200" Height="40" Content="Terminer" Foreground="Black" Style="{StaticResource CustomFont}" HorizontalAlignment="Right"
+                    Command="{Binding NavigateNextPageCommand}"/>
+        </DockPanel>
     </Grid>
 </ContentControl>
