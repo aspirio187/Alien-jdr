@@ -71,7 +71,8 @@ namespace Alien.UI.ViewModels
             {
                 Image = SelectedCareer.ImagePath,
                 Career = SelectedCareer.Name,
-                Race = SelectedRace.ToString()
+                Race = SelectedRace.ToString(),
+                IdentificationStamp = Guid.NewGuid()
             };
 
             Navigate(ViewsEnum.CharacterInfosCreationView, new Dictionary<string, object>()

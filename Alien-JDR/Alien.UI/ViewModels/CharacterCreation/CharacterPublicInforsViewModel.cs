@@ -33,7 +33,11 @@ namespace Alien.UI.ViewModels
         public RaceEnum Race
         {
             get { return _race; }
-            set { SetProperty(ref _race, value); }
+            set
+            {
+                SetProperty(ref _race, value);
+                SelectAttributeCommand.RaiseCanExecuteChanged();
+            }
         }
         public ObservableCollection<bool> SelectedAttributes { get; set; } = new()
         {
@@ -81,6 +85,12 @@ namespace Alien.UI.ViewModels
         {
             _characterService = characterService ??
                 throw new ArgumentNullException(nameof(characterService));
+
+            IncreaseAttributeCommand.RaiseCanExecuteChanged();
+            DecreaseAttributeCommand.RaiseCanExecuteChanged();
+            SelectAttributeCommand.RaiseCanExecuteChanged();
+            IncreaseCompetenceCommand.RaiseCanExecuteChanged();
+            DecreaseCompetenceCommand.RaiseCanExecuteChanged();
         }
 
         public bool CanIncreaseAttributes(Attributes? attribute)
@@ -170,6 +180,51 @@ namespace Alien.UI.ViewModels
         public void SelectAttribute(Attributes? attribute)
         {
             SelectedAttributes[(int)attribute] = !SelectedAttributes[(int)attribute];
+
+            switch (attribute)
+            {
+                case Attributes.Force:
+                    if (SelectedAttributes[(int)attribute])
+                    {
+                        PublicCharacter.Strength += 3;
+                    }
+                    else
+                    {
+                        PublicCharacter.Strength -= 3;
+                    }
+                    break;
+                case Attributes.Agilité:
+                    if (SelectedAttributes[(int)attribute])
+                    {
+                        PublicCharacter.Agility += 3;
+                    }
+                    else
+                    {
+                        PublicCharacter.Agility -= 3;
+                    }
+                    break;
+                case Attributes.Esprit:
+                    if (SelectedAttributes[(int)attribute])
+                    {
+                        PublicCharacter.Mind += 3;
+                    }
+                    else
+                    {
+                        PublicCharacter.Mind -= 3;
+                    }
+                    break;
+                case Attributes.Empathie:
+                    if (SelectedAttributes[(int)attribute])
+                    {
+                        PublicCharacter.Empathy += 3;
+                    }
+                    else
+                    {
+                        PublicCharacter.Empathy -= 3;
+                    }
+                    break;
+            }
+
             CreatePublicCharacterCommand.RaiseCanExecuteChanged();
             SelectAttributeCommand.RaiseCanExecuteChanged();
         }

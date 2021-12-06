@@ -62,8 +62,20 @@ namespace Alien.UI.ViewModels
             {
                 if (await _characterService.CreateCharacter(CharacterCreation, _authenticator.User.Id))
                 {
-                    _regionNavigationService.Journal.Clear();
-                    Navigate(ViewsEnum.CharactersView);
+                    if (CharacterCreation.IsPublic)
+                    {
+                        _regionNavigationService.Journal.Clear();
+                        Navigate(ViewsEnum.CharactersView);
+                    }
+                    else
+                    {
+                        Dictionary<string, object> parameters = new Dictionary<string, object>()
+                        {
+                            { Global.CHARACTER_CREATION, CharacterCreation }
+                        };
+
+                        Navigate(ViewsEnum.CharacterPublicInfosView, parameters);
+                    }
                 }
             }
             catch (Exception e)
