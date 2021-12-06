@@ -41,6 +41,8 @@ namespace Alien.BLL.Services
             CharacterEntity characterToCreate = _mapper.Map<CharacterEntity>(character);
             characterToCreate.OwnerId = userId;
             characterToCreate.IdentificationStamp = Guid.NewGuid();
+            characterToCreate.IsEditable = false;
+
             // TODO : Créer un personnage public si nécessaire et créer un personnage éditable
 
             TalentEntity talentFromRepo = await _talentRepository.GetTalentByNameAsync(character.Talent);
@@ -57,11 +59,16 @@ namespace Alien.BLL.Services
                 characterToCreate.Talents.Add(talentFromRepo);
             }
 
-
             try
             {
                 CharacterEntity createdCharacter = _characterRepository.Create(characterToCreate);
+                CharacterEntity editableCharacter = createdCharacter;
+                editableCharacter.Id = 0;
+                editableCharacter.IsEditable = true;
+
+                CharacterEntity createdEditableCharacter = _characterRepository.Create(editableCharacter);
                 if (createdCharacter is null) return false;
+                if (editableCharacter is null) return false;
 
                 return _characterRepository.SaveChanges();
             }
