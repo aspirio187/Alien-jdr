@@ -10,7 +10,7 @@ namespace Alien.BLL.Interfaces
     public interface ICharacterService
     {
         Task<IEnumerable<CharacterMiniatureDto>> GetCharactersMiniaturesAsync(Guid userId);
-        bool CreateCharacter(CharacterCreationDto character);
+        Task<bool> CreateCharacter(CharacterCreationDto character, Guid userId);
         Task<bool> DeleteCharacter(int characterId);
         CareerFromJsonDto[] GetCareersFromJson();
         TalentFromJsonDto[] GetTalentsFromJson(string careerName);

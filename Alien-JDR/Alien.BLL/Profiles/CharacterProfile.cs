@@ -14,7 +14,10 @@ namespace Alien.BLL.Profiles
         public CharacterProfile()
         {
             CreateMap<CharacterEntity, CharacterMiniatureDto>();
-            CreateMap<CharacterCreationDto, CharacterEntity>();
+            CreateMap<CharacterCreationDto, CharacterEntity>()
+                .ForMember(
+                    dest => dest.Talents,
+                    opt => opt.Ignore());
         }
     }
 }

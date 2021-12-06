@@ -20,5 +20,10 @@ namespace Alien.DAL.Repositories
             UserEntity user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username && u.Password == password);
             return user;
         }
+
+        public async Task<bool> UserExists(Guid userId)
+        {
+            return await _context.Users.AnyAsync(u => u.Id == userId);
+        }
     }
 }

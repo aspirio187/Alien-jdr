@@ -48,7 +48,7 @@ namespace Alien.UI.ViewModels
 
         public void CreateCharacter()
         {
-
+            _characterService.CreateCharacter(CharacterCreation, _authenticator.User.Id);
         }
 
         public override void OnNavigatedTo(NavigationContext navigationContext)

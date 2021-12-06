@@ -13,18 +13,18 @@ namespace Alien.DAL.Entities
         public int Id { get; set; }
 
         public string Name { get; set; }
-        public string PicturePath { get; set; }
+        public string Image { get; set; }
         public string Career { get; set; }
         public string Race { get; set; }
         public string Appearance { get; set; }
         public string Objectives { get; set; }
 
         public ICollection<ItemEntity> Items { get; set; }
-        public string Friend { get; set; }
-        public string Rival { get; set; }
+        public string Friends { get; set; }
+        public string Rivals { get; set; }
 
-        public int StressPoints { get; set; }
-        public int LifePoints { get; set; }
+        public int StressPoints { get; set; } 
+        public int LifePoints { get; set; } = 10;
         public int RadiationPoints { get; set; }
         public int ExperiencePoints { get; set; }
         public int StoryPoints { get; set; }
@@ -32,29 +32,25 @@ namespace Alien.DAL.Entities
         // Sur base de la carrière
         public ICollection<WoundEntity> MajorWounds { get; set; }
 
-        [IntegerValidator(MinValue = 2, ExcludeRange = false)]
         public int Strength { get; set; }
         public int CloseCombat { get; set; }
         public int Stamina { get; set; }
         public int HeavyMachines { get; set; }
 
-        [IntegerValidator(MinValue = 2, ExcludeRange = false)]
         public int Agility { get; set; }
         public int RangedCombat { get; set; }
         public int Mobility { get; set; }
         public int Piloting { get; set; }
 
-        [IntegerValidator(MinValue = 2, ExcludeRange = false)]
         public int Empathy { get; set; }
-        public int Commanding { get; set; }
+        public int Commandment { get; set; }
         public int Manipulation { get; set; }
         public int MedicalCare { get; set; }
 
-        [IntegerValidator(MinValue = 2, ExcludeRange = false)]
         public int Mind { get; set; }
-        public int Observer { get; set; }
+        public int Observation { get; set; }
         public int Survival { get; set; }
-        public int Contech { get; set; }
+        public int Comtech { get; set; }
 
         public ICollection<EquipmentEntity> Equipments { get; set; }
 

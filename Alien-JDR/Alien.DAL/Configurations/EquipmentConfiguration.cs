@@ -21,10 +21,6 @@ namespace Alien.DAL.Configurations
                  .IsRequired()
                  .HasMaxLength(50);
 
-            builder.Property(x => x.Description)
-                 .IsRequired()
-                 .HasMaxLength(500);
-
             builder.HasOne(e => e.Character)
                 .WithMany(c => c.Equipments)
                 .IsRequired(true)

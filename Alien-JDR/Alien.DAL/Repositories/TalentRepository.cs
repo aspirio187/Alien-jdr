@@ -21,5 +21,10 @@ namespace Alien.DAL.Repositories
         {
             return await _context.Talents.Where(t => t.Characters.Any(c => c.Id == characterId)).ToListAsync();
         }
+
+        public async Task<TalentEntity> GetTalentByNameAsync(string talent)
+        {
+            return await _context.Talents.FirstOrDefaultAsync(t => t.Name.Equals(talent));
+        }
     }
 }

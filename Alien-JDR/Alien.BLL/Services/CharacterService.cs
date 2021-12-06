@@ -18,24 +18,51 @@ namespace Alien.BLL.Services
     public class CharacterService : ICharacterService
     {
         private readonly ICharacterRepository _characterRepository;
+        private readonly ITalentRepository _talentRepository;
+        private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
 
-        public CharacterService(ICharacterRepository characterRepository, IMapper mapper)
+        public CharacterService(ICharacterRepository characterRepository, IMapper mapper, ITalentRepository talentRepository, IUserRepository userRepository)
         {
             _characterRepository = characterRepository ??
                 throw new ArgumentNullException(nameof(characterRepository));
             _mapper = mapper ??
                 throw new ArgumentNullException(nameof(mapper));
+            _talentRepository = talentRepository ??
+                throw new ArgumentNullException(nameof(talentRepository));
+            _userRepository = userRepository ??
+                throw new ArgumentNullException(nameof(userRepository));
         }
 
-        public bool CreateCharacter(CharacterCreationDto character)
+        public async Task<bool> CreateCharacter(CharacterCreationDto character, Guid userId)
         {
             if (character is null) throw new ArgumentNullException(nameof(character));
+            if (!await _userRepository.UserExists(userId)) return false;
             CharacterEntity characterToCreate = _mapper.Map<CharacterEntity>(character);
+            characterToCreate.OwnerId = userId;
+            characterToCreate.IdentificationStamp = Guid.NewGuid();
+            // TODO : Créer un personnage public si nécessaire et créer un personnage éditable
+
+            TalentEntity talentFromRepo = await _talentRepository.GetTalentByNameAsync(character.Talent);
+
+            if (talentFromRepo is null)
+            {
+                characterToCreate.Talents.Add(new TalentEntity()
+                {
+                    Name = character.Talent
+                });
+            }
+            else
+            {
+                characterToCreate.Talents.Add(talentFromRepo);
+            }
+
+
             try
             {
                 CharacterEntity createdCharacter = _characterRepository.Create(characterToCreate);
                 if (createdCharacter is null) return false;
+
                 return _characterRepository.SaveChanges();
             }
             catch (Exception e)

@@ -37,7 +37,7 @@ namespace Alien.DAL.Configurations
                 .IsRequired()
                 .HasMaxLength(50);
 
-            builder.Property(x => x.PicturePath)
+            builder.Property(x => x.Image)
                 .IsRequired()
                 .HasMaxLength(150);
 
@@ -57,11 +57,11 @@ namespace Alien.DAL.Configurations
                 .IsRequired()
                 .HasMaxLength(150);
 
-            builder.Property(x => x.Friend)
+            builder.Property(x => x.Friends)
                 .IsRequired()
                 .HasMaxLength(50);
 
-            builder.Property(x => x.Rival)
+            builder.Property(x => x.Rivals)
                 .IsRequired()
                 .HasMaxLength(50);
  
@@ -107,7 +107,7 @@ namespace Alien.DAL.Configurations
             builder.Property(p => p.Empathy)
                .IsRequired(true);
 
-            builder.Property(p => p.Commanding)
+            builder.Property(p => p.Commandment)
                .IsRequired(true);
 
             builder.Property(p => p.Manipulation)
@@ -119,13 +119,13 @@ namespace Alien.DAL.Configurations
             builder.Property(p => p.Mind)
                .IsRequired(true);
 
-            builder.Property(p => p.Observer)
+            builder.Property(p => p.Observation)
                .IsRequired(true);
 
             builder.Property(p => p.Survival)
                .IsRequired(true);
 
-            builder.Property(p => p.Contech)
+            builder.Property(p => p.Comtech)
                .IsRequired(true);
         }
     }
