@@ -22,6 +22,7 @@ namespace Alien.BLL
 
             // Injection des Repository
             containerRegistry.RegisterScoped<IUserRepository, UserRepository>();
+            containerRegistry.RegisterScoped<ITalentRepository, TalentRepository>();
             containerRegistry.RegisterScoped<ICharacterRepository, CharacterRepository>();
 
             // Injection des services
