@@ -34,11 +34,9 @@ namespace Alien.UI.ViewModels
         }
 
         private DelegateCommand _navigateBackCommand;
-
-        public DelegateCommand NavigateBackCommand => _navigateBackCommand ??= new(NavigateBack);
-
         private DelegateCommand _createCharacterCommand;
 
+        public DelegateCommand NavigateBackCommand => _navigateBackCommand ??= new(NavigateBack);
         public DelegateCommand CreateCharacterCommand => _createCharacterCommand ??= new(CreateCharacter);
 
         public CharacterCreationSummaryViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, ICharacterService characterService)

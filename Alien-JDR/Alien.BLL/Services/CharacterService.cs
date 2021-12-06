@@ -40,7 +40,6 @@ namespace Alien.BLL.Services
             if (!await _userRepository.UserExists(userId)) return false;
             CharacterEntity characterToCreate = _mapper.Map<CharacterEntity>(character);
             characterToCreate.OwnerId = userId;
-            characterToCreate.IdentificationStamp = Guid.NewGuid();
             characterToCreate.IsEditable = false;
 
             // TODO : Créer un personnage public si nécessaire et créer un personnage éditable
@@ -49,23 +48,22 @@ namespace Alien.BLL.Services
 
             if (talentFromRepo is null)
             {
-                characterToCreate.Talents.Add(new TalentEntity()
-                {
-                    Name = character.Talent
-                });
+                characterToCreate.Talents = new List<TalentEntity>() {
+                    new TalentEntity()
+                    {
+                        Name = character.Talent
+                    }};
             }
             else
             {
-                characterToCreate.Talents.Add(talentFromRepo);
+                characterToCreate.Talents = new List<TalentEntity>() { talentFromRepo };
             }
 
             try
             {
                 CharacterEntity createdCharacter = _characterRepository.Create(characterToCreate);
-                CharacterEntity editableCharacter = createdCharacter;
-                editableCharacter.Id = 0;
+                CharacterEntity editableCharacter = new CharacterEntity(createdCharacter);
                 editableCharacter.IsEditable = true;
-
                 CharacterEntity createdEditableCharacter = _characterRepository.Create(editableCharacter);
                 if (createdCharacter is null) return false;
                 if (editableCharacter is null) return false;

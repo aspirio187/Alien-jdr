@@ -24,5 +24,17 @@ namespace Alien.UI.Views
         {
             InitializeComponent();
         }
+
+        private void CheckBox_Changed(object sender, RoutedEventArgs e)
+        {
+            if ((sender as CheckBox).IsChecked == true)
+            {
+                btnOver.Content = "Suivant";
+            }
+            else
+            {
+                btnOver.Content = "Terminer";
+            }
+        }
     }
 }

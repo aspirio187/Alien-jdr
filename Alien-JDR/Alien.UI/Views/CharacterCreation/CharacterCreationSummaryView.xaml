@@ -224,14 +224,15 @@
 
             <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="10">
                 <TextBlock Text="Souhaitez-vous rendre votre fiche de personnage public ?" Style="{StaticResource CustomFont}" Foreground="White" FontSize="20" />
-                <CheckBox  IsChecked="{Binding CharacterCreation.IsPublic}" Margin="10,0,10,0"/>
+                <CheckBox  IsChecked="{Binding CharacterCreation.IsPublic}" Style="{StaticResource CustomFont}" Margin="10,0,10,0" VerticalAlignment="Center" 
+                           Checked="CheckBox_Changed"/>
             </StackPanel>
 
 
             <DockPanel Grid.Row="6" Margin="10">
                 <Button Content="Retour" Width="200" Height="40" Foreground="Black" Style="{StaticResource CustomFont}" HorizontalAlignment="Left" 
                         Command="{Binding NavigateBackCommand}"/>
-                <Button Content="Terminer" Width="200" Height="40" Foreground="Black" Style="{StaticResource CustomFont}" HorizontalAlignment="Right" 
+                <Button x:Name="btnOver" Content="Terminer" Width="200" Height="40" Foreground="Black" Style="{StaticResource CustomFont}" HorizontalAlignment="Right" 
                         Command="{Binding CreateCharacterCommand}"/>
             </DockPanel>
         </Grid>

@@ -13,7 +13,11 @@ namespace Alien.BLL.Profiles
     {
         public ItemProfile()
         {
-            CreateMap<ItemCreationDto, ItemEntity>();
+            CreateMap<ItemCreationDto, ItemEntity>()
+                .ForMember(
+                    dest => dest.IsUsable,
+                    opt => opt.MapFrom(
+                        src => src.IsFetish));
         }
     }
 }

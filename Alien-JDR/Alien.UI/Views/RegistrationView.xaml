@@ -21,14 +21,6 @@
             <Setter Property="Width" Value="960" />
         </Style>
     </prism:Dialog.WindowStyle>
-    <!--Title="RegistrationView"
-        AllowsTransparency="True"
-        WindowStyle="None"
-        WindowStartupLocation="CenterScreen"
-
-    <Window.Background>
-        <ImageBrush ImageSource="/Images/AlienRegistration.jpg"/>
-    </Window.Background>-->
 
     <Grid>
         <Grid.Background>
@@ -73,7 +65,7 @@
                        HorizontalAlignment="Center"/>
 
             <DockPanel HorizontalAlignment="Center" >
-                <TextBox x:Name="txbUsername" 
+                <TextBox Text="{Binding Registration.Username}"
                          FontFamily="arial black"
                          materialDesign:HintAssist.Hint="Nom d'utilisateur" 
                          FontWeight="Light" FontSize="20"
@@ -95,10 +87,7 @@
                     Opacity="0.5"/>
 
             <DockPanel HorizontalAlignment="Center" >
-                <TextBox 
-                         x:Name="txbSurName" 
-                         FontFamily="arial black"
-                         materialDesign:HintAssist.Hint="Nom"
+                <TextBox FontFamily="arial black" materialDesign:HintAssist.Hint="Nom"
                          FontWeight="Light"
                          Text="{Binding Registration.LastName}"
                          FontSize="20"

@@ -23,7 +23,7 @@ namespace Alien.DAL.Entities
         public string Friends { get; set; }
         public string Rivals { get; set; }
 
-        public int StressPoints { get; set; } 
+        public int StressPoints { get; set; }
         public int LifePoints { get; set; } = 10;
         public int RadiationPoints { get; set; }
         public int ExperiencePoints { get; set; }
@@ -63,5 +63,53 @@ namespace Alien.DAL.Entities
         public bool IsEditable { get; set; }
         public bool IsPublic { get; set; }
         public Guid IdentificationStamp { get; set; }
+
+        public CharacterEntity()
+        {
+
+        }
+
+        public CharacterEntity(CharacterEntity character)
+        {
+            if (character is null) throw new ArgumentNullException(nameof(character));
+
+            Name = character.Name;
+            Image = character.Image;
+            Career = character.Career;
+            Race = character.Race;
+            Appearance = character.Appearance;
+            Objectives = character.Objectives;
+            Items = character.Items;
+            Friends = character.Friends;
+            Rivals = character.Rivals;
+            StressPoints = character.StressPoints;
+            LifePoints = character.LifePoints;
+            RadiationPoints = character.RadiationPoints;
+            StoryPoints = character.StoryPoints;
+            Talents = character.Talents;
+            MajorWounds = character.MajorWounds;
+            Strength = character.Strength;
+            CloseCombat = character.CloseCombat;
+            Stamina = character.Stamina;
+            HeavyMachines = character.HeavyMachines;
+            Agility = character.Agility;
+            RangedCombat = character.RangedCombat;
+            Mobility = character.Mobility;
+            Piloting = character.Piloting;
+            Empathy = character.Empathy;
+            Commandment = character.Commandment;
+            Manipulation = character.Manipulation;
+            MedicalCare = character.MedicalCare;
+            Mind = character.Mind;
+            Observation = character.Observation;
+            Survival = character.Survival;
+            Comtech = character.Comtech;
+            Equipments = character.Equipments;
+            OwnerId = character.OwnerId;
+            UsedBy = character.UsedBy;
+            IsEditable = character.IsEditable;
+            IsPublic = character.IsPublic;
+            IdentificationStamp = character.IdentificationStamp;
+        }
     }
 }
