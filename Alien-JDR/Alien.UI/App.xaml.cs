@@ -43,6 +43,7 @@ namespace Alien.UI
             containerRegistry.RegisterForNavigation<CharacterAttributesCompetencesView>();
             containerRegistry.RegisterForNavigation<CharacterAndroidCreationView>();
             containerRegistry.RegisterForNavigation<CharacterCreationSummaryView>();
+            containerRegistry.RegisterForNavigation<CharacterPublicInfosView>();
 
         }
     }
