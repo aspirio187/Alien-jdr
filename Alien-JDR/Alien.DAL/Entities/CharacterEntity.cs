@@ -57,9 +57,6 @@ namespace Alien.DAL.Entities
         public Guid OwnerId { get; set; }
         public UserEntity Owner { get; set; }
 
-        public Guid UsedById { get; set; }
-        public UserEntity UsedBy { get; set; }
-
         public bool IsEditable { get; set; }
         public bool IsPublic { get; set; }
         public Guid IdentificationStamp { get; set; }
@@ -106,7 +103,6 @@ namespace Alien.DAL.Entities
             Comtech = character.Comtech;
             Equipments = character.Equipments;
             OwnerId = character.OwnerId;
-            UsedBy = character.UsedBy;
             IsEditable = character.IsEditable;
             IsPublic = character.IsPublic;
             IdentificationStamp = character.IdentificationStamp;

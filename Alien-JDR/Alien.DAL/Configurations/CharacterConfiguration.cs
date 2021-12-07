@@ -22,12 +22,7 @@ namespace Alien.DAL.Configurations
             builder.HasOne(p => p.Owner)
                 .WithMany(c => c.Characters)
                 .IsRequired(true)
-                .OnDelete(DeleteBehavior.NoAction);
-
-            builder.HasOne(p => p.UsedBy)
-                .WithOne()
-                .IsRequired(false)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasMany(c => c.Talents)
                 .WithMany(t => t.Characters)
@@ -38,8 +33,7 @@ namespace Alien.DAL.Configurations
                 .HasMaxLength(50);
 
             builder.Property(x => x.Image)
-                .IsRequired()
-                .HasMaxLength(150);
+                .IsRequired();
 
             builder.Property(x => x.Career)
                 .IsRequired()
@@ -59,11 +53,11 @@ namespace Alien.DAL.Configurations
 
             builder.Property(x => x.Friends)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(150);
 
             builder.Property(x => x.Rivals)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(150);
  
             builder.Property(p => p.StressPoints)
                 .IsRequired(true);

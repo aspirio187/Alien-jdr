@@ -51,7 +51,8 @@ namespace Alien.BLL.Services
                 characterToCreate.Talents = new List<TalentEntity>() {
                     new TalentEntity()
                     {
-                        Name = character.Talent
+                        Name = character.Talent,
+                        Description = GetTalent(character.Talent, character.Career).Description
                     }};
             }
             else
@@ -112,6 +113,14 @@ namespace Alien.BLL.Services
             return JsonConvert.DeserializeObject<TalentFromJsonDto[]>(file.Trim())
                 .Where(t => t.Career.Equals(careerName) || t.Career.Equals("Général"))
                 .ToArray();
+        }
+
+        public TalentFromJsonDto GetTalent(string talentName, string careerName)
+        {
+            if (talentName is null) throw new ArgumentNullException(nameof(talentName));
+            if (careerName is null) throw new ArgumentNullException(nameof(careerName));
+            TalentFromJsonDto[] talents = GetTalentsFromJson(careerName);
+            return talents.FirstOrDefault(t => t.Name.Equals(talentName));
         }
 
         public CareerFromJsonDto GetCareer(string careerName)
