@@ -68,7 +68,7 @@ namespace Alien.UI.ViewModels
 
         public void OnDialogClosed()
         {
-            // TODO : Si le login est correct continuez, sinon éteindre
+
         }
 
         public void OnDialogOpened(IDialogParameters parameters)

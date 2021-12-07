@@ -81,7 +81,8 @@ namespace Alien.UI.Helpers
     public enum NotificationStatusEnum
     {
         Accepted,
-        Denied
+        Denied,
+        Pending
     }
 
     public enum CareerEnum

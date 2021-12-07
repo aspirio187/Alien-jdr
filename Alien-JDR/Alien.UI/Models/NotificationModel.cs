@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 
 namespace Alien.UI.Models
 {
-    public class NotificaitonModel : ModelBase
+    public class NotificationModel : ModelBase
     {
+        public int Id { get; set; }
+        public Guid HostId { get; set; }
         public string PartyName { get; set; }
-        public PartyModeEnum Mode { get; set; }
+        public string Mode { get; set; }
         public string PartyHost { get; set; }
         public DateTime SendAt { get; set; }
         public NotificationStatusEnum NotificationStatus { get; set; }
