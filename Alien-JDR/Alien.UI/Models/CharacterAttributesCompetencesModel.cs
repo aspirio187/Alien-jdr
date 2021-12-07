@@ -10,7 +10,7 @@ namespace Alien.UI.Models
 {
     public class CharacterAttributesCompetencesModel : ModelBase
     {
-        private int _strength;
+        private int _strength = 2;
 
         public int Strength
         {
@@ -22,7 +22,7 @@ namespace Alien.UI.Models
             }
         }
 
-        private int _agility;
+        private int _agility = 2;
 
         public int Agility
         {
@@ -34,7 +34,7 @@ namespace Alien.UI.Models
             }
         }
 
-        private int _mind;
+        private int _mind = 2;
 
         public int Mind
         {
@@ -46,7 +46,7 @@ namespace Alien.UI.Models
             }
         }
 
-        private int _empathy;
+        private int _empathy = 2;
 
         public int Empathy
         {

@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Alien.UI.ViewModels
 {
-    public class CharacterPublicInforsViewModel : ViewModelBase, IJournalAware
+    public class CharacterPublicInfosViewModel : ViewModelBase, IJournalAware
     {
         private readonly ICharacterService _characterService;
 
@@ -80,7 +80,7 @@ namespace Alien.UI.ViewModels
         public DelegateCommand NavigateBackCommand => _navigateBackCommand ??= new(NavigateBack);
         public DelegateCommand CreatePublicCharacterCommand => _createPublicCharacterCommand ??= new(CreatePublicCharacter);
 
-        public CharacterPublicInforsViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, ICharacterService characterService)
+        public CharacterPublicInfosViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, ICharacterService characterService)
             : base(regionNavigationService, authenticator)
         {
             _characterService = characterService ??

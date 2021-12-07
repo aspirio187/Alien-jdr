@@ -33,7 +33,11 @@ namespace Alien.UI.ViewModels
         public int AttributePoints
         {
             get { return _attributePoints; }
-            set { SetProperty(ref _attributePoints, value); }
+            set
+            {
+                SetProperty(ref _attributePoints, value);
+                NavigateNextPageCommand.RaiseCanExecuteChanged();
+            }
         }
 
         private int _competencePoints;
@@ -41,7 +45,11 @@ namespace Alien.UI.ViewModels
         public int CompetencePoints
         {
             get { return _competencePoints; }
-            set { SetProperty(ref _competencePoints, value); }
+            set
+            {
+                SetProperty(ref _competencePoints, value);
+                NavigateNextPageCommand.RaiseCanExecuteChanged();
+            }
         }
 
         private DelegateCommand<Attributes?> _increaseAttributeCommand;
@@ -56,7 +64,7 @@ namespace Alien.UI.ViewModels
         public DelegateCommand<Competences?> IncreaseCompetenceCommand => _increaseCompetenceCommand ??= new DelegateCommand<Competences?>(IncreaseCompetence, CanIncreaseCompetence);
         public DelegateCommand<Competences?> DecreaseCompetenceCommand => _decreaseCompetenceCommand ??= new DelegateCommand<Competences?>(DecreaseCompetence, CanDecreaseCompetence);
         public DelegateCommand NavigateBackCommand => _navigateBackCommand ??= new DelegateCommand(NavigateBack);
-        public DelegateCommand NavigateNextPageCommand => _navigateNextPageCommand ??= new DelegateCommand(NavigateNextPage);
+        public DelegateCommand NavigateNextPageCommand => _navigateNextPageCommand ??= new DelegateCommand(NavigateNextPage, CanNavigateNextPage);
 
         public CharacterAttributesCompetencesViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, ICharacterService characterService)
             : base(regionNavigationService, authenticator)
@@ -64,13 +72,14 @@ namespace Alien.UI.ViewModels
             _characterService = characterService ??
                 throw new ArgumentNullException(nameof(characterService));
 
-            AttributePoints = 14;
+            AttributePoints = 6;
             CompetencePoints = 10;
 
             IncreaseAttributeCommand.RaiseCanExecuteChanged();
             DecreaseAttributeCommand.RaiseCanExecuteChanged();
             IncreaseCompetenceCommand.RaiseCanExecuteChanged();
             DecreaseCompetenceCommand.RaiseCanExecuteChanged();
+            NavigateNextPageCommand.RaiseCanExecuteChanged();
         }
 
         public bool CanIncreaseAttributes(Attributes? attribute)
@@ -300,6 +309,11 @@ namespace Alien.UI.ViewModels
             {
                 _regionNavigationService.Journal.GoBack();
             }
+        }
+
+        public bool CanNavigateNextPage()
+        {
+            return AttributePoints == 0 && CompetencePoints == 0 && CharacterAttributesCompetences.IsValid;
         }
 
         public void NavigateNextPage()
