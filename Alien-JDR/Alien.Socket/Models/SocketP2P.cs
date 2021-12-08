@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Diagnostics;
 
 namespace Alien.Socket.Models
 {
-    public class SocketEmitor
+    public class SocketP2P
     {
+
+        private SocketRouter Router;
+
         private string ipv6;
         private int _hostPort;
         private IPHostEntry ipHost;
@@ -20,13 +24,13 @@ namespace Alien.Socket.Models
 
         private Message _reply = new Message("");
 
-        private SocketChanel chanels;
+        private SocketChanels chanels;
 
-        public SocketEmitor(int port, string? ipv6 = null)
+        public SocketP2P(int port, SocketRouter Router)
         {
+            this.Router = Router;
             this._hostPort = port;
-            this.ipv6 = ipv6;
-            this.chanels = new SocketChanel(this);
+            this.chanels = new SocketChanels(this);
         }
 
         public IPAddress IP()
@@ -34,11 +38,10 @@ namespace Alien.Socket.Models
             return this.ipAddr;
         }
 
-        public SocketEmitor Subscribe(string? ipv6 = null)
+        public SocketP2P Subscribe(string? ipv6 = null)
         {
             this.ipv6 = ipv6;
-            this.SendOn("subscribe", Dns.GetHostEntry(Dns.GetHostName()).AddressList[0].ToString());
-            return this;
+            return this.SendOn("subscribe", Dns.GetHostEntry(Dns.GetHostName()).AddressList[0].ToString());
         }
 
         /*
@@ -48,9 +51,37 @@ namespace Alien.Socket.Models
          */
         public void Infos()
         {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine((this.ipAddr == null ? $"socketEmitor is linked with unscribe:{11111}" : $"socketEmitor is linked with {this.ipAddr}:{11111}"));
-            Console.ResetColor();
+            Debug.WriteLine((this.ipAddr == null ? $"socketEmitor is linked with unscribe:{11111}" : $"socketEmitor is linked with {this.ipAddr}:{11111}"));
+        }
+
+        public bool IsIpOnLine(IPAddress IP)
+        {
+            System.Net.Sockets.Socket sender = new System.Net.Sockets.Socket(IP.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+
+            try
+            {
+                sender.Connect(new IPEndPoint(IP, 11111));
+                sender.Shutdown(SocketShutdown.Both);
+                sender.Close();
+                return true;
+            }
+            catch (ArgumentNullException ane)
+            {
+                this._OnError("ArgumentNullException", ane);
+                return false;
+            }
+
+            catch (SocketException se)
+            {
+                this._OnError("SocketException", se);
+                return false;
+            }
+
+            catch (Exception e)
+            {
+                this._OnError("Exception", e);
+                return false;
+            }
         }
 
         /*
@@ -60,7 +91,7 @@ namespace Alien.Socket.Models
          */
         public void Connect()
         {
-            this._connect();
+            this._connect(this.localEndPoint, this.sender);
         }
 
         /*
@@ -68,7 +99,7 @@ namespace Alien.Socket.Models
          * @{type}      public void
          * @{desc}      
          */
-        public SocketEmitor SendOn(string chanelName, string message)
+        public SocketP2P SendOn(string chanelName, string message)
         {
             return this.Send($"{{" +
                 $"\"eventTime\" : \"{(DateTime.Now - new DateTime(1970, 1, 1)).TotalMilliseconds.ToString()}\"," +
@@ -82,13 +113,32 @@ namespace Alien.Socket.Models
          * @{type}      public void
          * @{desc}      
          */
-        public SocketEmitor Send(string message)
+        public SocketP2P Send(string message)
         {
             this._setEndpoint();
             this._setSender();
-            this._connect();
-            this._execClient(message);
-            this._close();
+            this._connect(this.localEndPoint, this.sender);
+            this._execClient(this.sender, message);
+            this._close(this.sender);
+            return this;
+        }
+
+        public SocketP2P SendToOn(string IP, string chanelName, string message)
+        {
+            return this.SendTo(IP, $"{{" +
+                $"\"eventTime\" : \"{(DateTime.Now - new DateTime(1970, 1, 1)).TotalMilliseconds.ToString()}\"," +
+                $"\"chanel\" : \"{chanelName}\"," +
+                $"\"data\" : \"{message}\"" +
+                $"}}");
+        }
+
+        public SocketP2P SendTo(string IP, string message)
+        {
+            IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(IP), 11111);
+            System.Net.Sockets.Socket sender = new System.Net.Sockets.Socket(this.ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            this._connect(endPoint, sender);
+            this._execClient(sender, message);
+            this._close(sender);
             return this;
         }
 
@@ -112,7 +162,7 @@ namespace Alien.Socket.Models
             try
             {
                 if (this.isConnected == false) throw new InvalidCastException("Socket n'est pas connecter au point d'accès.");
-                this._close();
+                this._close(this.sender);
             }
             catch (InvalidCastException e)
             {
@@ -165,12 +215,12 @@ namespace Alien.Socket.Models
          * @{type}      private void
          * @{desc}      Connection du Socket au point de terminaison distant à l’aide de la méthode Connect()
          */
-        private void _connect()
+        private void _connect(IPEndPoint endpoint, System.Net.Sockets.Socket sender)
         {
             try
             {
-                this.sender.Connect(this.localEndPoint);
-                this._print("Socket connected to : " + this.sender.RemoteEndPoint.ToString()); // Nous imprimons des informations EndPoint à laquel nous sommes connectés
+                sender.Connect(endpoint);
+                this._print("Socket connected to : " + sender.RemoteEndPoint.ToString()); // Nous imprimons des informations EndPoint à laquel nous sommes connectés
                 this._switchConnectionState();
             }
             catch (ArgumentNullException ane)
@@ -194,26 +244,24 @@ namespace Alien.Socket.Models
          * @{type}      private void
          * @{desc}      Envois d'un message au serveur
          */
-        private void _send(string message)
+        private void _send(System.Net.Sockets.Socket sender, string message)
         {
-            int byteSent = this.sender.Send(this._normalize(message));
+            int byteSent = sender.Send(this._normalize(message));
         }
 
-        private string _Onmessage()
+        private string _Onmessage(System.Net.Sockets.Socket sender)
         {
             // Data buffer
             byte[] messageReceived = new byte[1024];
-            int byteRecv = this.sender.Receive(messageReceived);
+            int byteRecv = sender.Receive(messageReceived);
             return Encoding.ASCII.GetString(messageReceived, 0, byteRecv);
         }
 
         private void _print(string message)
         {
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write($"{this.ipHost.HostName} ");
-            Console.ResetColor();
-            Console.Write(message);
-            Console.WriteLine("");
+            Debug.Write($"{this.ipHost.HostName} ");
+            Debug.Write(message);
+            Debug.WriteLine("");
         }
 
         /*
@@ -222,13 +270,13 @@ namespace Alien.Socket.Models
          * @{desc}      Établissez le point de terminaison distant pour le socket. Cet exemple utilise le port 11111 sur l’ordinateur local.
          *              Modifie en interne les valeurs de ipHost , ipAddr , localEndPoint
          */
-        private void _execClient(string message)
+        private void _execClient(System.Net.Sockets.Socket sender, string message)
         {
             try
             {
                 if (this.isConnected == false) throw new InvalidCastException("Socket n'est pas connecter au point d'accès.");
-                this._send(message);
-                this._reply = new Message(this._Onmessage());
+                this._send(sender, message);
+                this._reply = new Message(this._Onmessage(sender));
                 this._print(this._reply.message);
             }
             catch (InvalidCastException e)
@@ -242,12 +290,12 @@ namespace Alien.Socket.Models
          * @{type}      private void
          * @{desc}      Close Socket à l’aide de la méthode Close()
          */
-        private void _close()
+        private void _close(System.Net.Sockets.Socket sender)
         {
             try
             {
-                this.sender.Shutdown(SocketShutdown.Both);
-                this.sender.Close();
+                sender.Shutdown(SocketShutdown.Both);
+                sender.Close();
                 this._switchConnectionState();
             }
             catch (SocketException e)
@@ -263,15 +311,13 @@ namespace Alien.Socket.Models
 
         private void _OnError(string? type, dynamic error)
         {
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write($"{this.ipHost.HostName}-");
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write($"{type} ");
-            Console.Write($"{error.StackTrace.Split("\\")[error.StackTrace.Split("\\").Length - 1].Split(":line")[0]}:");
-            Console.Write($"{error.StackTrace.Split(":line ")[error.StackTrace.Split(":line ").Length - 1]} ");
-            Console.ResetColor();
-            Console.Write($"{error.Message}");
-            Console.WriteLine("");
+            Debug.Write($"{this.ipHost.HostName}-");
+            Debug.Write($"{type} ");
+            Debug.Write($"{error.StackTrace.Split("\\")[error.StackTrace.Split("\\").Length - 1].Split(":line")[0]}:");
+            Debug.Write($"{error.StackTrace.Split(":line ")[error.StackTrace.Split(":line ").Length - 1]} ");
+            Debug.Write($"{error.Message}");
+            Debug.WriteLine("");
         }
+
     }
 }

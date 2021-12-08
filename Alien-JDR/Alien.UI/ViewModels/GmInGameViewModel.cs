@@ -19,18 +19,80 @@ namespace Alien.UI.ViewModels
         {
             SocketRouteur = new SocketRouter().Start();
 
-            SocketRouteur.SendOn(Global.CHANEL_PING, "Mon message");
+            /*InitialiseChanels();*/
 
         }
 
-        public void InitialiseChanels()
+        #region Fonctionalitée MJ
+        /// <summary>
+        /// Retourne un bool sur la présence des joueurs dans la partie.
+        /// </summary>
+        /// <returns></returns>
+        public bool PlayersIsConnected()
         {
-            SocketRouteur.On(Global.CHANEL_PING, ChanelPing);
+            return (SocketRouteur.GetDisconectedIp().Count > 0 ? true : false);
         }
 
-        public bool ChanelPing(dynamic cli, Message args)
+        /// <summary>
+        /// Retourne un tableau des IP de joueurs manquant.
+        /// </summary>
+        /// <returns></returns>
+        public List<System.Net.IPAddress> MissingPlayersIp()
         {
-            return true;
+            return SocketRouteur.GetDisconectedIp();
         }
+
+        /// <summary>
+        /// Retourne un PingAnalitics des joueurs.
+        /// </summary>
+        /// <returns></returns>
+        public PingAnalitics PlayersPing()
+        {
+            return SocketRouteur.Ping();
+        }
+
+        /// <summary>
+        /// MJ demande à un joueur ( IP ) de lancer le dé
+        /// </summary>
+        /// <returns></returns>
+        public void PlayerThrowDice(string IP)
+        {
+            SocketRouteur.SendToOn(IP, Global.PLAYER_THROW_DICE, "").OnReply(TreatPlayerThrowDice);
+        }
+
+        /// <summary>
+        /// CallBack traitant le résultat du lancer de dé du joueur
+        /// </summary>
+        /// <param name="cli"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        public void TreatPlayerThrowDice(dynamic cli, Message args)
+        {
+            // BACK : Appliquer les résultat du lancer
+
+        }
+        #endregion
+
+        #region Fonctionalitée Joueur
+        /// <summary>
+        /// Initialisation des chanel du Joueur
+        /// </summary>
+        public void InitialiseChanels_Joueur()
+        {
+            // Chanel qui vas recevoir l'instruction du lancer de dé.
+            SocketRouteur.On(Global.PLAYER_THROW_DICE, PLAYER_ThrowDice);
+        }
+
+        /// <summary>
+        /// CallBack permetant d'effectuer un lancé de dé et de comuniquer le résultat au MJ.
+        /// </summary>
+        /// <param name="cli"></param>
+        /// <param name="arg"></param>
+        /// <returns></returns>
+        public bool PLAYER_ThrowDice(dynamic cli, Message arg) {
+            /// BACK : Effectuer le lancement de dé afin de le communiquer au MJ
+            return cli.Reply("Résultat du lancement de dé");
+        }
+        #endregion
     }
 }

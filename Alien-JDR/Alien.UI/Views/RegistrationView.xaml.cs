@@ -38,5 +38,7 @@ namespace Alien.UI.Views
         {
             Application.Current.Shutdown();
         }
+
+      
     }
 }

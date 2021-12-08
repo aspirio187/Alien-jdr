@@ -4,13 +4,14 @@ using System.Text;
 
 namespace Alien.Socket.Models
 {
-    public class SocketChanel
+    class SocketChanels
     {
+
         private List<Func<dynamic, Message, bool>> callBacks = new List<Func<dynamic, Message, bool>>();
         private List<string> chanelsNames = new List<string>();
         private dynamic root;
 
-        public SocketChanel(dynamic root)
+        public SocketChanels(dynamic root)
         {
             this.root = root ?? throw new ArgumentNullException(nameof(root));
         }
@@ -86,5 +87,6 @@ namespace Alien.Socket.Models
         {
             this.callBacks[this._getIdFromName(message.chanel)](this.root, message);
         }
+
     }
 }

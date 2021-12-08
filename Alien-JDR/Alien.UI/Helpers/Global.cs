@@ -15,22 +15,9 @@ namespace Alien.UI.Helpers
         public const string CHARACTER_CREATION = "Creating Character";
 
 
-        /* Global */
-
-        public const string CHANEL_PING = "CPing";
-
-        /* Joueur */
-
-        /* Mj */
-
-        public const string MJ_CHANEL_PLAY = "Play";
-        public const string MJ_CHANEL_NEW_PLAYER = "NewPlayer";
-        public const string MJ_CHANEL_ADD_ITEM = "AddItem";
-        public const string MJ_CHANEL_REMOVE_ITEM = "RemoveItem";
-        public const string MJ_CHANEL_ADD_EQUIPEMENT = "AddEquipement";
-        public const string MJ_CHANEL_REMOVE_EQUIPEMENT = "RemoveEquipement";
-
+        /* CHANELS JOUEUR */
         public const string CHANEL_ADD_ITEM = "AddItem";
+        public const string PLAYER_THROW_DICE = "PlayerThrowDice";
 
         public static readonly Dictionary<Competences?, string> Competences = new()
         {

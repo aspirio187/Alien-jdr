@@ -9,8 +9,10 @@ using System.Diagnostics;
 
 namespace Alien.Socket.Models
 {
-    public class SocketCaptor
+
+    class SocketListener
     {
+        private SocketRouter Router;
         private int port;                   //
         private IPHostEntry ipHost;         //
         private IPAddress ipAddr;           //
@@ -22,9 +24,9 @@ namespace Alien.Socket.Models
 
         private int nbrUsers;               // nombre d'utilisateur max présent dans la liste Socket.Listen()
 
-        private SocketChanel chanels;
+        private SocketChanels chanels;
 
-        private SocketSubscription _subscriptions = new SocketSubscription();
+        public SocketSubscription subscriptions = new SocketSubscription();
 
         ////////////////////////
         /////////PUBLIC/////////
@@ -37,18 +39,18 @@ namespace Alien.Socket.Models
          *      int? {nbrUsers} peut être null . SI null, par défaut 10
          *      int? {port}     peut être null . SI null, par défaut 11111
          */
-        public SocketCaptor(int? nbrUsers = null, int? port = null)
+        public SocketListener(int port, SocketRouter Router)
         {
-            this.nbrUsers = (nbrUsers != null ? (int)nbrUsers : 10);
+            this.nbrUsers = 10;
             this.port = (port != null ? (int)port : 11111);
-            this.chanels = new SocketChanel(this);
+            this.chanels = new SocketChanels(this);
             this._setEndpoint();
             this._setListener();
             this._setHandlers();
             this.serverTask = new Task(this._execServer);
         }
 
-        public SocketChanel Chanels() { return this.chanels; }
+        public SocketChanels Chanels() { return this.chanels; }
 
         /*
          * @{name}      Infos
@@ -65,7 +67,7 @@ namespace Alien.Socket.Models
          * @{type}      public void
          * @{desc}      Permet de démarrer le serveur sur un thread.
          */
-        public SocketCaptor Start()
+        public SocketListener Start()
         {
             this.serverTask.Start();
             return this;
@@ -91,17 +93,17 @@ namespace Alien.Socket.Models
 
         public void Subscribe(string ipv6)
         {
-            this._subscriptions.Add(ipv6);
+            this.subscriptions.Add(ipv6);
         }
 
         public void Unsubscribe(string ipv6)
         {
-            this._subscriptions.Remove(ipv6);
+            this.subscriptions.Remove(ipv6);
         }
 
         public void OnError(string? type, dynamic error)
         {
-            _OnError(type, error);
+            this._OnError(type, error);
         }
 
         /*
@@ -125,12 +127,12 @@ namespace Alien.Socket.Models
 
         public void Emit(string message)
         {
-            this._subscriptions.SendToAll(this, message);
+            /*this.subscriptions.SendToAll(this, message);*/
         }
 
         public void EmitOn(string chanel, string message)
         {
-            this._subscriptions.SendToAllOn(this, chanel, message);
+            /*this.subscriptions.SendToAllOn(this, chanel, message);*/
         }
 
         ////////////////////////
@@ -163,7 +165,6 @@ namespace Alien.Socket.Models
         {
             Func<dynamic, Message, bool> Subscribe = (dynamic cli, Message arg) =>
             {
-
                 Debug.Write($"{this.ipHost.HostName}-");
                 Debug.Write((arg.chanel == null ? $"general" : $"{arg.chanel}"));
                 Debug.Write($" : {arg.message}");
@@ -182,7 +183,10 @@ namespace Alien.Socket.Models
 
             Func<dynamic, Message, bool> Ping = (dynamic cli, Message arg) =>
             {
-                return cli.Reply($"ping - {Encoding.UTF8.GetByteCount(arg.message).ToString()} byte recive in {(DateTime.Now - new DateTime(1970, 1, 1)).TotalMilliseconds - arg.eventTime} ms");
+                string messageBytes = Encoding.UTF8.GetByteCount(arg.message).ToString();
+                double delay = (DateTime.Now - new DateTime(1970, 1, 1)).TotalMilliseconds - arg.eventTime;
+                /*                this._print(new Message($"ping - {messageBytes} byte recive in {delay} ms"));*/
+                return cli.Reply(delay.ToString());
             };
 
             this.On("subscribe", Subscribe);
@@ -292,7 +296,7 @@ namespace Alien.Socket.Models
             this.clientSocket.Close();
         }
 
-        private void _OnError(string type, dynamic error)
+        private void _OnError(string? type, dynamic error)
         {
             Debug.Write($"{this.ipHost.HostName}-");
             Debug.Write($"{type} ");
@@ -301,5 +305,6 @@ namespace Alien.Socket.Models
             Debug.Write($" {error.Message}");
             Debug.WriteLine("");
         }
+
     }
 }
