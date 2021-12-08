@@ -7,6 +7,7 @@ namespace Alien.Socket.Models
 {
     public class Message
     {
+
         private string _eventTime;
         private string? _chanel = null;
         private string? _message = null;
@@ -31,9 +32,7 @@ namespace Alien.Socket.Models
         {
             try
             {
-
                 M m = JsonConvert.DeserializeObject<M>(message);
-                //M m = JsonSerializer.Deserialize<M>(message);
                 this._eventTime = m.eventTime;
                 this._chanel = m.chanel;
                 this._message = m.data;
