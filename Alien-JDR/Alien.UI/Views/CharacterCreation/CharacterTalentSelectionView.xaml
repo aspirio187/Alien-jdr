@@ -26,14 +26,14 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                                <RadioButton BorderBrush="Black" BorderThickness="1" Margin="5" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsSelected}">
+                                <RadioButton BorderBrush="White" BorderThickness="1" Margin="5" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsSelected}">
                                     <StackPanel>
-                                        <Expander Foreground="White" MaxWidth="280" Style="{StaticResource CustomFont}" FontSize="20">
+                                        <Expander Foreground="White" MaxWidth="280" Style="{StaticResource CustomFont}" FontSize="20" BorderBrush="White" BorderThickness="1">
                                             <Expander.Header>
-                                                <TextBlock Text="{Binding Name}" TextWrapping="Wrap" />
+                                                <TextBlock Text="{Binding Name}" TextWrapping="Wrap" FontSize="25" Style="{StaticResource CustomFont}" Width="200"/>
                                             </Expander.Header>
                                             <StackPanel>
-                                                <TextBlock Margin="10" FontSize="15" Text="{Binding Description}" TextWrapping="Wrap" />
+                                                <TextBlock Margin="10" FontSize="15" Text="{Binding Description}" TextWrapping="Wrap" Style="{StaticResource CustomFont}" Width="200" />
                                             </StackPanel>
                                         </Expander>
                                     </StackPanel>
@@ -61,13 +61,15 @@
                     Content="Retour" 
                     HorizontalAlignment="Left" 
                     Style="{StaticResource CustomFont}"
-                    Command="{Binding NavigateBackCommand}"/>
+                    Command="{Binding NavigateBackCommand}"
+                    FontSize="25"/>
             
             <Button Width="200" 
                     Height="40" 
                     Content="Suivant" 
                     Style="{StaticResource CustomFont}" HorizontalAlignment="Right" 
-                    Command="{Binding NavigateNextPageCommand}"/>
+                    Command="{Binding NavigateNextPageCommand}"
+                    FontSize="25"/>
         </DockPanel>
 
     </Grid>

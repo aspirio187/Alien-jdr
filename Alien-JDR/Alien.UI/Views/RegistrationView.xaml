@@ -52,7 +52,7 @@
                     VerticalAlignment="Top" 
                     HorizontalAlignment="Right"
                     Width="25" Height="25"
-/>
+                    Click="CloseButton_Click"/>
 
         </DockPanel>
 
