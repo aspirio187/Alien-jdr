@@ -7,6 +7,8 @@
         xmlns:behavior="http://schemas.microsoft.com/xaml/behaviors"
         prism:ViewModelLocator.AutoWireViewModel="True"
         xmlns:local="clr-namespace:Alien.UI.Views"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:global="clr-namespace:Alien.UI.Helpers"
         mc:Ignorable="d"
         Height="480" Width="640"
         ResizeMode="CanResizeWithGrip"
@@ -17,6 +19,11 @@
         Loaded="Window_Loaded" SizeChanged="Window_SizeChanged">
 
     <Grid>
+
+        <Grid.Resources>
+            <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
+        </Grid.Resources>
+        
         <Grid.Background>
             <ImageBrush ImageSource="pack://application:,,,/Images/alienMainUI.jpg"/>
         </Grid.Background>
@@ -90,16 +97,16 @@
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
-                             FontFamily="C:\Users\David\Source\Repos\Alien-jdr\Alien-JDR\Alien.UI\Fonts\Alenia.otf"
                              Command="{Binding GamesViewCommand}"/>
 
-            <RadioButton Content="Notifications"
-                        Height="50"
-                        Foreground="White"
-                        FontSize="14"
-                        Style="{StaticResource MenuButtonTheme}"
-                        FontFamily="Fonts/#Alenia"
-                        Command="{Binding NavigateNotificationCommand}"/>
+            <RadioButton Height="50" Command="{Binding NavigateNotificationCommand}">
+                <DockPanel>
+                    <Label Content="Notifications" Foreground="White" FontSize="14"  FontFamily="Fonts/#Alenia" />
+                    <iconPacks:PackIconMaterial Kind="Bell" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,25,0,0" Foreground="White" 
+                                                />
+                    <iconPacks:PackIconMaterial Kind="BellRing" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,25,0,0" Foreground="White" Visibility="Visible"/>
+                </DockPanel>
+            </RadioButton>
 
             <RadioButton Content="Manuel"
                         Height="50"
@@ -123,7 +130,7 @@
         <ContentControl Grid.Row="1" Grid.Column="1" Margin="5"
                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                         prism:RegionManager.RegionName="MainRegion">
-            
+
             <behavior:Interaction.Triggers>
                 <behavior:EventTrigger EventName="Loaded">
                     <prism:InvokeCommandAction Command="{Binding LoadCommand}"/>

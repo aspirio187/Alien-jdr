@@ -13,6 +13,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="SqlTableDependency" Version="8.5.8" />
     <PackageReference Include="Syncfusion.PdfViewer.WPF" Version="19.3.0.48" />
   </ItemGroup>
 

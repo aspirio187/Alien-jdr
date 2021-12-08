@@ -1,4 +1,5 @@
 ﻿using Alien.BLL.Dtos;
+using Alien.BLL.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace Alien.BLL.Interfaces
 {
     public interface INotificationService
     {
+        event EventHandler<NotificationEventArgs> OnNotificationReceived;
         Task<IEnumerable<NotificationDto>> GetNotificationAsync(Guid userId);
     }
 }

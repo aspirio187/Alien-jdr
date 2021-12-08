@@ -10,11 +10,15 @@ using Prism.Commands;
 using Alien.UI.Helpers;
 using Alien.UI.States;
 using Prism.Services.Dialogs;
+using TableDependency.SqlClient;
+using Alien.BLL.Interfaces;
+using Alien.BLL.Helpers;
 
 namespace Alien.UI.ViewModels
 {
     public class ShellViewModel : ViewModelBase
     {
+        private readonly INotificationService _notificationService;
         private readonly IRegionManager _regionManager;
         private readonly IDialogService _dialogService;
 
@@ -27,18 +31,28 @@ namespace Alien.UI.ViewModels
         public DelegateCommand NavigateCreditCommand => _navigateCreditCommand ??= new DelegateCommand(NavigateCredit);
         public override DelegateCommand LoadCommand => _loadCommand ??= new DelegateCommand(async () => await LoadAsync());
 
-        public ShellViewModel(IRegionManager regionManager, IDialogService dialogService, IRegionNavigationService regionNavigationService, IAuthenticator authenticator)
+        public ShellViewModel(IRegionManager regionManager, IDialogService dialogService, IRegionNavigationService regionNavigationService, IAuthenticator authenticator,
+            INotificationService notificationService)
             : base(regionNavigationService, authenticator)
         {
             _regionManager = regionManager ??
                 throw new ArgumentNullException(nameof(regionManager));
             _dialogService = dialogService ??
                 throw new ArgumentNullException(nameof(dialogService));
+            _notificationService = notificationService ??
+                throw new ArgumentNullException(nameof(notificationService));
+
+            _notificationService.OnNotificationReceived += Notification_Received;
+        }
+
+        private void Notification_Received(object sender, NotificationEventArgs e)
+        {
+            // TODO : Faire une action en cas de réception de la notification
         }
 
         protected override async Task LoadAsync()
         {
-            if(!await _authenticator.IsConnected())
+            if (!await _authenticator.IsConnected())
             {
                 _dialogService.ShowDialog("LoginView", null);
             }
