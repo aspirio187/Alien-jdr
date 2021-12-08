@@ -22,6 +22,14 @@ namespace Alien.UI.ViewModels
         private readonly IRegionManager _regionManager;
         private readonly IDialogService _dialogService;
 
+        private bool _notificationReceived;
+
+        public bool NotificationReceived
+        {
+            get { return _notificationReceived; }
+            set { SetProperty(ref _notificationReceived, value); }
+        }
+
         private DelegateCommand _navigateCharacterCommand;
         private DelegateCommand _navigateManuelCommand;
         private DelegateCommand _navigateCreditCommand;

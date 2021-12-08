@@ -8,11 +8,15 @@ using System.Windows.Data;
 
 namespace Alien.UI.Helpers
 {
-    public class InverseBoolConverter : IValueConverter
+    public class CombiningConverter : IValueConverter
     {
+        public IValueConverter Converter1 { get; set; }
+        public IValueConverter Converter2 { get; set; }
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return !(bool)value;
+            object converterValue = Converter1.Convert(value, targetType, parameter, culture);
+            return Converter2.Convert(converterValue, targetType, parameter, culture);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

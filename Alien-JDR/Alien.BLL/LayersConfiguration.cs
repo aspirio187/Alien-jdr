@@ -24,10 +24,12 @@ namespace Alien.BLL
             containerRegistry.RegisterScoped<IUserRepository, UserRepository>();
             containerRegistry.RegisterScoped<ITalentRepository, TalentRepository>();
             containerRegistry.RegisterScoped<ICharacterRepository, CharacterRepository>();
+            containerRegistry.RegisterScoped<INotificationRepository, NotificationRepository>();
 
             // Injection des services
             containerRegistry.RegisterScoped<IUserService, UserService>();
             containerRegistry.RegisterScoped<ICharacterService, CharacterService>();
+            containerRegistry.RegisterScoped<INotificationService, NotificationService>();
 
             return containerRegistry;
         }

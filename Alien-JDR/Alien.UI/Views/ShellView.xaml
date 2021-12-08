@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:prism="http://prismlibrary.com/"
         xmlns:behavior="http://schemas.microsoft.com/xaml/behaviors"
-        prism:ViewModelLocator.AutoWireViewModel="True"
         xmlns:local="clr-namespace:Alien.UI.Views"
-        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:global="clr-namespace:Alien.UI.Helpers"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        prism:ViewModelLocator.AutoWireViewModel="True"
         mc:Ignorable="d"
         Height="480" Width="640"
         ResizeMode="CanResizeWithGrip"
@@ -22,8 +22,10 @@
 
         <Grid.Resources>
             <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
+            <global:InverseBoolConverter x:Key="InverseBoolConverter" />
+            <global:CombiningConverter x:Key="CombiningConverter" Converter1="{StaticResource InverseBoolConverter}" Converter2="{StaticResource BooleanToVisibilityConverter}" />
         </Grid.Resources>
-        
+
         <Grid.Background>
             <ImageBrush ImageSource="pack://application:,,,/Images/alienMainUI.jpg"/>
         </Grid.Background>
@@ -101,10 +103,11 @@
 
             <RadioButton Height="50" Command="{Binding NavigateNotificationCommand}">
                 <DockPanel>
-                    <Label Content="Notifications" Foreground="White" FontSize="14"  FontFamily="Fonts/#Alenia" />
-                    <iconPacks:PackIconMaterial Kind="Bell" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,25,0,0" Foreground="White" 
-                                                />
-                    <iconPacks:PackIconMaterial Kind="BellRing" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,25,0,0" Foreground="White" Visibility="Visible"/>
+                    <Label Content="Notifications" Foreground="White" FontSize="14"  FontFamily="Fonts/#Alenia" VerticalContentAlignment="Center" />
+                    <iconPacks:PackIconMaterial Kind="Bell" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="White" 
+                                                Visibility="{Binding NotificationReceived, Converter={StaticResource CombiningConverter}}"/>
+                    <iconPacks:PackIconMaterial Kind="BellRing" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="White" 
+                                                Visibility="{Binding NotificationReceived, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                 </DockPanel>
             </RadioButton>
 
