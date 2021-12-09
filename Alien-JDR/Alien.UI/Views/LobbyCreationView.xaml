@@ -90,14 +90,6 @@
 
         </DataGrid>
 
-        <StackPanel Grid.Row="8" 
-                    Grid.Column="1" 
-                    Margin="10" 
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center">
-
-            <Button Width="200" Height="40" Content="Suivant"   Style="{StaticResource CustomFont}"/>
-        </StackPanel>
+        <Button Grid.Row="6" Content="Demarrer" Style="{StaticResource CustomFont}" Width="200" Height="40" Margin="10" HorizontalAlignment="Right"/>
     </Grid>
 </ContentControl>
