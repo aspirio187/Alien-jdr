@@ -31,8 +31,8 @@ namespace Alien.DAL.Configurations
                 .OnDelete(DeleteBehavior.NoAction);
             // TODO : A verif ; il faut récup les diff players de la même party, voir si cest bien encodé dans user entity et party entity etc
 
-            builder.HasOne(p => p.Party)
-                .WithOne()
+            builder.HasOne(pp => pp.Party)
+                .WithMany(p => p.PartyPlayers)
                 .IsRequired(true)
                 .OnDelete(DeleteBehavior.NoAction);
 

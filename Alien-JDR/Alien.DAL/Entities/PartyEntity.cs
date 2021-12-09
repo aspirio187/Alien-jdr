@@ -18,7 +18,7 @@ namespace Alien.DAL.Entities
 
         public ICollection<NotificationEntity> Notifications { get; set; }
 
-        //public ICollection<PartyPlayersEntity> PartyPlayers { get; set; }
+        public ICollection<PartyPlayersEntity> PartyPlayers { get; set; }
         // TODO : ADD Partyplayers( many, required false ), creator ( unique et required ) 
     }
 }

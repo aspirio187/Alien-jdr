@@ -31,12 +31,8 @@ namespace Alien.DAL.Configurations
                 .IsRequired()
                 .HasMaxLength(50);
 
-// TODO : ADD les bools
-
-            //builder.HasOne(x => x.Creator);
-
-            //builder.HasMany(x => x.PartyPlayers)
-            //    .WithOne(x => x.Party);        .WithMany x players ?          
+            builder.HasMany(p => p.PartyPlayers)
+                .WithOne(pp => pp.Party);
         }
     }
 }
