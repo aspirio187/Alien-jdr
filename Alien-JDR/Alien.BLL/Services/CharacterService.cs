@@ -62,12 +62,21 @@ namespace Alien.BLL.Services
 
             try
             {
-                CharacterEntity createdCharacter = _characterRepository.Create(characterToCreate);
-                CharacterEntity editableCharacter = new CharacterEntity(createdCharacter);
-                editableCharacter.IsEditable = true;
-                CharacterEntity createdEditableCharacter = _characterRepository.Create(editableCharacter);
-                if (createdCharacter is null) return false;
-                if (editableCharacter is null) return false;
+                if(!await _characterRepository.CharacterExistAsync(characterToCreate.IdentificationStamp))
+                {
+                    CharacterEntity createdCharacter = _characterRepository.Create(characterToCreate);
+                    CharacterEntity editableCharacter = new CharacterEntity(createdCharacter);
+                    editableCharacter.IsEditable = true;
+                    CharacterEntity createdEditableCharacter = _characterRepository.Create(editableCharacter);
+                    if (createdCharacter is null) return false;
+                    if (editableCharacter is null) return false;
+                }
+                else
+                {
+                    characterToCreate.IsPublic = true;
+                    CharacterEntity createdCharacter = _characterRepository.Create(characterToCreate);
+                    if (createdCharacter is null) return false;
+                }
 
                 return _characterRepository.SaveChanges();
             }

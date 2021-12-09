@@ -17,6 +17,11 @@ namespace Alien.DAL.Repositories
 
         }
 
+        public async Task<bool> CharacterExistAsync(Guid idStamp)
+        {
+            return await _context.Characters.AnyAsync(c => c.IdentificationStamp == idStamp);
+        }
+
         public async Task<IEnumerable<CharacterEntity>> GetUserCharactersAsync(Guid userId)
         {
             if (userId == Guid.Empty) throw new ArgumentException($"User ID \"{userId}\" is empty!");
