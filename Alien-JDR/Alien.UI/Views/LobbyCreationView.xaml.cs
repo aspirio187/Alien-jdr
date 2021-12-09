@@ -18,9 +18,9 @@ namespace Alien.UI.Views
     /// <summary>
     /// Interaction logic for GameCreationView.xaml
     /// </summary>
-    public partial class GameCreationView : ContentControl
+    public partial class LobbyCreationView : ContentControl
     {
-        public GameCreationView()
+        public LobbyCreationView()
         {
             InitializeComponent();
         }

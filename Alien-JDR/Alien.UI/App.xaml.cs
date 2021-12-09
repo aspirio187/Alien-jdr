@@ -36,6 +36,7 @@ namespace Alien.UI
             containerRegistry.RegisterForNavigation<ManuelView>();
             containerRegistry.RegisterForNavigation<CreditView>();
 
+            // Character views
             containerRegistry.RegisterForNavigation<CharactersView>();
             containerRegistry.RegisterForNavigation<CharacterCareerSelectionView>();
             containerRegistry.RegisterForNavigation<CharacterInfosCreationView>();
@@ -44,6 +45,10 @@ namespace Alien.UI
             containerRegistry.RegisterForNavigation<CharacterAndroidCreationView>();
             containerRegistry.RegisterForNavigation<CharacterCreationSummaryView>();
             containerRegistry.RegisterForNavigation<CharacterPublicInfosView>();
+
+            // Lobby View
+            containerRegistry.RegisterForNavigation<LobbiesView>();
+            containerRegistry.RegisterForNavigation<LobbyCreationView>();
 
         }
     }
