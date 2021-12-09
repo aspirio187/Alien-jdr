@@ -28,7 +28,7 @@
             <Label Style="{StaticResource CustomFont}" 
                    Content="Creer/Choisir un personnage"
                    Foreground="White"
-                   FontSize="30"
+                   FontSize="40"
                    HorizontalAlignment="Center"/>
         </StackPanel>
 
@@ -50,7 +50,7 @@
             </ItemsControl.ItemsPanel>
         </ItemsControl>
 
-        <Button Grid.Row="2" Content="creer un personnage" Style="{StaticResource CustomFont}" Height="50" Width="200" Margin="10" 
+        <Button Grid.Row="2" Content="creer un personnage" FontSize="25" Style="{StaticResource CustomFont}" Height="80" Width="350" Margin="10" 
                 Command="{Binding NavigateCreateCharacterCommand}" />
 
     </Grid>

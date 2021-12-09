@@ -10,18 +10,16 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
-
         </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         
-        
-        <StackPanel Grid.Row="0" 
+        <StackPanel Grid.Row="0"  Grid.ColumnSpan="2"
                     Orientation="Horizontal"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
@@ -36,9 +34,9 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" 
-                    HorizontalAlignment="Center" 
+                    HorizontalAlignment="Right" 
                     VerticalAlignment="Center"
-                    Margin="0,0">
+                    Margin="0,0,50,0">
             <TextBlock Style="{StaticResource CustomFont}"
                        Foreground="White"
                        FontSize="20">
@@ -48,10 +46,12 @@
             </TextBlock>
         </StackPanel>
 
-        <StackPanel Grid.Row="2" 
+        <StackPanel Grid.Row="1"
+                    Grid.Column="1"
                     Orientation="Horizontal" 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center">
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Center"
+                    >
             <TextBlock FontFamily="Comic Sans MS"
                        Foreground="White"
                        FontSize="15"
@@ -63,10 +63,11 @@
         </StackPanel>
 
 
-        <StackPanel Grid.Row="3" 
+        <StackPanel Grid.Row="2" 
                     Orientation="Horizontal" 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center">
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Center"
+                    Margin="0,0,50,0">
             
             <TextBlock Style="{StaticResource CustomFont}"
                        Foreground="White"
@@ -78,10 +79,11 @@
             </TextBlock>
         </StackPanel>
 
-        <StackPanel Grid.Row="4" 
+        <StackPanel Grid.Row="2" 
                     Orientation="Horizontal" 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center">
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Center"
+                    Grid.Column="1">
             
             <TextBlock FontFamily="Comic Sans MS"
                        Foreground="White"
@@ -100,10 +102,11 @@
             </TextBlock>
         </StackPanel>
 
-        <StackPanel Grid.Row="5" 
+        <StackPanel Grid.Row="3" 
                     Orientation="Horizontal" 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center">
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Center"
+                    Margin="0,0,50,0">
             
             <TextBlock Style="{StaticResource CustomFont}"
                        Foreground="White"
@@ -115,10 +118,11 @@
             </TextBlock>
         </StackPanel>
 
-        <StackPanel Grid.Row="6" 
+        <StackPanel Grid.Row="3" 
                     Orientation="Horizontal"
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center">
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Center"
+                    Grid.Column="1">
             
             <TextBlock FontFamily="Comic Sans MS"
                        Foreground="White"

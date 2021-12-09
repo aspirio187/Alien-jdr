@@ -27,7 +27,7 @@
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type ListBoxItem}">
                                 <RadioButton BorderBrush="White" BorderThickness="1" Margin="5" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsSelected}">
-                                    <StackPanel>
+                                    <StackPanel Width="250" Height="350">
                                         <Expander Foreground="White" MaxWidth="280" Style="{StaticResource CustomFont}" FontSize="20" BorderBrush="White" BorderThickness="1">
                                             <Expander.Header>
                                                 <TextBlock Text="{Binding Name}" TextWrapping="Wrap" FontSize="25" Style="{StaticResource CustomFont}" Width="200"/>

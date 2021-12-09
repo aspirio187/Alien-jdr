@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:prism="http://prismlibrary.com/"
              xmlns:local="clr-namespace:Alien.UI.Views"
-             xmlns:global="clr-namespace:Alien.UI.Helpers"
-             prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:global="clr-namespace:Alien.UI.Helpers" xmlns:iconPack="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Material"
+                prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d">
     <Grid>
         <Grid.Resources>
@@ -29,20 +29,22 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="Fiche public" Style="{StaticResource CustomFont}" Foreground="white" FontSize="25"
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="Fiche public" Style="{StaticResource CustomFont}" Foreground="white" FontSize="40"
                    Margin="10" HorizontalAlignment="Center" />
 
-        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="Informations" Style="{StaticResource CustomFont}" Foreground="White" FontSize="22"
+        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Text="Informations" Style="{StaticResource CustomFont}" Foreground="White" FontSize="30"
                    Margin="5" HorizontalAlignment="Center" />
 
         <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
 
             <RadioButton Margin="10" IsChecked="{Binding Race, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static global:RaceEnum.Humain}}" >
-                <Label Content="Humain" Style="{StaticResource CustomFont}" Foreground="White" FontSize="20"/>
+                <iconPack:PackIconMaterial Kind="Human" Foreground="White"
+                                            VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="100" />
             </RadioButton>
 
             <RadioButton Margin="10" IsChecked="{Binding Race, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static global:RaceEnum.Android}}" >
-                <Label Content="Android" Style="{StaticResource CustomFont}" Foreground="White" FontSize="20" />
+                <iconPack:PackIconMaterial Kind="Robot" Foreground="White"
+                                            VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="100"/>
             </RadioButton>
         </StackPanel>
 
@@ -62,11 +64,11 @@
         </StackPanel>
 
         <StackPanel Grid.Row="4" Grid.Column="1">
-            <TextBlock Text="Caracteristiques" Style="{StaticResource CustomFont}" Foreground="White" FontSize="22" HorizontalAlignment="Center" />
+            <TextBlock Text="Caracteristiques" Style="{StaticResource CustomFont}" Foreground="White" FontSize="30" HorizontalAlignment="Center" />
         </StackPanel>
         
         <DockPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" LastChildFill="False">
-            <StackPanel DockPanel.Dock="Left">
+            <StackPanel DockPanel.Dock="Left" Margin="20">
                 <TextBlock Text="Attributs" Style="{StaticResource CustomFont}" Foreground="White" FontSize="22" HorizontalAlignment="Center" Margin="10" />
                 <StackPanel>
                     <DockPanel>
@@ -175,7 +177,7 @@
                 </StackPanel>
             </StackPanel>
 
-            <StackPanel DockPanel.Dock="Right">
+            <StackPanel DockPanel.Dock="Right" Margin="20">
                 <TextBlock Text="competences" Style="{StaticResource CustomFont}" Foreground="White" FontSize="20" HorizontalAlignment="Center" Margin="10" />
 
                 <DockPanel>

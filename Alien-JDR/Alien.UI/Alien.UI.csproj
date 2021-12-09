@@ -5,6 +5,8 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <StartupObject>Alien.UI.App</StartupObject>
+    <ApplicationIcon>Aaron-Sinuhe-Tv-Movie-Folder-Alien-1.ico</ApplicationIcon>
+    <Win32Resource />
   </PropertyGroup>
 
   <ItemGroup>

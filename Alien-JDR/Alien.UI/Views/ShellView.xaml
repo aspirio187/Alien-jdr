@@ -16,7 +16,8 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         MinHeight="600" MinWidth="400" 
-        Loaded="Window_Loaded" SizeChanged="Window_SizeChanged">
+        Loaded="Window_Loaded" SizeChanged="Window_SizeChanged"
+        WindowState="Maximized">
 
     <Grid>
 
