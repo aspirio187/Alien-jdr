@@ -12,6 +12,7 @@ namespace Alien.BLL.Interfaces
         Task<IEnumerable<CharacterMiniatureDto>> GetCharactersMiniaturesAsync(Guid userId);
         Task<bool> CreateCharacter(CharacterCreationDto character, Guid userId);
         Task<bool> DeleteCharacter(int characterId);
+        Task<bool> DeleteCharacter(Guid idStamp);
         CareerFromJsonDto[] GetCareersFromJson();
         TalentFromJsonDto[] GetTalentsFromJson(string careerName);
         CareerFromJsonDto GetCareer(string careerName);
