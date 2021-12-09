@@ -7,11 +7,17 @@
                 xmlns:behavior="http://schemas.microsoft.com/xaml/behaviors"
                 prism:ViewModelLocator.AutoWireViewModel="True"
                 xmlns:local="clr-namespace:Alien.UI.Views" 
+                xmlns:global="clr-namespace:Alien.UI.Helpers"
                 mc:Ignorable="d" 
                 d:DesignHeight="450" d:DesignWidth="800"
                 Background="Black">
 
     <Grid>
+
+        <Grid.Resources>
+            <global:Base64ImageConverter x:Key="Base64ImageConverter" />
+        </Grid.Resources>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
@@ -25,7 +31,34 @@
                    HorizontalAlignment="Center"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <WrapPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+            <!--<ListView ItemsSource="{Binding CharacterMiniatures}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Button Background="Black" Height="80" Width="100" Margin="10" Command="{Binding NavigateToCharacterCommand}" CommandParameter="{Binding Id}">
+                            <StackPanel Background="Transparent">
+                                <Image Source="{Binding Image, Converter={StaticResource Base64ImageConverter}}" />
+                                <TextBlock Text="{Binding Name}" />
+                            </StackPanel>
+                        </Button>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>-->
+
+            <ItemsControl ItemsSource="{Binding CharacterMiniatures}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Background="Black" Height="80" Width="100" Margin="10" Command="{Binding NavigateToCharacterCommand}" CommandParameter="{Binding Id}">
+                            <StackPanel Background="Transparent">
+                                <Image Source="{Binding Image, Converter={StaticResource Base64ImageConverter}}" />
+                                <TextBlock Text="{Binding Name}" />
+                            </StackPanel>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate> 
+            </ItemsControl>
+           
 
             <Button Background="Black" Height="80" Width="100" Margin="10" Command="{Binding NavigateCreateCharacterCommand}">
                 <StackPanel Orientation="Horizontal" 
@@ -36,9 +69,15 @@
                     <Image Source="pack://application:,,,/Images/Create.jpg"/>
                 </StackPanel>
             </Button>
-           
-        </StackPanel>
+
+        </WrapPanel>
 
     </Grid>
+
+    <behavior:Interaction.Triggers>
+        <behavior:EventTrigger EventName="Loaded">
+            <prism:InvokeCommandAction Command="{Binding LoadCommand}"/>
+        </behavior:EventTrigger>
+    </behavior:Interaction.Triggers>
 
 </ContentControl>

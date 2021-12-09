@@ -28,7 +28,7 @@ namespace Alien.DAL.Configurations
             builder.HasOne(p => p.User)
                 .WithMany(c => c.LobbyPlayers)
                 .IsRequired(true)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(pp => pp.Party)
                 .WithMany(p => p.PartyPlayers)

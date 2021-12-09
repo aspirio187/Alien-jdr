@@ -17,13 +17,20 @@ namespace Alien.UI.ViewModels
     {
         private readonly ICharacterService _characterService;
 
-        public override DelegateCommand LoadCommand => _loadCommand ??= new(async () => await LoadAsync());
-
         private DelegateCommand _navigateCreateCharacterCommand;
 
-        public DelegateCommand NavigateCreateCharacterCommand => _navigateCreateCharacterCommand ??= new DelegateCommand(NavigateCreateCharacter);
+        //public ObservableCollection<CharacterMiniatureDto> CharacterMiniatures { get; set; }
+        private ObservableCollection<CharacterMiniatureDto> _characterMiniatures;
 
-        public ObservableCollection<CharacterMiniatureDto> CharacterMiniatures { get; set; }
+        public ObservableCollection<CharacterMiniatureDto> CharacterMiniatures
+        {
+            get { return _characterMiniatures; }
+            set {SetProperty(ref _characterMiniatures, value); }
+        }
+
+
+        public override DelegateCommand LoadCommand => _loadCommand ??= new(async () => await LoadAsync());
+        public DelegateCommand NavigateCreateCharacterCommand => _navigateCreateCharacterCommand ??= new DelegateCommand(NavigateCreateCharacter);
 
         public CharactersViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, ICharacterService characterService)
             : base(regionNavigationService, authenticator)

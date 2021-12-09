@@ -98,7 +98,7 @@ namespace Alien.BLL.Services
         {
             if (userId == Guid.Empty) throw new ArgumentException($"The user ID \"{userId}\" is empty!");
             IEnumerable<CharacterEntity> charactersFromRepo = await _characterRepository.GetUserCharactersAsync(userId);
-            return _mapper.Map<IEnumerable<CharacterMiniatureDto>>(charactersFromRepo);
+            return _mapper.Map<IEnumerable<CharacterMiniatureDto>>(charactersFromRepo.Where(c => c.IsEditable));
         }
 
         public CareerFromJsonDto[] GetCareersFromJson()

@@ -21,15 +21,22 @@ namespace Alien.BLL
             containerRegistry.RegisterScoped<AlienContext>();
 
             // Injection des Repository
-            containerRegistry.RegisterScoped<IUserRepository, UserRepository>();
-            containerRegistry.RegisterScoped<ITalentRepository, TalentRepository>();
             containerRegistry.RegisterScoped<ICharacterRepository, CharacterRepository>();
+            containerRegistry.RegisterScoped<IEquipmentRepository, EquipmentRepository>();
+            containerRegistry.RegisterScoped<ILobbyPlayerRepository, LobbyPlayerRepository>();
+            containerRegistry.RegisterScoped<ILobbyRepository, LobbyRepository>();
             containerRegistry.RegisterScoped<INotificationRepository, NotificationRepository>();
+            containerRegistry.RegisterScoped<IRoleRepository, RoleRepository>();
+            containerRegistry.RegisterScoped<ITalentRepository, TalentRepository>();
+            containerRegistry.RegisterScoped<IUserRepository, UserRepository>();
+            containerRegistry.RegisterScoped<IWoundRepository, WoundRepository>();
+
 
             // Injection des services
-            containerRegistry.RegisterScoped<IUserService, UserService>();
             containerRegistry.RegisterScoped<ICharacterService, CharacterService>();
+            containerRegistry.RegisterScoped<ILobbyService, LobbyService>();
             containerRegistry.RegisterScoped<INotificationService, NotificationService>();
+            containerRegistry.RegisterScoped<IUserService, UserService>();
 
             return containerRegistry;
         }
