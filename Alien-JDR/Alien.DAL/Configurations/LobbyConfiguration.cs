@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Alien.DAL.Configurations
 {
-    public class PartyConfiguration : IEntityTypeConfiguration<PartyEntity>
+    public class LobbyConfiguration : IEntityTypeConfiguration<LobbyEntity>
     {
-        public void Configure(EntityTypeBuilder<PartyEntity> builder)
+        public void Configure(EntityTypeBuilder<LobbyEntity> builder)
         {
             builder.Property(x => x.Name)
                 .IsRequired(true)

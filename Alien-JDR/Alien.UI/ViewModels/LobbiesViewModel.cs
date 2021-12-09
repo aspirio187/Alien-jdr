@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Alien.UI.ViewModels
 {
-    public class GamesViewModel : ViewModelBase
+    public class LobbiesViewModel : ViewModelBase
     {
         public override DelegateCommand LoadCommand => _loadCommand ??= new DelegateCommand(async () => await LoadAsync());
 
-        public GamesViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator)
+        public LobbiesViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator)
             : base(regionNavigationService, authenticator)
         {
 

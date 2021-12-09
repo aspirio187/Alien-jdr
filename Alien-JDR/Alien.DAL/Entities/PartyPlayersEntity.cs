@@ -14,7 +14,7 @@ namespace Alien.DAL.Entities
         public UserEntity User { get; set; }
 
         public int PartyId { get; set; }
-        public PartyEntity Party { get; set; }
+        public LobbyEntity Party { get; set; }
 
         public int CharacterId { get; set; }
         public CharacterEntity Character { get; set; }

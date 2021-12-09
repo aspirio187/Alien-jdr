@@ -12,7 +12,7 @@ namespace Alien.DAL
     public class AlienContext : DbContext
     {
         public DbSet<UserEntity> Users { get; set; }
-        public DbSet<PartyEntity> Parties { get; set; }
+        public DbSet<LobbyEntity> Parties { get; set; }
         public DbSet<CharacterEntity> Characters { get; set; }
         public DbSet<PartyPlayersEntity> PartyPlayers { get; set; }
         public DbSet<RoleEntity> Roles { get; set; }
@@ -41,7 +41,7 @@ namespace Alien.DAL
             modelBuilder.ApplyConfiguration(new EquipmentConfiguration());
             modelBuilder.ApplyConfiguration(new ItemConfiguration());
             modelBuilder.ApplyConfiguration(new NotificationConfiguration());
-            modelBuilder.ApplyConfiguration(new PartyConfiguration());
+            modelBuilder.ApplyConfiguration(new LobbyConfiguration());
             modelBuilder.ApplyConfiguration(new PartyPlayersConfiguration());
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
             modelBuilder.ApplyConfiguration(new TalentConfiguration());
