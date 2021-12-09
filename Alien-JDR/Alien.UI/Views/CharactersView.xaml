@@ -32,8 +32,9 @@
                    HorizontalAlignment="Center"/>
         </StackPanel>
 
-        <ItemsControl Grid.Row="1" ItemsSource="{Binding CharacterMiniatures}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-            <ItemsControl.ItemTemplate>
+        <ListView Grid.Row="1" ItemsSource="{Binding CharacterMiniatures}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+            <ListView.ItemTemplate>
                 <DataTemplate>
                     <Button Background="Black" Height="320" Width="250" Margin="10" Command="{Binding NavigateToCharacterCommand}" CommandParameter="{Binding Id}">
                         <StackPanel Background="Transparent">
@@ -42,13 +43,13 @@
                         </StackPanel>
                     </Button>
                 </DataTemplate>
-            </ItemsControl.ItemTemplate>
-            <ItemsControl.ItemsPanel>
+            </ListView.ItemTemplate>
+            <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
                 </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
+            </ListView.ItemsPanel>
+        </ListView>
 
         <Button Grid.Row="2" Content="creer un personnage" FontSize="25" Style="{StaticResource CustomFont}" Height="80" Width="350" Margin="10" 
                 Command="{Binding NavigateCreateCharacterCommand}" />
