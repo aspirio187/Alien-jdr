@@ -101,15 +101,16 @@
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding GamesViewCommand}"/>
 
-            <RadioButton Height="50" Command="{Binding NavigateNotificationCommand}">
-                <DockPanel>
-                    <Label Content="Notifications" Foreground="White" FontSize="14"  FontFamily="Fonts/#Alenia" VerticalContentAlignment="Center" />
-                    <iconPacks:PackIconMaterial Kind="Bell" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="White" 
-                                                Visibility="{Binding NotificationReceived, Converter={StaticResource CombiningConverter}}"/>
-                    <iconPacks:PackIconMaterial Kind="BellRing" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="White" 
-                                                Visibility="{Binding NotificationReceived, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                </DockPanel>
+            <RadioButton Content="Notification"
+                         FontSize="14"
+                         Foreground="White"
+                         Style="{StaticResource MenuButtonTheme}"
+                         Height="50" 
+                         Command="{Binding NavigateNotificationCommand}">
+
             </RadioButton>
+
+
 
             <RadioButton Content="Manuel"
                         Height="50"
@@ -129,6 +130,11 @@
 
         </StackPanel>
 
+        <iconPacks:PackIconMaterial Kind="Bell" Foreground="White" 
+                                                Visibility="{Binding NotificationReceived, Converter={StaticResource CombiningConverter}}" Margin="153,140,0,0" Grid.Row="1"/>
+        <iconPacks:PackIconMaterial Kind="BellRing" Foreground="White" 
+                                                Visibility="{Binding NotificationReceived, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="174,140,0,0" Grid.Row="1"/>
+
 
         <ContentControl Grid.Row="1" Grid.Column="1" Margin="5"
                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
@@ -140,6 +146,8 @@
                 </behavior:EventTrigger>
             </behavior:Interaction.Triggers>
         </ContentControl>
+
+
     </Grid>
 </Window>
     
