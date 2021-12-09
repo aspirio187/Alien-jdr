@@ -91,7 +91,7 @@
                         <Button Content="+3" FontWeight="Bold" FontSize="15" Width="40" Height="40" HorizontalAlignment="Center" Margin="10"
                                 Command="{Binding SelectAttributeCommand}" CommandParameter="{x:Static global:Attributes.Force}" />
                         
-                        <CheckBox IsEnabled="True" IsChecked="{Binding SelectedAttributes[0]}" HorizontalAlignment="Center" />
+                        <CheckBox IsEnabled="False" IsChecked="{Binding SelectedAttributes[0]}" HorizontalAlignment="Center" />
                     </DockPanel>
                     <DockPanel>
 
@@ -115,7 +115,7 @@
                         <Button Content="+3" FontWeight="Bold" FontSize="15" Width="40" Height="40" HorizontalAlignment="Center" Margin="10"
                                 Command="{Binding SelectAttributeCommand}" CommandParameter="{x:Static global:Attributes.Agilité}" />
                         
-                        <CheckBox IsEnabled="True" IsChecked="{Binding SelectedAttributes[0]}" HorizontalAlignment="Center" />
+                        <CheckBox IsEnabled="False" IsChecked="{Binding SelectedAttributes[1]}" HorizontalAlignment="Center" />
                     </DockPanel>
                     
                     <DockPanel>
@@ -139,7 +139,7 @@
                         <Button Content="+3" FontWeight="Bold" FontSize="15" Width="40" Height="40" HorizontalAlignment="Center" Margin="10"
                                 Command="{Binding SelectAttributeCommand}" CommandParameter="{x:Static global:Attributes.Esprit}" />
 
-                        <CheckBox IsEnabled="True" IsChecked="{Binding SelectedAttributes[0]}" HorizontalAlignment="Center" />
+                        <CheckBox IsEnabled="False" IsChecked="{Binding SelectedAttributes[2]}" HorizontalAlignment="Center" />
                     </DockPanel>
                     
                     <DockPanel>
@@ -164,7 +164,7 @@
                         <Button Content="+3" FontWeight="Bold" FontSize="15" Width="40" Height="40" HorizontalAlignment="Center" Margin="10"
                                 Command="{Binding SelectAttributeCommand}" CommandParameter="{x:Static global:Attributes.Empathie}" />
                         
-                        <CheckBox IsEnabled="True" IsChecked="{Binding SelectedAttributes[0]}" HorizontalAlignment="Center" />
+                        <CheckBox IsEnabled="False" IsChecked="{Binding SelectedAttributes[3]}" HorizontalAlignment="Center" />
                     </DockPanel>
 
                     <DockPanel HorizontalAlignment="Right" Margin="10">

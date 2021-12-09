@@ -17,7 +17,7 @@ namespace Alien.UI.ViewModels
     {
         private readonly ICharacterService _characterService;
 
-        private CharacterCreationDto _characterCreation;
+        private CharacterCreationDto _characterCreation = new();
 
         public CharacterCreationDto CharacterCreation
         {
@@ -86,6 +86,7 @@ namespace Alien.UI.ViewModels
         {
             base.OnNavigatedTo(navigationContext);
 
+            CharacterCreation = new();
             CharacterCreation = navigationContext.Parameters.GetValue<CharacterCreationDto>(Global.CHARACTER_CREATION);
             if (CharacterCreation is not null && !string.IsNullOrEmpty(CharacterCreation.Career))
             {

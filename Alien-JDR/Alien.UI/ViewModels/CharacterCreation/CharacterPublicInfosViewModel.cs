@@ -35,8 +35,35 @@ namespace Alien.UI.ViewModels
             get { return _race; }
             set
             {
+                if(value == RaceEnum.Humain)
+                {
+                    if(PublicCharacter is not null && SelectedAttributes is not null && SelectedAttributes.Any(a => a))
+                    {
+                        if (SelectedAttributes[(int)Attributes.Force])
+                        {
+                            PublicCharacter.Strength -= 3;
+                            SelectedAttributes[(int)Attributes.Force] = false;
+                        }
+                        if (SelectedAttributes[(int)Attributes.Agilité])
+                        {
+                            PublicCharacter.Agility -= 3;
+                            SelectedAttributes[(int)Attributes.Agilité] = false;
+                        }
+                        if (SelectedAttributes[(int)Attributes.Esprit])
+                        {
+                            PublicCharacter.Mind -= 3;
+                            SelectedAttributes[(int)Attributes.Esprit] = false;
+                        }
+                        if (SelectedAttributes[(int)Attributes.Empathie])
+                        {
+                            PublicCharacter.Empathy -= 3;
+                            SelectedAttributes[(int)Attributes.Empathie] = false;
+                        }
+                    }
+                }
+
                 SetProperty(ref _race, value);
-                SelectAttributeCommand.RaiseCanExecuteChanged();
+                SelectAttributeCommand?.RaiseCanExecuteChanged();
             }
         }
         private ObservableCollection<bool> _selectedAttributes;
@@ -95,9 +122,7 @@ namespace Alien.UI.ViewModels
 
         public bool CanIncreaseAttributes(Attributes? attribute)
         {
-            return AttributePoints <= 0
-                ? false
-                : attribute is null
+            return attribute is null || AttributePoints >= 6
                 ? false
                 : attribute switch
                 {
@@ -138,9 +163,7 @@ namespace Alien.UI.ViewModels
 
         public bool CanDecreaseAttribute(Attributes? attribute)
         {
-            return AttributePoints >= 14
-                ? false
-                : attribute is null
+            return attribute is null || AttributePoints <= 0
                 ? false
                 : attribute switch
                 {
@@ -177,7 +200,10 @@ namespace Alien.UI.ViewModels
 
         public bool CanSelectAttribute(Attributes? attribute)
         {
-            return Race.Equals(RaceEnum.Android) && attribute is not null && (SelectedAttributes.Count(a => a) < 2 || SelectedAttributes[(int)attribute]);
+            return SelectedAttributes is not null && 
+                Race.Equals(RaceEnum.Android) && 
+                attribute is not null && 
+                (SelectedAttributes.Count(a => a) < 2 || SelectedAttributes[(int)attribute]);
         }
 
         public void SelectAttribute(Attributes? attribute)
@@ -234,9 +260,7 @@ namespace Alien.UI.ViewModels
 
         public bool CanIncreaseCompetence(Competences? competence)
         {
-            return CompetencePoints <= 0
-                ? false
-                : competence is null
+            return competence is null || CompetencePoints <= 0
                 ? false
                 : competence switch
                 {
@@ -305,9 +329,7 @@ namespace Alien.UI.ViewModels
 
         public bool CanDecreaseCompetence(Competences? competence)
         {
-            return CompetencePoints >= 10
-                ? false
-                : competence is null
+            return competence is null || CompetencePoints >= 10
                 ? false
                 : competence switch
                 {
@@ -415,8 +437,6 @@ namespace Alien.UI.ViewModels
                     Navigate(ViewsEnum.CharactersView);
                 }
             }
-
-            // TODO : créer le personnage public
         }
 
         public override void OnNavigatedTo(NavigationContext navigationContext)
@@ -434,7 +454,7 @@ namespace Alien.UI.ViewModels
 
             PublicCharacter.Strength = CharacterCreation.Strength;
             PublicCharacter.Agility = CharacterCreation.Agility;
-            PublicCharacter.Empathy = CharacterCreation.Mind;
+            PublicCharacter.Mind = CharacterCreation.Mind;
             PublicCharacter.Empathy = CharacterCreation.Empathy;
 
             PublicCharacter.HeavyMachines = CharacterCreation.HeavyMachines;
@@ -451,6 +471,12 @@ namespace Alien.UI.ViewModels
             PublicCharacter.MedicalCare = CharacterCreation.MedicalCare;
 
             SelectedAttributes = new(CharacterCreation.SelectedAttributes);
+
+            IncreaseAttributeCommand?.RaiseCanExecuteChanged();
+            DecreaseAttributeCommand?.RaiseCanExecuteChanged();
+            SelectAttributeCommand?.RaiseCanExecuteChanged();
+            IncreaseCompetenceCommand?.RaiseCanExecuteChanged();
+            DecreaseCompetenceCommand?.RaiseCanExecuteChanged();
         }
 
         public bool PersistInHistory()
