@@ -62,7 +62,7 @@ namespace Alien.BLL.Services
 
             try
             {
-                if(!await _characterRepository.CharacterExistAsync(characterToCreate.IdentificationStamp))
+                if (!await _characterRepository.CharacterExistAsync(characterToCreate.IdentificationStamp))
                 {
                     CharacterEntity createdCharacter = _characterRepository.Create(characterToCreate);
                     CharacterEntity editableCharacter = new CharacterEntity(createdCharacter);
@@ -137,6 +137,17 @@ namespace Alien.BLL.Services
             if (careerName is null) throw new ArgumentNullException(nameof(careerName));
             CareerFromJsonDto[] careers = GetCareersFromJson();
             return careers.FirstOrDefault(c => c.Name.Equals(careerName));
+        }
+
+        public async Task<bool> DeleteCharacter(Guid idStamp)
+        {
+            var charactersFromRepo = await _characterRepository.GetAllAsync();
+            var charactersToDelete = charactersFromRepo.Where(c => c.IdentificationStamp == idStamp);
+            foreach (var characterToDelete in charactersToDelete)
+            {
+                _characterRepository.Delete(characterToDelete);
+            }
+            return _characterRepository.SaveChanges();
         }
     }
 }

@@ -122,19 +122,56 @@ namespace Alien.UI.ViewModels
 
         public bool CanIncreaseAttributes(Attributes? attribute)
         {
-            return attribute is null || AttributePoints >= 6
-                ? false
-                : attribute switch
-                {
-                    Attributes.Force => IsKeyAttribute(attribute) ? PublicCharacter.Strength < 5 : PublicCharacter.Strength < 4,
+            if (attribute is null) return false;
+            if (AttributePoints <= 0) return false;
 
-                    Attributes.Agilité => IsKeyAttribute(attribute) ? PublicCharacter.Agility < 5 : PublicCharacter.Agility < 4,
-
-                    Attributes.Esprit => IsKeyAttribute(attribute) ? PublicCharacter.Mind < 5 : PublicCharacter.Mind < 4,
-
-                    Attributes.Empathie => IsKeyAttribute(attribute) ? PublicCharacter.Empathy < 5 : PublicCharacter.Empathy < 4,
-                    _ => false,
-                };
+            switch (attribute)
+            {
+                case Attributes.Force:
+                    if (IsKeyAttribute(attribute))
+                    {
+                        if (SelectedAttributes[(int)attribute]) return PublicCharacter.Strength < (3 + 5);
+                        else return PublicCharacter.Strength < 5;
+                    }
+                    else
+                    {
+                        if (SelectedAttributes[(int)attribute]) return PublicCharacter.Strength < (3 + 4);
+                        else return PublicCharacter.Strength < 4;
+                    }
+                case Attributes.Agilité:
+                    if (IsKeyAttribute(attribute))
+                    {
+                        if (SelectedAttributes[(int)attribute]) return PublicCharacter.Agility < (3 + 5);
+                        else return PublicCharacter.Agility < 5;
+                    }
+                    else
+                    {
+                        if (SelectedAttributes[(int)attribute]) return PublicCharacter.Agility < (3 + 4);
+                        else return PublicCharacter.Agility < 4;
+                    }
+                case Attributes.Esprit:
+                    if (IsKeyAttribute(attribute))
+                    {
+                        if (SelectedAttributes[(int)attribute]) return PublicCharacter.Mind < (3 + 5);
+                        else return PublicCharacter.Mind < 5;
+                    }
+                    else
+                    {
+                        if (SelectedAttributes[(int)attribute]) return PublicCharacter.Mind < (3 + 4);
+                        else return PublicCharacter.Mind < 4;
+                    }
+                case Attributes.Empathie:
+                    if (IsKeyAttribute(attribute))
+                    {
+                        return SelectedAttributes[(int)attribute] ? PublicCharacter.Empathy < (3 + 5) : PublicCharacter.Empathy < 5;
+                    }
+                    else
+                    {
+                        return SelectedAttributes[(int)attribute] ? PublicCharacter.Empathy < (3 + 4) : PublicCharacter.Empathy < 4;
+                    }
+                default:
+                    return false;
+            }
         }
 
         public void IncreaseAttribute(Attributes? attribute)
@@ -163,7 +200,9 @@ namespace Alien.UI.ViewModels
 
         public bool CanDecreaseAttribute(Attributes? attribute)
         {
-            return attribute is null || AttributePoints <= 0
+            return attribute is null
+                ? false 
+                : AttributePoints >= 6
                 ? false
                 : attribute switch
                 {
@@ -405,6 +444,14 @@ namespace Alien.UI.ViewModels
             }
         }
 
+        public bool CanCreatePublicCharacter()
+        {
+            if (AttributePoints > 0) return false;
+            if (CompetencePoints > 0) return false;
+            if (!PublicCharacter.IsValid) return false;
+            return true;
+        }
+
         public async void CreatePublicCharacter()
         {
             if (PublicCharacter.IsValid)
@@ -437,6 +484,13 @@ namespace Alien.UI.ViewModels
                     Navigate(ViewsEnum.CharactersView);
                 }
             }
+        }
+
+        public override void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+            base.OnNavigatedFrom(navigationContext);
+
+            _characterService.DeleteCharacter(CharacterCreation.IdentificationStamp);   
         }
 
         public override void OnNavigatedTo(NavigationContext navigationContext)

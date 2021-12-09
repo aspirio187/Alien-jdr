@@ -21,6 +21,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0">
@@ -31,49 +32,26 @@
                    HorizontalAlignment="Center"/>
         </StackPanel>
 
-        <WrapPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <ItemsControl Grid.Row="1" ItemsSource="{Binding CharacterMiniatures}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Background="Black" Height="320" Width="250" Margin="10" Command="{Binding NavigateToCharacterCommand}" CommandParameter="{Binding Id}">
+                        <StackPanel Background="Transparent">
+                            <Image Source="{Binding Image, Converter={StaticResource Base64ImageConverter}}" />
+                            <TextBlock Text="{Binding Name}" />
+                        </StackPanel>
+                    </Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
 
-            <!--<ListView ItemsSource="{Binding CharacterMiniatures}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Button Background="Black" Height="80" Width="100" Margin="10" Command="{Binding NavigateToCharacterCommand}" CommandParameter="{Binding Id}">
-                            <StackPanel Background="Transparent">
-                                <Image Source="{Binding Image, Converter={StaticResource Base64ImageConverter}}" />
-                                <TextBlock Text="{Binding Name}" />
-                            </StackPanel>
-                        </Button>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>-->
-
-            <ItemsControl ItemsSource="{Binding CharacterMiniatures}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Button Background="Black" Height="80" Width="100" Margin="10" Command="{Binding NavigateToCharacterCommand}" CommandParameter="{Binding Id}">
-                            <StackPanel Background="Transparent">
-                                <Image Source="{Binding Image, Converter={StaticResource Base64ImageConverter}}" />
-                                <TextBlock Text="{Binding Name}" />
-                            </StackPanel>
-                        </Button>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate> 
-            </ItemsControl>
-           
-
-            <Button Background="Black" Height="80" Width="100" Margin="20" Command="{Binding NavigateCreateCharacterCommand}">
-                
-                <StackPanel Orientation="Horizontal" 
-                            VerticalAlignment="Center" 
-                            HorizontalAlignment="Center" 
-                            Background="Transparent">
-
-                    <Image Source="pack://application:,,,/Images/Create.jpg"/>
-                </StackPanel>
-            </Button>
-
-            
-
-        </WrapPanel>
+        <Button Grid.Row="2" Content="creer un personnage" Style="{StaticResource CustomFont}" Height="50" Width="200" Margin="10" 
+                Command="{Binding NavigateCreateCharacterCommand}" />
 
     </Grid>
 
