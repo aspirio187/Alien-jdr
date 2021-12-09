@@ -232,7 +232,7 @@
             <DockPanel Grid.Row="6" Margin="10">
                 <Button Content="Retour" Width="200" Height="40" Foreground="Black" Style="{StaticResource CustomFont}" HorizontalAlignment="Left" FontSize="25" 
                         Command="{Binding NavigateBackCommand}"/>
-                <Button x:Name="btnOver" Content="Terminer" Width="200" Height="40" Foreground="Black" Style="{StaticResource CustomFont}" HorizontalAlignment="Right" FontSize="
+                <Button x:Name="btnOver" Content="Terminer" Width="200" Height="40" Foreground="Black" Style="{StaticResource CustomFont}" HorizontalAlignment="Right" FontSize="25"
                         Command="{Binding CreateCharacterCommand}"/>
             </DockPanel>
         </Grid>

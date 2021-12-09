@@ -11,8 +11,9 @@ namespace Alien.BLL.Dtos
         public int Id { get; set; }
         public string Mode { get; set; }
         public string Name { get; set; }
-        public string Creator { get; set; }
+        public LobbyPlayerDto LobbyCreator { get; set; }
         public int MaximumPlayers { get; set; }
         public string Status { get; set; }
+        public string HostIp { get; set; }
     }
 }

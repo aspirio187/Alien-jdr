@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Alien.BLL.Dtos
 {
     public class CharacterCreationDto
-    {
+    {      
         public string Name { get; set; }
         public string Image { get; set; }
         public string Career { get; set; }

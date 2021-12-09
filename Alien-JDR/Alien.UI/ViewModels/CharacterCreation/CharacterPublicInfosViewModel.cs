@@ -382,7 +382,36 @@ namespace Alien.UI.ViewModels
 
         public async void CreatePublicCharacter()
         {
+            if (PublicCharacter.IsValid)
+            {
+                CharacterCreation.Race = Race.ToString();
+                CharacterCreation.Objectives = PublicCharacter.Objectives;
+                CharacterCreation.Friends = PublicCharacter.Friends;
 
+                CharacterCreation.Strength = PublicCharacter.Strength;
+                CharacterCreation.Agility = PublicCharacter.Agility;
+                CharacterCreation.Empathy = PublicCharacter.Mind;
+                CharacterCreation.Empathy = PublicCharacter.Empathy;
+
+                CharacterCreation.HeavyMachines = PublicCharacter.HeavyMachines;
+                CharacterCreation.Stamina = PublicCharacter.Stamina;
+                CharacterCreation.CloseCombat = PublicCharacter.CloseCombat;
+                CharacterCreation.Mobility = PublicCharacter.Mobility;
+                CharacterCreation.Piloting = PublicCharacter.Piloting;
+                CharacterCreation.RangedCombat = PublicCharacter.RangeCombat;
+                CharacterCreation.Observation = PublicCharacter.Observation;
+                CharacterCreation.Comtech = PublicCharacter.Comtech;
+                CharacterCreation.Survival = PublicCharacter.Survival;
+                CharacterCreation.Manipulation = PublicCharacter.Manipulation;
+                CharacterCreation.Commandment = PublicCharacter.Commandment;
+                CharacterCreation.MedicalCare = PublicCharacter.MedicalCare;
+
+                if (await _characterService.CreateCharacter(CharacterCreation, _authenticator.User.Id))
+                {
+                    _regionNavigationService.Journal.Clear();
+                    Navigate(ViewsEnum.CharactersView);
+                }
+            }
 
             // TODO : créer le personnage public
         }

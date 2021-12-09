@@ -18,6 +18,9 @@ namespace Alien.BLL.Profiles
                 .ForMember(
                     dest => dest.Talents,
                     opt => opt.Ignore());
+
+            CreateMap<CharacterEntity, CharacterLobbyDto>();
+                
         }
     }
 }

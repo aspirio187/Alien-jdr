@@ -41,8 +41,8 @@ namespace Alien.UI.ViewModels
                 not.Add(new NotificationModel()
                 {
                     PartyHost = notif.SenderName,
-                    PartyName = notif.LobbyName,
-                    Mode = notif.LobbyMode.ToString(),
+                    PartyName = notif.Lobby.Name,
+                    Mode = notif.Lobby.Mode,
                     NotificationStatus = notif.IsAccepted ? NotificationStatusEnum.Accepted : NotificationStatusEnum.Pending,
                     SendAt = notif.SentTime,
                     HostId = notif.SenderId,
