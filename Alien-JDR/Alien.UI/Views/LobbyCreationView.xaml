@@ -5,122 +5,92 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Alien.UI.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="450"
              Background="Black">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Text="creation de jeu" Style="{StaticResource CustomFont}" Foreground="White" FontSize="25" Margin="10" HorizontalAlignment="Center" />
 
-        <StackPanel Grid.Row="0" 
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center">
 
-            <TextBlock Style="{StaticResource CustomFont}"
-                       Foreground="White"
-                       FontSize="25"
-                       Margin="10">
-                Creation jeu
-            </TextBlock>
-
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
+            <RadioButton Content="Mode Campagne" Foreground="White" FontSize="20"/>
+            <RadioButton Content="Mode Scénario" Foreground="White" FontSize="20"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" 
-                    Grid.Column="0"
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center"
-                    Style="{StaticResource CustomFont}"
-                    Margin="10">
-            
-            <RadioButton Content="Mode Campagne" 
-                         Foreground="White">
-                
-            </RadioButton>
-            
-        </StackPanel>
+        <DockPanel Grid.Row="2" LastChildFill="False">
+            <TextBlock Text="nombre de joueurs maximum" Style="{StaticResource CustomFont}" Foreground="white" FontSize="15" Margin="5" Width="300"
+                       VerticalAlignment="Center"
+                       DockPanel.Dock="Left"/>
+            <ComboBox ItemsSource="{Binding AuthorizedNumberOfPlayers}" Width="150"/>
+        </DockPanel>
 
-        <StackPanel Grid.Row="1" 
-                    Grid.Column="1"
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center"
-                    Style="{StaticResource CustomFont}">
+        <DockPanel Grid.Row="3" LastChildFill="False">
+            <TextBlock Text="inviter un joueur" Style="{StaticResource CustomFont}" Foreground="White" FontSize="15" Margin="5" Width="300"
+                       VerticalAlignment="Center" 
+                       DockPanel.Dock="Left"/>
+            <ComboBox ItemsSource="{Binding AvailablePlayers}" MinWidth="400" Foreground="White" Margin="5" DockPanel.Dock="Left"/>
+            <Button Content="inviter" Style="{StaticResource CustomFont}" Width="200" Margin="5" DockPanel.Dock="Right"/>
+        </DockPanel>
 
-            <RadioButton Content="Mode Scenario" 
-                         Foreground="White">
-            </RadioButton>
+        <DockPanel Grid.Row="4" LastChildFill="False">
+            <TextBlock Text="Ajouter un personnage non joueur" Style="{StaticResource CustomFont}" Foreground="White" FontSize="15" Margin="5" Width="300"
+                       VerticalAlignment="Center" />
+            <ComboBox ItemsSource="{Binding AvailableCharacters}" MinWidth="400" Foreground="White" Margin="5" />
+            <Button Content="Ajouter" Style="{StaticResource CustomFont}" MinWidth="200" Margin="5" Command="{Binding AddNpcCharacterCommand}" DockPanel.Dock="Right"/>
+        </DockPanel>
+        
+        <DataGrid Grid.Row="5" IsReadOnly="True" AutoGenerateColumns="False" Margin="0, 10, 0, 10" >
 
-        </StackPanel>
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="Black"/>
+                    <Setter Property="FontSize" Value="25"/>
+                    <Setter Property="FontFamily" Value="Arial Black"/>
+                    <Setter Property="Margin" Value="10"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                </Style>
 
-        <StackPanel Grid.Row="2" 
-                    Grid.ColumnSpan="2" 
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Top" 
-                    Margin="10" >
+                <Style TargetType="{x:Type DataGrid}">
+                    <Setter Property="Background" Value="Black"/>
+                </Style>
 
-            <DataGrid x:Name="PlayerInvitationDataGrid"
-                  IsReadOnly="True"
-                  AutoGenerateColumns="False"
-                  Margin="10">
+                <Style TargetType="{x:Type DataGridRow}">
+                    <Setter Property="Background" Value="Black"/>
+                </Style>
+            </DataGrid.Resources>
 
-                <DataGrid.Resources>
-                    <Style TargetType="{x:Type DataGridColumnHeader}">
-                        <Setter Property="Background" Value="Black"/>
-                        <Setter Property="FontSize" Value="25"/>
-                        <Setter Property="FontFamily" Value="Arial Black"/>
-                        <Setter Property="Margin" Value="10"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="HorizontalAlignment" Value="Center"/>
-                    </Style>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="JOUEURS" MinWidth="200" Width="auto" />
 
-                    <Style TargetType="{x:Type DataGrid}">
-                        <Setter Property="Background" Value="Black"/>
-                    </Style>
+                <DataGridComboBoxColumn Header="PERSONNAGES" MinWidth="350" Width="*" />
 
-                    <Style TargetType="{x:Type DataGridRow}">
-                        <Setter Property="Background" Value="Black"/>
-                    </Style>
-                </DataGrid.Resources>
+                <DataGridTextColumn Header="STATUS" MinWidth="150" />
 
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Joueurs"
-                                    MinWidth="150"
-                                    Width="auto"/>
+                <DataGridTextColumn Header="TYPE" MinWidth="100" />
 
-                    <DataGridComboBoxColumn Header="Personnages" 
-                                            MinWidth="150"
-                                            Width="auto">
-                        
-                    </DataGridComboBoxColumn>
+                <DataGridTemplateColumn Width="50">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="X" Style="{StaticResource CustomFont}" Width="50" Command="{Binding KickPlayerCommand}" CommandParameter="{Binding PlayerId}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn Header="Inviter">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Name="AccepteInvitationButton" Content="Accepter"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                   
-                </DataGrid.Columns>
+            </DataGrid.Columns>
 
-            </DataGrid>
+        </DataGrid>
 
-        </StackPanel>
-
-        <StackPanel Grid.Row="3" 
+        <StackPanel Grid.Row="8" 
                     Grid.Column="1" 
                     Margin="10" 
                     Orientation="Horizontal" 
