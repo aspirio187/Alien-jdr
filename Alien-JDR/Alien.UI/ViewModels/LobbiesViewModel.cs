@@ -26,11 +26,7 @@ namespace Alien.UI.ViewModels
 
         public DelegateCommand<int?> JoinLobbyCommand => _joinLobbyCommand ??= new DelegateCommand<int?>(JoinLobby, CanJoinLobby);
         public override DelegateCommand LoadCommand => _loadCommand ??= new DelegateCommand(async () => await LoadAsync());
-        public DelegateCommand CreateLobbyCommand
-        {
-            get { return _createLobbyCommand; }
-            set { _createLobbyCommand = value; }
-        }
+        public DelegateCommand CreateLobbyCommand => _createLobbyCommand ??= new DelegateCommand(CreateLobby, CanCreateLobby);
 
 
         public LobbiesViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, ILobbyService lobbyService, IUserService userService)
@@ -58,11 +54,11 @@ namespace Alien.UI.ViewModels
             // TODO : Ajouté le joueur dans la base de donnée
         }
 
-        public async Task<bool> CanCreateLobby()
+        public bool CanCreateLobby()
         {
             try
             {
-                UserDto user = await _userService.GetUserAsync(_authenticator.User.Id);
+                UserDto user =  _userService.GetUserAsync(_authenticator.User.Id).Result;
                 return true;
             }
             catch (NullReferenceException e)
