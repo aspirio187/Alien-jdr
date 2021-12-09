@@ -34,7 +34,7 @@ namespace Alien.UI.ViewModels
 
         protected override async Task LoadAsync()
         {
-            var notifs = await _notificationService.GetNotificationAsync(_authenticator.User.Id);
+            var notifs = await _notificationService.GetUserNotifications(_authenticator.User.Id);
             List<NotificationModel> not = new List<NotificationModel>();
             foreach (var notif in notifs)
             {

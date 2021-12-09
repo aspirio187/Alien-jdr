@@ -11,6 +11,6 @@ namespace Alien.BLL.Interfaces
     public interface INotificationService
     {
         event EventHandler<NotificationEventArgs> OnNotificationReceived;
-        Task<IEnumerable<NotificationDto>> GetNotificationAsync(Guid userId);
+        Task<IEnumerable<NotificationDto>> GetUserNotifications(Guid userId);
     }
 }
