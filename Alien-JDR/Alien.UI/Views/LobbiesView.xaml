@@ -40,7 +40,7 @@
 
                     <DataGridTextColumn Header="NOM" Binding="{Binding Name}" MinWidth="150" Width="*" />
                     <DataGridTextColumn Header="MODE" Binding="{Binding Mode}" MinWidth="150" Width="*" />
-                    <DataGridTextColumn Header="CREATEUR" Binding="{Binding Creator}" MinWidth="200" Width="*" />
+                    <DataGridTextColumn Header="CREATEUR" Binding="{Binding LobbyCreator.Name}" MinWidth="200" Width="*" />
                     <DataGridTextColumn Header="ETAT" Binding="{Binding Status}" MinWidth="150" Width="*" />
                     <DataGridTextColumn Header="PLACES" Binding="{Binding MaximumPlayers}" MinWidth="150" Width="*" />
                     <DataGridTemplateColumn Header="JOIN">
