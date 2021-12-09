@@ -36,7 +36,7 @@ namespace Alien.DAL.Configurations
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(p => p.Character)
-                .WithMany(c => c.PartyPlayers)
+                .WithMany(c => c.LobbyPlayers)
                 .IsRequired(false)
                 .OnDelete(DeleteBehavior.Cascade);
             // TODO : Add le bool

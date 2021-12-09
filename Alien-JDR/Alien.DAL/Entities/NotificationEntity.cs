@@ -9,13 +9,13 @@ namespace Alien.DAL.Entities
     public class NotificationEntity
     {
         public int Id { get; set; }
-        public DateTimeOffset SendTime { get; set; }
-        public Guid? UserFromId { get; set; }
-        public UserEntity UserFrom { get; set; }
-        public Guid? UserToId { get; set; }
-        public UserEntity UserTo { get; set; }
-        public int? PartyId { get; set; }
-        public LobbyEntity Party { get; set; }
+        public DateTimeOffset SentTime { get; set; }
+        public Guid? SenderId { get; set; }
+        public UserEntity Sender { get; set; }
+        public Guid? ReceiverId { get; set; }
+        public UserEntity Receiver { get; set; }
+        public int LobbyId { get; set; }
+        public LobbyEntity Lobby { get; set; }
         public bool IsAccepted { get; set; }
     }
 }

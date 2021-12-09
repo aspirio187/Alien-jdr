@@ -41,11 +41,11 @@ namespace Alien.UI.ViewModels
                 not.Add(new NotificationModel()
                 {
                     PartyHost = notif.SenderName,
-                    PartyName = notif.PartyName,
-                    Mode = notif.PartyMode.ToString(),
+                    PartyName = notif.LobbyName,
+                    Mode = notif.LobbyMode.ToString(),
                     NotificationStatus = notif.IsAccepted ? NotificationStatusEnum.Accepted : NotificationStatusEnum.Pending,
-                    SendAt = notif.SendTime,
-                    HostId = notif.UserFromId,
+                    SendAt = notif.SentTime,
+                    HostId = notif.SenderId,
                     Id = notif.Id
                 });
             }

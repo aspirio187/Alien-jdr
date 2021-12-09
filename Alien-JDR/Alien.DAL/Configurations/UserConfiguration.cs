@@ -49,6 +49,12 @@ namespace Alien.DAL.Configurations
 
             builder.HasMany(u => u.LobbyPlayers)
                 .WithOne(lb => lb.User);
+
+            builder.HasMany(u => u.SentNotifications)
+                .WithOne(n => n.Sender);
+
+            builder.HasMany(u => u.ReceivedNotifications)
+                .WithOne(n => n.Receiver);
         }
     }
 }

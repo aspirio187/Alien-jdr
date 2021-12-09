@@ -61,7 +61,7 @@ namespace Alien.DAL.Entities
         public bool IsPublic { get; set; }
         public Guid IdentificationStamp { get; set; }
 
-        public ICollection<LobbyPlayerEntity> PartyPlayers { get; set; }
+        public ICollection<LobbyPlayerEntity> LobbyPlayers { get; set; }
 
         public CharacterEntity()
         {

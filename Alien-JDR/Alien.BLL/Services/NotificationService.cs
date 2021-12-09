@@ -43,7 +43,7 @@ namespace Alien.BLL.Services
         {
             IEnumerable<NotificationEntity> notifications = await _notificationRepository.GetAllAsync();
 
-            return _mapper.Map<IEnumerable<NotificationDto>>(notifications.Where(u => u.UserToId == userId));
+            return _mapper.Map<IEnumerable<NotificationDto>>(notifications.Where(u => u.ReceiverId == userId));
         }
     }
 }
