@@ -50,7 +50,9 @@ namespace Alien.UI.Helpers
         CharacterAttributesCompetencesView,
         CharacterAndroidCreationView,
         CharacterCreationSummaryView,
-        CharacterPublicInfosView
+        CharacterPublicInfosView,
+        LobbiesView,
+        LobbyCreationView
     }
 
     public enum RaceEnum
