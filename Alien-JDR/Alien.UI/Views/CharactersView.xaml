@@ -60,7 +60,8 @@
             </ItemsControl>
            
 
-            <Button Background="Black" Height="80" Width="100" Margin="10" Command="{Binding NavigateCreateCharacterCommand}">
+            <Button Background="Black" Height="80" Width="100" Margin="20" Command="{Binding NavigateCreateCharacterCommand}">
+                
                 <StackPanel Orientation="Horizontal" 
                             VerticalAlignment="Center" 
                             HorizontalAlignment="Center" 
@@ -69,6 +70,8 @@
                     <Image Source="pack://application:,,,/Images/Create.jpg"/>
                 </StackPanel>
             </Button>
+
+            
 
         </WrapPanel>
 
