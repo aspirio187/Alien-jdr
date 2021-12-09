@@ -20,6 +20,6 @@ namespace Alien.DAL.Entities
         public ICollection<RoleEntity> Roles { get; set; }
         public ICollection<NotificationEntity> SentNotifications { get; set; }
         public ICollection<NotificationEntity> ReceivedNotifications { get; set; }
-        public ICollection<LobbyPlayerEntity> PartyPlayers { get; set; }
+        public ICollection<LobbyPlayerEntity> LobbyPlayers { get; set; }
     }
 }

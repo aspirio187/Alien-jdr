@@ -46,6 +46,9 @@ namespace Alien.DAL.Configurations
             builder.HasMany(u => u.Roles)
                 .WithMany(r => r.Users)
                 .UsingEntity(join => join.ToTable("UserRole"));
+
+            builder.HasMany(u => u.LobbyPlayers)
+                .WithOne(lb => lb.User);
         }
     }
 }

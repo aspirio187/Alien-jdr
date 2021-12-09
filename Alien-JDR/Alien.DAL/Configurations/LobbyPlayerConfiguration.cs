@@ -25,11 +25,10 @@ namespace Alien.DAL.Configurations
             builder.Property(p => p.CharacterId)
                 .IsRequired(false);
 
-            builder.HasOne(p => p.User) // La on dit qu'il a un user avec plusieur party players, cest pas plutot dire qu'il a un owner avec plusieurs party players ? 
-                .WithMany(c => c.PartyPlayers)
+            builder.HasOne(p => p.User)
+                .WithMany(c => c.LobbyPlayers)
                 .IsRequired(true)
-                .OnDelete(DeleteBehavior.NoAction);
-            // TODO : A verif ; il faut récup les diff players de la même party, voir si cest bien encodé dans user entity et party entity etc
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(pp => pp.Party)
                 .WithMany(p => p.PartyPlayers)
