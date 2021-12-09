@@ -39,7 +39,6 @@ namespace Alien.DAL.Configurations
                 .WithMany(c => c.LobbyPlayers)
                 .IsRequired(false)
                 .OnDelete(DeleteBehavior.Cascade);
-            // TODO : Add le bool
         }
     }
 }

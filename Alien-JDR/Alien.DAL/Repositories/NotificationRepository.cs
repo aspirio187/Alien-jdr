@@ -1,5 +1,6 @@
 ﻿using Alien.DAL.Entities;
 using Alien.DAL.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,11 @@ namespace Alien.DAL.Repositories
         private void NewNotification(object sender, RecordChangedEventArgs<NotificationEntity> e)
         {
             NotificationEvent.Invoke(sender, e);
+        }
+
+        public async Task<bool> UserHasPendingNotification(Guid userId)
+        {
+            return await _context.Notifications.AnyAsync(n => n.Status == NotificationStatucEnum.Pending && n.ReceiverId == userId);
         }
     }
 }

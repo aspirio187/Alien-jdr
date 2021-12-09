@@ -25,8 +25,6 @@ namespace Alien.DAL.Configurations
                 .WithMany(c => c.Equipments)
                 .IsRequired(true)
                 .OnDelete(DeleteBehavior.Cascade);
-
-            // TODO : ADD le bool
         }
 
     }

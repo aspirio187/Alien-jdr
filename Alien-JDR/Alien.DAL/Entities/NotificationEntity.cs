@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace Alien.DAL.Entities
 {
+    public enum NotificationStatucEnum
+    {
+        Accepted,
+        Pending,
+        Denied
+    }
+
     public class NotificationEntity
     {
         public int Id { get; set; }
@@ -16,6 +23,6 @@ namespace Alien.DAL.Entities
         public UserEntity Receiver { get; set; }
         public int LobbyId { get; set; }
         public LobbyEntity Lobby { get; set; }
-        public bool IsAccepted { get; set; }
+        public NotificationStatucEnum Status { get; set; }
     }
 }

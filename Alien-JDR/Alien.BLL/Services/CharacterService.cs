@@ -42,8 +42,6 @@ namespace Alien.BLL.Services
             characterToCreate.OwnerId = userId;
             characterToCreate.IsEditable = false;
 
-            // TODO : Créer un personnage public si nécessaire et créer un personnage éditable
-
             TalentEntity talentFromRepo = await _talentRepository.GetTalentByNameAsync(character.Talent);
 
             if (talentFromRepo is null)

@@ -44,7 +44,6 @@ namespace Alien.DAL.Configurations
 
             builder.Property(n => n.SentTime)
                 .IsRequired(true);
-            // TODO : Add la date ! + le bool
         }
 
     }

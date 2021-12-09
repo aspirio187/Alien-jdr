@@ -11,5 +11,6 @@ namespace Alien.DAL.Interfaces
     public interface INotificationRepository : IRepositoryBase<NotificationEntity, int>
     {
         event ChangedEventHandler<NotificationEntity> NotificationEvent;
+        Task<bool> UserHasPendingNotification(Guid userId);
     }
 }

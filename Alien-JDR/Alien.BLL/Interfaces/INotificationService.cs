@@ -12,5 +12,6 @@ namespace Alien.BLL.Interfaces
     {
         event EventHandler<NotificationEventArgs> OnNotificationReceived;
         Task<IEnumerable<NotificationDto>> GetUserNotifications(Guid userId);
+        Task<bool> CheckPendingNotifications(Guid userId);
     }
 }

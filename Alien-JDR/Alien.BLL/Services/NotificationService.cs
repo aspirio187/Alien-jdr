@@ -47,5 +47,10 @@ namespace Alien.BLL.Services
             IEnumerable<NotificationEntity> notifications = await _notificationRepository.GetAllAsync();
             return _mapper.Map<IEnumerable<NotificationDto>>(notifications.Where(n => n.ReceiverId == userId));
         }
+
+        public async Task<bool> CheckPendingNotifications(Guid userId)
+        {
+            return await _notificationRepository.UserHasPendingNotification(userId);
+        }
     }
 }

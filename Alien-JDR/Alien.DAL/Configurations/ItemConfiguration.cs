@@ -30,8 +30,6 @@ namespace Alien.DAL.Configurations
 
             builder.Property(i => i.IsFetish)
                 .IsRequired(true);
-
-            // TODO : Add le bool
         }
 
     }

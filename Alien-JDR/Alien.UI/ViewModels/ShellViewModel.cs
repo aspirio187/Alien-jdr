@@ -33,10 +33,12 @@ namespace Alien.UI.ViewModels
         private DelegateCommand _navigateCharacterCommand;
         private DelegateCommand _navigateManuelCommand;
         private DelegateCommand _navigateCreditCommand;
+        private DelegateCommand _navigateLobbiesCommand;
 
         public DelegateCommand NavigateCharacterCommand => _navigateCharacterCommand ??= new DelegateCommand(NavigateCharacter);
         public DelegateCommand NavigateManuelCommand => _navigateManuelCommand ??= new DelegateCommand(NavigateManuel);
         public DelegateCommand NavigateCreditCommand => _navigateCreditCommand ??= new DelegateCommand(NavigateCredit);
+        public DelegateCommand NavigateLobbiesCommand => _navigateLobbiesCommand ??= new DelegateCommand(NavigateLobbies);
         public override DelegateCommand LoadCommand => _loadCommand ??= new DelegateCommand(async () => await LoadAsync());
 
         public ShellViewModel(IRegionManager regionManager, IDialogService dialogService, IRegionNavigationService regionNavigationService, IAuthenticator authenticator,
@@ -55,7 +57,7 @@ namespace Alien.UI.ViewModels
 
         private void Notification_Received(object sender, NotificationEventArgs e)
         {
-            // TODO : Faire une action en cas de réception de la notification
+            NotificationReceived = true;
         }
 
         protected override async Task LoadAsync()
@@ -65,6 +67,11 @@ namespace Alien.UI.ViewModels
                 _dialogService.ShowDialog("LoginView", null);
             }
 
+            if (await _notificationService.CheckPendingNotifications(_authenticator.User.Id))
+            {
+                NotificationReceived = true;
+            }
+
             _regionNavigationService.Region = _regionManager.Regions[Global.REGION_NAME];
             Navigate(ViewsEnum.CharactersView);
         }
@@ -72,6 +79,12 @@ namespace Alien.UI.ViewModels
         public void NavigateCharacter()
         {
             Navigate(ViewsEnum.CharactersView);
+        }
+
+        public void NavigateLobbies()
+        {
+            NotificationReceived = false;
+            Navigate(ViewsEnum.LobbiesView);
         }
 
         public void NavigateManuel()
