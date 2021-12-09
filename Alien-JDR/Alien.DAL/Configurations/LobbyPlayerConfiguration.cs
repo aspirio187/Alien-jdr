@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Alien.DAL.Configurations
 {
-    public class PartyPlayersConfiguration : IEntityTypeConfiguration<PartyPlayersEntity>
+    public class LobbyPlayerConfiguration : IEntityTypeConfiguration<LobbyPlayerEntity>
     {
-        public void Configure(EntityTypeBuilder<PartyPlayersEntity> builder)
+        public void Configure(EntityTypeBuilder<LobbyPlayerEntity> builder)
         {
             builder.Property(p => p.Id)
                 .IsRequired(true);
@@ -23,7 +23,7 @@ namespace Alien.DAL.Configurations
                 .IsRequired(true);
 
             builder.Property(p => p.CharacterId)
-                .IsRequired(true);
+                .IsRequired(false);
 
             builder.HasOne(p => p.User) // La on dit qu'il a un user avec plusieur party players, cest pas plutot dire qu'il a un owner avec plusieurs party players ? 
                 .WithMany(c => c.PartyPlayers)
@@ -37,9 +37,9 @@ namespace Alien.DAL.Configurations
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(p => p.Character)
-                .WithOne()
-                .IsRequired(true)
-                .OnDelete(DeleteBehavior.NoAction);
+                .WithMany(c => c.PartyPlayers)
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.Cascade);
             // TODO : Add le bool
         }
     }

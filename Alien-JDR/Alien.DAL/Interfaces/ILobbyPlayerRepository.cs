@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Alien.DAL.Interfaces
 {
-    class IPartyPlayersRepository
+    class ILobbyPlayerRepository
     {
     }
 }

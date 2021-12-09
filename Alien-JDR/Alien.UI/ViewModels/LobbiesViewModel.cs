@@ -18,6 +18,9 @@ namespace Alien.UI.ViewModels
 
         public ObservableCollection<LobbyDto> Lobbies { get; set; }
 
+        private DelegateCommand<int?> _joinLobbyCommand;
+
+        public DelegateCommand<int?> JoinLobbyCommand => _joinLobbyCommand ??= new DelegateCommand<int?>(JoinLobby, CanJoinLobby);
         public override DelegateCommand LoadCommand => _loadCommand ??= new DelegateCommand(async () => await LoadAsync());
 
         public LobbiesViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, ILobbyService lobbyService)
@@ -25,6 +28,16 @@ namespace Alien.UI.ViewModels
         {
             _lobbyService = lobbyService ??
                 throw new ArgumentNullException(nameof(lobbyService));
+        }
+
+        public bool CanJoinLobby(int? id)
+        {
+            return true;
+        }
+
+        public void JoinLobby(int? id)
+        {
+            // TODO : Ajouté le joueur dans la base de donnée
         }
 
         protected override async Task LoadAsync()

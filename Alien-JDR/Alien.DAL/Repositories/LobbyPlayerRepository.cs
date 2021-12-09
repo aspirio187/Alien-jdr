@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Alien.DAL.Repositories
 {
-    public class PartyPlayersRepository
+    public class LobbyPlayerRepository
     {
     }
 }

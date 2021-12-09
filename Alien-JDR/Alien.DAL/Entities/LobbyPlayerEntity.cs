@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Alien.DAL.Entities
 {
-    public class PartyPlayersEntity
+    public class LobbyPlayerEntity
     {
         public int Id { get; set; }
 
@@ -16,7 +16,7 @@ namespace Alien.DAL.Entities
         public int PartyId { get; set; }
         public LobbyEntity Party { get; set; }
 
-        public int CharacterId { get; set; }
+        public int? CharacterId { get; set; }
         public CharacterEntity Character { get; set; }
 
         public bool IsCreator { get; set; }

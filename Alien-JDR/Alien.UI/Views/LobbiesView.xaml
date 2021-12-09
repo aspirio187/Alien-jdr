@@ -38,12 +38,12 @@
 
                 <DataGrid.Columns>
 
-                    <DataGridTextColumn Header="Nom" Binding="{Binding Name}" MinWidth="150" Width="*" />
-                    <DataGridTextColumn Header="Mode" Binding="{Binding Mode}" MinWidth="150" Width="*" />
-                    <DataGridTextColumn Header="Créateur" Binding="{Binding Creator}" MinWidth="150" Width="*" />
-                    <DataGridTextColumn Header="Etat" Binding="{Binding Status}" MinWidth="150" Width="*" />
-                    <DataGridTextColumn Header="Places" Binding="{Binding MaximumPlayers}" MinWidth="150" Width="*" />
-                    <DataGridTemplateColumn Header="Join">
+                    <DataGridTextColumn Header="NOM" Binding="{Binding Name}" MinWidth="150" Width="*" />
+                    <DataGridTextColumn Header="MODE" Binding="{Binding Mode}" MinWidth="150" Width="*" />
+                    <DataGridTextColumn Header="CREATEUR" Binding="{Binding Creator}" MinWidth="200" Width="*" />
+                    <DataGridTextColumn Header="ETAT" Binding="{Binding Status}" MinWidth="150" Width="*" />
+                    <DataGridTextColumn Header="PLACES" Binding="{Binding MaximumPlayers}" MinWidth="150" Width="*" />
+                    <DataGridTemplateColumn Header="JOIN">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Content="Rejoindre" Command="{Binding JoinLobbyCommand}" CommandParameter="{Binding Id}"/>
