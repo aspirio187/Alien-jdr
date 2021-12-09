@@ -12,9 +12,9 @@ namespace Alien.DAL
     public class AlienContext : DbContext
     {
         public DbSet<UserEntity> Users { get; set; }
-        public DbSet<LobbyEntity> Parties { get; set; }
+        public DbSet<LobbyEntity> Lobbies { get; set; }
         public DbSet<CharacterEntity> Characters { get; set; }
-        public DbSet<LobbyPlayerEntity> PartyPlayers { get; set; }
+        public DbSet<LobbyPlayerEntity> LobbyPlayers { get; set; }
         public DbSet<RoleEntity> Roles { get; set; }
         public DbSet<EquipmentEntity> Equipments { get; set; }
         public DbSet<NotificationEntity> Notifications { get; set; }

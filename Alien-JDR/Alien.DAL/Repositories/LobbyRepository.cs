@@ -10,10 +10,10 @@ namespace Alien.DAL.Repositories
 {
     public class LobbyRepository : RepositoryBase<LobbyEntity, int>, ILobbyRepository
     {
-        public LobbyRepository(AlienContext context) 
+        public LobbyRepository(AlienContext context)
             : base(context)
         {
-            
+
         }
     }
 }
