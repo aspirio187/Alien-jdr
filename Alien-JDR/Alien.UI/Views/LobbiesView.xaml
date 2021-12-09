@@ -6,7 +6,6 @@
                 xmlns:local="clr-namespace:Alien.UI.Views" 
                 mc:Ignorable="d" 
                 d:DesignHeight="450" 
-                d:DesignWidth="1000"
                 Background="Black">
     <Grid>
 
@@ -16,7 +15,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0">
-            <DataGrid x:Name="GamesDataGrid" IsReadOnly="True" AutoGenerateColumns="False" Margin="10">
+            <DataGrid x:Name="GamesDataGrid" IsReadOnly="True" AutoGenerateColumns="False" Margin="10" ItemsSource="{Binding Lobbies}" >
 
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -38,48 +37,26 @@
                 </DataGrid.Resources>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Parties"
-                                    MinWidth="150"
-                                    Width="*"/>
-                    <DataGridTextColumn Header="Mode"
-                                    MinWidth="150"
-                                    Width="*"/>
-                    <DataGridTextColumn Header="Créateur"
-                                    MinWidth="150"
-                                    Width="*"/>
-                    <DataGridTextColumn Header="Etat"
-                                    MinWidth="150"
-                                    Width="*"/>
-                    <DataGridTemplateColumn Header="Détailes">
+
+                    <DataGridTextColumn Header="Nom" Binding="{Binding Name}" MinWidth="150" Width="*" />
+                    <DataGridTextColumn Header="Mode" Binding="{Binding Mode}" MinWidth="150" Width="*" />
+                    <DataGridTextColumn Header="Créateur" Binding="{Binding Creator}" MinWidth="150" Width="*" />
+                    <DataGridTextColumn Header="Etat" Binding="{Binding Status}" MinWidth="150" Width="*" />
+                    <DataGridTextColumn Header="Places" Binding="{Binding MaximumPlayers}" MinWidth="150" Width="*" />
+                    <DataGridTemplateColumn Header="Join">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Name="DetailButton" Content="Détailes"/>
+                                <Button Content="Rejoindre" Command="{Binding JoinLobbyCommand}" CommandParameter="{Binding Id}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
-
             </DataGrid>
 
         </StackPanel>
 
-        <StackPanel Grid.Row="1">
-            
-            
-            <Button x:Name="CreateAGame" 
-                    Content="CREER UN JEU" 
-                    HorizontalAlignment="Right" 
-                    VerticalAlignment="Bottom" 
-                    Style="{StaticResource CustomFont}" 
-                    Width="200" 
-                    Margin="20"
-                    FontFamily="Arial Black"/>
-
-        </StackPanel>
-
-
-
-
+        <Button Grid.Row="1" Content="Creer un lobby" Style="{StaticResource CustomFont}" Width="200" Margin="10"
+                HorizontalAlignment="Right" VerticalAlignment="Center" Command="{Binding CreateLobbyCommand}" />
 
     </Grid>
 </ContentControl>
