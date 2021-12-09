@@ -39,13 +39,13 @@ namespace Alien.UI.ViewModels
                 SelectAttributeCommand.RaiseCanExecuteChanged();
             }
         }
-        public ObservableCollection<bool> SelectedAttributes { get; set; } = new()
+        private ObservableCollection<bool> _selectedAttributes;
+
+        public ObservableCollection<bool> SelectedAttributes
         {
-            false,
-            false,
-            false,
-            false
-        };
+            get { return _selectedAttributes; }
+            set { SetProperty(ref _selectedAttributes, value); }
+        }
 
         private int _attributePoints;
 
@@ -102,8 +102,11 @@ namespace Alien.UI.ViewModels
                 : attribute switch
                 {
                     Attributes.Force => IsKeyAttribute(attribute) ? PublicCharacter.Strength < 5 : PublicCharacter.Strength < 4,
+
                     Attributes.Agilité => IsKeyAttribute(attribute) ? PublicCharacter.Agility < 5 : PublicCharacter.Agility < 4,
+
                     Attributes.Esprit => IsKeyAttribute(attribute) ? PublicCharacter.Mind < 5 : PublicCharacter.Mind < 4,
+
                     Attributes.Empathie => IsKeyAttribute(attribute) ? PublicCharacter.Empathy < 5 : PublicCharacter.Empathy < 4,
                     _ => false,
                 };
@@ -446,6 +449,8 @@ namespace Alien.UI.ViewModels
             PublicCharacter.Manipulation = CharacterCreation.Manipulation;
             PublicCharacter.Commandment = CharacterCreation.Commandment;
             PublicCharacter.MedicalCare = CharacterCreation.MedicalCare;
+
+            SelectedAttributes = new(CharacterCreation.SelectedAttributes);
         }
 
         public bool PersistInHistory()

@@ -139,21 +139,29 @@
                     <DockPanel HorizontalAlignment="Left" Margin="5">
                         <TextBlock Text="Force" Width="150" Style="{StaticResource CustomFont}" Foreground="white" FontSize="30" />
                         <TextBlock Text="{Binding CharacterCreation.Strength}" Margin="10, 0, 0, 0" Foreground="white" FontSize="30" FontFamily="Arial Black"/>
+                        <CheckBox IsEnabled="False" IsChecked="{Binding CharacterCreation.SelectedAttributes[0]}" Margin="10,0,10,0" 
+                                  HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </DockPanel>
 
                     <DockPanel HorizontalAlignment="Left" Margin="5">
                         <TextBlock Text="agilite" Width="150" Style="{StaticResource CustomFont}" Foreground="white" FontSize="30" />
                         <TextBlock Text="{Binding CharacterCreation.Agility}" Foreground="white" Margin="10, 0, 0, 0" FontSize="30" FontFamily="Arial Black"/>
+                        <CheckBox IsEnabled="False" IsChecked="{Binding CharacterCreation.SelectedAttributes[1]}" Margin="10,0,10,0" 
+                                  HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </DockPanel>
 
                     <DockPanel HorizontalAlignment="Left" Margin="5">
                         <TextBlock Text="esprit" Width="150" Style="{StaticResource CustomFont}" Foreground="white" FontSize="30" />
                         <TextBlock Text="{Binding CharacterCreation.Mind}" Foreground="white" Margin="10, 0, 0, 0" FontSize="30" FontFamily="Arial Black"/>
+                        <CheckBox IsEnabled="False" IsChecked="{Binding CharacterCreation.SelectedAttributes[3]}" Margin="10,0,10,0" 
+                                  HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </DockPanel>
 
                     <DockPanel HorizontalAlignment="Left" Margin="5">
                         <TextBlock Text="empathie" Width="150" Style="{StaticResource CustomFont}" Foreground="white" FontSize="30" />
                         <TextBlock Text="{Binding CharacterCreation.Empathy}" Foreground="white" Margin="10, 0, 0, 0" FontSize="30" FontFamily="Arial Black"/>
+                        <CheckBox IsEnabled="False" IsChecked="{Binding CharacterCreation.SelectedAttributes[4]}" Margin="10,0,10,0" 
+                                  HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </DockPanel>
                 </StackPanel>
 

@@ -81,7 +81,7 @@
                                     Command="{Binding DecreaseAttributeCommand}" CommandParameter="{x:Static global:Attributes.Force}"/>
 
                             <TextBlock Text="{Binding PublicCharacter.Strength}" FontFamily="arial black" Foreground="White" 
-                                       FontSize="20" Margin="10,0,10,0" />
+                                       FontSize="20" VerticalAlignment="Center" Margin="10,0,10,0" />
 
                             <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20"
                                     HorizontalAlignment="Center" VerticalAlignment="Center" 
@@ -105,7 +105,7 @@
                                     Command="{Binding DecreaseAttributeCommand}" CommandParameter="{x:Static global:Attributes.Agilité}"/>
 
                             <TextBlock Text="{Binding PublicCharacter.Agility}" FontFamily="arial black" Foreground="White" 
-                                       FontSize="20" Margin="10,0,10,0" />
+                                       FontSize="20" VerticalAlignment="Center"  Margin="10,0,10,0" />
 
                             <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20"
                                     HorizontalAlignment="Center" VerticalAlignment="Center" 
@@ -129,7 +129,7 @@
                                     Command="{Binding DecreaseAttributeCommand}" CommandParameter="{x:Static global:Attributes.Esprit}"/>
 
                             <TextBlock Text="{Binding PublicCharacter.Mind}" FontFamily="arial black" Foreground="White" 
-                                       FontSize="20" Margin="10,0,10,0" />
+                                       FontSize="20" VerticalAlignment="Center" Margin="10,0,10,0" />
 
                             <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20"
                                     HorizontalAlignment="Center" VerticalAlignment="Center" 
@@ -154,7 +154,7 @@
                                     Command="{Binding DecreaseAttributeCommand}" CommandParameter="{x:Static global:Attributes.Empathie}"/>
 
                             <TextBlock Text="{Binding PublicCharacter.Empathy}" FontFamily="arial black" Foreground="White" 
-                                       FontSize="20" Margin="10,0,10,0" />
+                                       FontSize="20" VerticalAlignment="Center" Margin="10,0,10,0" />
 
                             <Button Content="+" Style="{StaticResource CustomFont}" FontSize="15" Width="20" Height="20"
                                     HorizontalAlignment="Center" VerticalAlignment="Center" 
