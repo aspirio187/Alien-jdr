@@ -71,6 +71,8 @@ namespace Alien.UI.ViewModels
             if (SelectedAttributes[2]) CharacterCreation.Mind += 3;
             if (SelectedAttributes[3]) CharacterCreation.Empathy += 3;
 
+            CharacterCreation.SelectedAttributes = SelectedAttributes.ToArray();
+
             Dictionary<string, object> parameters = new Dictionary<string, object>()
             {
                 { Global.CHARACTER_CREATION, CharacterCreation }
