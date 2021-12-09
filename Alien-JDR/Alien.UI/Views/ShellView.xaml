@@ -44,11 +44,7 @@
 
         <DockPanel Grid.Row="0" Grid.Column="1" Margin="0,5,5,0" Background="Transparent" VerticalAlignment="Top" MouseDown="DockPanel_MouseDown">
             <DockPanel HorizontalAlignment="Right">
-                <Button x:Name="MinimizeButton" 
-                        Content="_"
-                        FontSize="16"
-                        Style="{StaticResource CustomFont}"
-                        FontWeight="Bold"
+                <Button x:Name="MinimizeButton" Content="_" FontSize="16" Style="{StaticResource CustomFont}" FontWeight="Bold"
                         Width="25"
                         Height="25" 
                         Click="MinimizeButton_Click"
@@ -95,12 +91,8 @@
                         Command="{Binding NavigateCharacterCommand}"
                         IsChecked="True"/>
 
-            <RadioButton Content="Parties"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="14"
-                             Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding GamesViewCommand}"/>
+            <RadioButton Content="Parties" Height="50" Foreground="White" FontSize="14" Style="{StaticResource MenuButtonTheme}" 
+                         Command="{Binding NavigateLobbiesCommand}"/>
 
             <RadioButton Content="Notification"
                          FontSize="14"

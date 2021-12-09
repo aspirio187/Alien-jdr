@@ -25,6 +25,12 @@ namespace Alien.DAL.Configurations
             builder.Property(p => p.LobbyId)
              .IsRequired(true);
 
+            builder.Property(n => n.Status)
+                .IsRequired(true)
+                .HasMaxLength(50)
+                .HasConversion(
+                    s => s.ToString(),
+                    s => (NotificationStatucEnum)Enum.Parse(typeof(NotificationStatucEnum), s));
 
             builder.HasOne(p => p.Sender)
                 .WithMany(u => u.SentNotifications)
