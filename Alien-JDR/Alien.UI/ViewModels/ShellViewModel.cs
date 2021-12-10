@@ -13,6 +13,7 @@ using Prism.Services.Dialogs;
 using TableDependency.SqlClient;
 using Alien.BLL.Interfaces;
 using Alien.BLL.Helpers;
+using AutoMapper;
 
 namespace Alien.UI.ViewModels
 {
@@ -41,9 +42,9 @@ namespace Alien.UI.ViewModels
         public DelegateCommand NavigateLobbiesCommand => _navigateLobbiesCommand ??= new DelegateCommand(NavigateLobbies);
         public override DelegateCommand LoadCommand => _loadCommand ??= new DelegateCommand(async () => await LoadAsync());
 
-        public ShellViewModel(IRegionManager regionManager, IDialogService dialogService, IRegionNavigationService regionNavigationService, IAuthenticator authenticator,
-            INotificationService notificationService)
-            : base(regionNavigationService, authenticator)
+        public ShellViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, IMapper mapper, IRegionManager regionManager,
+            IDialogService dialogService, INotificationService notificationService)
+            : base(regionNavigationService, authenticator, mapper)
         {
             _regionManager = regionManager ??
                 throw new ArgumentNullException(nameof(regionManager));

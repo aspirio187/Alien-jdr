@@ -2,6 +2,7 @@
 using Alien.UI.Helpers;
 using Alien.UI.Models;
 using Alien.UI.States;
+using AutoMapper;
 using Prism.Commands;
 using Prism.Regions;
 using System;
@@ -23,8 +24,8 @@ namespace Alien.UI.ViewModels
 
         public ObservableCollection<NotificationModel> Notifications { get; set; }
 
-        public NotificationsViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, INotificationService notificationService)
-            : base(regionNavigationService, authenticator)
+        public NotificationsViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, IMapper mapper, INotificationService notificationService)
+            : base(regionNavigationService, authenticator, mapper)
         {
             _notificationService = notificationService ??
                 throw new ArgumentNullException(nameof(notificationService));

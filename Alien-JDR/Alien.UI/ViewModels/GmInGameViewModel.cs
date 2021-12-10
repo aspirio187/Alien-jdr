@@ -1,6 +1,7 @@
 ﻿using Alien.Socket.Models;
 using Alien.UI.Helpers;
 using Alien.UI.States;
+using AutoMapper;
 using Prism.Regions;
 using System;
 using System.Collections.Generic;
@@ -14,8 +15,8 @@ namespace Alien.UI.ViewModels
     {
         public SocketRouter SocketRouteur { get; set; }
 
-        public GmInGameViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator)
-            : base(regionNavigationService, authenticator)
+        public GmInGameViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, IMapper mapper)
+            : base(regionNavigationService, authenticator, mapper)
         {
             SocketRouteur = new SocketRouter().Start();
 

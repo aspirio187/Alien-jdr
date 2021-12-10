@@ -2,6 +2,7 @@
 using Alien.BLL.Interfaces;
 using Alien.UI.Helpers;
 using Alien.UI.States;
+using AutoMapper;
 using Prism.Commands;
 using Prism.Regions;
 using System;
@@ -33,8 +34,8 @@ namespace Alien.UI.ViewModels
         public override DelegateCommand LoadCommand => _loadCommand ??= new DelegateCommand(async () => await LoadAsync());
 
 
-        public LobbiesViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, ILobbyService lobbyService, IUserService userService)
-            : base(regionNavigationService, authenticator)
+        public LobbiesViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, IMapper mapper, ILobbyService lobbyService, IUserService userService)
+            : base(regionNavigationService, authenticator, mapper)
         {
             _lobbyService = lobbyService ??
                 throw new ArgumentNullException(nameof(lobbyService));

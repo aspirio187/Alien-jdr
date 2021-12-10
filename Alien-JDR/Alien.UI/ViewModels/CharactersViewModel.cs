@@ -1,6 +1,7 @@
 ﻿using Alien.BLL.Dtos;
 using Alien.BLL.Interfaces;
 using Alien.UI.States;
+using AutoMapper;
 using Prism.Commands;
 using Prism.Regions;
 using System;
@@ -32,8 +33,8 @@ namespace Alien.UI.ViewModels
         public override DelegateCommand LoadCommand => _loadCommand ??= new(async () => await LoadAsync());
         public DelegateCommand NavigateCreateCharacterCommand => _navigateCreateCharacterCommand ??= new DelegateCommand(NavigateCreateCharacter);
 
-        public CharactersViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, ICharacterService characterService)
-            : base(regionNavigationService, authenticator)
+        public CharactersViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, IMapper mapper, ICharacterService characterService)
+            : base(regionNavigationService, authenticator, mapper)
         {
             _characterService = characterService ??
                 throw new ArgumentNullException(nameof(characterService));

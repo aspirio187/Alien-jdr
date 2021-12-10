@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace Alien.UI.ViewModels
 {
-    class PdfViewerModel : INotifyPropertyChanged
+    // TODO : adapter cette classe au programme
+    public class PdfViewerModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
