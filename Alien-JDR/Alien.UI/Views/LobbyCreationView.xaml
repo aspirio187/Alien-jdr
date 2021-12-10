@@ -31,8 +31,10 @@
 
 
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
-            <RadioButton Content="Mode Campagne" Foreground="White" FontSize="20"/>
-            <RadioButton Content="Mode Scénario" Foreground="White" FontSize="20"/>
+            <RadioButton Content="Mode Campagne" Foreground="White" FontSize="20"
+                         IsChecked="{Binding SelectedGameMode, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static global:LobbyModeEnum.Campagne}}" />
+            <RadioButton Content="Mode Scénario" Foreground="White" FontSize="20"
+                         IsChecked="{Binding SelectedGameMode, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static global:LobbyModeEnum.Scenario}}" />
         </StackPanel>
 
         <DockPanel Grid.Row="2" LastChildFill="False">

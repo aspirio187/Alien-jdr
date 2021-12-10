@@ -23,6 +23,13 @@ namespace Alien.UI.ViewModels
             set { SetProperty(ref _isCreator, value); }
         }
 
+        private LobbyModeEnum _selectedGameMode;
+
+        public LobbyModeEnum SelectedGameMode
+        {
+            get { return _selectedGameMode; }
+            set { SetProperty(ref _selectedGameMode, value); }
+        }
 
         private DelegateCommand _startGameCommand;
 
