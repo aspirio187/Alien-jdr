@@ -35,6 +35,7 @@ namespace Alien.BLL
             // Injection des services
             containerRegistry.RegisterScoped<ICharacterService, CharacterService>();
             containerRegistry.RegisterScoped<ILobbyService, LobbyService>();
+            containerRegistry.RegisterScoped<ILobbyPlayerService, LobbyPlayerService>();
             containerRegistry.RegisterScoped<INotificationService, NotificationService>();
             containerRegistry.RegisterScoped<IUserService, UserService>();
 

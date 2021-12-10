@@ -103,11 +103,13 @@
                 <DataGridTextColumn Header="JOUEURS" MinWidth="200" Width="auto" />
 
                 <DataGridComboBoxColumn Header="PERSONNAGES" MinWidth="350" Width="*">
-                    <behavior:Interaction.Triggers>
+                    
+                    <!--<behavior:Interaction.Triggers>
                         <behavior:EventTrigger EventName="DropDownOpenend">
                             <prism:InvokeCommandAction Command="{Binding LoadCharactersCommand}"/>
                         </behavior:EventTrigger>
-                    </behavior:Interaction.Triggers>
+                    </behavior:Interaction.Triggers>-->
+                    
                 </DataGridComboBoxColumn>
 
                 <DataGridTextColumn Header="STATUS" MinWidth="150" />
