@@ -1,4 +1,5 @@
-﻿using Alien.BLL.Interfaces;
+﻿using Alien.BLL.Dtos;
+using Alien.BLL.Interfaces;
 using Alien.UI.Helpers;
 using Alien.UI.Models;
 using Alien.UI.States;
@@ -103,6 +104,13 @@ namespace Alien.UI.ViewModels
         {
             if (SelectedUser is not null && SelectedUser.IsValid)
             {
+                CreateNotificationDto notification = new CreateNotificationDto()
+                {
+                    LobbyId = 1,
+                    ReceiverId = SelectedUser.Id,
+                    SenderId = _authenticator.User.Id
+                };
+                _notificationService.SendNotification(notification);
                 AvailableUsers.Clear();
             }
             // TODO : Send notification to user

@@ -52,5 +52,14 @@ namespace Alien.BLL.Services
         {
             return await _notificationRepository.UserHasPendingNotification(userId);
         }
+
+        public bool SendNotification(CreateNotificationDto notification)
+        {
+            var notificationToCreate = _mapper.Map<NotificationEntity>(notification);
+            notificationToCreate.SentTime = DateTime.Now;
+            notificationToCreate.Status = NotificationStatucEnum.Pending;
+            _notificationRepository.Create(notificationToCreate);
+            return _notificationRepository.SaveChanges();
+        }
     }
 }
