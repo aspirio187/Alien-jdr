@@ -1,12 +1,15 @@
 ﻿<ContentControl x:Class="Alien.UI.Views.LobbyCreationView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Alien.UI.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450"
-             Background="Black">
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                xmlns:prism="http://prismlibrary.com/"
+                xmlns:behavior="http://schemas.microsoft.com/xaml/behaviors"
+                xmlns:local="clr-namespace:Alien.UI.Views"
+                prism:ViewModelLocator.AutoWireViewModel="True"
+                mc:Ignorable="d" 
+                d:DesignHeight="450"
+                Background="Black">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -36,18 +39,31 @@
             <TextBlock Text="inviter un joueur" Style="{StaticResource CustomFont}" Foreground="White" FontSize="15" Margin="5" Width="300"
                        VerticalAlignment="Center" 
                        DockPanel.Dock="Left"/>
-            <ComboBox ItemsSource="{Binding AvailablePlayers}" MinWidth="400" Foreground="White" Margin="5" DockPanel.Dock="Left" IsEnabled="{Binding IsCreator}"/>
-            <Button Content="inviter" Style="{StaticResource CustomFont}" Width="200" Margin="5" DockPanel.Dock="Right" IsEnabled="{Binding IsCreator}"/>
+            <ComboBox ItemsSource="{Binding AvailablePlayers}" MinWidth="400" Foreground="White" Margin="5" DockPanel.Dock="Left" IsEnabled="{Binding IsCreator}">
+                <behavior:Interaction.Triggers>
+                    <behavior:EventTrigger EventName="DropDownOpenend">
+                        <prism:InvokeCommandAction Command="{Binding LoadPlayersCommand}"/>
+                    </behavior:EventTrigger>
+                </behavior:Interaction.Triggers>
+            </ComboBox>
+            <Button Content="inviter" Style="{StaticResource CustomFont}" Width="200" Margin="5" Command="{Binding InvitePlayerCommand}" DockPanel.Dock="Right"
+                    IsEnabled="{Binding IsCreator}"/>
         </DockPanel>
 
         <DockPanel Grid.Row="4" LastChildFill="False">
             <TextBlock Text="Ajouter un personnage non joueur" Style="{StaticResource CustomFont}" Foreground="White" FontSize="15" Margin="5" Width="300"
                        VerticalAlignment="Center" />
-            <ComboBox ItemsSource="{Binding AvailableCharacters}" MinWidth="400" Foreground="White" Margin="5" />
+            <ComboBox ItemsSource="{Binding AvailableCharacters}" MinWidth="400" Foreground="White" Margin="5">
+                <behavior:Interaction.Triggers>
+                    <behavior:EventTrigger EventName="DropDownOpenend">
+                        <prism:InvokeCommandAction Command="{Binding LoadCharactersCommand}"/>
+                    </behavior:EventTrigger>
+                </behavior:Interaction.Triggers>
+            </ComboBox>
             <Button Content="Ajouter" Style="{StaticResource CustomFont}" MinWidth="200" Margin="5" Command="{Binding AddNpcCharacterCommand}" DockPanel.Dock="Right"
                     IsEnabled="{Binding IsCreator}"/>
         </DockPanel>
-        
+
         <DataGrid Grid.Row="5" IsReadOnly="True" AutoGenerateColumns="False" Margin="0, 10, 0, 10" >
 
             <DataGrid.Resources>
@@ -72,7 +88,13 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="JOUEURS" MinWidth="200" Width="auto" />
 
-                <DataGridComboBoxColumn Header="PERSONNAGES" MinWidth="350" Width="*" />
+                <DataGridComboBoxColumn Header="PERSONNAGES" MinWidth="350" Width="*">
+                    <behavior:Interaction.Triggers>
+                        <behavior:EventTrigger EventName="DropDownOpenend">
+                            <prism:InvokeCommandAction Command="{Binding LoadCharactersCommand}"/>
+                        </behavior:EventTrigger>
+                    </behavior:Interaction.Triggers>
+                </DataGridComboBoxColumn>
 
                 <DataGridTextColumn Header="STATUS" MinWidth="150" />
 
