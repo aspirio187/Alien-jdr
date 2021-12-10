@@ -54,5 +54,10 @@ namespace Alien.BLL.Services
             if (userFromRepo is null) throw new NullReferenceException(nameof(userFromRepo));
             return _mapper.Map<UserDto>(userFromRepo);
         }
+
+        public async Task<IEnumerable<UserDto>> GetUsersAsync()
+        {
+            return _mapper.Map<IEnumerable<UserDto>>(await _userRepository.GetAllAsync());
+        }
     }
 }

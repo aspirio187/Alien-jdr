@@ -1,5 +1,6 @@
 ﻿using Alien.UI.Helpers;
 using Alien.UI.States;
+using AutoMapper;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -15,6 +16,7 @@ namespace Alien.UI.ViewModels
     public class ViewModelBase : BindableBase, INavigationAware
     {
         protected readonly IAuthenticator _authenticator;
+        protected readonly IMapper _mapper;
 
         protected IRegionNavigationService _regionNavigationService;
 
@@ -23,12 +25,14 @@ namespace Alien.UI.ViewModels
         protected DelegateCommand _loadCommand;
         public virtual DelegateCommand LoadCommand => _loadCommand;
 
-        public ViewModelBase(IRegionNavigationService regionNavigationService, IAuthenticator authenticator)
+        public ViewModelBase(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, IMapper mapper)
         {
             _regionNavigationService = regionNavigationService ??
                 throw new ArgumentNullException(nameof(regionNavigationService));
             _authenticator = authenticator ??
                 throw new ArgumentNullException(nameof(authenticator));
+            _mapper = mapper ??
+                throw new ArgumentNullException(nameof(mapper));
         }
 
         /// <summary>

@@ -12,5 +12,6 @@ namespace Alien.BLL.Interfaces
         bool SignUp(UserSignUpDto user);
         Task<UserDto> SignInAsync(UserSignInDto user);
         Task<UserDto> GetUserAsync(Guid id);
+        Task<IEnumerable<UserDto>> GetUsersAsync();
     }
 }

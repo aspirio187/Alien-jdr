@@ -2,6 +2,7 @@
 using Alien.UI.Helpers;
 using Alien.UI.Models;
 using Alien.UI.States;
+using AutoMapper;
 using Prism.Commands;
 using Prism.Regions;
 using System;
@@ -70,8 +71,9 @@ namespace Alien.UI.ViewModels
         public DelegateCommand StartGameCommand => _startGameCommand ??= new DelegateCommand(StartGame);
 
 
-        public LobbyCreationViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, ILobbyService lobbyService, ICharacterService characterService,
-            IUserService userService, INotificationService notificationService) : base(regionNavigationService, authenticator)
+        public LobbyCreationViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, IMapper mapper, ILobbyService lobbyService,
+            ICharacterService characterService, IUserService userService, INotificationService notificationService)
+            : base(regionNavigationService, authenticator, mapper)
         {
             _lobbyService = lobbyService ??
                 throw new ArgumentNullException(nameof(lobbyService));
@@ -85,6 +87,7 @@ namespace Alien.UI.ViewModels
 
         public async void LoadPlayers()
         {
+
             // TODO : Get all users
         }
 
