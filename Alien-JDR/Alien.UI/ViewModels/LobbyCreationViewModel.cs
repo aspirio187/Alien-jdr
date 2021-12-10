@@ -23,6 +23,7 @@ namespace Alien.UI.ViewModels
         private readonly ICharacterService _characterService;
         private readonly IUserService _userService;
         private readonly INotificationService _notificationService;
+        private readonly ILobbyPlayerService _lobbyPlayerService;
 
         public LobbyModel Lobby { get; set; }
 
@@ -93,7 +94,7 @@ namespace Alien.UI.ViewModels
 
 
         public LobbyCreationViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, IMapper mapper, ILobbyService lobbyService,
-            ICharacterService characterService, IUserService userService, INotificationService notificationService)
+            ICharacterService characterService, IUserService userService, INotificationService notificationService, ILobbyPlayerService lobbyPlayerService)
             : base(regionNavigationService, authenticator, mapper)
         {
             _lobbyService = lobbyService ??
@@ -104,6 +105,8 @@ namespace Alien.UI.ViewModels
                 throw new ArgumentNullException(nameof(userService));
             _notificationService = notificationService ??
                 throw new ArgumentNullException(nameof(notificationService));
+            _lobbyPlayerService = lobbyPlayerService ??
+                throw new ArgumentNullException(nameof(lobbyPlayerService));
         }
 
         public async void LoadPlayers()
@@ -180,6 +183,20 @@ namespace Alien.UI.ViewModels
                     }
                     else
                     {
+                        CreateLobbyPlayerDto creator = new CreateLobbyPlayerDto()
+                        {
+                            UserId = _authenticator.User.Id,
+                            PartyId = Lobby.Id,
+                            CharacterId = null,
+                            IsCreator = true
+                        };
+
+                        if (!_lobbyPlayerService.CreateLobbyCreator(creator))
+                        {
+                            _lobbyService.DeleteLobby(Lobby.Id);
+                            Navigate(ViewsEnum.LobbiesView);
+                        }
+
                         // TODO : créer un lobbyplayer qui est créateur
                     }
                 }
@@ -192,10 +209,6 @@ namespace Alien.UI.ViewModels
             {
 
             }
-
-
-
-
 
             // TODO : Vérifie si l'utilisateur est le créateur du lobby
             // TODO : Si rejoins un lobby en cours : récupérer les infos de la DB et les mettre à jour

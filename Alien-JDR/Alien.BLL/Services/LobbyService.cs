@@ -31,6 +31,14 @@ namespace Alien.BLL.Services
             return _lobbyRepository.SaveChanges() ? _mapper.Map<LobbyDto>(createdLobby) : null;
         }
 
+        public bool DeleteLobby(int lobbyId)
+        {
+            LobbyEntity lobbyFromRepo = Task.Run(async () => await _lobbyRepository.GetByKeyAsync(lobbyId)).Result;
+            if (lobbyFromRepo is null) throw new ArgumentException($"Lobby with ID : \"{ lobbyId }\" does not exist!");
+            _lobbyRepository.Delete(lobbyFromRepo);
+            return _lobbyRepository.SaveChanges();
+        }
+
         public async Task<IEnumerable<LobbyDto>> GetLobbiesAsync()
         {
             return _mapper.Map<IEnumerable<LobbyDto>>(await _lobbyRepository.GetAllAsync());

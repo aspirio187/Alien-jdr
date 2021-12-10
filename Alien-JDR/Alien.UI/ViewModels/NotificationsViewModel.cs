@@ -1,4 +1,5 @@
-﻿using Alien.BLL.Interfaces;
+﻿using Alien.BLL.Dtos;
+using Alien.BLL.Interfaces;
 using Alien.UI.Helpers;
 using Alien.UI.Models;
 using Alien.UI.States;
@@ -35,7 +36,7 @@ namespace Alien.UI.ViewModels
 
         protected override async Task LoadAsync()
         {
-            var notifs = await _notificationService.GetUserNotifications(_authenticator.User.Id);
+            IEnumerable<NotificationDto> notifs = await _notificationService.GetUserNotifications(_authenticator.User.Id);
             List<NotificationModel> not = new List<NotificationModel>();
             foreach (var notif in notifs)
             {
