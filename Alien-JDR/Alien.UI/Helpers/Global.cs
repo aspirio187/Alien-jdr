@@ -62,10 +62,10 @@ namespace Alien.UI.Helpers
         Android
     }
 
-    public enum PartyModeEnum
+    public enum LobbyModeEnum
     {
         Scenario,
-        Campagned
+        Campagne
     }
 
     public enum NotificationStatusEnum

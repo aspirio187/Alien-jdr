@@ -6,11 +6,17 @@
                 xmlns:prism="http://prismlibrary.com/"
                 xmlns:behavior="http://schemas.microsoft.com/xaml/behaviors"
                 xmlns:local="clr-namespace:Alien.UI.Views"
+                xmlns:global="clr-namespace:Alien.UI.Helpers"
                 prism:ViewModelLocator.AutoWireViewModel="True"
                 mc:Ignorable="d" 
                 d:DesignHeight="450"
                 Background="Black">
     <Grid>
+
+        <Grid.Resources>
+            <global:ComparisonConverter x:Key="ComparisonConverter" />
+        </Grid.Resources>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
