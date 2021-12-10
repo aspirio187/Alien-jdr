@@ -16,7 +16,7 @@
         <Grid.Resources>
             <global:ComparisonConverter x:Key="ComparisonConverter" />
         </Grid.Resources>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -40,9 +40,9 @@
 
         <DockPanel Grid.Row="2">
             <TextBlock Text="nom de la partie" Style="{StaticResource CustomFont}" Foreground="White" FontSize="15" Margin="5" Width="300" VerticalAlignment="Center" />
-            <TextBox Text="{Binding LobbyName}" Margin="5" IsEnabled="{Binding IsCreator}" />
+            <TextBox Text="{Binding LobbyName}" Margin="5" IsEnabled="{Binding IsCreator}" Foreground="white" FontSize="15" VerticalAlignment="Center"/>
         </DockPanel>
-        
+
         <DockPanel Grid.Row="3" LastChildFill="False">
             <TextBlock Text="nombre de joueurs maximum" Style="{StaticResource CustomFont}" Foreground="white" FontSize="15" Margin="5" Width="300"
                        VerticalAlignment="Center" />

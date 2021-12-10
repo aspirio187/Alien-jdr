@@ -9,7 +9,9 @@ using Prism.Regions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -40,7 +42,15 @@ namespace Alien.UI.ViewModels
             set { SetProperty(ref _selectedGameMode, value); }
         }
 
-        private int _maximumPlayers;
+        private string _lobbyName = $"NOUVELLE PARTIE { new Random().Next(1, 250) }";
+
+        public string LobbyName
+        {
+            get { return _lobbyName; }
+            set { SetProperty(ref _lobbyName, value); }
+        }
+
+        private int _maximumPlayers = 6;
 
         public int MaximumPlayers
         {
@@ -48,7 +58,7 @@ namespace Alien.UI.ViewModels
             set { SetProperty(ref _maximumPlayers, value); }
         }
 
-        public ObservableCollection<LobbyPlayerModel> LobbyPlayers { get; set; }
+        public ObservableCollection<LobbyPlayerModel> LobbyPlayers { get; set; } = new();
         public ObservableCollection<LobbyUserModel> AvailableUsers { get; set; }
 
         private LobbyUserModel _selectedUser;
@@ -154,13 +164,33 @@ namespace Alien.UI.ViewModels
             {
                 // TODO : Créer un lobby dans la base de donnée
 
-                Lobby = _mapper.Map<LobbyModel>(_lobbyService.CreateLobby(new CreateLobbyDto()
+                try
                 {
-                    HostIp = string.Empty, // Récupérer l'adresse ip de l'hôte
-                    MaximumPlayers = MaximumPlayers,
-                    Mode = SelectedGameMode.ToString(),
-                    Name = 
-                }));
+                    Lobby = _mapper.Map<LobbyModel>(_lobbyService.CreateLobby(new CreateLobbyDto()
+                    {
+                        HostIp = Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(ip => ip.IsIPv6LinkLocal)?.ToString(),
+                        MaximumPlayers = MaximumPlayers,
+                        Mode = SelectedGameMode.ToString(),
+                        Name = LobbyName
+                    }));
+
+                    if (Lobby is null)
+                    {
+                        Navigate(ViewsEnum.LobbiesView);
+                    }
+                    else
+                    {
+                        // TODO : créer un lobbyplayer qui est créateur
+                    }
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e.Message);
+                }
+            }
+            else
+            {
+
             }
 
 
