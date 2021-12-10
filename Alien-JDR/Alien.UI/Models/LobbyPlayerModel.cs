@@ -10,7 +10,7 @@ namespace Alien.UI.Models
 {
     public class LobbyPlayerModel : ModelBase
     {
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
 
         private string _playerName;
 

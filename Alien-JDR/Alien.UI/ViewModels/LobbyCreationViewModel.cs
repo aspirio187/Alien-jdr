@@ -87,15 +87,23 @@ namespace Alien.UI.ViewModels
 
         public async void LoadPlayers()
         {
+            List<LobbyUserModel> users = _mapper.Map<List<LobbyUserModel>>(await _userService.GetUsersAsync());
 
-            // TODO : Get all users
+            users.Remove(users.FirstOrDefault(u => u.Id == _authenticator.User.Id));
+
+            foreach (var player in LobbyPlayers)
+            {
+                users.Remove(users.FirstOrDefault(u => u.Id == player.UserId));
+            }
+
+            AvailableUsers = new(users);
         }
 
         public void InvitePlayer()
         {
             if (SelectedUser is not null && SelectedUser.IsValid)
             {
-
+                AvailableUsers.Clear();
             }
             // TODO : Send notification to user
         }
