@@ -22,6 +22,8 @@ namespace Alien.UI.ViewModels
         private readonly IUserService _userService;
         private readonly INotificationService _notificationService;
 
+        public LobbyModel Lobby { get; set; }
+
         private bool _isCreator;
 
         public bool IsCreator
@@ -36,6 +38,14 @@ namespace Alien.UI.ViewModels
         {
             get { return _selectedGameMode; }
             set { SetProperty(ref _selectedGameMode, value); }
+        }
+
+        private int _maximumPlayers;
+
+        public int MaximumPlayers
+        {
+            get { return _maximumPlayers; }
+            set { SetProperty(ref _maximumPlayers, value); }
         }
 
         public ObservableCollection<LobbyPlayerModel> LobbyPlayers { get; set; }
@@ -139,8 +149,26 @@ namespace Alien.UI.ViewModels
         {
             base.OnNavigatedTo(navigationContext);
 
-            // TODO : Créer un lobby dans la base de donnée
+            int? lobbyId = navigationContext.Parameters.GetValue<int?>(Global.LOBBY_ID);
+            if (lobbyId is null)
+            {
+                // TODO : Créer un lobby dans la base de donnée
+
+                Lobby = _mapper.Map<LobbyModel>(_lobbyService.CreateLobby(new CreateLobbyDto()
+                {
+                    HostIp = string.Empty, // Récupérer l'adresse ip de l'hôte
+                    MaximumPlayers = MaximumPlayers,
+                    Mode = SelectedGameMode.ToString(),
+                    Name = 
+                }));
+            }
+
+
+
+
+
             // TODO : Vérifie si l'utilisateur est le créateur du lobby
+            // TODO : Si rejoins un lobby en cours : récupérer les infos de la DB et les mettre à jour
         }
 
         public bool PersistInHistory()

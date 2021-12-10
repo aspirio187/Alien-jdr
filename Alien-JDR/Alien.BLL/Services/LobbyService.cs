@@ -1,5 +1,6 @@
 ﻿using Alien.BLL.Dtos;
 using Alien.BLL.Interfaces;
+using Alien.DAL.Entities;
 using Alien.DAL.Interfaces;
 using AutoMapper;
 using System;
@@ -21,6 +22,13 @@ namespace Alien.BLL.Services
                 throw new ArgumentNullException(nameof(lobbyRepository));
             _mapper = mapper ??
                 throw new ArgumentNullException(nameof(mapper));
+        }
+
+        public LobbyDto CreateLobby(CreateLobbyDto lobby)
+        {
+            if (lobby is null) throw new ArgumentNullException(nameof(lobby));
+            LobbyEntity createdLobby = _lobbyRepository.Create(_mapper.Map<LobbyEntity>(lobby));
+            return _lobbyRepository.SaveChanges() ? _mapper.Map<LobbyDto>(createdLobby) : null;
         }
 
         public async Task<IEnumerable<LobbyDto>> GetLobbiesAsync()

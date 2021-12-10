@@ -7,5 +7,6 @@ namespace Alien.BLL.Interfaces
     public interface ILobbyService
     {
         Task<IEnumerable<LobbyDto>> GetLobbiesAsync();
+        LobbyDto CreateLobby(CreateLobbyDto lobby);
     }
 }
