@@ -2,6 +2,7 @@
 using Alien.UI.Helpers;
 using Alien.UI.Models;
 using Alien.UI.States;
+using AutoMapper;
 using Prism.Commands;
 using Prism.Regions;
 using System;
@@ -33,8 +34,8 @@ namespace Alien.UI.ViewModels
         public DelegateCommand NavigateNextPageCommand => _navigateNextPageCommand ??= new(NavigateNextPage, CanNavigateNextPage);
         public DelegateCommand<Attributes?> SelectAttributeCommand => _selectAttributeCommand ??= new DelegateCommand<Attributes?>(SelectAttribute, CanSelectAttribute);
 
-        public CharacterAndroidCreationViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator)
-            : base(regionNavigationService, authenticator)
+        public CharacterAndroidCreationViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, IMapper mapper)
+            : base(regionNavigationService, authenticator, mapper)
         {
             SelectAttributeCommand.RaiseCanExecuteChanged();
         }

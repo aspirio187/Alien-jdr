@@ -2,6 +2,7 @@
 using Alien.BLL.Interfaces;
 using Alien.UI.Helpers;
 using Alien.UI.States;
+using AutoMapper;
 using Prism.Commands;
 using Prism.Regions;
 using System;
@@ -39,8 +40,8 @@ namespace Alien.UI.ViewModels
         public DelegateCommand NavigateBackCommand => _navigateBackCommand ??= new(NavigateBack);
         public DelegateCommand CreateCharacterCommand => _createCharacterCommand ??= new(CreateCharacter);
 
-        public CharacterCreationSummaryViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, ICharacterService characterService)
-            : base(regionNavigationService, authenticator)
+        public CharacterCreationSummaryViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, IMapper mapper, ICharacterService characterService)
+            : base(regionNavigationService, authenticator, mapper)
         {
             _characterService = characterService ??
                 throw new ArgumentNullException(nameof(characterService));

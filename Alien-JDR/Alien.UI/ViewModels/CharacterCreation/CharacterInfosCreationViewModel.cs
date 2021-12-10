@@ -2,6 +2,7 @@
 using Alien.UI.Helpers;
 using Alien.UI.Models;
 using Alien.UI.States;
+using AutoMapper;
 using Prism.Commands;
 using Prism.Regions;
 using System;
@@ -39,8 +40,8 @@ namespace Alien.UI.ViewModels
         public DelegateCommand AddEquipmentCommand => _addEquipmentCommand ??= new(AddEquipment);
         public DelegateCommand RemoveEquipmentCommand => _removeEquipmentCommand ??= new(RemoveEquipment);
 
-        public CharacterInfosCreationViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator)
-            : base(regionNavigationService, authenticator)
+        public CharacterInfosCreationViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, IMapper mapper)
+            : base(regionNavigationService, authenticator, mapper)
         {
 
         }

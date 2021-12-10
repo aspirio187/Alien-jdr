@@ -4,6 +4,7 @@ using Alien.Tools.Helpers;
 using Alien.UI.Helpers;
 using Alien.UI.Models;
 using Alien.UI.States;
+using AutoMapper;
 using Prism.Commands;
 using Prism.Regions;
 using System;
@@ -66,8 +67,8 @@ namespace Alien.UI.ViewModels
         public DelegateCommand NavigateBackCommand => _navigateBackCommand ??= new DelegateCommand(NavigateBack);
         public DelegateCommand NavigateNextPageCommand => _navigateNextPageCommand ??= new DelegateCommand(NavigateNextPage, CanNavigateNextPage);
 
-        public CharacterAttributesCompetencesViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, ICharacterService characterService)
-            : base(regionNavigationService, authenticator)
+        public CharacterAttributesCompetencesViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, IMapper mapper, 
+            ICharacterService characterService) : base(regionNavigationService, authenticator, mapper)
         {
             _characterService = characterService ??
                 throw new ArgumentNullException(nameof(characterService));
