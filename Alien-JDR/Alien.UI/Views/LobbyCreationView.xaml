@@ -55,7 +55,7 @@
                        DockPanel.Dock="Left"/>
             <ComboBox ItemsSource="{Binding AvailablePlayers}" MinWidth="400" Foreground="White" Margin="5" DockPanel.Dock="Left" IsEnabled="{Binding IsCreator}">
                 <behavior:Interaction.Triggers>
-                    <behavior:EventTrigger EventName="DropDownOpenend">
+                    <behavior:EventTrigger EventName="DropDownOpened">
                         <prism:InvokeCommandAction Command="{Binding LoadPlayersCommand}"/>
                     </behavior:EventTrigger>
                 </behavior:Interaction.Triggers>
@@ -69,7 +69,7 @@
                        VerticalAlignment="Center" />
             <ComboBox ItemsSource="{Binding AvailableCharacters}" MinWidth="400" Foreground="White" Margin="5">
                 <behavior:Interaction.Triggers>
-                    <behavior:EventTrigger EventName="DropDownOpenend">
+                    <behavior:EventTrigger EventName="DropDownOpened">
                         <prism:InvokeCommandAction Command="{Binding LoadCharactersCommand}"/>
                     </behavior:EventTrigger>
                 </behavior:Interaction.Triggers>

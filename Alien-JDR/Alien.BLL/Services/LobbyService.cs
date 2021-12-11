@@ -43,7 +43,8 @@ namespace Alien.BLL.Services
 
         public async Task<IEnumerable<LobbyDto>> GetLobbiesAsync()
         {
-            return _mapper.Map<IEnumerable<LobbyDto>>(await _lobbyRepository.GetAllLobbiesWithPlayersAsync());
+            IEnumerable<LobbyDto> lobbies = _mapper.Map<IEnumerable<LobbyDto>>(await _lobbyRepository.GetAllLobbiesWithPlayersAsync());
+            return lobbies;
         }
     }
 }

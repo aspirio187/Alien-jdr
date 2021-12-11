@@ -19,7 +19,8 @@ namespace Alien.DAL.Repositories
 
         public async Task<IEnumerable<LobbyEntity>> GetAllLobbiesWithPlayersAsync()
         {
-            return await _context.Lobbies.Include(l => l.PartyPlayers).ToListAsync();
+            List<LobbyEntity> lobbies = await _context.Lobbies.Include(l => l.PartyPlayers).ToListAsync();
+            return lobbies;
         }
     }
 }

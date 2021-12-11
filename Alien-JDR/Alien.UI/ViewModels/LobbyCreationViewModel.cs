@@ -199,6 +199,8 @@ namespace Alien.UI.ViewModels
                             Navigate(ViewsEnum.LobbiesView);
                         }
                     }
+
+                    IsCreator = true;
                 }
                 catch (Exception e)
                 {
