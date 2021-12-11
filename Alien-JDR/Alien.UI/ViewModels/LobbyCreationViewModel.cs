@@ -60,7 +60,16 @@ namespace Alien.UI.ViewModels
         }
 
         public ObservableCollection<LobbyPlayerModel> LobbyPlayers { get; set; } = new();
-        public ObservableCollection<LobbyUserModel> AvailableUsers { get; set; }
+
+        private ObservableCollection<LobbyUserModel> _availableUsers;
+
+        public ObservableCollection<LobbyUserModel> AvailableUsers
+        {
+            get { return _availableUsers; }
+            set {SetProperty(ref _availableUsers, value); }
+        }
+
+        //public ObservableCollection<LobbyUserModel> AvailableUsers { get; set; }
 
         private LobbyUserModel _selectedUser;
 

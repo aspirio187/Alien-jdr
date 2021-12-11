@@ -20,16 +20,21 @@ namespace Alien.UI.Models
             }
         }
 
-        private string _name;
+        private string _username;
 
-        public string Name
+        public string Username
         {
-            get { return _name; }
+            get { return _username; }
             set
             {
-                ValidateProperty(ref _name, value);
+                ValidateProperty(ref _username, value);
                 NotifyPropertyChanged();
             }
+        }
+
+        public override string ToString()
+        {
+            return $"{Username}";
         }
     }
 }
