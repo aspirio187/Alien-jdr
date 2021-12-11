@@ -72,7 +72,8 @@
                          HorizontalAlignment="Center" HorizontalContentAlignment="Left"
                          Foreground="White" Background="Transparent"
                          BorderThickness="0" Margin="0,30,0,0"
-                         Width="400" />
+                         Width="400"
+                         CaretBrush="White"/>
 
                 <iconPacks:PackIconMaterial Kind="Account"
                                            VerticalAlignment="Center" 
@@ -97,7 +98,8 @@
                          BorderThickness="0"
                          Width="400"
                          HorizontalContentAlignment="Left"
-                         Margin="0,30,0,0" />
+                         Margin="0,30,0,0"
+                         CaretBrush="White"/>
 
                 <iconPacks:PackIconMaterial Kind="Account"
                                            VerticalAlignment="Center" 
@@ -125,7 +127,8 @@
                          Width="400"
                          HorizontalContentAlignment="Left"
                          Margin="0,30,0,0"
-                         x:Name="txbName" />
+                         x:Name="txbName"
+                         CaretBrush="White"/>
 
 
                 <iconPacks:PackIconMaterial Kind="Account"
@@ -153,7 +156,8 @@
                          Width="400"
                          HorizontalContentAlignment="Left"
                          Margin="0,30,0,0"
-                         x:Name="txbEmail" />
+                         x:Name="txbEmail" 
+                         CaretBrush="White"/>
 
 
                 <iconPacks:PackIconMaterial Kind="Mail"
@@ -182,7 +186,8 @@
                          BorderThickness="0"
                          Width="400"
                          HorizontalContentAlignment="Left"
-                         Margin="0,30,0,0" />
+                         Margin="0,30,0,0"
+                         CaretBrush="White"/>
 
                 <iconPacks:PackIconMaterial Kind="FormTextboxPassword"
                                            VerticalAlignment="Center" 

@@ -74,6 +74,7 @@
                     <DockPanel HorizontalAlignment="Center" Height="50">
                         <!-- Mettre le nom d'utilisateur en MAJ ? Faut l'adapter à la DB -->
                         <TextBox 
+                                CaretBrush="White"
                                 FontWeight="Light"
                                 materialDesign:HintAssist.Hint="Nom d'utilisateur" 
                                 FontFamily="Arial Black"
@@ -106,7 +107,8 @@
                                      BorderThickness="0"
                                      Width="235"
                                      VerticalContentAlignment="Center"
-                                     HorizontalContentAlignment="Left" />
+                                     HorizontalContentAlignment="Left"
+                                     CaretBrush="White"/>
 
                         <iconPack:PackIconMaterial Kind="FormTextboxPassword" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Right" />
                     </DockPanel>
