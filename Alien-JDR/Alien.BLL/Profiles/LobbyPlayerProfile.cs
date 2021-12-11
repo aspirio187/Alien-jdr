@@ -13,7 +13,8 @@ namespace Alien.BLL.Profiles
     {
         public LobbyPlayerProfile()
         {
-            
+            CreateMap<LobbyPlayerEntity, LobbyPlayerDto>();
+            CreateMap<CreateLobbyPlayerDto, LobbyPlayerEntity>();
         }
     }
 }

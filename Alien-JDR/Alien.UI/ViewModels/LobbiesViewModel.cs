@@ -20,7 +20,15 @@ namespace Alien.UI.ViewModels
         private readonly ILobbyService _lobbyService;
         private readonly IUserService _userService;
 
-        public ObservableCollection<LobbyDto> Lobbies { get; set; }
+        //public ObservableCollection<LobbyDto> Lobbies { get; set; }
+        private ObservableCollection<LobbyDto> _lobbies;
+
+        public ObservableCollection<LobbyDto> Lobbies
+        {
+            get { return _lobbies; }
+            set { SetProperty(ref _lobbies, value); }
+        }
+
 
         private DelegateCommand<int?> _joinLobbyCommand;
         private DelegateCommand _createLobbyCommand;

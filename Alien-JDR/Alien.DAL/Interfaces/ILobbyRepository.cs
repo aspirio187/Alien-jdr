@@ -9,6 +9,6 @@ namespace Alien.DAL.Interfaces
 {
     public interface ILobbyRepository : IRepositoryBase<LobbyEntity, int>
     {
-
+        Task<IEnumerable<LobbyEntity>> GetAllLobbiesWithPlayersAsync();
     }
 }

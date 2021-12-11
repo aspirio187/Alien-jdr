@@ -20,6 +20,8 @@ namespace Alien.BLL.Profiles
                         src => src.Status == LobbyStatusEnum.Started ? "Commencé"
                                 : src.Status == LobbyStatusEnum.Waiting ? "Attente"
                                 : src.Status == LobbyStatusEnum.Over ? "Terminé" : string.Empty));
+
+            CreateMap<CreateLobbyDto, LobbyEntity>();
         }
     }
 }

@@ -27,7 +27,9 @@ namespace Alien.BLL.Services
         public LobbyDto CreateLobby(CreateLobbyDto lobby)
         {
             if (lobby is null) throw new ArgumentNullException(nameof(lobby));
-            LobbyEntity createdLobby = _lobbyRepository.Create(_mapper.Map<LobbyEntity>(lobby));
+            LobbyEntity lobbyToCreate = _mapper.Map<LobbyEntity>(lobby);
+            lobbyToCreate.Status = LobbyStatusEnum.Waiting;
+            LobbyEntity createdLobby = _lobbyRepository.Create(lobbyToCreate);
             return _lobbyRepository.SaveChanges() ? _mapper.Map<LobbyDto>(createdLobby) : null;
         }
 
@@ -41,7 +43,7 @@ namespace Alien.BLL.Services
 
         public async Task<IEnumerable<LobbyDto>> GetLobbiesAsync()
         {
-            return _mapper.Map<IEnumerable<LobbyDto>>(await _lobbyRepository.GetAllAsync());
+            return _mapper.Map<IEnumerable<LobbyDto>>(await _lobbyRepository.GetAllLobbiesWithPlayersAsync());
         }
     }
 }
