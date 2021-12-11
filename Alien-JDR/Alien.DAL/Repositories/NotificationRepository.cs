@@ -14,10 +14,13 @@ namespace Alien.DAL.Repositories
 {
     public class NotificationRepository : RepositoryBase<NotificationEntity, int>, INotificationRepository
     {
-        private const string CONNECTION_STRING = @"Server=(localdb)\MSSQLLocalDB;
+        private const string CONNECTION_STRING = @"Server=IDEAPAD-SOULTAN\SQLEXPRESS;
                                                 Database=Alien-JDR-DB;
-                                                Integrated Security=True;
-                                                Connect Timeout=60;";
+                                                Integrated Security=SSPI;";
+        //private const string CONNECTION_STRING = @"Server=(localdb)\MSSQLLocalDB;
+        //                                        Database=Alien-JDR-DB;
+        //                                        Integrated Security=True;
+        //                                        Connect Timeout=60;";
         private const string TABLE_NAME = "Notifications";
 
         private readonly SqlTableDependency<NotificationEntity> _sqlTableDependency;

@@ -115,7 +115,7 @@ namespace Alien.UI.ViewModels
 
             users.Remove(users.FirstOrDefault(u => u.Id == _authenticator.User.Id));
 
-            foreach (var player in LobbyPlayers)
+            foreach (LobbyPlayerModel player in LobbyPlayers)
             {
                 users.Remove(users.FirstOrDefault(u => u.Id == player.UserId));
             }
@@ -183,6 +183,8 @@ namespace Alien.UI.ViewModels
                     }
                     else
                     {
+                        // TODO : créer un lobbyplayer qui est créateur
+
                         CreateLobbyPlayerDto creator = new CreateLobbyPlayerDto()
                         {
                             UserId = _authenticator.User.Id,
@@ -196,8 +198,6 @@ namespace Alien.UI.ViewModels
                             _lobbyService.DeleteLobby(Lobby.Id);
                             Navigate(ViewsEnum.LobbiesView);
                         }
-
-                        // TODO : créer un lobbyplayer qui est créateur
                     }
                 }
                 catch (Exception e)

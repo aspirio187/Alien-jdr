@@ -69,6 +69,7 @@ namespace Alien.UI.ViewModels
             try
             {
                 UserDto user = Task.Run(async () => await _userService.GetUserAsync(_authenticator.User.Id)).Result;
+                if (user is null) return false;
                 return true;
             }
             catch (NullReferenceException e)
