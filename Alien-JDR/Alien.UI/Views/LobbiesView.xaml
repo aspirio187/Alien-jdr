@@ -3,7 +3,10 @@
                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                xmlns:prism="http://prismlibrary.com/"
+                xmlns:behavior="http://schemas.microsoft.com/xaml/behaviors"
                 xmlns:local="clr-namespace:Alien.UI.Views" 
+                prism:ViewModelLocator.AutoWireViewModel="True"
                 mc:Ignorable="d" 
                 d:DesignHeight="450" 
                 Background="Black">
@@ -63,7 +66,11 @@
             <Button  Content="Creer un lobby" Style="{StaticResource CustomFont}" Width="200" Margin="10"
                 HorizontalAlignment="Right" VerticalAlignment="Center" Command="{Binding CreateLobbyCommand}" />
         </DockPanel>
-        
 
+        <behavior:Interaction.Triggers>
+            <behavior:EventTrigger EventName="Loaded">
+                <prism:InvokeCommandAction Command="{Binding LoadCommand}"/>
+            </behavior:EventTrigger>
+        </behavior:Interaction.Triggers>
     </Grid>
 </ContentControl>
