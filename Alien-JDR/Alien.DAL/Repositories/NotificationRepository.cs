@@ -16,7 +16,8 @@ namespace Alien.DAL.Repositories
     {
         private const string CONNECTION_STRING = @"Server=IDEAPAD-SOULTAN\SQLEXPRESS;
                                                 Database=Alien-JDR-DB;
-                                                Integrated Security=SSPI;";
+                                                Username=thinkpad;
+                                                Password=soultan187;";
         //private const string CONNECTION_STRING = @"Server=(localdb)\MSSQLLocalDB;
         //                                        Database=Alien-JDR-DB;
         //                                        Integrated Security=True;

@@ -34,7 +34,8 @@ namespace Alien.DAL
             //                    Integrated Security=True;
             //                    Connect Timeout=60;");
             optionsBuilder.UseSqlServer(
-                 @"Server=IDEAPAD-SOULTAN\SQLEXPRESS;Database=Alien-JDR-DB;Integrated Security=SSPI;");
+                 @"Server=IDEAPAD-SOULTAN\SQLEXPRESS;Database=Alien-JDR-DB;Username=thinkpad;
+                                                Password=soultan187;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
