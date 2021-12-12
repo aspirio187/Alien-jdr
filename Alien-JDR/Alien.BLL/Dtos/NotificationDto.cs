@@ -12,6 +12,7 @@ namespace Alien.BLL.Dtos
         public DateTime SentTime { get; set; }
         public Guid SenderId { get; set; }
         public string SenderName { get; set; }
+        public Guid ReceiverId { get; set; }
         public LobbyDto Lobby { get; set; }
         public bool IsAccepted { get; set; }
     }

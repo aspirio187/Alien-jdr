@@ -58,7 +58,10 @@ namespace Alien.UI.ViewModels
 
         private void Notification_Received(object sender, NotificationEventArgs e)
         {
-            NotificationReceived = true;
+            if(e.Notification.ReceiverId == _authenticator.User.Id)
+            {
+                NotificationReceived = true;
+            }
         }
 
         protected override async Task LoadAsync()
