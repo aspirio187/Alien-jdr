@@ -71,5 +71,12 @@
         </DataGrid>
         <!--<Button Content="Accepter" Command="{Binding RespondCommand}" CommandParameter="{x:Static Global:NotificationStatusEnum.Accepted}" />-->
 
+        <behavior:Interaction.Triggers>
+
+            <behavior:EventTrigger EventName="Loaded">
+
+                <prism:InvokeCommandAction Command="{Binding LoadCommand}"/>
+            </behavior:EventTrigger>
+        </behavior:Interaction.Triggers>
     </Grid>
 </ContentControl>

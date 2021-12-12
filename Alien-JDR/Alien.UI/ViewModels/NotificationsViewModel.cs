@@ -19,11 +19,12 @@ namespace Alien.UI.ViewModels
     {
         public readonly INotificationService _notificationService;
 
-        private DelegateCommand<NotificationStatusEnum> _respondCommand;
-        public override DelegateCommand LoadCommand => _loadCommand ??= new(async () => await LoadAsync());
-        public DelegateCommand<NotificationStatusEnum> RespondCommand => _respondCommand ??= new DelegateCommand<NotificationStatusEnum>(Respond, CanRespond);
-
         public ObservableCollection<NotificationModel> Notifications { get; set; }
+
+        private DelegateCommand<NotificationStatusEnum?> _respondCommand;
+
+        public DelegateCommand<NotificationStatusEnum?> RespondCommand => _respondCommand ??= new DelegateCommand<NotificationStatusEnum?>(Respond, CanRespond);
+        public override DelegateCommand LoadCommand => _loadCommand ??= new(async () => await LoadAsync());
 
         public NotificationsViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, IMapper mapper, INotificationService notificationService)
             : base(regionNavigationService, authenticator, mapper)
@@ -54,12 +55,12 @@ namespace Alien.UI.ViewModels
             Notifications = new(not.OrderBy(n => n.Id));
         }
 
-        public bool CanRespond(NotificationStatusEnum notificationStatusEnum)
+        public bool CanRespond(NotificationStatusEnum? notificationStatusEnum)
         {
             return notificationStatusEnum == NotificationStatusEnum.Pending;
         }
 
-        public void Respond(NotificationStatusEnum notificationStatusEnum)
+        public void Respond(NotificationStatusEnum? notificationStatusEnum)
         {
             switch (notificationStatusEnum)
             {
