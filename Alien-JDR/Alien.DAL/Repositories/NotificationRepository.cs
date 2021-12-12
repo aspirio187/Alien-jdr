@@ -32,6 +32,7 @@ namespace Alien.DAL.Repositories
             : base(context)
         {
             _sqlTableDependency = new SqlTableDependency<NotificationEntity>(CONNECTION_STRING, TABLE_NAME);
+            _sqlTableDependency.Start();
             _sqlTableDependency.OnChanged += NewNotification;
         }
 
