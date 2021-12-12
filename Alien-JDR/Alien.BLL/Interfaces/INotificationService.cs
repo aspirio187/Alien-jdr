@@ -14,5 +14,6 @@ namespace Alien.BLL.Interfaces
         Task<IEnumerable<NotificationDto>> GetUserNotifications(Guid userId);
         Task<bool> CheckPendingNotifications(Guid userId);
         bool SendNotification(CreateNotificationDto notification);
+        Task<bool> UpdateNotificationStatus(int notificationid, string status);
     }
 }

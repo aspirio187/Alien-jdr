@@ -26,15 +26,15 @@ namespace Alien.UI.Profiles
                     opt => opt.MapFrom(
                         src => src.Lobby.Mode))
                 .ForMember(
-                    dest => dest.PartyHost,
+                    dest => dest.LobbyHost,
                     opt => opt.MapFrom(
                         src => src.SenderName))
                 .ForMember(
-                    dest => dest.PartyName,
+                    dest => dest.LobbyName,
                     opt => opt.MapFrom(
                         src => src.Lobby.Name))
                 .ForMember(
-                    dest => dest.SendAt,
+                    dest => dest.SentAt,
                     opt => opt.MapFrom(
                         src => src.SentTime))
                 .ForMember(

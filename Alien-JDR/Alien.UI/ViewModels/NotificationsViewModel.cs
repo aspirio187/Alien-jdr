@@ -62,15 +62,20 @@ namespace Alien.UI.ViewModels
         public void Respond(object row)
         {
             object[] bindings = (row as object[]);
-            NotificationStatusEnum status = (NotificationStatusEnum)bindings[0];
+            NotificationStatusEnum buttonStatus = (NotificationStatusEnum)bindings[0];
+            NotificationStatusEnum notificationStatus = (NotificationStatusEnum)bindings[1];
+            int id = (int)bindings[2];
 
-            switch (status)
+            switch (buttonStatus)
             {
                 case NotificationStatusEnum.Accepted:
                     // TODO : Change l'état dans la base de donnée et navigue vers le lobby
                     break;
                 case NotificationStatusEnum.Denied:
                     // TODO : Change l'état dans la base de donnée
+                    NotificationModel notificationToUpdate = Notifications.FirstOrDefault(n => n.Id == id);
+                    notificationToUpdate.NotificationStatus = NotificationStatusEnum.Denied;
+                    _notificationService.UpdateNotificationStatus(id, NotificationStatusEnum.Denied.ToString());
                     break;
             }
 
@@ -80,7 +85,7 @@ namespace Alien.UI.ViewModels
         protected override async Task LoadAsync()
         {
             IEnumerable<NotificationDto> notifs = await _notificationService.GetUserNotifications(_authenticator.User.Id);
-            Notifications = new(_mapper.Map<IEnumerable<NotificationModel>>(notifs).OrderBy(n => n.SendAt));
+            Notifications = new(_mapper.Map<IEnumerable<NotificationModel>>(notifs).OrderBy(n => n.SentAt));
         }
     }
 }

@@ -18,6 +18,13 @@ namespace Alien.BLL.Profiles
                     dest => dest.Status,
                     opt => opt.MapFrom(
                         src => src.Status.ToString()));
+
+            CreateMap<NotificationDto, NotificationEntity>()
+                .ForMember(
+                    dest => dest.Status,
+                    opt => opt.MapFrom(
+                        src => (NotificationStatucEnum)Enum.Parse(typeof(NotificationStatucEnum), src.Status)));
+
             CreateMap<CreateNotificationDto, NotificationEntity>();
         }
     }

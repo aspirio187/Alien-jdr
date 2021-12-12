@@ -61,5 +61,14 @@ namespace Alien.BLL.Services
             _notificationRepository.Create(notificationToCreate);
             return _notificationRepository.SaveChanges();
         }
+
+        public async Task<bool> UpdateNotificationStatus(int notificationid, string status)
+        {
+            NotificationEntity notificationFromRepo = await _notificationRepository.GetByKeyAsync(notificationid);
+            if (notificationFromRepo is null) throw new NullReferenceException($"There is no notification with ID : {notificationid}");
+            notificationFromRepo.Status = (NotificationStatucEnum)Enum.Parse(typeof(GCNotificationStatus), status);
+            _notificationRepository.Update(notificationFromRepo);
+            return _notificationRepository.SaveChanges();
+        }
     }
 }
