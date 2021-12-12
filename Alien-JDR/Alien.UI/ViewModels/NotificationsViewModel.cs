@@ -59,7 +59,7 @@ namespace Alien.UI.ViewModels
             return status.Equals(NotificationStatusEnum.Pending);
         }
 
-        public void Respond(object row)
+        public async void Respond(object row)
         {
             object[] bindings = (row as object[]);
             NotificationStatusEnum buttonStatus = (NotificationStatusEnum)bindings[0];
@@ -74,8 +74,10 @@ namespace Alien.UI.ViewModels
                 case NotificationStatusEnum.Denied:
                     // TODO : Change l'état dans la base de donnée
                     NotificationModel notificationToUpdate = Notifications.FirstOrDefault(n => n.Id == id);
-                    notificationToUpdate.NotificationStatus = NotificationStatusEnum.Denied;
-                    _notificationService.UpdateNotificationStatus(id, NotificationStatusEnum.Denied.ToString());
+                    if(await _notificationService.UpdateNotificationStatus(id, NotificationStatusEnum.Denied.ToString()))
+                    {
+                        notificationToUpdate.NotificationStatus = NotificationStatusEnum.Denied;
+                    }
                     break;
             }
 

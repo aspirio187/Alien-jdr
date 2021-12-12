@@ -66,7 +66,7 @@ namespace Alien.BLL.Services
         {
             NotificationEntity notificationFromRepo = await _notificationRepository.GetByKeyAsync(notificationid);
             if (notificationFromRepo is null) throw new NullReferenceException($"There is no notification with ID : {notificationid}");
-            notificationFromRepo.Status = (NotificationStatucEnum)Enum.Parse(typeof(GCNotificationStatus), status);
+            notificationFromRepo.Status = (NotificationStatucEnum)Enum.Parse(typeof(NotificationStatucEnum), status);
             _notificationRepository.Update(notificationFromRepo);
             return _notificationRepository.SaveChanges();
         }
