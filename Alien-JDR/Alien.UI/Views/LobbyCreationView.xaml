@@ -53,7 +53,7 @@
             <TextBlock Text="inviter un joueur" Style="{StaticResource CustomFont}" Foreground="White" FontSize="15" Margin="5" Width="300"
                        VerticalAlignment="Center" 
                        DockPanel.Dock="Left"/>
-            <ComboBox ItemsSource="{Binding AvailableUsers}" MinWidth="400" Foreground="White" Margin="5" DockPanel.Dock="Left" IsEnabled="{Binding IsCreator}">
+            <ComboBox ItemsSource="{Binding AvailableUsers}" MinWidth="400" Margin="5" DockPanel.Dock="Left" IsEnabled="{Binding IsCreator}">
                 <behavior:Interaction.Triggers>
                     <behavior:EventTrigger EventName="DropDownOpened">
                         <prism:InvokeCommandAction Command="{Binding LoadPlayersCommand}"/>
@@ -67,7 +67,7 @@
         <DockPanel Grid.Row="5" LastChildFill="False">
             <TextBlock Text="Ajouter un personnage non joueur" Style="{StaticResource CustomFont}" Foreground="White" FontSize="15" Margin="5" Width="300"
                        VerticalAlignment="Center" />
-            <ComboBox ItemsSource="{Binding AvailableCharacters}" MinWidth="400" Foreground="White" Margin="5">
+            <ComboBox ItemsSource="{Binding AvailableCharacters}" MinWidth="400" Margin="5">
                 <behavior:Interaction.Triggers>
                     <behavior:EventTrigger EventName="DropDownOpened">
                         <prism:InvokeCommandAction Command="{Binding LoadCharactersCommand}"/>
