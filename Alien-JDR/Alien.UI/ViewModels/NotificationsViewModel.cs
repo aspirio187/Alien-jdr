@@ -70,6 +70,12 @@ namespace Alien.UI.ViewModels
             switch (notificationStatusEnum)
             {
                 case NotificationStatusEnum.Accepted:
+
+                    Dictionary<string, object> parameters = new Dictionary<string, object>()
+                    {
+                        { Global.LOBBY_ID,  }
+                    }
+
                     break;
                 case NotificationStatusEnum.Denied:
                     break;

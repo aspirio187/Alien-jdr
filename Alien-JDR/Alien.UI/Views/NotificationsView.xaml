@@ -11,6 +11,11 @@
                 mc:Ignorable="d" 
                 d:DesignHeight="450" d:DesignWidth="1000">
     <Grid>
+
+        <Grid.Resources>
+            <Global:NotificationMultiValueConverter x:Key="NotificationMultiValueConverter" />
+        </Grid.Resources>
+        
         <DataGrid x:Name="NotificationsDataGrid"
                   IsReadOnly="True"
                   AutoGenerateColumns="False"
@@ -36,24 +41,25 @@
             </DataGrid.Resources>
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Parties"
-                                    MinWidth="150"
-                                    Width="*"/>
-                <DataGridTextColumn Header="Mode"
-                                    MinWidth="150"
-                                    Width="*"/>
-                <DataGridTextColumn Header="Hôte"
-                                    MinWidth="150"
-                                    Width="*"/>
-                <DataGridTextColumn Header="Temps"
-                                    MinWidth="150"
-                                    Width="*"/>
-               
+                <DataGridTextColumn Header="Parties" MinWidth="150" Width="*" />
                 
+                <DataGridTextColumn Header="Mode" MinWidth="150" Width="*" />
+                
+                <DataGridTextColumn Header="Hôte" MinWidth="150" Width="*" />
+                
+                <DataGridTextColumn Header="Temps" MinWidth="150" Width="*" />
+                               
                 <DataGridTemplateColumn Header="Accepter">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Name="AccepteInvitationButton" Content="Accepter"/>
+                            <Button Name="AccepteInvitationButton" Content="Accepter" Command="{Binding RespondCommand}">
+                                <Button.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource NotificationMultiValueConverter}">
+                                        <Binding Source="{x:Static Global:NotificationStatusEnum.Accepted}" ElementName="ChosenStatus"/>
+                                        <Binding Source="{Binding Id}" ElementName="NotificationId"/>
+                                    </MultiBinding>
+                                </Button.CommandParameter>
+                            </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
