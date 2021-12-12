@@ -202,7 +202,7 @@
                     Opacity="0.5"/>
 
             <DockPanel Margin="0,40,0,0" HorizontalAlignment="Center">
-                <Button Width="200" Height="40" Content="s'enregistrer" Margin="20" Style="{StaticResource CustomFont}" Command="{Binding RegisterAccountCommand}"/>
+                <Button Width="200" Height="40" Content="s'enregistrer" Margin="20" Style="{StaticResource CustomFont}" Command="{Binding RegisterAccountCommand}" Click="Registration_Click"/>
                 <Button Width="200" Height="40" Content="Retour a l'authentification"   Style="{StaticResource CustomFont}" Command="{Binding NavigateBackToLoginCommand}"/>
             </DockPanel>
             <DockPanel>
