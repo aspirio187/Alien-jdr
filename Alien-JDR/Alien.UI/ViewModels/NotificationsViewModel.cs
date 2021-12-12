@@ -45,7 +45,7 @@ namespace Alien.UI.ViewModels
                     PartyHost = notif.SenderName,
                     PartyName = notif.Lobby.Name,
                     Mode = notif.Lobby.Mode,
-                    NotificationStatus = notif.IsAccepted ? NotificationStatusEnum.Accepted : NotificationStatusEnum.Pending,
+                    NotificationStatus = notif.Status.Equals("Accepted") ? NotificationStatusEnum.Accepted :notif.Status.Equals("Pending") ? NotificationStatusEnum.Pending : NotificationStatusEnum.Denied,
                     SendAt = notif.SentTime,
                     HostId = notif.SenderId,
                     Id = notif.Id

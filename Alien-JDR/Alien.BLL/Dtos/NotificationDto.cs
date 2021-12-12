@@ -14,6 +14,6 @@ namespace Alien.BLL.Dtos
         public string SenderName { get; set; }
         public Guid ReceiverId { get; set; }
         public LobbyDto Lobby { get; set; }
-        public bool IsAccepted { get; set; }
+        public string Status { get; set; }
     }
 }

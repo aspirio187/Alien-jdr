@@ -13,7 +13,11 @@ namespace Alien.BLL.Profiles
     {
         public NotificationProfile()
         {
-            CreateMap<NotificationEntity, NotificationDto>();
+            CreateMap<NotificationEntity, NotificationDto>()
+                .ForMember(
+                    dest => dest.Status,
+                    opt => opt.MapFrom(
+                        src => src.Status.ToString()));
             CreateMap<CreateNotificationDto, NotificationEntity>();
         }
     }

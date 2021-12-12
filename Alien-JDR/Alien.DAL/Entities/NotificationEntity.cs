@@ -16,7 +16,7 @@ namespace Alien.DAL.Entities
     public class NotificationEntity
     {
         public int Id { get; set; }
-        public DateTimeOffset SentTime { get; set; }
+        public DateTime SentTime { get; set; }
         public Guid SenderId { get; set; }
         public UserEntity Sender { get; set; }
         public Guid ReceiverId { get; set; }
