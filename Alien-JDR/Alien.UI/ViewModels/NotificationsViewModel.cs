@@ -28,10 +28,14 @@ namespace Alien.UI.ViewModels
             set { SetProperty(ref _notifications, value); }
         }
 
-
         private DelegateCommand<object> _respondCommand;
 
         public DelegateCommand<object> RespondCommand => _respondCommand ??= new DelegateCommand<object>(Respond, CanRespond);
+
+        private DelegateCommand _checkChangesCommand;
+
+        public DelegateCommand CheckChangesCommand => _checkChangesCommand ??= new DelegateCommand(CheckChanges);
+
         public override DelegateCommand LoadCommand => _loadCommand ??= new(async () => await LoadAsync());
 
 
@@ -40,15 +44,19 @@ namespace Alien.UI.ViewModels
         {
             _notificationService = notificationService ??
                 throw new ArgumentNullException(nameof(notificationService));
+        }
 
-            RespondCommand.RaiseCanExecuteChanged();
+        public void CheckChanges()
+        {
+            RespondCommand?.RaiseCanExecuteChanged();
         }
 
         public bool CanRespond(object row)
         {
+            if (row is null) return false;
             object[] bindings = (row as object[]);
-            NotificationStatusEnum status = (NotificationStatusEnum)bindings[0];
-            return status == NotificationStatusEnum.Pending;
+            NotificationStatusEnum status = (NotificationStatusEnum)bindings[1];
+            return status.Equals(NotificationStatusEnum.Pending);
         }
 
         public void Respond(object row)
@@ -74,6 +82,5 @@ namespace Alien.UI.ViewModels
             IEnumerable<NotificationDto> notifs = await _notificationService.GetUserNotifications(_authenticator.User.Id);
             Notifications = new(_mapper.Map<IEnumerable<NotificationModel>>(notifs).OrderBy(n => n.SendAt));
         }
-
     }
 }

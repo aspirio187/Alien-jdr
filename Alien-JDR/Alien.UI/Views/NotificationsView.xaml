@@ -16,7 +16,7 @@
             <Global:NotificationMultiValueConverter x:Key="NotificationMultiValueConverter" />
         </Grid.Resources>
 
-        <DataGrid x:Name="NotificationsDataGrid" IsReadOnly="True" AutoGenerateColumns="False" Margin="10" ItemsSource="{Binding Notifications}">
+        <DataGrid x:Name="NotificationsDataGrid" IsReadOnly="True" AutoGenerateColumns="False" Margin="10" ItemsSource="{Binding Notifications}" >
 
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -46,29 +46,57 @@
 
                 <DataGridTextColumn Header="Temps" MinWidth="150" Width="*" Binding="{Binding SendAt}" />
 
-                <DataGridTemplateColumn Header="Accepter">
+                <DataGridTemplateColumn Width="auto" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Accepter" Command="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.RespondCommand}">
+                            <Button Content="V" FontWeight="Bold" Width="35" Height="35" FontSize="20" Foreground="DarkGreen"
+                                    Command="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.RespondCommand}">
                                 <Button.CommandParameter>
                                     <MultiBinding Converter="{StaticResource NotificationMultiValueConverter}">
                                         <Binding Source="{x:Static Global:NotificationStatusEnum.Accepted}"/>
+                                        <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=DataGridRow}" Path="DataContext.NotificationStatus" />
                                         <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=DataGridRow}" Path="DataContext.Id" />
                                     </MultiBinding>
                                 </Button.CommandParameter>
+
+                                <behavior:Interaction.Triggers>
+
+                                    <behavior:EventTrigger EventName="Loaded">
+
+                                        <prism:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=DataGrid},Path=DataContext.CheckChangesCommand}"/>
+                                    </behavior:EventTrigger>
+                                </behavior:Interaction.Triggers>
                             </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn Header="Refuser">
+                <DataGridTemplateColumn Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Name="RefuserInvitationButton"  Content="Refuser"/>
+                            <Button Content="X" FontWeight="Bold" FontSize="20" Width="35" Height="35" Foreground="Red"
+                                    Command="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.RespondCommand}">
+                                <Button.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource NotificationMultiValueConverter}">
+                                        <Binding Source="{x:Static Global:NotificationStatusEnum.Denied}"/>
+                                        <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=DataGridRow}" Path="DataContext.NotificationStatus" />
+                                        <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=DataGridRow}" Path="DataContext.Id" />
+                                    </MultiBinding>
+                                </Button.CommandParameter>
+
+                                <behavior:Interaction.Triggers>
+
+                                    <behavior:EventTrigger EventName="Loaded">
+
+                                        <prism:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=DataGrid},Path=DataContext.CheckChangesCommand}"/>
+                                    </behavior:EventTrigger>
+                                </behavior:Interaction.Triggers>
+                            </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
+
         </DataGrid>
 
         <behavior:Interaction.Triggers>
