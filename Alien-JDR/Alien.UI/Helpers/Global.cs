@@ -42,7 +42,7 @@ namespace Alien.UI.Helpers
         CharactersView,
         PartiesView,
         HistoryView,
-        NotificationView,
+        NotificationsView,
         ManuelView,
         CreditView,
         CharacterCareerSelectionView,
@@ -53,7 +53,7 @@ namespace Alien.UI.Helpers
         CharacterCreationSummaryView,
         CharacterPublicInfosView,
         LobbiesView,
-        LobbyCreationView
+        LobbyCreationView,
     }
 
     public enum RaceEnum

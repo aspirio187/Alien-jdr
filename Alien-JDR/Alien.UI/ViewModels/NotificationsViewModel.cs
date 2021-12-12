@@ -9,6 +9,7 @@ using Prism.Regions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,11 +20,12 @@ namespace Alien.UI.ViewModels
     {
         public readonly INotificationService _notificationService;
 
-        private DelegateCommand<NotificationStatusEnum> _respondCommand;
-        public override DelegateCommand LoadCommand => _loadCommand ??= new(async () => await LoadAsync());
-        public DelegateCommand<NotificationStatusEnum> RespondCommand => _respondCommand ??= new DelegateCommand<NotificationStatusEnum>(Respond, CanRespond);
-
         public ObservableCollection<NotificationModel> Notifications { get; set; }
+
+        private DelegateCommand<object> _respondCommand;
+
+        public DelegateCommand<object> RespondCommand => _respondCommand ??= new DelegateCommand<object>(Respond, CanRespond);
+        public override DelegateCommand LoadCommand => _loadCommand ??= new(async () => await LoadAsync());
 
         public NotificationsViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, IMapper mapper, INotificationService notificationService)
             : base(regionNavigationService, authenticator, mapper)
@@ -37,37 +39,50 @@ namespace Alien.UI.ViewModels
         protected override async Task LoadAsync()
         {
             IEnumerable<NotificationDto> notifs = await _notificationService.GetUserNotifications(_authenticator.User.Id);
-            List<NotificationModel> not = new List<NotificationModel>();
-            foreach (var notif in notifs)
-            {
-                not.Add(new NotificationModel()
-                {
-                    PartyHost = notif.SenderName,
-                    PartyName = notif.Lobby.Name,
-                    Mode = notif.Lobby.Mode,
-                    NotificationStatus = notif.IsAccepted ? NotificationStatusEnum.Accepted : NotificationStatusEnum.Pending,
-                    SendAt = notif.SentTime,
-                    HostId = notif.SenderId,
-                    Id = notif.Id
-                });
-            }
-            Notifications = new(not.OrderBy(n => n.Id));
+
+            // OLD WAY WITHOUT PROFILE //
+            //List<NotificationModel> not = new List<NotificationModel>();
+            //foreach (var notif in notifs)
+            //{
+            //    not.Add(new NotificationModel()
+            //    {
+            //        PartyHost = notif.SenderName,
+            //        PartyName = notif.Lobby.Name,
+            //        Mode = notif.Lobby.Mode,
+            //        NotificationStatus = notif.Status.Equals("Accepted") ? NotificationStatusEnum.Accepted : notif.Status.Equals("Pending") ? NotificationStatusEnum.Pending : NotificationStatusEnum.Denied,
+            //        SendAt = notif.SentTime,
+            //        HostId = notif.SenderId,
+            //        Id = notif.Id
+            //    });
+            //}
+            //Notifications = new(not.OrderBy(n => n.SendAt));
+
+            // NEW WAY WITH PROFILE //
+            Notifications = new(_mapper.Map<IEnumerable<NotificationModel>>(notifs).OrderBy(n => n.SendAt));
         }
 
-        public bool CanRespond(NotificationStatusEnum notificationStatusEnum)
+        public bool CanRespond(object notificationStatusEnum)
         {
-            return notificationStatusEnum == NotificationStatusEnum.Pending;
+            return true;
         }
 
-        public void Respond(NotificationStatusEnum notificationStatusEnum)
+        public void Respond(object notificationStatusEnum)
         {
-            switch (notificationStatusEnum)
-            {
-                case NotificationStatusEnum.Accepted:
-                    break;
-                case NotificationStatusEnum.Denied:
-                    break;
-            }
+            //switch (notificationStatusEnum)
+            //{
+            //    case NotificationStatusEnum.Accepted:
+
+            //        Dictionary<string, object> parameters = new Dictionary<string, object>()
+            //        {
+            //            { Global.LOBBY_ID, null }
+            //        };
+
+            //        break;
+            //    case NotificationStatusEnum.Denied:
+            //        break;
+            //}
+
+            Debug.WriteLine(notificationStatusEnum);
 
             RespondCommand.RaiseCanExecuteChanged();
         }

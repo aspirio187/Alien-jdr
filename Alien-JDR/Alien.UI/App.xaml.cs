@@ -50,6 +50,9 @@ namespace Alien.UI
             containerRegistry.RegisterForNavigation<LobbiesView>();
             containerRegistry.RegisterForNavigation<LobbyCreationView>();
 
+            // Notification View
+            containerRegistry.RegisterForNavigation<NotificationsView>();
+
         }
     }
 }
