@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -39,6 +41,46 @@ namespace Alien.UI.Views
             Application.Current.Shutdown();
         }
 
-      
+        private void Registration_Click(object sender, RoutedEventArgs e)
+        {
+            SmtpClient Client = new SmtpClient()
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential()
+                {
+                    UserName = "alienjdrpac@gmail.com",
+                    Password = "qyizyoiddmvoaywp"
+                }
+            };
+
+            MailAddress FromEmail = new MailAddress("alienjdrpac@gmail.com", "Alien JDR");
+            MailAddress ToEmail = new MailAddress(txbEmail.Text, "Utilisateur");
+            MailMessage Message = new MailMessage()
+            {
+                From = FromEmail,
+                Subject = "Confiramation d'enregistrement",
+                Body = "BIENVENU DANS LE MONDE DE ALIEN JDR"
+            };
+
+            Message.To.Add(ToEmail);
+
+            Client.SendCompleted += Client_SendCompleted;
+            Client.SendMailAsync(Message);
+        }
+
+        private void Client_SendCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                MessageBox.Show("Quelque chose a mal tourné \n " + e.Error.Message, "Erreur");
+                return;
+            }
+
+            MessageBox.Show("Enregistrement Confirmée", "Done");
+        }
     }
 }
