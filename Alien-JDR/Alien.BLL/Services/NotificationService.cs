@@ -44,7 +44,7 @@ namespace Alien.BLL.Services
 
         public async Task<IEnumerable<NotificationDto>> GetUserNotifications(Guid userId)
         {
-            IEnumerable<NotificationEntity> notifications = await _notificationRepository.GetAllAsync();
+            IEnumerable<NotificationEntity> notifications = await _notificationRepository.GetNotificationsAsync();
             return _mapper.Map<IEnumerable<NotificationDto>>(notifications.Where(n => n.ReceiverId == userId));
         }
 

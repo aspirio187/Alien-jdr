@@ -45,5 +45,15 @@ namespace Alien.DAL.Repositories
         {
             return await _context.Notifications.AnyAsync(n => n.Status == NotificationStatucEnum.Pending && n.ReceiverId == userId);
         }
+
+        public async Task<IEnumerable<NotificationEntity>> GetNotificationsAsync()
+        {
+            List<NotificationEntity> notifsFromRepo = await _context.Notifications
+                .Include(n => n.Lobby)
+                .Include(n => n.Sender)
+                .Include(n => n.Lobby.PartyPlayers)
+                .ToListAsync();
+            return notifsFromRepo;
+        }
     }
 }

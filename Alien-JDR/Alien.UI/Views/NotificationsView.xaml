@@ -15,11 +15,8 @@
         <Grid.Resources>
             <Global:NotificationMultiValueConverter x:Key="NotificationMultiValueConverter" />
         </Grid.Resources>
-        
-        <DataGrid x:Name="NotificationsDataGrid"
-                  IsReadOnly="True"
-                  AutoGenerateColumns="False"
-                  Margin="10">
+
+        <DataGrid x:Name="NotificationsDataGrid" IsReadOnly="True" AutoGenerateColumns="False" Margin="10" ItemsSource="{Binding Notifications}">
 
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -41,22 +38,22 @@
             </DataGrid.Resources>
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Parties" MinWidth="150" Width="*" />
-                
-                <DataGridTextColumn Header="Mode" MinWidth="150" Width="*" />
-                
-                <DataGridTextColumn Header="Hôte" MinWidth="150" Width="*" />
-                
-                <DataGridTextColumn Header="Temps" MinWidth="150" Width="*" />
-                               
+                <DataGridTextColumn Header="Parties" MinWidth="150" Width="*" Binding="{Binding PartyName}"/>
+
+                <DataGridTextColumn Header="Mode" MinWidth="150" Width="*" Binding="{Binding Mode}"/>
+
+                <DataGridTextColumn Header="Hôte" MinWidth="150" Width="*" Binding="{Binding PartyHost}" />
+
+                <DataGridTextColumn Header="Temps" MinWidth="150" Width="*" Binding="{Binding SendAt}" />
+
                 <DataGridTemplateColumn Header="Accepter">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Name="AccepteInvitationButton" Content="Accepter" Command="{Binding RespondCommand}">
+                            <Button Content="Accepter" Command="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.RespondCommand}">
                                 <Button.CommandParameter>
                                     <MultiBinding Converter="{StaticResource NotificationMultiValueConverter}">
-                                        <Binding Source="{x:Static Global:NotificationStatusEnum.Accepted}" ElementName="ChosenStatus"/>
-                                        <Binding Source="{Binding Id}" ElementName="NotificationId"/>
+                                        <Binding Source="{x:Static Global:NotificationStatusEnum.Accepted}"/>
+                                        <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=DataGridRow}" Path="DataContext.Id" />
                                     </MultiBinding>
                                 </Button.CommandParameter>
                             </Button>
@@ -72,10 +69,7 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
-
-
         </DataGrid>
-        <!--<Button Content="Accepter" Command="{Binding RespondCommand}" CommandParameter="{x:Static Global:NotificationStatusEnum.Accepted}" />-->
 
         <behavior:Interaction.Triggers>
 

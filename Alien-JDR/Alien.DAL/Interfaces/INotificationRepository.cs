@@ -12,5 +12,6 @@ namespace Alien.DAL.Interfaces
     {
         event ChangedEventHandler<NotificationEntity> NotificationEvent;
         Task<bool> UserHasPendingNotification(Guid userId);
+        Task<IEnumerable<NotificationEntity>> GetNotificationsAsync();
     }
 }
