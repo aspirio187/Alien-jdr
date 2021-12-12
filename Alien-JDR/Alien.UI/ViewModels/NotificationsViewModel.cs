@@ -9,6 +9,7 @@ using Prism.Regions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,9 +22,9 @@ namespace Alien.UI.ViewModels
 
         public ObservableCollection<NotificationModel> Notifications { get; set; }
 
-        private DelegateCommand<NotificationStatusEnum?> _respondCommand;
+        private DelegateCommand<object> _respondCommand;
 
-        public DelegateCommand<NotificationStatusEnum?> RespondCommand => _respondCommand ??= new DelegateCommand<NotificationStatusEnum?>(Respond, CanRespond);
+        public DelegateCommand<object> RespondCommand => _respondCommand ??= new DelegateCommand<object>(Respond, CanRespond);
         public override DelegateCommand LoadCommand => _loadCommand ??= new(async () => await LoadAsync());
 
         public NotificationsViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, IMapper mapper, INotificationService notificationService)
@@ -60,26 +61,28 @@ namespace Alien.UI.ViewModels
             Notifications = new(_mapper.Map<IEnumerable<NotificationModel>>(notifs).OrderBy(n => n.SendAt));
         }
 
-        public bool CanRespond(NotificationStatusEnum? notificationStatusEnum)
+        public bool CanRespond(object notificationStatusEnum)
         {
-            return notificationStatusEnum == NotificationStatusEnum.Pending;
+            return true;
         }
 
-        public void Respond(NotificationStatusEnum? notificationStatusEnum)
+        public void Respond(object notificationStatusEnum)
         {
-            switch (notificationStatusEnum)
-            {
-                case NotificationStatusEnum.Accepted:
+            //switch (notificationStatusEnum)
+            //{
+            //    case NotificationStatusEnum.Accepted:
 
-                    Dictionary<string, object> parameters = new Dictionary<string, object>()
-                    {
-                        { Global.LOBBY_ID,  }
-                    }
+            //        Dictionary<string, object> parameters = new Dictionary<string, object>()
+            //        {
+            //            { Global.LOBBY_ID, null }
+            //        };
 
-                    break;
-                case NotificationStatusEnum.Denied:
-                    break;
-            }
+            //        break;
+            //    case NotificationStatusEnum.Denied:
+            //        break;
+            //}
+
+            Debug.WriteLine(notificationStatusEnum);
 
             RespondCommand.RaiseCanExecuteChanged();
         }
