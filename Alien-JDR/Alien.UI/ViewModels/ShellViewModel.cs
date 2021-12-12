@@ -32,14 +32,16 @@ namespace Alien.UI.ViewModels
         }
 
         private DelegateCommand _navigateCharacterCommand;
+        private DelegateCommand _navigateLobbiesCommand;
+        private DelegateCommand _navigateNotificationsCommand;
         private DelegateCommand _navigateManuelCommand;
         private DelegateCommand _navigateCreditCommand;
-        private DelegateCommand _navigateLobbiesCommand;
 
         public DelegateCommand NavigateCharacterCommand => _navigateCharacterCommand ??= new DelegateCommand(NavigateCharacter);
+        public DelegateCommand NavigateLobbiesCommand => _navigateLobbiesCommand ??= new DelegateCommand(NavigateLobbies);
+        public DelegateCommand NavigateNotificationsCommand => _navigateNotificationsCommand ??= new DelegateCommand(NavigateNotifications);
         public DelegateCommand NavigateManuelCommand => _navigateManuelCommand ??= new DelegateCommand(NavigateManuel);
         public DelegateCommand NavigateCreditCommand => _navigateCreditCommand ??= new DelegateCommand(NavigateCredit);
-        public DelegateCommand NavigateLobbiesCommand => _navigateLobbiesCommand ??= new DelegateCommand(NavigateLobbies);
         public override DelegateCommand LoadCommand => _loadCommand ??= new DelegateCommand(async () => await LoadAsync());
 
         public ShellViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, IMapper mapper, IRegionManager regionManager,
@@ -58,7 +60,7 @@ namespace Alien.UI.ViewModels
 
         private void Notification_Received(object sender, NotificationEventArgs e)
         {
-            if(e.Notification.ReceiverId == _authenticator.User.Id)
+            if (e.Notification.ReceiverId == _authenticator.User.Id)
             {
                 NotificationReceived = true;
             }
@@ -87,8 +89,13 @@ namespace Alien.UI.ViewModels
 
         public void NavigateLobbies()
         {
-            NotificationReceived = false;
             Navigate(ViewsEnum.LobbiesView);
+        }
+
+        public void NavigateNotifications()
+        {
+            NotificationReceived = false;
+            Navigate(ViewsEnum.NotificationsView);
         }
 
         public void NavigateManuel()
