@@ -38,21 +38,26 @@ namespace Alien.UI.ViewModels
         protected override async Task LoadAsync()
         {
             IEnumerable<NotificationDto> notifs = await _notificationService.GetUserNotifications(_authenticator.User.Id);
-            List<NotificationModel> not = new List<NotificationModel>();
-            foreach (var notif in notifs)
-            {
-                not.Add(new NotificationModel()
-                {
-                    PartyHost = notif.SenderName,
-                    PartyName = notif.Lobby.Name,
-                    Mode = notif.Lobby.Mode,
-                    NotificationStatus = notif.Status.Equals("Accepted") ? NotificationStatusEnum.Accepted :notif.Status.Equals("Pending") ? NotificationStatusEnum.Pending : NotificationStatusEnum.Denied,
-                    SendAt = notif.SentTime,
-                    HostId = notif.SenderId,
-                    Id = notif.Id
-                });
-            }
-            Notifications = new(not.OrderBy(n => n.Id));
+
+            // OLD WAY WITHOUT PROFILE //
+            //List<NotificationModel> not = new List<NotificationModel>();
+            //foreach (var notif in notifs)
+            //{
+            //    not.Add(new NotificationModel()
+            //    {
+            //        PartyHost = notif.SenderName,
+            //        PartyName = notif.Lobby.Name,
+            //        Mode = notif.Lobby.Mode,
+            //        NotificationStatus = notif.Status.Equals("Accepted") ? NotificationStatusEnum.Accepted : notif.Status.Equals("Pending") ? NotificationStatusEnum.Pending : NotificationStatusEnum.Denied,
+            //        SendAt = notif.SentTime,
+            //        HostId = notif.SenderId,
+            //        Id = notif.Id
+            //    });
+            //}
+            //Notifications = new(not.OrderBy(n => n.SendAt));
+
+            // NEW WAY WITH PROFILE //
+            Notifications = new(_mapper.Map<IEnumerable<NotificationModel>>(notifs).OrderBy(n => n.SendAt));
         }
 
         public bool CanRespond(NotificationStatusEnum? notificationStatusEnum)
