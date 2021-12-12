@@ -14,6 +14,7 @@ namespace Alien.BLL.Profiles
         public NotificationProfile()
         {
             CreateMap<NotificationEntity, NotificationDto>();
+            CreateMap<CreateNotificationDto, NotificationEntity>();
         }
     }
 }
