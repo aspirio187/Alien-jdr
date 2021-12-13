@@ -46,7 +46,7 @@
         <DockPanel Grid.Row="3" LastChildFill="False">
             <TextBlock Text="nombre de joueurs maximum" Style="{StaticResource CustomFont}" Foreground="white" FontSize="15" Margin="5" Width="300"
                        VerticalAlignment="Center" />
-            <ComboBox ItemsSource="{Binding AuthorizedNumberOfPlayers}" Width="150" Margin="5" DockPanel.Dock="Left" IsEnabled="{Binding IsCreator}" />
+            <ComboBox x:Name="cmbNumberPlayer" Width="150" Margin="5" DockPanel.Dock="Left" SelectedItem="{Binding MaximumPlayers}" IsEnabled="{Binding IsCreator}" />
         </DockPanel>
 
         <DockPanel Grid.Row="4" LastChildFill="False">

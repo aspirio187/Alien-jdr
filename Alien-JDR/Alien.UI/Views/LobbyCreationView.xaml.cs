@@ -23,6 +23,10 @@ namespace Alien.UI.Views
         public LobbyCreationView()
         {
             InitializeComponent();
+            cmbNumberPlayer.ItemsSource = new List<string>
+            {
+                "2", "3", "4", "5", "6"
+            };
         }
     }
 }
