@@ -22,17 +22,17 @@ namespace Alien.UI.Helpers
 
             bool isCreator = (bool)values[1];
 
-            if (values[2].GetType() != typeof(int) || values[3].GetType() != typeof(int))
+            if (values[2].GetType() != typeof(Guid) || values[3].GetType() != typeof(Guid))
             {
                 throw new ArgumentException(
                     $"The third and fourth values\n" +
                     $"\tValue 3 : \"{ values[2] }\" is type : \"{ values[2].GetType() }\"\n" +
                     $"\tValue 4 : \"{ values[3] }\" is type : \"{ values[3].GetType() }\"\n" +
-                    $"must be type : \"{ typeof(int) }\"");
+                    $"must be type : \"{ typeof(Guid) }\"");
             }
 
-            int rowId = (int)values[2];
-            int userId = (int)values[3];
+            Guid rowId = (Guid)values[2];
+            Guid userId = (Guid)values[3];
 
             if (isCreator)
             {

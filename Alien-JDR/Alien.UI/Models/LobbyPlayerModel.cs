@@ -10,7 +10,18 @@ namespace Alien.UI.Models
 {
     public class LobbyPlayerModel : ModelBase
     {
-        public Guid UserId { get; set; }
+        private Guid _userId;
+
+        public Guid UserId
+        {
+            get { return _userId; }
+            set
+            {
+                ValidateProperty(ref _userId, value);
+                NotifyPropertyChanged();
+            }
+        }
+
 
         private string _playerName;
 
@@ -73,6 +84,18 @@ namespace Alien.UI.Models
             set
             {
                 ValidateProperty(ref _playerType, value);
+                NotifyPropertyChanged();
+            }
+        }
+
+        private LobbyCharacterModel _character;
+
+        public LobbyCharacterModel Character
+        {
+            get { return _character; }
+            set
+            {
+                ValidateProperty(ref _character, value);
                 NotifyPropertyChanged();
             }
         }

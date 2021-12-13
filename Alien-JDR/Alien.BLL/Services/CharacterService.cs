@@ -131,7 +131,10 @@ namespace Alien.BLL.Services
             }
 
             IEnumerable<CharacterEntity> availableCharacters = charactersFromRepo
-                .Where(c => c.LobbyPlayers is null || c.LobbyPlayers.Count == 0 || !c.LobbyPlayers.Any(lb => lb.Lobby.Status == LobbyStatusEnum.Started));
+                .Where(c => 
+                    c.LobbyPlayers is null ||
+                    c.LobbyPlayers.Count == 0 ||
+                    !c.LobbyPlayers.Any(lb => lb.Lobby.Status == LobbyStatusEnum.Started));
 
             return _mapper.Map<IEnumerable<CharacterMiniatureDto>>(charactersFromRepo.Where(c => c.LobbyPlayers is null || c.LobbyPlayers.Count == 0));
         }

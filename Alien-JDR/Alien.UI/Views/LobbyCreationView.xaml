@@ -81,20 +81,20 @@
 
         <DataGrid Grid.Row="6" IsReadOnly="True" AutoGenerateColumns="False" Margin="0, 10, 0, 10" ItemsSource="{Binding LobbyPlayers}">
 
-            <DataGrid.RowStyle>
+            <!--<DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
                     <Setter Property="IsEnabled">
                         <Setter.Value>
                             <MultiBinding Converter="{StaticResource ComboBoxIsEnableConverter}">
                                 <Binding RelativeSource="{RelativeSource AncestorType=DataGrid}" Path="DataContext.SelectedGameMode" />
                                 <Binding RelativeSource="{RelativeSource AncestorType=DataGrid}" Path="DataContext.IsCreator" />
-                                <Binding RelativeSource="{RelativeSource AncestorType=DataGridRow}" Path="DataContext.Id" />
+                                <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=DataGridCell}" Path="DataContext.UserId" />
                                 <Binding RelativeSource="{RelativeSource AncestorType=DataGrid}" Path="DataContext.UserId" />
                             </MultiBinding>
                         </Setter.Value>
                     </Setter>
                 </Style>
-            </DataGrid.RowStyle>
+            </DataGrid.RowStyle>-->
 
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -121,11 +121,21 @@
                 <DataGridTemplateColumn Header="PERSONNAGES" MinWidth="350" Width="*" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ComboBox ItemsSource="{Binding AvailableCharacters}" SelectedItem="{Binding CharacterName}">
+                            <ComboBox ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid},Path=DataContext.AvailableCharacters}" 
+                                      SelectedItem="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGridRow}, Path=DataContext.Character}">
+                                <ComboBox.IsEnabled>
+                                    <MultiBinding Converter="{StaticResource ComboBoxIsEnableConverter}">
+                                        <Binding RelativeSource="{RelativeSource AncestorType=DataGrid}" Path="DataContext.SelectedGameMode" />
+                                        <Binding RelativeSource="{RelativeSource AncestorType=DataGrid}" Path="DataContext.IsCreator" />
+                                        <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=DataGridRow}" Path="DataContext.UserId" />
+                                        <Binding RelativeSource="{RelativeSource AncestorType=DataGrid}" Path="DataContext.UserId" />
+                                    </MultiBinding>
+                                </ComboBox.IsEnabled>
+
                                 <behavior:Interaction.Triggers>
                                     <behavior:EventTrigger EventName="DropDownOpened">
                                         <prism:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=DataGrid},Path=DataContext.LoadCharactersCommand}" 
-                                                                   CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=DataContext.Id}" />
+                                                                   CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.Id}" />
                                     </behavior:EventTrigger>
                                 </behavior:Interaction.Triggers>
                             </ComboBox>

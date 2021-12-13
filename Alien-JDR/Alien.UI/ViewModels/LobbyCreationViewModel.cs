@@ -35,6 +35,11 @@ namespace Alien.UI.ViewModels
             set { SetProperty(ref _isCreator, value); }
         }
 
+        public Guid UserId
+        {
+            get { return _authenticator.User.Id; }
+        }
+
         private LobbyModeEnum _selectedGameMode;
 
         public LobbyModeEnum SelectedGameMode
@@ -82,15 +87,13 @@ namespace Alien.UI.ViewModels
             set { SetProperty(ref _lobbyPlayers, value); }
         }
 
-        private ObservableCollection<LobbyUserModel> _availableUsers;
+        private ObservableCollection<LobbyUserModel> _availableUsers = new();
 
         public ObservableCollection<LobbyUserModel> AvailableUsers
         {
             get { return _availableUsers; }
             set { SetProperty(ref _availableUsers, value); }
         }
-
-        //public ObservableCollection<LobbyUserModel> AvailableUsers { get; set; }
 
         private LobbyUserModel _selectedUser;
 
@@ -100,7 +103,21 @@ namespace Alien.UI.ViewModels
             set { SetProperty(ref _selectedUser, value); }
         }
 
-        public ObservableCollection<LobbyCharacterModel> AvailableCharacters { get; set; }
+        private int myVar;
+
+        public int MyProperty
+        {
+            get { return myVar; }
+            set { myVar = value; }
+        }
+
+        private ObservableCollection<LobbyCharacterModel> _availableCharacters = new();
+
+        public ObservableCollection<LobbyCharacterModel> AvailableCharacters
+        {
+            get { return _availableCharacters; }
+            set { SetProperty(ref _availableCharacters, value); }
+        }
 
         private LobbyCharacterModel _selectedNpcCharacter;
 
