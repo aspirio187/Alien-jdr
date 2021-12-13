@@ -74,7 +74,13 @@ namespace Alien.UI.ViewModels
             }
         }
 
-        public ObservableCollection<LobbyPlayerModel> LobbyPlayers { get; set; } = new();
+        private ObservableCollection<LobbyPlayerModel> _lobbyPlayers = new();
+
+        public ObservableCollection<LobbyPlayerModel> LobbyPlayers
+        {
+            get { return _lobbyPlayers; }
+            set { SetProperty(ref _lobbyPlayers, value); }
+        }
 
         private ObservableCollection<LobbyUserModel> _availableUsers;
 
@@ -188,6 +194,18 @@ namespace Alien.UI.ViewModels
         public void StartGame()
         {
 
+        }
+
+        public override void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+            base.OnNavigatedFrom(navigationContext);
+
+            LobbyPlayerModel player = LobbyPlayers.FirstOrDefault(lb => lb.UserId == _authenticator.User.Id);
+
+            if (player is not null)
+            {
+                LobbyPlayers.Remove(player);
+            }
         }
 
         public override async void OnNavigatedTo(NavigationContext navigationContext)

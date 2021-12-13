@@ -15,6 +15,7 @@
 
         <Grid.Resources>
             <global:ComparisonConverter x:Key="ComparisonConverter" />
+            <global:EnumBoolValuesConverter x:Key="ComboBoxIsEnableConverter" />
         </Grid.Resources>
 
         <Grid.RowDefinitions>
@@ -78,7 +79,22 @@
                     IsEnabled="{Binding IsCreator}"/>
         </DockPanel>
 
-        <DataGrid Grid.Row="6" IsReadOnly="True" AutoGenerateColumns="False" Margin="0, 10, 0, 10" >
+        <DataGrid Grid.Row="6" IsReadOnly="True" AutoGenerateColumns="False" Margin="0, 10, 0, 10" ItemsSource="{Binding LobbyPlayers}">
+
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="IsEnabled">
+                        <Setter.Value>
+                            <MultiBinding Converter="{StaticResource ComboBoxIsEnableConverter}">
+                                <Binding RelativeSource="{RelativeSource AncestorType=DataGrid}" Path="DataContext.SelectedGameMode" />
+                                <Binding RelativeSource="{RelativeSource AncestorType=DataGrid}" Path="DataContext.IsCreator" />
+                                <Binding RelativeSource="{RelativeSource AncestorType=DataGridRow}" Path="DataContext.Id" />
+                                <Binding RelativeSource="{RelativeSource AncestorType=DataGrid}" Path="DataContext.UserId" />
+                            </MultiBinding>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </DataGrid.RowStyle>
 
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -100,21 +116,32 @@
             </DataGrid.Resources>
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="JOUEURS" MinWidth="200" Width="auto" />
+                <DataGridTextColumn Header="JOUEURS" MinWidth="200" Width="auto" Binding="{Binding PlayerName}"/>
 
-                <DataGridComboBoxColumn Header="PERSONNAGES" MinWidth="350" Width="*">
-                    
+                <DataGridTemplateColumn Header="PERSONNAGES" MinWidth="350" Width="*" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox ItemsSource="{Binding AvailableCharacters}" SelectedItem="{Binding CharacterName}">
+                                <behavior:Interaction.Triggers>
+                                    <behavior:EventTrigger EventName="DropDownOpened">
+                                        <prism:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=DataGrid},Path=DataContext.LoadCharactersCommand}" 
+                                                                   CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=DataContext.Id}" />
+                                    </behavior:EventTrigger>
+                                </behavior:Interaction.Triggers>
+                            </ComboBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
                     <!--<behavior:Interaction.Triggers>
                         <behavior:EventTrigger EventName="DropDownOpenend">
                             <prism:InvokeCommandAction Command="{Binding LoadCharactersCommand}"/>
                         </behavior:EventTrigger>
                     </behavior:Interaction.Triggers>-->
-                    
-                </DataGridComboBoxColumn>
 
-                <DataGridTextColumn Header="STATUS" MinWidth="150" />
+                </DataGridTemplateColumn>
 
-                <DataGridTextColumn Header="TYPE" MinWidth="100" />
+                <DataGridTextColumn Header="STATUS" MinWidth="150" Binding="{Binding Status}" />
+
+                <DataGridTextColumn Header="TYPE" MinWidth="100" Binding="{Binding Type}" />
 
                 <DataGridTemplateColumn Width="50">
                     <DataGridTemplateColumn.CellTemplate>
