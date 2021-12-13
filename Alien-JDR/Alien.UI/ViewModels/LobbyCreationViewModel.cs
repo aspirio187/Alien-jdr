@@ -1,5 +1,6 @@
 ﻿using Alien.BLL.Dtos;
 using Alien.BLL.Interfaces;
+using Alien.Socket.Models;
 using Alien.UI.Helpers;
 using Alien.UI.Models;
 using Alien.UI.States;
@@ -26,6 +27,7 @@ namespace Alien.UI.ViewModels
         private readonly ILobbyPlayerService _lobbyPlayerService;
 
         public LobbyModel Lobby { get; set; }
+        public SocketRouter SocketRouteur { get; set; } = new SocketRouter();
 
         private bool _isCreator;
 
@@ -154,6 +156,8 @@ namespace Alien.UI.ViewModels
                 throw new ArgumentNullException(nameof(notificationService));
             _lobbyPlayerService = lobbyPlayerService ??
                 throw new ArgumentNullException(nameof(lobbyPlayerService));
+
+            SocketRouteur = new SocketRouter().Start();
         }
 
         public async Task UpdateLobbyAsync()
@@ -312,7 +316,15 @@ namespace Alien.UI.ViewModels
                                 else
                                 {
                                     // TODO : Transmettre au lobby créateur l'information de notre arrivée
-                                    LobbyPlayers.Add(lobbyPlayer);
+                                    if (SocketRouteur.IsIpOnLine(Lobby.HostIp))
+                                    {
+                                        LobbyPlayers.Add(lobbyPlayer);
+                                        SocketRouteur.Subscribe(Lobby.HostIp);
+                                    }
+                                    else
+                                    {
+                                        Navigate(ViewsEnum.LobbiesView);
+                                    }
                                 }
                             }
                             else

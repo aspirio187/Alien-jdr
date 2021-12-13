@@ -44,6 +44,7 @@ namespace Alien.Socket.Models
             return this.SendOn("subscribe", Dns.GetHostEntry(Dns.GetHostName()).AddressList[0].ToString());
         }
 
+
         /*
          * @{name}      Infos
          * @{type}      public void

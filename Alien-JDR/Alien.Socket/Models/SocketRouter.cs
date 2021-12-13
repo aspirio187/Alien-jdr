@@ -202,6 +202,11 @@ namespace Alien.Socket.Models
             return this;
         }
 
+        public bool IsIpOnLine(string ip)
+        {
+            return this._sender.IsIpOnLine(System.Net.IPAddress.Parse(ip));
+        }
+
         /// <summary>
         /// Print des informations du routeur dans la console
         /// </summary>

@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Alien.UI.ViewModels
@@ -19,6 +20,8 @@ namespace Alien.UI.ViewModels
             : base(regionNavigationService, authenticator, mapper)
         {
             SocketRouteur = new SocketRouter().Start();
+
+            SocketRouteur.IsIpOnLine("");
 
             /*InitialiseChanels();*/
 
