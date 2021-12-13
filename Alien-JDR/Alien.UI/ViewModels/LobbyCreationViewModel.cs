@@ -245,6 +245,7 @@ namespace Alien.UI.ViewModels
 
                     if (await _lobbyPlayerService.IsUserCreator(_authenticator.User.Id, Lobby.Id))
                     {
+                        Lobby.HostIp = Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(ip => ip.IsIPv6LinkLocal)?.ToString();
                         IsCreator = true;
                     }
                     else
@@ -285,6 +286,10 @@ namespace Alien.UI.ViewModels
                             LobbyPlayers.Add(lobbyPlayer);
                         }
                     }
+                }
+                else
+                {
+                    Navigate(ViewsEnum.LobbiesView);
                 }
             }
         }
