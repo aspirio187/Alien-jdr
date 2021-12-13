@@ -45,13 +45,13 @@ namespace Alien.BLL.Services
         public async Task<bool> IsUserCreator(Guid userId, int lobbyId)
         {
             IEnumerable<LobbyPlayerEntity> users = await _lobbyPlayerRepository.GetAllAsync();
-            return users.FirstOrDefault(u => u.PartyId == lobbyId && u.UserId == userId && u.IsCreator == true) is not null;
+            return users.FirstOrDefault(u => u.lobbyId == lobbyId && u.UserId == userId && u.IsCreator == true) is not null;
         }
 
         public async Task<LobbyPlayerDto> GetLobbyPlayerAsync(Guid userId, int lobbyId)
         {
             IEnumerable<LobbyPlayerEntity> lobbyPlayers = await _lobbyPlayerRepository.GetAllAsync();
-            LobbyPlayerEntity lobbyPlayer = lobbyPlayers.FirstOrDefault(u => u.PartyId == lobbyId && u.UserId == userId && u.IsCreator == false);
+            LobbyPlayerEntity lobbyPlayer = lobbyPlayers.FirstOrDefault(u => u.lobbyId == lobbyId && u.UserId == userId && u.IsCreator == false);
             if (lobbyPlayer is null) throw new NullReferenceException($"There is no user with \"{userId}\" in lobby \"{lobbyId}\"");
             if(lobbyPlayer.CharacterId is not null) lobbyPlayer.Character = await _characterRepository.GetByKeyAsync((int)lobbyPlayer.CharacterId);
             lobbyPlayer.User = await _userRepository.GetByKeyAsync(lobbyPlayer.UserId);

@@ -19,7 +19,7 @@ namespace Alien.DAL.Configurations
             builder.Property(p => p.UserId)
                 .IsRequired(true);
 
-            builder.Property(p => p.PartyId)
+            builder.Property(p => p.lobbyId)
                 .IsRequired(true);
 
             builder.Property(p => p.CharacterId)
@@ -30,7 +30,7 @@ namespace Alien.DAL.Configurations
                 .IsRequired(true)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne(pp => pp.Party)
+            builder.HasOne(pp => pp.Lobby)
                 .WithMany(p => p.PartyPlayers)
                 .IsRequired(true)
                 .OnDelete(DeleteBehavior.NoAction);

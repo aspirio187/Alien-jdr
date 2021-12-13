@@ -13,8 +13,8 @@ namespace Alien.DAL.Entities
         public Guid UserId { get; set; }
         public UserEntity User { get; set; }
 
-        public int PartyId { get; set; }
-        public LobbyEntity Party { get; set; }
+        public int lobbyId { get; set; }
+        public LobbyEntity Lobby { get; set; }
 
         public int? CharacterId { get; set; }
         public CharacterEntity Character { get; set; }

@@ -6,6 +6,7 @@ using AutoMapper;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -20,9 +21,12 @@ namespace Alien.BLL.Services
         private readonly ICharacterRepository _characterRepository;
         private readonly ITalentRepository _talentRepository;
         private readonly IUserRepository _userRepository;
+        private readonly ILobbyPlayerRepository _lobbyPlayerRepository;
+        private readonly ILobbyRepository _lobbyRepository;
         private readonly IMapper _mapper;
 
-        public CharacterService(ICharacterRepository characterRepository, IMapper mapper, ITalentRepository talentRepository, IUserRepository userRepository)
+        public CharacterService(ICharacterRepository characterRepository, IMapper mapper, ITalentRepository talentRepository, IUserRepository userRepository,
+            ILobbyPlayerRepository lobbyPlayerRepository, ILobbyRepository lobbyRepository)
         {
             _characterRepository = characterRepository ??
                 throw new ArgumentNullException(nameof(characterRepository));
@@ -32,6 +36,10 @@ namespace Alien.BLL.Services
                 throw new ArgumentNullException(nameof(talentRepository));
             _userRepository = userRepository ??
                 throw new ArgumentNullException(nameof(userRepository));
+            _lobbyPlayerRepository = lobbyPlayerRepository ??
+                throw new ArgumentNullException(nameof(lobbyPlayerRepository));
+            _lobbyRepository = lobbyRepository ??
+                throw new ArgumentNullException(nameof(lobbyRepository));
         }
 
         public async Task<bool> CreateCharacter(CharacterCreationDto character, Guid userId)
@@ -106,6 +114,26 @@ namespace Alien.BLL.Services
             if (userId == Guid.Empty) throw new ArgumentException($"The user ID \"{userId}\" is empty!");
             IEnumerable<CharacterEntity> charactersFromRepo = await _characterRepository.GetUserCharactersAsync(userId);
             return _mapper.Map<IEnumerable<CharacterMiniatureDto>>(charactersFromRepo.Where(c => c.IsEditable));
+        }
+
+        public async Task<IEnumerable<CharacterMiniatureDto>> GetAvailableCharactersAsync(Guid userId)
+        {
+            if (userId == Guid.Empty) throw new ArgumentException($"The user ID : \"{userId}\" is empty!");
+            IEnumerable<CharacterEntity> charactersFromRepo = await _characterRepository.GetUserCharactersAsync(userId);
+            IEnumerable<LobbyPlayerEntity> lobbiesPlayers = await _lobbyPlayerRepository.GetAllAsync();
+            foreach (CharacterEntity character in charactersFromRepo)
+            {
+                character.LobbyPlayers = new Collection<LobbyPlayerEntity>(lobbiesPlayers.Where(lb => lb.CharacterId == character.Id).ToList());
+                foreach (LobbyPlayerEntity lobbyPlayer in character.LobbyPlayers)
+                {
+                    lobbyPlayer.Lobby = await _lobbyRepository.GetByKeyAsync(lobbyPlayer.lobbyId);
+                }
+            }
+
+            IEnumerable<CharacterEntity> availableCharacters = charactersFromRepo
+                .Where(c => c.LobbyPlayers is null || c.LobbyPlayers.Count == 0 || !c.LobbyPlayers.Any(lb => lb.Lobby.Status == LobbyStatusEnum.Started));
+
+            return _mapper.Map<IEnumerable<CharacterMiniatureDto>>(charactersFromRepo.Where(c => c.LobbyPlayers is null || c.LobbyPlayers.Count == 0));
         }
 
         public CareerFromJsonDto[] GetCareersFromJson()

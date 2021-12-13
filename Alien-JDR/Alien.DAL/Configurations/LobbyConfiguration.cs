@@ -32,7 +32,7 @@ namespace Alien.DAL.Configurations
                 .HasMaxLength(50);
 
             builder.HasMany(p => p.PartyPlayers)
-                .WithOne(pp => pp.Party);
+                .WithOne(pp => pp.Lobby);
         }
     }
 }

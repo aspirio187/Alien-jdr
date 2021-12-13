@@ -17,7 +17,7 @@ namespace Alien.DAL.Repositories
 
         public async Task<IEnumerable<LobbyPlayerEntity>> GetLobbyPlayersAsync(int lobbyId)
         {
-            return await _context.LobbyPlayers.Where(lb => lb.PartyId == lobbyId).ToListAsync();
+            return await _context.LobbyPlayers.Where(lb => lb.lobbyId == lobbyId).ToListAsync();
         }
     }
 }

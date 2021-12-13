@@ -10,6 +10,7 @@ namespace Alien.BLL.Interfaces
     public interface ICharacterService
     {
         Task<IEnumerable<CharacterMiniatureDto>> GetCharactersMiniaturesAsync(Guid userId);
+        Task<IEnumerable<CharacterMiniatureDto>> GetAvailableCharactersAsync(Guid userId);
         Task<bool> CreateCharacter(CharacterCreationDto character, Guid userId);
         Task<bool> DeleteCharacter(int characterId);
         Task<bool> DeleteCharacter(Guid idStamp);

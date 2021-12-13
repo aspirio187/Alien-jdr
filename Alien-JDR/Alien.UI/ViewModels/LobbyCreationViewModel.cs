@@ -172,7 +172,8 @@ namespace Alien.UI.ViewModels
 
         public async void LoadCharacters()
         {
-            // TODO : Get all available characters
+            IEnumerable<CharacterMiniatureDto> charactersFromRepo = await _characterService.GetAvailableCharactersAsync(_authenticator.User.Id);
+            AvailableCharacters = new(_mapper.Map<IEnumerable<LobbyCharacterModel>>(charactersFromRepo));
         }
 
         public void AddNpcCharacter()
