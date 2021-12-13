@@ -12,6 +12,6 @@ namespace Alien.BLL.Interfaces
         bool CreateLobbyCreator(CreateLobbyPlayerDto lobbyPlayer);
         bool CreateLobbyPlayer(CreateLobbyPlayerDto lobbyPlayer);
         Task<bool> IsUserCreator(Guid userId, int lobbyId);
-        Task<LobbyPlayerDto> GetLobbyPlayer(Guid userId, int lobbyId);
+        Task<LobbyPlayerDto> GetLobbyPlayerAsync(Guid userId, int lobbyId);
     }
 }

@@ -250,7 +250,7 @@ namespace Alien.UI.ViewModels
                     else
                     {
                         IsCreator = false;
-                        LobbyPlayerModel lobbyPlayer = _mapper.Map<LobbyPlayerModel>(await _lobbyPlayerService.GetLobbyPlayer(_authenticator.User.Id, (int)lobbyId));
+                        LobbyPlayerModel lobbyPlayer = _mapper.Map<LobbyPlayerModel>(await _lobbyPlayerService.GetLobbyPlayerAsync(_authenticator.User.Id, (int)lobbyId));
                         if (lobbyPlayer is null)
                         {
                             CreateLobbyPlayerDto createdLobbyPlayer = new CreateLobbyPlayerDto()
@@ -263,7 +263,7 @@ namespace Alien.UI.ViewModels
 
                             if (_lobbyPlayerService.CreateLobbyPlayer(createdLobbyPlayer))
                             {
-                                lobbyPlayer = _mapper.Map<LobbyPlayerModel>(await _lobbyPlayerService.GetLobbyPlayer(_authenticator.User.Id, (int)lobbyId));
+                                lobbyPlayer = _mapper.Map<LobbyPlayerModel>(await _lobbyPlayerService.GetLobbyPlayerAsync(_authenticator.User.Id, (int)lobbyId));
                                 if (lobbyPlayer is null)
                                 {
                                     Navigate(ViewsEnum.LobbiesView);

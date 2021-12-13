@@ -25,11 +25,10 @@ namespace Alien.UI.Models
             }
         }
 
-        private int _characterId;
+        private int? _characterId;
 
-        [Required]
         [IntegerValidator(MinValue = 1, MaxValue = int.MaxValue, ExcludeRange = false)]
-        public int CharacterId
+        public int? CharacterId
         {
             get { return _characterId; }
             set
