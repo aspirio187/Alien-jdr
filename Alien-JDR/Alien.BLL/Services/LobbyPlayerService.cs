@@ -53,7 +53,7 @@ namespace Alien.BLL.Services
             IEnumerable<LobbyPlayerEntity> lobbyPlayers = await _lobbyPlayerRepository.GetAllAsync();
             LobbyPlayerEntity lobbyPlayer = lobbyPlayers.FirstOrDefault(u => u.PartyId == lobbyId && u.UserId == userId && u.IsCreator == false);
             if (lobbyPlayer is null) throw new NullReferenceException($"There is no user with \"{userId}\" in lobby \"{lobbyId}\"");
-            lobbyPlayer.Character = await _characterRepository.GetByKeyAsync((int)lobbyPlayer.CharacterId);
+            if(lobbyPlayer.CharacterId is not null) lobbyPlayer.Character = await _characterRepository.GetByKeyAsync((int)lobbyPlayer.CharacterId);
             lobbyPlayer.User = await _userRepository.GetByKeyAsync(lobbyPlayer.UserId);
             return _mapper.Map<LobbyPlayerDto>(lobbyPlayer);
         }
