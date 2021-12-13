@@ -13,7 +13,13 @@ namespace Alien.UI.Profiles
     {
         public LobbyProfile()
         {
-            CreateMap<LobbyDto, LobbyModel>();
+            CreateMap<LobbyDto, LobbyModel>()
+                .ForMember(
+                    dest => dest.MaximumPlayers,
+                    opt => opt.MapFrom(
+                        src => src.MaximumPlayers.ToString()));
+
+            CreateMap<LobbyModel, LobbyDto>();
         }
     }
 }

@@ -25,6 +25,13 @@ namespace Alien.BLL.Profiles
                     opt => opt.MapFrom(
                         src => src.PartyPlayers.FirstOrDefault(lb => lb.IsCreator == true)));
 
+            CreateMap<LobbyDto, LobbyEntity>()
+                .ForMember(
+                    dest => dest.Status,
+                    opt => opt.MapFrom(
+                        src => src.Status.Equals("Commencé") ? LobbyStatusEnum.Started
+                            : src.Status.Equals("Attente") ? LobbyStatusEnum.Waiting : LobbyStatusEnum.Over));
+
             CreateMap<CreateLobbyDto, LobbyEntity>();
         }
     }

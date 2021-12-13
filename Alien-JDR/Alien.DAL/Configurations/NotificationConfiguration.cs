@@ -32,6 +32,8 @@ namespace Alien.DAL.Configurations
                     s => s.ToString(),
                     s => (NotificationStatucEnum)Enum.Parse(typeof(NotificationStatucEnum), s));
 
+            builder.HasKey(n => n.Id);
+
             builder.HasOne(p => p.Sender)
                 .WithMany(u => u.SentNotifications)
                 .IsRequired(true)

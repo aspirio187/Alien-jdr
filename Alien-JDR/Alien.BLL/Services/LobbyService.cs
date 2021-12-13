@@ -5,6 +5,7 @@ using Alien.DAL.Interfaces;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,10 +42,30 @@ namespace Alien.BLL.Services
             return _lobbyRepository.SaveChanges();
         }
 
+        public async Task<LobbyDto> GetLobby(int lobbyId)
+        {
+            LobbyEntity lobbyFromRepo = await _lobbyRepository.GetByKeyAsync(lobbyId);
+            return _mapper.Map<LobbyDto>(lobbyFromRepo);
+        }
+
         public async Task<IEnumerable<LobbyDto>> GetLobbiesAsync()
         {
             IEnumerable<LobbyDto> lobbies = _mapper.Map<IEnumerable<LobbyDto>>(await _lobbyRepository.GetAllLobbiesWithPlayersAsync());
             return lobbies;
+        }
+
+        public bool UpdateLobby(LobbyDto lobby)
+        {
+            try
+            {
+                _lobbyRepository.Update(_mapper.Map<LobbyEntity>(lobby));
+                _lobbyRepository.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+            return true;
         }
     }
 }

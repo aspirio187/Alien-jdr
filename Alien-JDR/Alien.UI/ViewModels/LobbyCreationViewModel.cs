@@ -40,7 +40,12 @@ namespace Alien.UI.ViewModels
         public LobbyModeEnum SelectedGameMode
         {
             get { return _selectedGameMode; }
-            set { SetProperty(ref _selectedGameMode, value); }
+            set
+            {
+                SetProperty(ref _selectedGameMode, value);
+                Lobby.Mode = value.ToString();
+                UpdateLobbyAsync();
+            }
         }
 
         private string _lobbyName = $"NOUVELLE PARTIE { new Random().Next(1, 250) }";
@@ -48,15 +53,25 @@ namespace Alien.UI.ViewModels
         public string LobbyName
         {
             get { return _lobbyName; }
-            set { SetProperty(ref _lobbyName, value); }
+            set
+            {
+                SetProperty(ref _lobbyName, value);
+                Lobby.Name = value;
+                UpdateLobbyAsync();
+            }
         }
 
-        private int _maximumPlayers = 6;
+        private string _maximumPlayers = "6";
 
-        public int MaximumPlayers
+        public string MaximumPlayers
         {
             get { return _maximumPlayers; }
-            set { SetProperty(ref _maximumPlayers, value); }
+            set
+            {
+                SetProperty(ref _maximumPlayers, value);
+                Lobby.MaximumPlayers = int.Parse(value);
+                UpdateLobbyAsync();
+            }
         }
 
         public ObservableCollection<LobbyPlayerModel> LobbyPlayers { get; set; } = new();
@@ -66,7 +81,7 @@ namespace Alien.UI.ViewModels
         public ObservableCollection<LobbyUserModel> AvailableUsers
         {
             get { return _availableUsers; }
-            set {SetProperty(ref _availableUsers, value); }
+            set { SetProperty(ref _availableUsers, value); }
         }
 
         //public ObservableCollection<LobbyUserModel> AvailableUsers { get; set; }
@@ -116,6 +131,13 @@ namespace Alien.UI.ViewModels
                 throw new ArgumentNullException(nameof(notificationService));
             _lobbyPlayerService = lobbyPlayerService ??
                 throw new ArgumentNullException(nameof(lobbyPlayerService));
+        }
+
+        public async Task UpdateLobbyAsync()
+        {
+            LobbyDto lobbyFromRepo = await _lobbyService.GetLobby(Lobby.Id);
+            lobbyFromRepo = _mapper.Map<LobbyDto>(Lobby);
+            _lobbyService.UpdateLobby(lobbyFromRepo);
         }
 
         public async void LoadPlayers()
@@ -181,7 +203,7 @@ namespace Alien.UI.ViewModels
                     Lobby = _mapper.Map<LobbyModel>(_lobbyService.CreateLobby(new CreateLobbyDto()
                     {
                         HostIp = Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(ip => ip.IsIPv6LinkLocal)?.ToString(),
-                        MaximumPlayers = MaximumPlayers,
+                        MaximumPlayers = int.Parse(MaximumPlayers),
                         Mode = SelectedGameMode.ToString(),
                         Name = LobbyName
                     }));

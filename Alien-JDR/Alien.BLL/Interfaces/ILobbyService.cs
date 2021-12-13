@@ -6,8 +6,10 @@ namespace Alien.BLL.Interfaces
 {
     public interface ILobbyService
     {
+        Task<LobbyDto> GetLobby(int lobbyId);
         Task<IEnumerable<LobbyDto>> GetLobbiesAsync();
         LobbyDto CreateLobby(CreateLobbyDto lobby);
         bool DeleteLobby(int lobbyId);
+        bool UpdateLobby(LobbyDto lobby);
     }
 }
