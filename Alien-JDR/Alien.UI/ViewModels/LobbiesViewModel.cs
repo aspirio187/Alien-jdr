@@ -64,6 +64,7 @@ namespace Alien.UI.ViewModels
             {
                 { Global.LOBBY_ID, id }
             };
+            Navigate(ViewsEnum.LobbyCreationView, parameters);
             // TODO : Ajouté le joueur dans la base de donnée
         }
 
