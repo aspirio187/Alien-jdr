@@ -32,11 +32,13 @@ namespace Alien.UI.ViewModels
 
         private DelegateCommand<int?> _joinLobbyCommand;
         private DelegateCommand _createLobbyCommand;
+        private DelegateCommand _refreshLobbiesCommand;
+        private DelegateCommand _checkChangesCommand;
+
+        public DelegateCommand CheckChangesCommand => _checkChangesCommand ??= new(CheckChanges);
 
         public DelegateCommand<int?> JoinLobbyCommand => _joinLobbyCommand ??= new DelegateCommand<int?>(JoinLobby, CanJoinLobby);
         public DelegateCommand CreateLobbyCommand => _createLobbyCommand ??= new DelegateCommand(CreateLobby, CanCreateLobby);
-        private DelegateCommand _refreshLobbiesCommand;
-
         public DelegateCommand RefreshLobbiesCommand => _refreshLobbiesCommand ??= new DelegateCommand(RefreshLobbies);
 
         public override DelegateCommand LoadCommand => _loadCommand ??= new DelegateCommand(async () => await LoadAsync());
@@ -51,11 +53,16 @@ namespace Alien.UI.ViewModels
                 throw new ArgumentNullException(nameof(userService));
         }
 
+        public void CheckChanges()
+        {
+            JoinLobbyCommand.RaiseCanExecuteChanged();
+        }
+
         public bool CanJoinLobby(int? id)
         {
             if (id is null) return false;
             if (id == 0) return false;
-            return true;
+            return _lobbyService.PlayerCanJoin((int)id, _authenticator.User.Id);
         }
 
         public void JoinLobby(int? id)

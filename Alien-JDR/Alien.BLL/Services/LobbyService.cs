@@ -67,5 +67,12 @@ namespace Alien.BLL.Services
             }
             return true;
         }
+
+        public bool PlayerCanJoin(int lobbyId, Guid userId)
+        {
+            LobbyEntity lobby = Task.Run(async () => await _lobbyRepository.GetByKeyAsync(lobbyId)).Result;
+            if (lobby is null) return false;
+            return lobby.PartyPlayers.Any(lb => lb.UserId == userId) || lobby.Status == LobbyStatusEnum.Waiting;
+        }
     }
 }

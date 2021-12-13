@@ -50,7 +50,15 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Content="Rejoindre" Command="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.JoinCommand}" 
-                                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow},Path=DataContext.Id}"/>
+                                        CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow},Path=DataContext.Id}">
+                                    <behavior:Interaction.Triggers>
+
+                                        <behavior:EventTrigger EventName="Loaded">
+
+                                            <prism:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=DataGrid},Path=DataContext.CheckChangesCommand}"/>
+                                        </behavior:EventTrigger>
+                                    </behavior:Interaction.Triggers>
+                                </Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
