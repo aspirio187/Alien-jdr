@@ -9,5 +9,6 @@ namespace Alien.DAL.Interfaces
 {
     public interface ILobbyPlayerRepository : IRepositoryBase<LobbyPlayerEntity, int>
     {
+        Task<IEnumerable<LobbyPlayerEntity>> GetLobbyPlayersAsync(int lobbyId);
     }
 }

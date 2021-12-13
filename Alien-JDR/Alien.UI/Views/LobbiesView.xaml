@@ -49,7 +49,7 @@
                     <DataGridTemplateColumn Header="JOIN">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Rejoindre" Command="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.JoinCommand}" 
+                                <Button Content="Rejoindre" Command="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.JoinLobbyCommand}" 
                                         CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow},Path=DataContext.Id}">
                                     <behavior:Interaction.Triggers>
 

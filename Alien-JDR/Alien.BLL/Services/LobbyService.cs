@@ -5,6 +5,7 @@ using Alien.DAL.Interfaces;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -15,14 +16,17 @@ namespace Alien.BLL.Services
     public class LobbyService : ILobbyService
     {
         private readonly ILobbyRepository _lobbyRepository;
+        private readonly ILobbyPlayerRepository _lobbyPlayerRepository;
         private readonly IMapper _mapper;
 
-        public LobbyService(ILobbyRepository lobbyRepository, IMapper mapper)
+        public LobbyService(ILobbyRepository lobbyRepository, IMapper mapper, ILobbyPlayerRepository lobbyPlayerRepository)
         {
             _lobbyRepository = lobbyRepository ??
                 throw new ArgumentNullException(nameof(lobbyRepository));
             _mapper = mapper ??
                 throw new ArgumentNullException(nameof(mapper));
+            _lobbyPlayerRepository = lobbyPlayerRepository ??
+                throw new ArgumentNullException(nameof(lobbyPlayerRepository));
         }
 
         public LobbyDto CreateLobby(CreateLobbyDto lobby)
@@ -71,6 +75,7 @@ namespace Alien.BLL.Services
         public bool PlayerCanJoin(int lobbyId, Guid userId)
         {
             LobbyEntity lobby = Task.Run(async () => await _lobbyRepository.GetByKeyAsync(lobbyId)).Result;
+            lobby.PartyPlayers = new Collection<LobbyPlayerEntity>(Task.Run(async () => await _lobbyPlayerRepository.GetLobbyPlayersAsync(lobbyId)).Result.ToList());
             if (lobby is null) return false;
             return lobby.PartyPlayers.Any(lb => lb.UserId == userId) || lobby.Status == LobbyStatusEnum.Waiting;
         }

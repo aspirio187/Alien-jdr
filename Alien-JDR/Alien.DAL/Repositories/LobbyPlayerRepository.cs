@@ -1,5 +1,6 @@
 ﻿using Alien.DAL.Entities;
 using Alien.DAL.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,11 @@ namespace Alien.DAL.Repositories
     {
         public LobbyPlayerRepository(AlienContext context) : base(context)
         {
+        }
+
+        public async Task<IEnumerable<LobbyPlayerEntity>> GetLobbyPlayersAsync(int lobbyId)
+        {
+            return await _context.LobbyPlayers.Where(lb => lb.PartyId == lobbyId).ToListAsync();
         }
     }
 }
