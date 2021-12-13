@@ -35,7 +35,21 @@ namespace Alien.BLL.Services
         public async Task<bool> IsUserCreator(Guid userId, int lobbyId)
         {
             IEnumerable<LobbyPlayerEntity> users = await _lobbyPlayerRepository.GetAllAsync();
-            return users.FirstOrDefault(u => u.Id == lobbyId && u.UserId == userId && u.IsCreator == true) is not null;
+            return users.FirstOrDefault(u => u.PartyId == lobbyId && u.UserId == userId && u.IsCreator == true) is not null;
+        }
+
+        public async Task<LobbyPlayerDto> GetLobbyPlayer(Guid userId, int lobbyId)
+        {
+            IEnumerable<LobbyPlayerEntity> user = await _lobbyPlayerRepository.GetAllAsync();
+            return _mapper.Map<LobbyPlayerDto>(user.FirstOrDefault(u => u.PartyId == lobbyId && u.UserId == userId && u.IsCreator == false));
+        }
+
+        public bool CreateLobbyPlayer(CreateLobbyPlayerDto lobbyPlayer)
+        {
+            if (lobbyPlayer is null) throw new ArgumentNullException(nameof(lobbyPlayer));
+            lobbyPlayer.IsCreator = false;
+            LobbyPlayerEntity lobbyCreate = _lobbyPlayerRepository.Create(_mapper.Map<LobbyPlayerEntity>(lobbyPlayer));
+            return _lobbyPlayerRepository.SaveChanges();
         }
     }
 }

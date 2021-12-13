@@ -249,8 +249,41 @@ namespace Alien.UI.ViewModels
                     }
                     else
                     {
-                        // TODO : rédcupérer les informations du joueur
                         IsCreator = false;
+                        LobbyPlayerModel lobbyPlayer = _mapper.Map<LobbyPlayerModel>(await _lobbyPlayerService.GetLobbyPlayer(_authenticator.User.Id, (int)lobbyId));
+                        if (lobbyPlayer is null)
+                        {
+                            CreateLobbyPlayerDto createdLobbyPlayer = new CreateLobbyPlayerDto()
+                            {
+                                UserId = _authenticator.User.Id,
+                                CharacterId = null,
+                                IsCreator = false,
+                                PartyId = Lobby.Id
+                            };
+
+                            if (_lobbyPlayerService.CreateLobbyPlayer(createdLobbyPlayer))
+                            {
+                                lobbyPlayer = _mapper.Map<LobbyPlayerModel>(await _lobbyPlayerService.GetLobbyPlayer(_authenticator.User.Id, (int)lobbyId));
+                                if (lobbyPlayer is null)
+                                {
+                                    Navigate(ViewsEnum.LobbiesView);
+                                }
+                                else
+                                {
+                                    // TODO : Transmettre au lobby créateur l'information de notre arrivée
+                                    LobbyPlayers.Add(lobbyPlayer);
+                                }
+                            }
+                            else
+                            {
+                                Navigate(ViewsEnum.LobbiesView);
+                            }
+                        }
+                        else
+                        {
+                            // TODO : Transmettre au lobby créateur l'information de notre arrivée
+                            LobbyPlayers.Add(lobbyPlayer);
+                        }
                     }
                 }
             }
