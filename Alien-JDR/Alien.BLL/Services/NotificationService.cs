@@ -55,7 +55,7 @@ namespace Alien.BLL.Services
 
         public bool SendNotification(CreateNotificationDto notification)
         {
-            var notificationToCreate = _mapper.Map<NotificationEntity>(notification);
+            NotificationEntity notificationToCreate = _mapper.Map<NotificationEntity>(notification);
             notificationToCreate.SentTime = DateTime.Now;
             notificationToCreate.Status = NotificationStatucEnum.Pending;
             _notificationRepository.Create(notificationToCreate);

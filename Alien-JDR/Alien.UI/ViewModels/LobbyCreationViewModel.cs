@@ -183,7 +183,7 @@ namespace Alien.UI.ViewModels
             {
                 CreateNotificationDto notification = new CreateNotificationDto()
                 {
-                    LobbyId = 1,
+                    LobbyId = Lobby.Id,
                     ReceiverId = SelectedUser.Id,
                     SenderId = _authenticator.User.Id
                 };
@@ -251,7 +251,7 @@ namespace Alien.UI.ViewModels
                         CreateLobbyPlayerDto creator = new CreateLobbyPlayerDto()
                         {
                             UserId = _authenticator.User.Id,
-                            PartyId = Lobby.Id,
+                            LobbyId = Lobby.Id,
                             CharacterId = null,
                             IsCreator = true
                         };
@@ -299,7 +299,7 @@ namespace Alien.UI.ViewModels
                                 UserId = _authenticator.User.Id,
                                 CharacterId = null,
                                 IsCreator = false,
-                                PartyId = Lobby.Id
+                                LobbyId = Lobby.Id
                             };
 
                             if (_lobbyPlayerService.CreateLobbyPlayer(createdLobbyPlayer))

@@ -9,7 +9,7 @@ namespace Alien.BLL.Dtos
     public class CreateLobbyPlayerDto
     {
         public Guid UserId { get; set; }
-        public int PartyId { get; set; }
+        public int LobbyId { get; set; }
         public int? CharacterId { get; set; }
         public bool IsCreator { get; set; }
     }
