@@ -79,5 +79,18 @@ namespace Alien.BLL.Services
             if (lobby is null) return false;
             return lobby.PartyPlayers.Any(lb => lb.UserId == userId) || lobby.Status == LobbyStatusEnum.Waiting;
         }
+
+        public bool UpdateHostIp(int lobbyId, string hostIp)
+        {
+            if (hostIp is null) throw new ArgumentNullException(nameof(hostIp));
+            if (hostIp.Length <= 0) throw new ArgumentException($"Host IP can not be empty string! : \"{ hostIp }\"");
+
+            LobbyEntity lobby = Task.Run(async () => await _lobbyRepository.GetByKeyAsync(lobbyId)).Result;
+            if (lobby is null) throw new NullReferenceException($"There is no lobby with ID : \"{ lobbyId }\"");
+
+            lobby.HostIp = hostIp;
+            _lobbyRepository.Update(lobby);
+            return _lobbyRepository.SaveChanges();
+        }
     }
 }

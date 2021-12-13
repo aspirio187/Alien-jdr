@@ -13,5 +13,6 @@ namespace Alien.BLL.Interfaces
         bool DeleteLobby(int lobbyId);
         bool UpdateLobby(LobbyDto lobby);
         bool PlayerCanJoin(int lobbyId, Guid userId);
+        bool UpdateHostIp(int lobbyId, string hostIp);
     }
 }

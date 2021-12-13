@@ -246,6 +246,10 @@ namespace Alien.UI.ViewModels
                     if (await _lobbyPlayerService.IsUserCreator(_authenticator.User.Id, Lobby.Id))
                     {
                         Lobby.HostIp = Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(ip => ip.IsIPv6LinkLocal)?.ToString();
+                        if (!_lobbyService.UpdateHostIp(Lobby.Id, Lobby.HostIp))
+                        {
+                            Navigate(ViewsEnum.LobbiesView);
+                        }
                         IsCreator = true;
                     }
                     else

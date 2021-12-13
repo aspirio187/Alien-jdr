@@ -6,6 +6,7 @@ using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,16 +15,23 @@ namespace Alien.BLL.Services
     public class LobbyPlayerService : ILobbyPlayerService
     {
         private readonly ILobbyPlayerRepository _lobbyPlayerRepository;
+        private readonly ILobbyRepository _lobbyRepository;
         private readonly ICharacterRepository _characterRepository;
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
 
-        public LobbyPlayerService(ILobbyPlayerRepository lobbyPlayerRepository, IMapper mapper)
+        public LobbyPlayerService(ILobbyPlayerRepository lobbyPlayerRepository, IMapper mapper, ILobbyRepository lobbyRepository, ICharacterRepository characterRepository, IUserRepository userRepository)
         {
             _lobbyPlayerRepository = lobbyPlayerRepository ??
                 throw new ArgumentNullException(nameof(lobbyPlayerRepository));
             _mapper = mapper ??
                 throw new ArgumentNullException(nameof(mapper));
+            _lobbyRepository = lobbyRepository ??
+                throw new ArgumentNullException(nameof(lobbyRepository));
+            _characterRepository = characterRepository ??
+                throw new ArgumentNullException(nameof(characterRepository));
+            _userRepository = userRepository ??
+                throw new ArgumentNullException(nameof(userRepository));
         }
 
         public bool CreateLobbyCreator(CreateLobbyPlayerDto lobbyPlayer)
