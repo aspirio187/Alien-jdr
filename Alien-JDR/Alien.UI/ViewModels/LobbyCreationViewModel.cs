@@ -189,15 +189,13 @@ namespace Alien.UI.ViewModels
 
         }
 
-        public override void OnNavigatedTo(NavigationContext navigationContext)
+        public override async void OnNavigatedTo(NavigationContext navigationContext)
         {
             base.OnNavigatedTo(navigationContext);
 
             int? lobbyId = navigationContext.Parameters.GetValue<int?>(Global.LOBBY_ID);
             if (lobbyId is null)
             {
-                // TODO : Créer un lobby dans la base de donnée
-
                 try
                 {
                     Lobby = _mapper.Map<LobbyModel>(_lobbyService.CreateLobby(new CreateLobbyDto()
@@ -214,8 +212,6 @@ namespace Alien.UI.ViewModels
                     }
                     else
                     {
-                        // TODO : créer un lobbyplayer qui est créateur
-
                         CreateLobbyPlayerDto creator = new CreateLobbyPlayerDto()
                         {
                             UserId = _authenticator.User.Id,
@@ -240,11 +236,24 @@ namespace Alien.UI.ViewModels
             }
             else
             {
+                Lobby = _mapper.Map<LobbyModel>(await _lobbyService.GetLobby((int)lobbyId));
+                if (Lobby is not null && Lobby.Id > 0)
+                {
+                    SelectedGameMode = (LobbyModeEnum)Enum.Parse(typeof(LobbyModeEnum), Lobby.Mode);
+                    LobbyName = Lobby.Name;
+                    MaximumPlayers = Lobby.MaximumPlayers.ToString();
 
+                    if (await _lobbyPlayerService.IsUserCreator(_authenticator.User.Id, Lobby.Id))
+                    {
+                        IsCreator = true;
+                    }
+                    else
+                    {
+                        // TODO : rédcupérer les informations du joueur
+                        IsCreator = false;
+                    }
+                }
             }
-
-            // TODO : Vérifie si l'utilisateur est le créateur du lobby
-            // TODO : Si rejoins un lobby en cours : récupérer les infos de la DB et les mettre à jour
         }
 
         public bool PersistInHistory()

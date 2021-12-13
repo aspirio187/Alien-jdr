@@ -31,5 +31,11 @@ namespace Alien.BLL.Services
             LobbyPlayerEntity lobbyCreated = _lobbyPlayerRepository.Create(_mapper.Map<LobbyPlayerEntity>(lobbyPlayer));
             return _lobbyPlayerRepository.SaveChanges();
         }
+
+        public async Task<bool> IsUserCreator(Guid userId, int lobbyId)
+        {
+            IEnumerable<LobbyPlayerEntity> users = await _lobbyPlayerRepository.GetAllAsync();
+            return users.FirstOrDefault(u => u.Id == lobbyId && u.UserId == userId && u.IsCreator == true) is not null;
+        }
     }
 }

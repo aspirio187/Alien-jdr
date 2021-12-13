@@ -10,5 +10,6 @@ namespace Alien.BLL.Interfaces
     public interface ILobbyPlayerService
     {
         bool CreateLobbyCreator(CreateLobbyPlayerDto lobbyPlayer);
+        Task<bool> IsUserCreator(Guid userId, int lobbyId);
     }
 }
