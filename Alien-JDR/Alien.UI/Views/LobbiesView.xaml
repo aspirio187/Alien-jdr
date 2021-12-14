@@ -9,7 +9,7 @@
                 prism:ViewModelLocator.AutoWireViewModel="True"
                 mc:Ignorable="d" 
                 d:DesignHeight="450" 
-                Background="Black">
+                Background="Transparent">
     <Grid>
 
         <Grid.RowDefinitions>
@@ -18,11 +18,11 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0">
-            <DataGrid x:Name="GamesDataGrid" IsReadOnly="True" AutoGenerateColumns="False" Margin="10" ItemsSource="{Binding Lobbies}" >
+            <DataGrid x:Name="GamesDataGrid" IsReadOnly="True" AutoGenerateColumns="False" Margin="10" ItemsSource="{Binding Lobbies}" Opacity="1" AlternatingRowBackground="ForestGreen">
 
                 <DataGrid.Resources>
                     <Style TargetType="{x:Type DataGridColumnHeader}">
-                        <Setter Property="Background" Value="Black"/>
+                        <Setter Property="Background" Value="Transparent"/>
                         <Setter Property="FontSize" Value="25"/>
                         <Setter Property="FontFamily" Value="Arial Black"/>
                         <Setter Property="Margin" Value="10"/>
@@ -31,11 +31,11 @@
                     </Style>
 
                     <Style TargetType="{x:Type DataGrid}">
-                        <Setter Property="Background" Value="Black"/>
+                        <Setter Property="Background" Value="Transparent"/>
                     </Style>
 
                     <Style TargetType="{x:Type DataGridRow}">
-                        <Setter Property="Background" Value="Black"/>
+                        <Setter Property="Background" Value="Transparent"/>
                     </Style>
                 </DataGrid.Resources>
 
@@ -69,10 +69,10 @@
 
         <DockPanel Grid.Row="1" >
 
-            <Button Content="Rafrachir" Style="{StaticResource CustomFont}" Width="200" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center"
+            <Button Content="Rafraichir" Style="{StaticResource CustomFont}" Width="200" Margin="20" HorizontalAlignment="Left" VerticalAlignment="Center"
                     Command="{Binding RefreshLobbiesCommand}" />
 
-            <Button  Content="Creer un lobby" Style="{StaticResource CustomFont}" Width="200" Margin="10"
+            <Button  Content="Creer un lobby" Style="{StaticResource CustomFont}" Width="200" Margin="20"
                 HorizontalAlignment="Right" VerticalAlignment="Center" Command="{Binding CreateLobbyCommand}" />
         </DockPanel>
 

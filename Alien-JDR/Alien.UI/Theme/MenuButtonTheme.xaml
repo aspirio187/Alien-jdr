@@ -30,6 +30,7 @@
             <Trigger Property="IsChecked" Value="True">
                 <Setter Property="Background" Value="Black"/>
                 <Setter Property="Opacity" Value="0.4"/>
+               
 
             </Trigger>
 
@@ -40,7 +41,12 @@
 
             </Trigger>
 
+            <!--<EventTrigger>
+                <SoundPlayerAction Source="pack://application:,,,/Sounds/mixkit-quest-game-interface-click-1139.wav"/>
+            </EventTrigger>-->
         </Style.Triggers>
+
+        
     </Style>
 
  
