@@ -50,7 +50,6 @@ namespace Alien.DAL.Repositories
         {
             if (entity is null) throw new ArgumentNullException(nameof(entity));
             TEntity saved = _context.Add(entity).Entity;
-            _context.Entry(entity).State = EntityState.Detached;
             return saved;
         }
 
