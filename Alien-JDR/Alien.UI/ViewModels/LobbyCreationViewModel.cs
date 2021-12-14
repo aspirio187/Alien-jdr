@@ -330,14 +330,23 @@ namespace Alien.UI.ViewModels
                         }
 
                         // TODO : Transmettre au lobby créateur l'information de notre arrivée
-                        if (SocketRouteur.IsIpOnLine(Lobby.HostIp))
+                        //if (SocketRouteur.IsIpOnLine("192.168.1.46"))
+                        //{
+                        //    LobbyPlayers.Add(lobbyPlayer);
+                        //    SocketRouteur.Subscribe(Lobby.HostIp);
+                        //}
+                        //else
+                        //{
+                        //    Navigate(ViewsEnum.LobbiesView);
+                        //}
+
+                        try
                         {
-                            LobbyPlayers.Add(lobbyPlayer);
                             SocketRouteur.Subscribe(Lobby.HostIp);
                         }
-                        else
+                        catch(Exception e)
                         {
-                            Navigate(ViewsEnum.LobbiesView);
+                            Debug.WriteLine(e.Message);
                         }
                     }
                 }

@@ -61,7 +61,8 @@ namespace Alien.Socket.Models
 
             try
             {
-                sender.Connect(new IPEndPoint(IP, 11111));
+                IPEndPoint endPoint = new IPEndPoint(IP, 11111);
+                sender.Connect(endPoint);
                 sender.Shutdown(SocketShutdown.Both);
                 sender.Close();
                 return true;
