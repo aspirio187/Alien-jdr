@@ -36,7 +36,7 @@
             <RadioButton Content="Mode Campagne" Foreground="White" FontSize="20" IsEnabled="{Binding IsCreator}"
                          IsChecked="{Binding SelectedGameMode, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static global:LobbyModeEnum.Campagne}}" Style="{StaticResource MenuButtonTheme}" Margin="20" />
             <RadioButton Content="Mode Scénario" Foreground="White" FontSize="20"  IsEnabled="{Binding IsCreator}"
-                         IsChecked="{Binding SelectedGameMode, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static global:LobbyModeEnum.Scenario}} " Style="{StaticResource MenuButtonTheme}" Margin="20"/>
+                         IsChecked="{Binding SelectedGameMode, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static global:LobbyModeEnum.Scenario}}" Style="{StaticResource MenuButtonTheme}" Margin="20"/>
         </StackPanel>
 
         <DockPanel Grid.Row="2">
