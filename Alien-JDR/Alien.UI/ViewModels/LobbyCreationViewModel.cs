@@ -238,9 +238,13 @@ namespace Alien.UI.ViewModels
             {
                 try
                 {
+                    string hostIp = Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(ip => ip.IsIPv6LinkLocal)?.ToString();
+
+                    hostIp = hostIp.Remove(hostIp.IndexOf('%'));
+
                     Lobby = _mapper.Map<LobbyModel>(_lobbyService.CreateLobby(new CreateLobbyDto()
                     {
-                        HostIp = Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(ip => ip.IsIPv6LinkLocal)?.ToString(),
+                        HostIp = hostIp,
                         MaximumPlayers = int.Parse(MaximumPlayers),
                         Mode = SelectedGameMode.ToString(),
                         Name = LobbyName
@@ -285,7 +289,11 @@ namespace Alien.UI.ViewModels
 
                     if (await _lobbyPlayerService.IsUserCreator(_authenticator.User.Id, Lobby.Id))
                     {
-                        Lobby.HostIp = Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(ip => ip.IsIPv6LinkLocal)?.ToString();
+                        string hostIp = Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(ip => ip.IsIPv6LinkLocal)?.ToString();
+
+                        hostIp = hostIp.Remove(hostIp.IndexOf('%'));
+                        Lobby.HostIp = hostIp;
+
                         if (!_lobbyService.UpdateHostIp(Lobby.Id, Lobby.HostIp))
                         {
                             Navigate(ViewsEnum.LobbiesView);
@@ -342,7 +350,8 @@ namespace Alien.UI.ViewModels
 
                         try
                         {
-                            SocketRouteur.Subscribe(Lobby.HostIp);
+                            //SocketRouteur.Subscribe(Lobby.HostIp);
+                            SocketRouteur.IsIpOnLine(Lobby.HostIp);
                         }
                         catch(Exception e)
                         {
