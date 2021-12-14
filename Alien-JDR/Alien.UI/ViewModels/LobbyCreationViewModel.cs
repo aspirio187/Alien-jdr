@@ -359,7 +359,7 @@ namespace Alien.UI.ViewModels
                             Debug.WriteLine(e.Message);
                         }
 
-                        SocketRouteur.SendOn("ping", "testPing").OnReply((dynamic cli, Message arg) =>
+                        SocketRouteur.SendToOn(Lobby.HostIp,"ping", "testPing").OnReply((dynamic cli, Message arg) =>
                         {
                             Console.WriteLine($"Callback sur la reception du message Ping : ${arg.message}");
                         });
