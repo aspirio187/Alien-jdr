@@ -16,7 +16,7 @@
             <Global:NotificationMultiValueConverter x:Key="NotificationMultiValueConverter" />
         </Grid.Resources>
 
-        <DataGrid x:Name="NotificationsDataGrid" IsReadOnly="True" AutoGenerateColumns="False" Margin="10" ItemsSource="{Binding Notifications}" >
+        <DataGrid x:Name="NotificationsDataGrid" IsReadOnly="True" AutoGenerateColumns="False" Margin="20" ItemsSource="{Binding Notifications}" Background="Transparent" Opacity="1" >
 
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -33,23 +33,23 @@
                 </Style>
 
                 <Style TargetType="{x:Type DataGridRow}">
-                    <Setter Property="Background" Value="Black"/>
+                    <Setter Property="Background" Value="Transparent"/>
                 </Style>
             </DataGrid.Resources>
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Parties" MinWidth="150" Width="*" Binding="{Binding PartyName}"/>
+                <DataGridTextColumn Header="PARTIES" MinWidth="150" Width="*" Binding="{Binding PartyName}"/>
 
-                <DataGridTextColumn Header="Mode" MinWidth="150" Width="*" Binding="{Binding Mode}"/>
+                <DataGridTextColumn Header="MODE" MinWidth="150" Width="*" Binding="{Binding Mode}"/>
 
-                <DataGridTextColumn Header="Hôte" MinWidth="150" Width="*" Binding="{Binding PartyHost}" />
+                <DataGridTextColumn Header="HOTE" MinWidth="150" Width="*" Binding="{Binding PartyHost}" />
 
-                <DataGridTextColumn Header="Temps" MinWidth="150" Width="*" Binding="{Binding SendAt}" />
+                <DataGridTextColumn Header="TEMPS" MinWidth="150" Width="*" Binding="{Binding SendAt}" />
 
                 <DataGridTemplateColumn Width="auto" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="V" FontWeight="Bold" Width="35" Height="35" FontSize="20" Foreground="DarkGreen"
+                            <Button Content="V" FontWeight="Bold" Width="35" Height="35" FontSize="20" Foreground="ForestGreen"
                                     Command="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.RespondCommand}">
                                 <Button.CommandParameter>
                                     <MultiBinding Converter="{StaticResource NotificationMultiValueConverter}">

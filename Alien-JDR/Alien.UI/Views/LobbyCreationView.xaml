@@ -34,9 +34,9 @@
 
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
             <RadioButton Content="Mode Campagne" Foreground="White" FontSize="20" IsEnabled="{Binding IsCreator}"
-                         IsChecked="{Binding SelectedGameMode, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static global:LobbyModeEnum.Campagne}}" />
-            <RadioButton Content="Mode Scénario" Foreground="White" FontSize="20" IsEnabled="{Binding IsCreator}"
-                         IsChecked="{Binding SelectedGameMode, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static global:LobbyModeEnum.Scenario}}" />
+                         IsChecked="{Binding SelectedGameMode, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static global:LobbyModeEnum.Campagne}}" Style="{StaticResource MenuButtonTheme}" Margin="20" />
+            <RadioButton Content="Mode Scénario" Foreground="White" FontSize="20"  IsEnabled="{Binding IsCreator}"
+                         IsChecked="{Binding SelectedGameMode, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static global:LobbyModeEnum.Scenario}} " Style="{StaticResource MenuButtonTheme}" Margin="20"/>
         </StackPanel>
 
         <DockPanel Grid.Row="2">
@@ -79,7 +79,7 @@
                     IsEnabled="{Binding IsCreator}"/>
         </DockPanel>
 
-        <DataGrid Grid.Row="6" IsReadOnly="True" AutoGenerateColumns="False" Margin="0, 10, 0, 10" ItemsSource="{Binding LobbyPlayers}">
+        <DataGrid Grid.Row="6" IsReadOnly="True" AutoGenerateColumns="False" Margin="0, 10, 0, 10" ItemsSource="{Binding LobbyPlayers}" Background="Transparent" Opacity="15">
 
             <!--<DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
@@ -98,7 +98,7 @@
 
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
-                    <Setter Property="Background" Value="Black"/>
+                    <Setter Property="Background" Value="Transparent"/>
                     <Setter Property="FontSize" Value="25"/>
                     <Setter Property="FontFamily" Value="Arial Black"/>
                     <Setter Property="Margin" Value="10"/>
@@ -107,11 +107,11 @@
                 </Style>
 
                 <Style TargetType="{x:Type DataGrid}">
-                    <Setter Property="Background" Value="Black"/>
+                    <Setter Property="Background" Value="Transparent"/>
                 </Style>
 
                 <Style TargetType="{x:Type DataGridRow}">
-                    <Setter Property="Background" Value="Black"/>
+                    <Setter Property="Background" Value="Transparent"/>
                 </Style>
             </DataGrid.Resources>
 

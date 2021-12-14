@@ -20,8 +20,10 @@
         </Setter>
 
         <Style.Triggers>
-            
-            
+
+            <EventTrigger>
+                <SoundPlayerAction Source="pack://application:,,,/Sounds/mixkit-hard-click-1118.wav"/>
+            </EventTrigger>
             
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="White"/>
