@@ -157,7 +157,7 @@ namespace Alien.UI.ViewModels
             _lobbyPlayerService = lobbyPlayerService ??
                 throw new ArgumentNullException(nameof(lobbyPlayerService));
 
-            SocketRouteur = new SocketRouter().Start();
+            SocketRouteur = new SocketRouter();
         }
 
         public async Task UpdateLobbyAsync()
@@ -351,13 +351,18 @@ namespace Alien.UI.ViewModels
 
                         try
                         {
-                            //SocketRouteur.Subscribe(Lobby.HostIp);
-                            SocketRouteur.IsIpOnLine(Lobby.HostIp);
+                            SocketRouteur = SocketRouteur.Start().Subscribe(Lobby.HostIp);
+                            //SocketRouteur.IsIpOnLine(Lobby.HostIp);
                         }
                         catch(Exception e)
                         {
                             Debug.WriteLine(e.Message);
                         }
+
+                        SocketRouteur.SendOn("ping", "testPing").OnReply((dynamic cli, Message arg) =>
+                        {
+                            Console.WriteLine($"Callback sur la reception du message Ping : ${arg.message}");
+                        });
                     }
                 }
                 else
