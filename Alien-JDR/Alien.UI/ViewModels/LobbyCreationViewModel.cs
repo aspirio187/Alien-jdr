@@ -315,16 +315,7 @@ namespace Alien.UI.ViewModels
                                 }
                                 else
                                 {
-                                    // TODO : Transmettre au lobby créateur l'information de notre arrivée
-                                    if (SocketRouteur.IsIpOnLine(Lobby.HostIp))
-                                    {
-                                        LobbyPlayers.Add(lobbyPlayer);
-                                        SocketRouteur.Subscribe(Lobby.HostIp);
-                                    }
-                                    else
-                                    {
-                                        Navigate(ViewsEnum.LobbiesView);
-                                    }
+                                    
                                 }
                             }
                             else
@@ -336,6 +327,17 @@ namespace Alien.UI.ViewModels
                         {
                             // TODO : Transmettre au lobby créateur l'information de notre arrivée
                             LobbyPlayers.Add(lobbyPlayer);
+                        }
+
+                        // TODO : Transmettre au lobby créateur l'information de notre arrivée
+                        if (SocketRouteur.IsIpOnLine(Lobby.HostIp))
+                        {
+                            LobbyPlayers.Add(lobbyPlayer);
+                            SocketRouteur.Subscribe(Lobby.HostIp);
+                        }
+                        else
+                        {
+                            Navigate(ViewsEnum.LobbiesView);
                         }
                     }
                 }
