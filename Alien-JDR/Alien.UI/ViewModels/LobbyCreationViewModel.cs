@@ -272,6 +272,7 @@ namespace Alien.UI.ViewModels
                     }
 
                     IsCreator = true;
+                    SocketRouteur.Subscribe();
                 }
                 catch (Exception e)
                 {
