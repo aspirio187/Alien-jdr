@@ -59,12 +59,13 @@ namespace Alien.BLL.Services
             return _mapper.Map<LobbyPlayerDto>(lobbyPlayer);
         }
 
-        public bool CreateLobbyPlayer(CreateLobbyPlayerDto lobbyPlayer)
+        public LobbyPlayerDto CreateLobbyPlayer(CreateLobbyPlayerDto lobbyPlayer)
         {
             if (lobbyPlayer is null) throw new ArgumentNullException(nameof(lobbyPlayer));
             lobbyPlayer.IsCreator = false;
             LobbyPlayerEntity lobbyCreate = _lobbyPlayerRepository.Create(_mapper.Map<LobbyPlayerEntity>(lobbyPlayer));
-            return _lobbyPlayerRepository.SaveChanges();
+            _lobbyPlayerRepository.SaveChanges();
+            return _mapper.Map<LobbyPlayerDto>(lobbyCreate);
         }
     }
 }
