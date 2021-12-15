@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace Alien.Socket.Models
 {
@@ -103,11 +104,20 @@ namespace Alien.Socket.Models
          */
         public SocketP2P SendOn(string chanelName, string message)
         {
-            return this.Send($"{{" +
-                $"\"eventTime\" : \"{(DateTime.Now - new DateTime(1970, 1, 1)).TotalMilliseconds.ToString()}\"," +
-                $"\"chanel\" : \"{chanelName}\"," +
-                $"\"data\" : \"{message}\"" +
-                $"}}");
+            var msg = new
+            {
+                eventTime = (DateTime.Now - new DateTime(1970, 1, 1)).TotalMilliseconds.ToString(),
+                chanel = chanelName,
+                data = message
+            };
+
+            return this.Send(JsonConvert.SerializeObject(msg));
+
+            //return this.Send($"{{" +
+            //    $"\"eventTime\" : \"{(DateTime.Now - new DateTime(1970, 1, 1)).TotalMilliseconds.ToString()}\"," +
+            //    $"\"chanel\" : \"{chanelName}\"," +
+            //    $"\"data\" : \"{message}\"" +
+            //    $"}}");
         }
 
         /*
