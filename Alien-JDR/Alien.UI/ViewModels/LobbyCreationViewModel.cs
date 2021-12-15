@@ -159,7 +159,7 @@ namespace Alien.UI.ViewModels
             _lobbyPlayerService = lobbyPlayerService ??
                 throw new ArgumentNullException(nameof(lobbyPlayerService));
 
-            SocketRouteur = new SocketRouter().Start();
+            SocketRouteur = new SocketRouter();
         }
 
         public async Task UpdateLobbyAsync()
@@ -244,6 +244,36 @@ namespace Alien.UI.ViewModels
             }
         }
 
+        #region Host Socket functions
+        public bool PlayerArrived(dynamic cli, Message args)
+        {
+            try
+            {
+                LobbyPlayerModel playerModel = JsonConvert.DeserializeObject<LobbyPlayerModel>(args.message);
+                if (playerModel is null) return false;
+
+                LobbyPlayerModel existingPlayer = LobbyPlayers.FirstOrDefault(lb => lb.UserId == playerModel.UserId);
+
+                if (existingPlayer is null)
+                {
+                    LobbyPlayers.Add(playerModel);
+                }
+                else
+                {
+                    existingPlayer = playerModel;
+                }
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                return false;
+            }
+        }
+
+        #endregion
+
+        #region Initialization of the lobby
         // Initialise le lobby s'il est null. S'il ne l'est pas alors il tente de charger un lobby existant
         private bool InitializeLobby(int? lobbyId)
         {
@@ -280,9 +310,9 @@ namespace Alien.UI.ViewModels
                 }
 
                 IsCreator = true;
-                SocketRouteur.Subscribe();
+                SocketRouteur.Start().Subscribe();
 
-                SocketRouteur.On("Ping", PlayerArrived);
+                SocketRouteur.On(Global.LOBBY_PLAYER_ARRIVED_CHANNEL, PlayerArrived);
 
                 return true;
             }
@@ -293,36 +323,6 @@ namespace Alien.UI.ViewModels
             }
         }
 
-        #region Host Socket functions
-        public bool PlayerArrived(dynamic cli, Message args)
-        {
-            try
-            {
-                LobbyPlayerModel playerModel = JsonConvert.DeserializeObject<LobbyPlayerModel>(args.message);
-                if (playerModel is null) return false;
-
-                LobbyPlayerModel existingPlayer = LobbyPlayers.FirstOrDefault(lb => lb.UserId == playerModel.UserId);
-
-                if (existingPlayer is null)
-                {
-                    LobbyPlayers.Add(playerModel);
-                }
-                else
-                {
-                    existingPlayer = playerModel;
-                }
-                return true;
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e.Message);
-                return false;
-            }
-        }
-
-        #endregion
-
-        #region Initialization of the lobby
         // Charge un lobby existant
         private bool LoadExistingLobby(int? lobbyId)
         {
@@ -342,13 +342,16 @@ namespace Alien.UI.ViewModels
 
                 LobbyPlayerModel lobbyPlayer = _mapper.Map<LobbyPlayerModel>(Task.Run(async () => await _lobbyPlayerService.GetLobbyPlayerAsync(_authenticator.User.Id, (int)lobbyId)).Result);
 
-                if (!LoadLobbyPlayer(lobbyPlayer)) return false;
+                if(lobbyPlayer is null)
+                {
+                    if (!LoadLobbyPlayer(ref lobbyPlayer)) return false;
+                }
 
                 LobbyPlayers.Add(lobbyPlayer);
 
                 try
                 {
-                    SocketRouteur = SocketRouteur.Subscribe(Lobby.HostIp);
+                    SocketRouteur = SocketRouteur.Start().Subscribe(Lobby.HostIp);
                     //SocketRouteur.IsIpOnLine(Lobby.HostIp);
                 }
                 catch (Exception e)
@@ -358,7 +361,7 @@ namespace Alien.UI.ViewModels
 
                 string message = JsonConvert.SerializeObject(lobbyPlayer);
 
-                SocketRouteur.SendToOn(Lobby.HostIp, "ping", message).OnReply((dynamic cli, Message arg) =>
+                SocketRouteur.SendToOn(Lobby.HostIp, Global.LOBBY_PLAYER_ARRIVED_CHANNEL, message).OnReply((dynamic cli, Message arg) =>
                 {
                     Console.WriteLine($"Callback sur la reception du message Ping : ${arg.message}");
                 });
@@ -386,7 +389,8 @@ namespace Alien.UI.ViewModels
                 if (!_lobbyService.UpdateHostIp(Lobby.Id, Lobby.HostIp)) return false;
 
                 IsCreator = true;
-                SocketRouteur.Subscribe();
+                SocketRouteur.Start().Subscribe();
+                SocketRouteur.On(Global.LOBBY_PLAYER_ARRIVED_CHANNEL, PlayerArrived);
                 return true;
             }
             catch (Exception e)
@@ -396,7 +400,7 @@ namespace Alien.UI.ViewModels
             }
         }
 
-        private bool LoadLobbyPlayer(LobbyPlayerModel lobbyPlayer)
+        private bool LoadLobbyPlayer(ref LobbyPlayerModel lobbyPlayer)
         {
             try
             {
