@@ -5,6 +5,7 @@ using Alien.UI.Helpers;
 using Alien.UI.Models;
 using Alien.UI.States;
 using AutoMapper;
+using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Regions;
 using System;
@@ -14,6 +15,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Alien.UI.ViewModels
@@ -157,7 +159,7 @@ namespace Alien.UI.ViewModels
             _lobbyPlayerService = lobbyPlayerService ??
                 throw new ArgumentNullException(nameof(lobbyPlayerService));
 
-            SocketRouteur = new SocketRouter();
+            SocketRouteur = new SocketRouter().Start();
         }
 
         public async Task UpdateLobbyAsync()
@@ -240,23 +242,6 @@ namespace Alien.UI.ViewModels
                 Navigate(ViewsEnum.LobbiesView);
                 _regionNavigationService.Journal.Clear();
             }
-            else
-            {
-                try
-                {
-                    SocketRouteur = SocketRouteur.Start().Subscribe(Lobby.HostIp);
-                    //SocketRouteur.IsIpOnLine(Lobby.HostIp);
-                }
-                catch (Exception e)
-                {
-                    Debug.WriteLine(e.Message);
-                }
-
-                SocketRouteur.SendToOn(Lobby.HostIp, "ping", "testPing").OnReply((dynamic cli, Message arg) =>
-                {
-                    Console.WriteLine($"Callback sur la reception du message Ping : ${arg.message}");
-                });
-            }
         }
 
         // Initialise le lobby s'il est null. S'il ne l'est pas alors il tente de charger un lobby existant
@@ -296,6 +281,9 @@ namespace Alien.UI.ViewModels
 
                 IsCreator = true;
                 SocketRouteur.Subscribe();
+
+                SocketRouteur.On("Ping", PlayerArrived);
+
                 return true;
             }
             catch (Exception e)
@@ -305,6 +293,36 @@ namespace Alien.UI.ViewModels
             }
         }
 
+        #region Host Socket functions
+        public bool PlayerArrived(dynamic cli, Message args)
+        {
+            try
+            {
+                LobbyPlayerModel playerModel = JsonConvert.DeserializeObject<LobbyPlayerModel>(args.message);
+                if (playerModel is null) return false;
+
+                LobbyPlayerModel existingPlayer = LobbyPlayers.FirstOrDefault(lb => lb.UserId == playerModel.UserId);
+
+                if (existingPlayer is null)
+                {
+                    LobbyPlayers.Add(playerModel);
+                }
+                else
+                {
+                    existingPlayer = playerModel;
+                }
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                return false;
+            }
+        }
+
+        #endregion
+
+        #region Initialization of the lobby
         // Charge un lobby existant
         private bool LoadExistingLobby(int? lobbyId)
         {
@@ -327,6 +345,24 @@ namespace Alien.UI.ViewModels
                 if (!LoadLobbyPlayer(lobbyPlayer)) return false;
 
                 LobbyPlayers.Add(lobbyPlayer);
+
+                try
+                {
+                    SocketRouteur = SocketRouteur.Subscribe(Lobby.HostIp);
+                    //SocketRouteur.IsIpOnLine(Lobby.HostIp);
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e.Message);
+                }
+
+                string message = JsonConvert.SerializeObject(lobbyPlayer);
+
+                SocketRouteur.SendToOn(Lobby.HostIp, "ping", message).OnReply((dynamic cli, Message arg) =>
+                {
+                    Console.WriteLine($"Callback sur la reception du message Ping : ${arg.message}");
+                });
+
                 return true;
             }
             catch (Exception e)
@@ -384,6 +420,7 @@ namespace Alien.UI.ViewModels
                 return false;
             }
         }
+        #endregion
 
         public bool PersistInHistory()
         {
