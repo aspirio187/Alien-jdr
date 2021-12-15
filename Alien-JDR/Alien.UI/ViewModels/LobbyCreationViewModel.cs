@@ -249,6 +249,7 @@ namespace Alien.UI.ViewModels
         {
             try
             {
+                // TODO : Déserializer l'objet dans un type anonynme ou un objet "intermédiaire"
                 LobbyPlayerModel playerModel = JsonConvert.DeserializeObject<LobbyPlayerModel>(args.message);
                 if (playerModel is null) return false;
 
@@ -363,6 +364,7 @@ namespace Alien.UI.ViewModels
                     Debug.WriteLine(e.Message);
                 }
 
+                // TODO: sérialiser l'objet à travers un objet anonyme ou un objet intermédiaire
                 string message = JsonConvert.SerializeObject(lobbyPlayer);
                 //string message = lobbyPlayer.UserId.ToString();
 
@@ -397,12 +399,15 @@ namespace Alien.UI.ViewModels
 
                 IsCreator = true;
                 SocketRouteur.Start();
-                SocketRouteur.On(Global.LOBBY_PLAYER_ARRIVED_CHANNEL, (dynamic cli, Message args) =>
-                {
-                    Debug.WriteLine("Message reçu :");
-                    Debug.WriteLine(args.message);
-                    return true;
-                });
+                SocketRouteur.On(Global.LOBBY_PLAYER_ARRIVED_CHANNEL, PlayerArrived);
+                    
+                    
+                //    (dynamic cli, Message args) =>
+                //{
+                //    Debug.WriteLine("Message reçu :");
+                //    Debug.WriteLine(args.message);
+                //    return true;
+                //});
                 return true;
             }
             catch (Exception e)
