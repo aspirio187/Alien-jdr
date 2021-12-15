@@ -229,152 +229,166 @@ namespace Alien.UI.ViewModels
             }
         }
 
-        public override async void OnNavigatedTo(NavigationContext navigationContext)
+        public override void OnNavigatedTo(NavigationContext navigationContext)
         {
             base.OnNavigatedTo(navigationContext);
 
             int? lobbyId = navigationContext.Parameters.GetValue<int?>(Global.LOBBY_ID);
-            if (lobbyId is null)
+
+            if (!InitializeLobby(lobbyId))
+            {
+                Navigate(ViewsEnum.LobbiesView);
+                _regionNavigationService.Journal.Clear();
+            }
+            else
             {
                 try
                 {
-                    string hostIp = Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(ip => ip.IsIPv6LinkLocal)?.ToString();
-
-                    hostIp = hostIp.Remove(hostIp.IndexOf('%'));
-
-                    Lobby = _mapper.Map<LobbyModel>(_lobbyService.CreateLobby(new CreateLobbyDto()
-                    {
-                        HostIp = hostIp,
-                        MaximumPlayers = int.Parse(MaximumPlayers),
-                        Mode = SelectedGameMode.ToString(),
-                        Name = LobbyName
-                    }));
-
-                    if (Lobby is null)
-                    {
-                        Navigate(ViewsEnum.LobbiesView);
-                    }
-                    else
-                    {
-                        CreateLobbyPlayerDto creator = new CreateLobbyPlayerDto()
-                        {
-                            UserId = _authenticator.User.Id,
-                            LobbyId = Lobby.Id,
-                            CharacterId = null,
-                            IsCreator = true
-                        };
-
-                        if (!_lobbyPlayerService.CreateLobbyCreator(creator))
-                        {
-                            _lobbyService.DeleteLobby(Lobby.Id);
-                            Navigate(ViewsEnum.LobbiesView);
-                        }
-                    }
-
-                    IsCreator = true;
-                    SocketRouteur.Subscribe();
+                    SocketRouteur = SocketRouteur.Start().Subscribe(Lobby.HostIp);
+                    //SocketRouteur.IsIpOnLine(Lobby.HostIp);
                 }
                 catch (Exception e)
                 {
                     Debug.WriteLine(e.Message);
                 }
+
+                SocketRouteur.SendToOn(Lobby.HostIp, "ping", "testPing").OnReply((dynamic cli, Message arg) =>
+                {
+                    Console.WriteLine($"Callback sur la reception du message Ping : ${arg.message}");
+                });
             }
-            else
+        }
+
+        // Initialise le lobby s'il est null. S'il ne l'est pas alors il tente de charger un lobby existant
+        private bool InitializeLobby(int? lobbyId)
+        {
+            if (lobbyId is not null) return LoadExistingLobby(lobbyId);
+
+            try
             {
-                Lobby = _mapper.Map<LobbyModel>(await _lobbyService.GetLobby((int)lobbyId));
-                if (Lobby is not null && Lobby.Id > 0)
+                string hostIp = Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(ip => ip.IsIPv6LinkLocal)?.ToString();
+
+                hostIp = hostIp.Remove(hostIp.IndexOf('%'));
+
+                Lobby = _mapper.Map<LobbyModel>(_lobbyService.CreateLobby(new CreateLobbyDto()
                 {
-                    SelectedGameMode = (LobbyModeEnum)Enum.Parse(typeof(LobbyModeEnum), Lobby.Mode);
-                    LobbyName = Lobby.Name;
-                    MaximumPlayers = Lobby.MaximumPlayers.ToString();
+                    HostIp = hostIp,
+                    MaximumPlayers = int.Parse(MaximumPlayers),
+                    Mode = SelectedGameMode.ToString(),
+                    Name = LobbyName
+                }));
 
-                    if (await _lobbyPlayerService.IsUserCreator(_authenticator.User.Id, Lobby.Id))
-                    {
-                        string hostIp = Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(ip => ip.IsIPv6LinkLocal)?.ToString();
+                if (Lobby is null) return false;
 
-                        hostIp = hostIp.Remove(hostIp.IndexOf('%'));
-                        Lobby.HostIp = hostIp;
-
-                        if (!_lobbyService.UpdateHostIp(Lobby.Id, Lobby.HostIp))
-                        {
-                            Navigate(ViewsEnum.LobbiesView);
-                        }
-                        IsCreator = true;
-                    }
-                    else
-                    {
-                        IsCreator = false;
-                        LobbyPlayerModel lobbyPlayer = _mapper.Map<LobbyPlayerModel>(await _lobbyPlayerService.GetLobbyPlayerAsync(_authenticator.User.Id, (int)lobbyId));
-                        if (lobbyPlayer is null)
-                        {
-                            CreateLobbyPlayerDto createdLobbyPlayer = new CreateLobbyPlayerDto()
-                            {
-                                UserId = _authenticator.User.Id,
-                                CharacterId = null,
-                                IsCreator = false,
-                                LobbyId = Lobby.Id
-                            };
-
-                            if (_lobbyPlayerService.CreateLobbyPlayer(createdLobbyPlayer))
-                            {
-                                lobbyPlayer = _mapper.Map<LobbyPlayerModel>(await _lobbyPlayerService.GetLobbyPlayerAsync(_authenticator.User.Id, (int)lobbyId));
-                                if (lobbyPlayer is null)
-                                {
-                                    Navigate(ViewsEnum.LobbiesView);
-                                }
-                                else
-                                {
-                                    
-                                }
-                            }
-                            else
-                            {
-                                Navigate(ViewsEnum.LobbiesView);
-                            }
-                        }
-                        else
-                        {
-                            // TODO : Transmettre au lobby créateur l'information de notre arrivée
-                            LobbyPlayers.Add(lobbyPlayer);
-                        }
-
-                        // TODO : Transmettre au lobby créateur l'information de notre arrivée
-                        //if (SocketRouteur.IsIpOnLine("192.168.1.46"))
-                        //{
-                        //    LobbyPlayers.Add(lobbyPlayer);
-                        //    SocketRouteur.Subscribe(Lobby.HostIp);
-                        //}
-                        //else
-                        //{
-                        //    Navigate(ViewsEnum.LobbiesView);
-                        //}
-
-                        try
-                        {
-                            SocketRouteur = SocketRouteur.Start().Subscribe(Lobby.HostIp);
-                            //SocketRouteur.IsIpOnLine(Lobby.HostIp);
-                        }
-                        catch(Exception e)
-                        {
-                            Debug.WriteLine(e.Message);
-                        }
-
-                        SocketRouteur.SendToOn(Lobby.HostIp,"ping", "testPing").OnReply((dynamic cli, Message arg) =>
-                        {
-                            Console.WriteLine($"Callback sur la reception du message Ping : ${arg.message}");
-                        });
-                    }
-                }
-                else
+                CreateLobbyPlayerDto creator = new CreateLobbyPlayerDto()
                 {
-                    Navigate(ViewsEnum.LobbiesView);
+                    UserId = _authenticator.User.Id,
+                    LobbyId = Lobby.Id,
+                    CharacterId = null,
+                    IsCreator = true
+                };
+
+                if (!_lobbyPlayerService.CreateLobbyCreator(creator))
+                {
+                    _lobbyService.DeleteLobby(Lobby.Id);
+                    return false;
                 }
+
+                IsCreator = true;
+                SocketRouteur.Subscribe();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                return false;
+            }
+        }
+
+        // Charge un lobby existant
+        private bool LoadExistingLobby(int? lobbyId)
+        {
+            try
+            {
+                Lobby = _mapper.Map<LobbyModel>(Task.Run(async () => await _lobbyService.GetLobby((int)lobbyId)).Result);
+
+                if (Lobby is null || Lobby.Id <= 0) return false;
+
+                SelectedGameMode = (LobbyModeEnum)Enum.Parse(typeof(LobbyModeEnum), Lobby.Mode);
+                LobbyName = Lobby.Name;
+                MaximumPlayers = Lobby.MaximumPlayers.ToString();
+
+                if (LoadExistingCreatorLobby(lobbyId)) return true;
+
+                IsCreator = false;
+
+                LobbyPlayerModel lobbyPlayer = _mapper.Map<LobbyPlayerModel>(Task.Run(async () => await _lobbyPlayerService.GetLobbyPlayerAsync(_authenticator.User.Id, (int)lobbyId)).Result);
+
+                if (!LoadLobbyPlayer(lobbyPlayer)) return false;
+
+                LobbyPlayers.Add(lobbyPlayer);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                return false;
+            }
+        }
+
+        private bool LoadExistingCreatorLobby(int? lobbyId)
+        {
+            try
+            {
+                string hostIp = Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(ip => ip.IsIPv6LinkLocal)?.ToString();
+
+                hostIp = hostIp.Remove(hostIp.IndexOf('%'));
+                Lobby.HostIp = hostIp;
+
+                if (!_lobbyService.UpdateHostIp(Lobby.Id, Lobby.HostIp)) return false;
+
+                IsCreator = true;
+                SocketRouteur.Subscribe();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                return false;
+            }
+        }
+
+        private bool LoadLobbyPlayer(LobbyPlayerModel lobbyPlayer)
+        {
+            try
+            {
+                CreateLobbyPlayerDto createdLobbyPlayer = new CreateLobbyPlayerDto()
+                {
+                    UserId = _authenticator.User.Id,
+                    CharacterId = null,
+                    IsCreator = false,
+                    LobbyId = Lobby.Id
+                };
+
+                if (_lobbyPlayerService.CreateLobbyPlayer(createdLobbyPlayer)) return true;
+
+                lobbyPlayer = _mapper.Map<LobbyPlayerModel>(Task.Run(async () => await _lobbyPlayerService.GetLobbyPlayerAsync(_authenticator.User.Id, Lobby.Id)).Result);
+
+                if (lobbyPlayer is null) return false;
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                return false;
             }
         }
 
         public bool PersistInHistory()
         {
-            return true;
+            return false;
         }
     }
 }
+
