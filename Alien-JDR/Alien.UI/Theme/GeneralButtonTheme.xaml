@@ -22,7 +22,7 @@
         <Style.Triggers>
 
             <!--<EventTrigger>
-                <SoundPlayerAction Source="pack://application:,,,/Sounds/mixkit-hard-click-1118.wav"/>
+                <SoundPlayerAction Source="pack://application:,,,/Alien-JDR;component/Sounds/mixkit-hard-click-1118.wav"/>
             </EventTrigger>-->
             
             <Trigger Property="IsMouseOver" Value="True">

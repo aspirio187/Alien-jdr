@@ -14,6 +14,9 @@
     <None Remove="Images\alienMainUI.jpg" />
     <None Remove="Images\AlienRegistration.jpg" />
     <None Remove="Images\alien_banner_2000x1000-VF-1170x585.jpg" />
+    <None Remove="Images\Create.jpg" />
+    <None Remove="Sounds\mixkit-hard-click-1118.wav" />
+    <None Remove="Sounds\mixkit-quest-game-interface-click-1139.wav" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,6 +43,9 @@
     <Resource Include="Images\alienMainUI.jpg" />
     <Resource Include="Images\AlienRegistration.jpg" />
     <Resource Include="Images\alien_banner_2000x1000-VF-1170x585.jpg" />
+    <Resource Include="Images\Create.jpg" />
+    <Resource Include="Sounds\mixkit-hard-click-1118.wav" />
+    <Resource Include="Sounds\mixkit-quest-game-interface-click-1139.wav" />
   </ItemGroup>
 
 </Project>
