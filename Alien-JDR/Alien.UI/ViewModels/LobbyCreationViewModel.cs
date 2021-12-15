@@ -361,10 +361,12 @@ namespace Alien.UI.ViewModels
 
                 string message = JsonConvert.SerializeObject(lobbyPlayer);
 
-                SocketRouteur.SendToOn(Lobby.HostIp, Global.LOBBY_PLAYER_ARRIVED_CHANNEL, message).OnReply((dynamic cli, Message arg) =>
-                {
-                    Console.WriteLine($"Callback sur la reception du message Ping : ${arg.message}");
-                });
+                SocketRouteur.EmitOn(Global.LOBBY_PLAYER_ARRIVED_CHANNEL, message);
+                    
+                //    .OnReply((dynamic cli, Message arg) =>
+                //{
+                //    Console.WriteLine($"Callback sur la reception du message Ping : ${arg.message}");
+                //});
 
                 return true;
             }
