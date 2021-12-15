@@ -31,7 +31,9 @@ namespace Alien.UI.Profiles
                     dest => dest.PlayerType,
                     opt => opt.MapFrom(
                         src => "PJ"));
- 
+
+            CreateMap<LobbyPlayerArrival, LobbyPlayerModel>().ReverseMap();
+
         }
     }
 }

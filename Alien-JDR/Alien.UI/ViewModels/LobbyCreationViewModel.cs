@@ -17,6 +17,7 @@ using System.Net;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System.Windows.Data;
 
 namespace Alien.UI.ViewModels
 {
@@ -83,6 +84,8 @@ namespace Alien.UI.ViewModels
             }
         }
 
+        public object Lock { get; private set; } = new object();
+
         private ObservableCollection<LobbyPlayerModel> _lobbyPlayers = new();
 
         public ObservableCollection<LobbyPlayerModel> LobbyPlayers
@@ -105,14 +108,6 @@ namespace Alien.UI.ViewModels
         {
             get { return _selectedUser; }
             set { SetProperty(ref _selectedUser, value); }
-        }
-
-        private int myVar;
-
-        public int MyProperty
-        {
-            get { return myVar; }
-            set { myVar = value; }
         }
 
         private ObservableCollection<LobbyCharacterModel> _availableCharacters = new();
@@ -160,6 +155,8 @@ namespace Alien.UI.ViewModels
                 throw new ArgumentNullException(nameof(lobbyPlayerService));
 
             SocketRouteur = new SocketRouter();
+
+            BindingOperations.EnableCollectionSynchronization(_lobbyPlayers, Lock);
         }
 
         public async Task UpdateLobbyAsync()
@@ -250,14 +247,18 @@ namespace Alien.UI.ViewModels
             try
             {
                 // TODO : Déserializer l'objet dans un type anonynme ou un objet "intermédiaire"
-                LobbyPlayerModel playerModel = JsonConvert.DeserializeObject<LobbyPlayerModel>(args.message);
+                LobbyPlayerArrival arrivedPlayer = JsonConvert.DeserializeObject<LobbyPlayerArrival>(args.message);
+                LobbyPlayerModel playerModel = _mapper.Map<LobbyPlayerModel>(arrivedPlayer);
                 if (playerModel is null) return false;
 
                 LobbyPlayerModel existingPlayer = LobbyPlayers.FirstOrDefault(lb => lb.UserId == playerModel.UserId);
 
                 if (existingPlayer is null)
                 {
-                    LobbyPlayers.Add(playerModel);
+                    lock (Lock)
+                    {
+                        LobbyPlayers.Add(playerModel);
+                    }
                 }
                 else
                 {
@@ -313,12 +314,7 @@ namespace Alien.UI.ViewModels
                 IsCreator = true;
                 SocketRouteur.Start();
 
-                SocketRouteur.On(Global.LOBBY_PLAYER_ARRIVED_CHANNEL, (dynamic cli, Message args) =>
-                {
-                    Debug.WriteLine("Message reçu :");
-                    Debug.WriteLine(args.message);
-                    return true;
-                });
+                SocketRouteur.On(Global.LOBBY_PLAYER_ARRIVED_CHANNEL, PlayerArrived);
 
                 return true;
             }
@@ -365,16 +361,10 @@ namespace Alien.UI.ViewModels
                 }
 
                 // TODO: sérialiser l'objet à travers un objet anonyme ou un objet intermédiaire
-                string message = JsonConvert.SerializeObject(lobbyPlayer);
-                //string message = lobbyPlayer.UserId.ToString();
+                LobbyPlayerArrival playerArrived = _mapper.Map<LobbyPlayerArrival>(lobbyPlayer);
+                string message = JsonConvert.SerializeObject(playerArrived);
 
                 SocketRouteur.SendOn(Global.LOBBY_PLAYER_ARRIVED_CHANNEL, message);
-
-                //    .OnReply((dynamic cli, Message arg) =>
-                //{
-                //    Console.WriteLine($"Callback sur la reception du message Ping : ${arg.message}");
-                //});
-
                 return true;
             }
             catch (Exception e)
@@ -400,14 +390,6 @@ namespace Alien.UI.ViewModels
                 IsCreator = true;
                 SocketRouteur.Start();
                 SocketRouteur.On(Global.LOBBY_PLAYER_ARRIVED_CHANNEL, PlayerArrived);
-                    
-                    
-                //    (dynamic cli, Message args) =>
-                //{
-                //    Debug.WriteLine("Message reçu :");
-                //    Debug.WriteLine(args.message);
-                //    return true;
-                //});
                 return true;
             }
             catch (Exception e)
@@ -429,12 +411,8 @@ namespace Alien.UI.ViewModels
                     LobbyId = Lobby.Id
                 };
 
-                if (_lobbyPlayerService.CreateLobbyPlayer(createdLobbyPlayer)) return true;
-
-                lobbyPlayer = _mapper.Map<LobbyPlayerModel>(Task.Run(async () => await _lobbyPlayerService.GetLobbyPlayerAsync(_authenticator.User.Id, Lobby.Id)).Result);
-
+                lobbyPlayer = _mapper.Map<LobbyPlayerModel>(_lobbyPlayerService.CreateLobbyPlayer(createdLobbyPlayer));
                 if (lobbyPlayer is null) return false;
-
                 return true;
             }
             catch (Exception e)
