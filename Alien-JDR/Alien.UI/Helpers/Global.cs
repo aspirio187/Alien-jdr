@@ -15,6 +15,7 @@ namespace Alien.UI.Helpers
         public const string CHARACTER_CREATION = "Creating Character";
         public const string LOBBY_ID = "LobbyID";
 
+        public const string LOBBY_PLAYER_ARRIVED_CHANNEL = "NewPlayerArrived";
 
         /* CHANELS JOUEUR */
         public const string CHANEL_ADD_ITEM = "AddItem";
