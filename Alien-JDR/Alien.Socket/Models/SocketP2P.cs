@@ -10,7 +10,6 @@ namespace Alien.Socket.Models
 {
     public class SocketP2P
     {
-
         private SocketRouter Router;
 
         private string ipv6;
