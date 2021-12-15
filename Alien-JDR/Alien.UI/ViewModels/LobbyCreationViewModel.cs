@@ -396,7 +396,12 @@ namespace Alien.UI.ViewModels
 
                 IsCreator = true;
                 SocketRouteur.Start();
-                SocketRouteur.On(Global.LOBBY_PLAYER_ARRIVED_CHANNEL, PlayerArrived);
+                SocketRouteur.On(Global.LOBBY_PLAYER_ARRIVED_CHANNEL, (dynamic cli, Message args) =>
+                {
+                    Debug.WriteLine("Message reçu :");
+                    Debug.WriteLine(args.message);
+                    return true;
+                });
                 return true;
             }
             catch (Exception e)
