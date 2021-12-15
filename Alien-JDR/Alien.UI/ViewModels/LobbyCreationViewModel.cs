@@ -282,7 +282,7 @@ namespace Alien.UI.ViewModels
                 IsCreator = true;
                 SocketRouteur.Subscribe();
 
-                SocketRouteur.On("Ping", PlayerArrived);
+                SocketRouteur.On("test", PlayerArrived);
 
                 return true;
             }
@@ -387,6 +387,7 @@ namespace Alien.UI.ViewModels
 
                 IsCreator = true;
                 SocketRouteur.Subscribe();
+                SocketRouteur.On("test", PlayerArrived);
                 return true;
             }
             catch (Exception e)
