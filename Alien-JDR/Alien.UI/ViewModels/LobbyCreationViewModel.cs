@@ -363,7 +363,7 @@ namespace Alien.UI.ViewModels
                     Debug.WriteLine(e.Message);
                 }
 
-                string message = JsonConvert.SerializeObject(lobbyPlayer.UserId);
+                string message = JsonConvert.SerializeObject(lobbyPlayer);
                 //string message = lobbyPlayer.UserId.ToString();
 
                 SocketRouteur.SendOn(Global.LOBBY_PLAYER_ARRIVED_CHANNEL, message);
