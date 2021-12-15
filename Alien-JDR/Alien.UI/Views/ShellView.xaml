@@ -60,7 +60,7 @@
             <TextBlock Text="ALIEN" VerticalAlignment="Center" HorizontalAlignment="Stretch" TextAlignment="Center" Foreground="White" FontSize="40" Margin="5"
                        Style="{StaticResource CustomFont}" />
 
-            <RadioButton Content="Personnages" Height="50" Foreground="White" FontSize="14" Style="{StaticResource MenuButtonTheme}" FontFamily="Alenia"
+            <RadioButton Content="Personnages" Height="50" Foreground="White" FontSize="14" Style="{StaticResource MenuButtonTheme}" 
                         Command="{Binding NavigateCharacterCommand}" IsChecked="True"/>
 
             <RadioButton Content="Parties" Height="50" Foreground="White" FontSize="14" Style="{StaticResource MenuButtonTheme}" 
@@ -76,8 +76,8 @@
                          Command="{Binding NavigateCreditCommand}" VerticalAlignment="Bottom"/>
         </StackPanel>
 
-        <iconPacks:PackIconMaterial Kind="Bell" Foreground="White" Margin="153,140,0,0" Grid.Row="1"
-                                    Visibility="{Binding NotificationReceived, Converter={StaticResource CombiningConverter}}" />
+        <!--<iconPacks:PackIconMaterial Kind="Bell" Foreground="White" Margin="153,140,0,0" Grid.Row="1"
+                                    Visibility="{Binding NotificationReceived, Converter={StaticResource CombiningConverter}}" />-->
         <iconPacks:PackIconMaterial Kind="BellRing" Foreground="White" Margin="174,140,0,0" Grid.Row="1"
                                     Visibility="{Binding NotificationReceived, Converter={StaticResource BooleanToVisibilityConverter}}" />
 

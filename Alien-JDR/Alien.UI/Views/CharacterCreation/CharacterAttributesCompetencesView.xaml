@@ -129,7 +129,7 @@
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Machines lourdes (Force)" Style="{StaticResource CustomFont}" Foreground="White" FontSize="30" TextAlignment="Center" />
 
                 <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-
+                   
                     <Button Content="-" Style="{StaticResource CustomFont}" FontSize="25" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"
                             Command="{Binding DecreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.HeavyMachines}" />
 
@@ -137,6 +137,8 @@
 
                     <Button Content="+" Style="{StaticResource CustomFont}" FontSize="25" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"
                             Command="{Binding IncreaseCompetenceCommand}" CommandParameter="{x:Static global:Competences.HeavyMachines}" />
+                    
+
                 </StackPanel>
 
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Endurance (Force)" Style="{StaticResource CustomFont}" Foreground="White" FontSize="30" TextAlignment="Center" />

@@ -16,7 +16,7 @@
             <Global:NotificationMultiValueConverter x:Key="NotificationMultiValueConverter" />
         </Grid.Resources>
 
-        <DataGrid x:Name="NotificationsDataGrid" IsReadOnly="True" AutoGenerateColumns="False" Margin="20" ItemsSource="{Binding Notifications}" Background="Transparent" Opacity="1" >
+        <DataGrid x:Name="NotificationsDataGrid" IsReadOnly="True" AutoGenerateColumns="False" Margin="20" ItemsSource="{Binding Notifications}" Background="Transparent" Opacity="15" AlternatingRowBackground="#045228" FontFamily="Arial Black" FontSize="15" >
 
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
