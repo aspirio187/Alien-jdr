@@ -376,6 +376,8 @@ namespace Alien.UI.ViewModels
         {
             try
             {
+                if (!Task.Run(async () => await _lobbyService.PlayerIsHost((int)lobbyId, _authenticator.User.Id)).Result) return false;
+
                 string hostIp = Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(ip => ip.IsIPv6LinkLocal)?.ToString();
 
                 hostIp = hostIp.Remove(hostIp.IndexOf('%'));

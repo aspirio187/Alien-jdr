@@ -92,5 +92,13 @@ namespace Alien.BLL.Services
             _lobbyRepository.Update(lobby);
             return _lobbyRepository.SaveChanges();
         }
+
+        public async Task<bool> PlayerIsHost(int lobbyId, Guid userId)
+        {
+            LobbyEntity lobby = await _lobbyRepository.GetByKeyAsync(lobbyId);
+            lobby.PartyPlayers = (await _lobbyPlayerRepository.GetLobbyPlayersAsync(lobby.Id)).ToList();
+
+            return lobby.PartyPlayers.FirstOrDefault(lb => lb.IsCreator && lb.UserId == userId) is not null;
+        }
     }
 }
