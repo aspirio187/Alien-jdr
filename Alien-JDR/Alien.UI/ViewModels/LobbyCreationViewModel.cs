@@ -310,7 +310,7 @@ namespace Alien.UI.ViewModels
                 }
 
                 IsCreator = true;
-                SocketRouteur.Start().Subscribe();
+                SocketRouteur.Start();
 
                 SocketRouteur.On(Global.LOBBY_PLAYER_ARRIVED_CHANNEL, PlayerArrived);
 
@@ -342,7 +342,7 @@ namespace Alien.UI.ViewModels
 
                 LobbyPlayerModel lobbyPlayer = _mapper.Map<LobbyPlayerModel>(Task.Run(async () => await _lobbyPlayerService.GetLobbyPlayerAsync(_authenticator.User.Id, (int)lobbyId)).Result);
 
-                if(lobbyPlayer is null)
+                if (lobbyPlayer is null)
                 {
                     if (!LoadLobbyPlayer(ref lobbyPlayer)) return false;
                 }
@@ -352,7 +352,6 @@ namespace Alien.UI.ViewModels
                 try
                 {
                     SocketRouteur = SocketRouteur.Start().Subscribe(Lobby.HostIp);
-                    //SocketRouteur.IsIpOnLine(Lobby.HostIp);
                 }
                 catch (Exception e)
                 {
@@ -361,8 +360,8 @@ namespace Alien.UI.ViewModels
 
                 string message = JsonConvert.SerializeObject(lobbyPlayer);
 
-                SocketRouteur.EmitOn(Global.LOBBY_PLAYER_ARRIVED_CHANNEL, message);
-                    
+                SocketRouteur.SendToOn(Lobby.HostIp, Global.LOBBY_PLAYER_ARRIVED_CHANNEL, message);
+
                 //    .OnReply((dynamic cli, Message arg) =>
                 //{
                 //    Console.WriteLine($"Callback sur la reception du message Ping : ${arg.message}");
@@ -391,7 +390,8 @@ namespace Alien.UI.ViewModels
                 if (!_lobbyService.UpdateHostIp(Lobby.Id, Lobby.HostIp)) return false;
 
                 IsCreator = true;
-                SocketRouteur.Subscribe();
+                SocketRouteur.Start();
+                SocketRouteur.On(Global.LOBBY_PLAYER_ARRIVED_CHANNEL, PlayerArrived);
                 return true;
             }
             catch (Exception e)
