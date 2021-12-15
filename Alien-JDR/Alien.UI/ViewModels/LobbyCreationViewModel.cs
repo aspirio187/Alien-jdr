@@ -17,6 +17,7 @@ using System.Net;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System.Windows.Data;
 
 namespace Alien.UI.ViewModels
 {
@@ -83,6 +84,8 @@ namespace Alien.UI.ViewModels
             }
         }
 
+        public object Lock { get; private set; } = new object();
+
         private ObservableCollection<LobbyPlayerModel> _lobbyPlayers = new();
 
         public ObservableCollection<LobbyPlayerModel> LobbyPlayers
@@ -105,14 +108,6 @@ namespace Alien.UI.ViewModels
         {
             get { return _selectedUser; }
             set { SetProperty(ref _selectedUser, value); }
-        }
-
-        private int myVar;
-
-        public int MyProperty
-        {
-            get { return myVar; }
-            set { myVar = value; }
         }
 
         private ObservableCollection<LobbyCharacterModel> _availableCharacters = new();
@@ -160,6 +155,8 @@ namespace Alien.UI.ViewModels
                 throw new ArgumentNullException(nameof(lobbyPlayerService));
 
             SocketRouteur = new SocketRouter();
+
+            BindingOperations.EnableCollectionSynchronization(_lobbyPlayers, Lock);
         }
 
         public async Task UpdateLobbyAsync()
@@ -258,7 +255,10 @@ namespace Alien.UI.ViewModels
 
                 if (existingPlayer is null)
                 {
-                    LobbyPlayers.Add(playerModel);
+                    lock (Lock)
+                    {
+                        LobbyPlayers.Add(playerModel);
+                    }
                 }
                 else
                 {
@@ -314,12 +314,7 @@ namespace Alien.UI.ViewModels
                 IsCreator = true;
                 SocketRouteur.Start();
 
-                SocketRouteur.On(Global.LOBBY_PLAYER_ARRIVED_CHANNEL, (dynamic cli, Message args) =>
-                {
-                    Debug.WriteLine("Message reçu :");
-                    Debug.WriteLine(args.message);
-                    return true;
-                });
+                SocketRouteur.On(Global.LOBBY_PLAYER_ARRIVED_CHANNEL, PlayerArrived);
 
                 return true;
             }
