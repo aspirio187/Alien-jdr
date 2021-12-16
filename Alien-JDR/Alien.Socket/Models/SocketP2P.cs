@@ -325,7 +325,7 @@ namespace Alien.Socket.Models
 
         private void _OnError(string? type, dynamic error)
         {
-            Debug.Write($"{this.ipHost.HostName}-");
+            Debug.Write($"{this.ipHost?.HostName}-");
             Debug.Write($"{type} ");
             Debug.Write($"{error.StackTrace.Split("\\")[error.StackTrace.Split("\\").Length - 1].Split(":line")[0]}:");
             Debug.Write($"{error.StackTrace.Split(":line ")[error.StackTrace.Split(":line ").Length - 1]} ");
