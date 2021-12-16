@@ -131,6 +131,9 @@ namespace Alien.UI.ViewModels
         private DelegateCommand _startGameCommand;
         private DelegateCommand _loadCharactersCommand;
         private DelegateCommand _addNpcCharacterCommand;
+        private DelegateCommand _declareArrivalCommand;
+
+        public DelegateCommand DeclareArrivalCommand => _declareArrivalCommand ??= new DelegateCommand(async () => await DeclareArrival());
 
         public DelegateCommand LoadPlayersCommand => _loadPlayersCommand ??= new DelegateCommand(LoadPlayers);
         public DelegateCommand InvitePlayerCommand => _invitePlayerCommand ??= new DelegateCommand(InvitePlayer);
@@ -263,7 +266,6 @@ namespace Alien.UI.ViewModels
                     existingPlayer = playerModel;
                 }
 
-                cli.Reply("Joueur enregistré");
                 return true;
             }
             catch (Exception e)
@@ -361,15 +363,15 @@ namespace Alien.UI.ViewModels
                 }
 
                 // TODO: sérialiser l'objet à travers un objet anonyme ou un objet intermédiaire
-                LobbyPlayerArrival playerArrived = _mapper.Map<LobbyPlayerArrival>(lobbyPlayer);
-                string message = JsonConvert.SerializeObject(playerArrived);
+                //LobbyPlayerArrival playerArrived = _mapper.Map<LobbyPlayerArrival>(lobbyPlayer);
+                //string message = JsonConvert.SerializeObject(playerArrived);
 
                 //SocketRouteur.SendOn(Global.LOBBY_PLAYER_ARRIVED_CHANNEL, message).OnReply((dynamic cli, Message args) => 
                 //{ 
                 //    Debug.WriteLine(args.message); 
                 //});
 
-                DeclareArrival(message).Start();
+                //DeclareArrival(message).Start();
 
                 return true;
             }
@@ -380,10 +382,13 @@ namespace Alien.UI.ViewModels
             }
         }
 
-        public async Task DeclareArrival(string message)
+        public async Task DeclareArrival()
         {
             await Task.Factory.StartNew(() =>
             {
+                LobbyPlayerArrival playerArrived = _mapper.Map<LobbyPlayerArrival>(
+                    Task.Run(async () => await _lobbyPlayerService.GetLobbyPlayerAsync(_authenticator.User.Id, Lobby.Id)).Result);
+                string message = JsonConvert.SerializeObject(playerArrived);
                 SocketRouteur.SendOn(Global.LOBBY_PLAYER_ARRIVED_CHANNEL, message).OnReply((dynamic cli, Message args) =>
                 {
                     Debug.WriteLine(args.message);
