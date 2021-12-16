@@ -389,7 +389,7 @@ namespace Alien.UI.ViewModels
 
                 LobbyPlayerModel lobbyPlayer = _mapper.Map<LobbyPlayerModel>(Task.Run(async () => await _lobbyPlayerService.GetLobbyPlayerAsync(_authenticator.User.Id, Lobby.Id)).Result);
 
-                if (Task.Run(async () => await _lobbyService.PlayerIsHost(Lobby.Id, _authenticator.User.Id)).Result)
+                if (!Task.Run(async () => await _lobbyService.PlayerIsHost(Lobby.Id, _authenticator.User.Id)).Result)
                 {
                     LobbyPlayerArrival playerArrived = _mapper.Map<LobbyPlayerArrival>(lobbyPlayer);
 
