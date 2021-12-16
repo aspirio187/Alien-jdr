@@ -267,6 +267,8 @@ namespace Alien.UI.ViewModels
                     }
                 }
 
+                SocketRouteur.EmitOn(Global.LOBBY_PLAYER_ARRIVED_CHANNEL, args.message);
+
                 return true;
             }
             catch (Exception e)
@@ -281,6 +283,7 @@ namespace Alien.UI.ViewModels
             try
             {
                 LobbyPlayerArrival arrivedPlayer = JsonConvert.DeserializeObject<LobbyPlayerArrival>(args.message);
+                if (arrivedPlayer.UserId == _authenticator.User.Id) return false;
                 LobbyPlayerModel playerModel = _mapper.Map<LobbyPlayerModel>(arrivedPlayer);
                 if (playerModel is null) return false;
 
