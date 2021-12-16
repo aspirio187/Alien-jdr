@@ -154,8 +154,6 @@ namespace Alien.UI.ViewModels
             _lobbyPlayerService = lobbyPlayerService ??
                 throw new ArgumentNullException(nameof(lobbyPlayerService));
 
-            SocketRouteur = new SocketRouter();
-
             BindingOperations.EnableCollectionSynchronization(_lobbyPlayers, Lock);
         }
 
@@ -353,7 +351,7 @@ namespace Alien.UI.ViewModels
 
                 try
                 {
-                    SocketRouteur = SocketRouteur.Start().Subscribe(Lobby.HostIp);
+                    SocketRouteur.Start().Subscribe(Lobby.HostIp);
                 }
                 catch (Exception e)
                 {
