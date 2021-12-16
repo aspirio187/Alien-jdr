@@ -28,14 +28,14 @@ namespace Alien.DAL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(
-                @"Server=(localdb)\MSSQLLocalDB;
-                                Database=Alien-JDR-DB;
-                                Integrated Security=True;
-                                Connect Timeout=60;");
             //optionsBuilder.UseSqlServer(
-            //     @"Server=IDEAPAD-SOULTAN\SQLEXPRESS;Database=Alien-JDR-DB;User Id=thinkpad;
-            //                                    Password=soultan187;MultipleActiveResultSets=True;");
+            //    @"Server=(localdb)\MSSQLLocalDB;
+            //                    Database=Alien-JDR-DB;
+            //                    Integrated Security=True;
+            //                    Connect Timeout=60;");
+            optionsBuilder.UseSqlServer(
+                 @"Server=IDEAPAD-SOULTAN\SQLEXPRESS;Database=Alien-JDR-DB;User Id=thinkpad;
+                                                Password=soultan187;MultipleActiveResultSets=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
