@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Diagnostics;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace Alien.Socket.Models
 {
@@ -146,7 +147,8 @@ namespace Alien.Socket.Models
         public SocketP2P SendTo(string IP, string message)
         {
             IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(IP), 11111);
-            System.Net.Sockets.Socket sender = new System.Net.Sockets.Socket(this.ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            IPAddress myIp = Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(ip => ip.IsIPv6LinkLocal);
+            System.Net.Sockets.Socket sender = new System.Net.Sockets.Socket(myIp.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             this._connect(endPoint, sender);
             this._execClient(sender, message);
             this._close(sender);
@@ -271,7 +273,7 @@ namespace Alien.Socket.Models
 
         private void _print(string message)
         {
-            Debug.Write($"{this.ipHost.HostName} ");
+            Debug.Write($"{this.ipHost?.HostName} ");
             Debug.Write(message);
             Debug.WriteLine("");
         }

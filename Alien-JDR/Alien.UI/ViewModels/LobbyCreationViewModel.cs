@@ -370,7 +370,7 @@ namespace Alien.UI.ViewModels
                 }
 
                 IsCreator = true;
-                SocketRouteur.Start();
+                SocketRouteur = SocketRouteur.Start();
 
                 SocketRouteur.On(Global.LOBBY_PLAYER_ARRIVED_CHANNEL, PlayerArrived);
 

@@ -176,7 +176,8 @@ namespace Alien.Socket.Models
             List<IPAddress> addressList = this._server.subscriptions.Subribers();
             foreach (IPAddress ip in addressList)
             {
-                SocketP2P sender = this.SendToOn(ip.ToString(), chanel, message);
+                string ipToSend = ip.ToString().Remove(ip.ToString().IndexOf('%'));
+                SocketP2P sender = this.SendToOn(ipToSend, chanel, message);
                 if (callback != null) sender.OnReply(callback);
             }
         }
