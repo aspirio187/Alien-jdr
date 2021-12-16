@@ -355,7 +355,7 @@ namespace Alien.UI.ViewModels
 
                 try
                 {
-                   SocketRouteur = SocketRouteur.Start().Subscribe(Lobby.HostIp);
+                    SocketRouteur = SocketRouteur.Start().Subscribe(Lobby.HostIp);
                 }
                 catch (Exception e)
                 {
@@ -386,13 +386,20 @@ namespace Alien.UI.ViewModels
         {
             await Task.Factory.StartNew(() =>
             {
-                LobbyPlayerArrival playerArrived = _mapper.Map<LobbyPlayerArrival>(
-                    Task.Run(async () => await _lobbyPlayerService.GetLobbyPlayerAsync(_authenticator.User.Id, Lobby.Id)).Result);
-                string message = JsonConvert.SerializeObject(playerArrived);
-                SocketRouteur.SendOn(Global.LOBBY_PLAYER_ARRIVED_CHANNEL, message).OnReply((dynamic cli, Message args) =>
+
+                LobbyPlayerModel lobbyPlayer = _mapper.Map<LobbyPlayerModel>(Task.Run(async () => await _lobbyPlayerService.GetLobbyPlayerAsync(_authenticator.User.Id, Lobby.Id)).Result);
+
+                if (Task.Run(async () => await _lobbyService.PlayerIsHost(Lobby.Id, _authenticator.User.Id)).Result)
                 {
-                    Debug.WriteLine(args.message);
-                });
+                    LobbyPlayerArrival playerArrived = _mapper.Map<LobbyPlayerArrival>(lobbyPlayer);
+
+                    string message = JsonConvert.SerializeObject(playerArrived);
+                    SocketRouteur.SendOn(Global.LOBBY_PLAYER_ARRIVED_CHANNEL, message).OnReply((dynamic cli, Message args) =>
+                    {
+                        Debug.WriteLine(args.message);
+                    });
+
+                }
             });
         }
 
