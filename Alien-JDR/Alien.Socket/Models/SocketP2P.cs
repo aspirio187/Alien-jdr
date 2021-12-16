@@ -137,11 +137,21 @@ namespace Alien.Socket.Models
 
         public SocketP2P SendToOn(string IP, string chanelName, string message)
         {
-            return this.SendTo(IP, $"{{" +
+
+            var msg = new
+            {
+                eventTime = (DateTime.Now - new DateTime(1970, 1, 1)).TotalMilliseconds.ToString(),
+                chanel = chanelName,
+                data = message
+            };
+
+            return this.SendTo(IP , JsonConvert.SerializeObject(msg));
+
+/*            return this.SendTo(IP, $"{{" +
                 $"\"eventTime\" : \"{(DateTime.Now - new DateTime(1970, 1, 1)).TotalMilliseconds.ToString()}\"," +
                 $"\"chanel\" : \"{chanelName}\"," +
                 $"\"data\" : \"{message}\"" +
-                $"}}");
+                $"}}");*/
         }
 
         public SocketP2P SendTo(string IP, string message)
@@ -325,7 +335,7 @@ namespace Alien.Socket.Models
 
         private void _OnError(string? type, dynamic error)
         {
-            Debug.Write($"{this.ipHost.HostName}-");
+            Debug.Write($"{this.ipHost?.HostName}-");
             Debug.Write($"{type} ");
             Debug.Write($"{error.StackTrace.Split("\\")[error.StackTrace.Split("\\").Length - 1].Split(":line")[0]}:");
             Debug.Write($"{error.StackTrace.Split(":line ")[error.StackTrace.Split(":line ").Length - 1]} ");

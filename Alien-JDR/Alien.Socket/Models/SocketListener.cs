@@ -175,9 +175,9 @@ namespace Alien.Socket.Models
         {
             Func<dynamic, Message, bool> Subscribe = (dynamic cli, Message arg) =>
             {
-                Debug.Write($"{this.ipHost.HostName}-");
+                Debug.Write($"{this.ipHost?.HostName}-");
                 Debug.Write((arg.chanel == null ? $"general" : $"{arg.chanel}"));
-                Debug.Write($" : {arg.message}");
+                Debug.Write($" : {arg?.message}");
                 Debug.WriteLine("");
 
                 cli.Subscribe(arg.message);
