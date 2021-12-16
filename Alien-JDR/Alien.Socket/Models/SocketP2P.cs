@@ -264,6 +264,7 @@ namespace Alien.Socket.Models
         {
             // Data buffer
             byte[] messageReceived = new byte[1024];
+            // Le thread bloque à cet endroit
             int byteRecv = sender.Receive(messageReceived);
             return Encoding.ASCII.GetString(messageReceived, 0, byteRecv);
         }
