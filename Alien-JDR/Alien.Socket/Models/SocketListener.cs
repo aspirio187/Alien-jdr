@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Dynamic;
 using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace Alien.Socket.Models
 {
@@ -117,10 +118,19 @@ namespace Alien.Socket.Models
 
         public bool Reply(string message)
         {
-            this._send($"{{" +
-                $"\"chanel\" : \"reply\"," +
-                $"\"data\" : \"{message}\"" +
-                $"}}");
+            var replyMsg = new
+            {
+                chanel = "reply",
+                data = message
+            };
+
+            var sendMsg = JsonConvert.SerializeObject(replyMsg);
+            this._send(sendMsg);
+
+            //this._send($"{{" +
+            //    $"\"chanel\" : \"reply\"," +
+            //    $"\"data\" : \"{message}\"" +
+            //    $"}}");
             this._close();
             return true;
         }

@@ -262,6 +262,8 @@ namespace Alien.UI.ViewModels
                 {
                     existingPlayer = playerModel;
                 }
+
+                cli.Reply("Joueur enregistré");
                 return true;
             }
             catch (Exception e)
@@ -351,7 +353,7 @@ namespace Alien.UI.ViewModels
 
                 try
                 {
-                    SocketRouteur.Start().Subscribe(Lobby.HostIp);
+                   SocketRouteur = SocketRouteur.Start().Subscribe(Lobby.HostIp);
                 }
                 catch (Exception e)
                 {
@@ -362,7 +364,10 @@ namespace Alien.UI.ViewModels
                 LobbyPlayerArrival playerArrived = _mapper.Map<LobbyPlayerArrival>(lobbyPlayer);
                 string message = JsonConvert.SerializeObject(playerArrived);
 
-                SocketRouteur.SendOn(Global.LOBBY_PLAYER_ARRIVED_CHANNEL, message);
+                SocketRouteur.SendOn(Global.LOBBY_PLAYER_ARRIVED_CHANNEL, message).OnReply((dynamic cli, Message args) => 
+                { 
+                    Debug.WriteLine(args.message); 
+                });
                 return true;
             }
             catch (Exception e)

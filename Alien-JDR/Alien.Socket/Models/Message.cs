@@ -25,7 +25,10 @@ namespace Alien.Socket.Models
 
         public Message(string message)
         {
-            this._normalize(message);
+            if(!string.IsNullOrEmpty(message))
+            {
+                this._normalize(message);
+            }
         }
 
         private void _normalize(string message)
