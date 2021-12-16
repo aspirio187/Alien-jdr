@@ -364,10 +364,13 @@ namespace Alien.UI.ViewModels
                 LobbyPlayerArrival playerArrived = _mapper.Map<LobbyPlayerArrival>(lobbyPlayer);
                 string message = JsonConvert.SerializeObject(playerArrived);
 
-                SocketRouteur.SendOn(Global.LOBBY_PLAYER_ARRIVED_CHANNEL, message).OnReply((dynamic cli, Message args) => 
-                { 
-                    Debug.WriteLine(args.message); 
-                });
+                //SocketRouteur.SendOn(Global.LOBBY_PLAYER_ARRIVED_CHANNEL, message).OnReply((dynamic cli, Message args) => 
+                //{ 
+                //    Debug.WriteLine(args.message); 
+                //});
+
+                DeclareArrival(message).Start();
+
                 return true;
             }
             catch (Exception e)
@@ -375,6 +378,17 @@ namespace Alien.UI.ViewModels
                 Debug.WriteLine(e.Message);
                 return false;
             }
+        }
+
+        public async Task DeclareArrival(string message)
+        {
+            await Task.Factory.StartNew(() =>
+            {
+                SocketRouteur.SendOn(Global.LOBBY_PLAYER_ARRIVED_CHANNEL, message).OnReply((dynamic cli, Message args) =>
+                {
+                    Debug.WriteLine(args.message);
+                });
+            });
         }
 
         private bool LoadExistingCreatorLobby(int? lobbyId)
