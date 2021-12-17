@@ -69,14 +69,14 @@ namespace Alien.UI.Models
         private string _password;
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Le mot de passe est requis!")]
-        [RegularExpression("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$",
-            ErrorMessage = "Votre mot de passe doit contenir une lettre minuscule, majuscule, au moins un chiffre et un caractère spécial!")]
+        [RegularExpression("(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-_+]).{8,20}$",
+            ErrorMessage = "Votre mot de passe doit contenir\n \tUne lettre minuscule\n\tUne lettre majuscule\n\tAu moins un chiffre\n\tUn caractère spécial")]
         public string Password
         {
             get { return _password; }
             set
             {
-                ValidateProperty(ref _password, value);
+                _password = value;
                 NotifyPropertyChanged();
             }
         }

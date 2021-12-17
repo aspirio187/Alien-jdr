@@ -5,6 +5,7 @@ using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,9 +43,12 @@ namespace Alien.UI.ViewModels
 
         public async Task RegisterAccount()
         {
-            if(Registration.IsValid)
+            if (Registration.IsValid)
             {
-                await _authenticator.Register(Registration);
+                if (await _authenticator.Register(Registration))
+                {
+                    RaiseRequestClose();
+                }
             }
         }
 

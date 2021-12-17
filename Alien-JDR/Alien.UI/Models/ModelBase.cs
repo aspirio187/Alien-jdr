@@ -26,8 +26,7 @@ namespace Alien.UI.Models
         {
             get
             {
-                bool isValid = Validator.TryValidateObject(this, new ValidationContext(this), ValidationResults) &&
-                    ValidationResults.Count <= 0;
+                bool isValid = Validator.TryValidateObject(this, new ValidationContext(this), ValidationResults, true);
                 return isValid == true;
             }
         }
