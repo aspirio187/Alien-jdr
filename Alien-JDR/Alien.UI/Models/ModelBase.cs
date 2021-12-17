@@ -14,15 +14,21 @@ namespace Alien.UI.Models
         private ObservableCollection<ValidationResult> _validationResults = new();
         public ObservableCollection<ValidationResult> ValidationResults
         {
-            get =>  CleanResults(_validationResults);
-            set => _validationResults = value;
+            get => CleanResults(_validationResults);
+            set
+            {
+                _validationResults = value;
+                NotifyPropertyChanged();
+            }
         }
 
         public bool IsValid
         {
             get
             {
-                return Validator.TryValidateObject(this, new ValidationContext(this), ValidationResults);
+                bool isValid = Validator.TryValidateObject(this, new ValidationContext(this), ValidationResults) &&
+                    ValidationResults.Count <= 0;
+                return isValid == true;
             }
         }
 
@@ -66,7 +72,7 @@ namespace Alien.UI.Models
         {
             for (int i = 0; i < validationResults.Count; i++)
             {
-                if(validationResults.Any(v => v.ErrorMessage.Equals(validationResults[i].ErrorMessage)))
+                if (validationResults.Count(v => v.ErrorMessage.Equals(validationResults[i].ErrorMessage)) > 1)
                 {
                     validationResults.RemoveAt(i);
                     i--;

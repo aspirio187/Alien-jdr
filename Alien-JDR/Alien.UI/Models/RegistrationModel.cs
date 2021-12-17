@@ -12,7 +12,8 @@ namespace Alien.UI.Models
         private string _username;
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Le nom d'utilisateur est requis!")]
-        [MaxLength(50, ErrorMessage = "La taille maximale est de 50!")]
+        [MaxLength(50, ErrorMessage = "La nom d'utilisateur doit faire au plus 50 caractères!")]
+        [MinLength(5, ErrorMessage = "Le nom d'utilisateur doit faire au moins 5 caractères!")]
         public string Username
         {
             get { return _username; }
@@ -52,9 +53,9 @@ namespace Alien.UI.Models
             }
         }
 
-        [MaxLength(50, ErrorMessage = "Le nom de famille ne peut faire qu'au maximum 50 caractères!")]
         private string _lastName;
 
+        [MaxLength(50, ErrorMessage = "Le nom de famille ne peut faire qu'au maximum 50 caractères!")]
         public string LastName
         {
             get { return _lastName; }
@@ -68,7 +69,8 @@ namespace Alien.UI.Models
         private string _password;
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Le mot de passe est requis!")]
-        [RegularExpression("", ErrorMessage = "Votre mot de passe doit contenir une lettre minuscule, majuscule, au moins un chiffre et un caractère spécial!")]
+        [RegularExpression("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$",
+            ErrorMessage = "Votre mot de passe doit contenir une lettre minuscule, majuscule, au moins un chiffre et un caractère spécial!")]
         public string Password
         {
             get { return _password; }
