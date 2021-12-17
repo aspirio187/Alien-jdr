@@ -75,10 +75,12 @@ namespace Alien.UI.Views
                            "\n \trivaux mènent une guerre froide tandis que les corporations se disputent des ressources précieuses. Les colons se" +
                            "\n \ttournent vers les étoiles et jouent avec leur vie : chaque nouveau monde apprivoisé offre soit un festin, soit la famine. Et" +
                            "\n \til y a des choses qui se cachent dans l'ombre de chaque astéroïde, des choses étranges, différentes et mortelles." +
-                           "\n \tDes choses Aliens..."
+                           "\n \tDes choses Aliens...",
 
-                
-            };
+                            
+                           IsBodyHtml = true,
+
+                };
 
 
                 Message.To.Add(ToEmail);
