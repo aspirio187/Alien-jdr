@@ -81,7 +81,7 @@
             </StackPanel>
         </StackPanel>
 
-        <StackPanel Grid.Row="4" Margin="10">
+        <StackPanel Grid.Row="4" Margin="30">
             <Button Width="200" Height="40" Content="Suivant" Style="{StaticResource CustomFont}" HorizontalAlignment="Right" Command="{Binding NavigateNextPageCommand}" FontSize="20" />
         </StackPanel>
 

@@ -49,7 +49,7 @@
                     <DataGridTemplateColumn Header="JOIN">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Rejoindre" Command="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.JoinLobbyCommand}" 
+                                <Button Content="  Rejoindre  " Command="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.JoinLobbyCommand}" 
                                         CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow},Path=DataContext.Id}">
                                     <behavior:Interaction.Triggers>
 
@@ -69,10 +69,10 @@
 
         <DockPanel Grid.Row="1" >
 
-            <Button Content="Actualiser" Style="{StaticResource CustomFont}" Width="200" Height="40" Margin="20" HorizontalAlignment="Left" VerticalAlignment="Center"
+            <Button Content="Actualiser" Style="{StaticResource CustomFont}" Width="200" Height="40" Margin="30" HorizontalAlignment="Left" VerticalAlignment="Center"
                     Command="{Binding RefreshLobbiesCommand}" />
 
-            <Button  Content="Creer un lobby" Style="{StaticResource CustomFont}" Width="200" Height="40" Margin="20"
+            <Button  Content="Creer un lobby" Style="{StaticResource CustomFont}" Width="200" Height="40" Margin="30"
                 HorizontalAlignment="Right" VerticalAlignment="Center" Command="{Binding CreateLobbyCommand}" />
         </DockPanel>
 

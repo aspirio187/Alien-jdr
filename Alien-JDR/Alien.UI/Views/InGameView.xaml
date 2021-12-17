@@ -3,11 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Alien.UI.Views"
+        xmlns:local="clr-namespace:Alien.UI.Views" xmlns:iconPacks="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Material"
         mc:Ignorable="d"
         Title="InGameView" Height="1500" Width="1250"
         WindowStyle="None"
-        Background="Black">
+        Background="Transparent">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -233,13 +233,79 @@
 
         
         <StackPanel Grid.Row="2" Grid.ColumnSpan="5">
-            <!--game-->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="10">
+                    
+                    <TextBlock Margin="10" Text="Benjamin : " Foreground="White" FontSize="25" Style="{StaticResource CustomFont}"/>
+
+                    <TextBlock Margin="10" Text="Reçois 5 points de dégats " Foreground="White" FontSize="20" FontFamily="Arial Black"/>
+                    
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+
+                    <TextBlock Margin="10" Text="David : " Foreground="White" FontSize="25" Style="{StaticResource CustomFont}"/>
+
+                    <TextBlock Margin="10" Text="Reçois 5 points de dégats " Foreground="White" FontSize="20" FontFamily="Arial Black"/>
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="10">
+
+                    <TextBlock Margin="10" Text="Diego : " Foreground="White" FontSize="25" Style="{StaticResource CustomFont}"/>
+
+                    <TextBlock Margin="10" Text="Reçois 5 points de dégats " Foreground="White" FontSize="20" FontFamily="Arial Black"/>
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+
+                    <TextBlock Margin="10" Text="Guillaume : " Foreground="White" FontSize="25" Style="{StaticResource CustomFont}"/>
+
+                    <TextBlock Margin="10" Text="Reçois 5 points de dégats " Foreground="White" FontSize="20" FontFamily="Arial Black"/>
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Left" Margin="10">
+
+                    <TextBlock Margin="10" Text="Jordan : " Foreground="White" FontSize="25" Style="{StaticResource CustomFont}"/>
+
+                    <TextBlock Margin="10" Text="Reçois 5 points de dégats " Foreground="White" FontSize="20" FontFamily="Arial Black"/>
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+
+                    <TextBlock Margin="10" Text="Louthierne : " Foreground="White" FontSize="25" Style="{StaticResource CustomFont}"/>
+
+                    <TextBlock Margin="10" Text="Reçois 5 points de dégats " Foreground="White" FontSize="20" FontFamily="Arial Black"/>
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Left" Margin="10">
+
+                    <TextBlock Margin="10" Text="Sultan : " Foreground="White" FontSize="25" Style="{StaticResource CustomFont}"/>
+
+                    <TextBlock Margin="10" Text="Reçois 5 points de dégats " Foreground="White" FontSize="20" FontFamily="Arial Black"/>
+
+                </StackPanel>
+            </Grid>
         </StackPanel>
 
 
         <StackPanel Grid.Row="3" Grid.Column="0"  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
 
-            <TextBlock Style="{StaticResource CustomFont}" Background="Black" Foreground="White" FontSize="20">
+            <TextBlock Style="{StaticResource CustomFont}" Background="Transparent" Foreground="White" FontSize="20">
                 Avatar
             </TextBlock>
 
@@ -247,15 +313,21 @@
 
         <StackPanel Grid.Row="4" Grid.Column="0"  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
 
-            <TextBlock Style="{StaticResource CustomFont}" Background="Black" Foreground="White" FontSize="20">
+            <TextBlock Style="{StaticResource CustomFont}" Background="Transparent" Foreground="White" FontSize="20">
                 Nom du joueur
             </TextBlock>
 
         </StackPanel>
 
+        <StackPanel Grid.Row="5" Grid.RowSpan="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" Width="auto" Height="auto">
+            <Button>
+                <iconPacks:PackIconMaterial Kind="ExitRun" Foreground="White" Width="95" Height="95" />
+            </Button>
+        </StackPanel>
+
         <StackPanel Grid.Row="3" Grid.Column="1"  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
 
-            <TextBlock Style="{StaticResource CustomFont}" Background="Black" Foreground="White" FontSize="20">
+            <TextBlock Style="{StaticResource CustomFont}" Background="Transparent" Foreground="White" FontSize="20">
                 Points de vie =
             </TextBlock>
 
@@ -263,7 +335,7 @@
 
         <StackPanel Grid.Row="4" Grid.Column="1"  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
 
-            <TextBlock Style="{StaticResource CustomFont}" Background="Black" Foreground="White" FontSize="20">
+            <TextBlock Style="{StaticResource CustomFont}" Background="Transparent" Foreground="White" FontSize="20">
                 Points de stresse =
             </TextBlock>
 
@@ -271,7 +343,7 @@
 
         <StackPanel Grid.Row="5" Grid.Column="1"  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
 
-            <TextBlock Style="{StaticResource CustomFont}" Background="Black" Foreground="White" FontSize="20">
+            <TextBlock Style="{StaticResource CustomFont}" Background="Transparent" Foreground="White" FontSize="20">
                 XP
             </TextBlock>
 
@@ -299,7 +371,7 @@
                 Style="{StaticResource CustomFont}" 
                 Foreground="White"
                 FontSize="20"
-                Text="Attribut"/>
+                Text="Attribut "/>
 
             <ComboBox Foreground="Black" 
                       Style="{StaticResource CustomFont}"
@@ -323,7 +395,7 @@
                 Style="{StaticResource CustomFont}" 
                 Foreground="White"
                 FontSize="20"
-                Text="Competances"/>
+                Text="Competances "/>
 
             <ComboBox Foreground="Black" 
                       Style="{StaticResource CustomFont}"
@@ -347,7 +419,7 @@
                 Style="{StaticResource CustomFont}" 
                 Foreground="White"
                 FontSize="20"
-                Text="Bonus"/>
+                Text="Bonus "/>
 
             <ComboBox Foreground="Black" 
                       Style="{StaticResource CustomFont}"

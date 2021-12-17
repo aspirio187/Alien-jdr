@@ -39,7 +39,7 @@
                     <Button Background="Black" Height="320" Width="250" Margin="10" Command="{Binding NavigateToCharacterCommand}" CommandParameter="{Binding Id}">
                         <StackPanel Background="Transparent">
                             <Image Source="{Binding Image, Converter={StaticResource Base64ImageConverter}}" />
-                            <TextBlock FontSize="20" Style="{StaticResource CustomFont}" Text="{Binding Name}" />
+                            <TextBlock Height="20" FontSize="20" FontFamily="Arial Black" Text="{Binding Name}" />
                         </StackPanel>
                     </Button>
                 </DataTemplate>

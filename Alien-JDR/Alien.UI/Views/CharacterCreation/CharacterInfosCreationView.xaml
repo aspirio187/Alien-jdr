@@ -78,7 +78,7 @@
                 <Button Content="Ajouter" Foreground="Black" Style="{StaticResource CustomFont}" Command="{Binding AddItemCommand}" FontSize="25" Width="200"/>
 
                 <ListBox MinHeight="80" ItemsSource="{Binding CharacterInfos.LittleItems}" SelectedItem="{Binding CharacterInfos.SelectedItem}"
-                         FontFamily="Arial" Foreground="white" FontSize="15" Margin="10" />
+                         FontFamily="Arial Black" Foreground="white" FontSize="25" Margin="10" />
                 <Button Content="Supprimer" Foreground="Black" Style="{StaticResource CustomFont}" Command="{Binding RemoveItemCommand}" FontSize="25" Width="200"/>
             </StackPanel>
 
@@ -114,7 +114,7 @@
             </ItemsControl.ItemsPanel>
         </ItemsControl>
 
-        <DockPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="10">
+        <DockPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="30">
             <Button Width="200" Height="40" Content="Retour" Foreground="Black" Style="{StaticResource CustomFont}" HorizontalAlignment="Left"
                     Command="{Binding NavigateBackCommand}" FontSize="25"/>
             <Button Width="200" Height="40" Content="Suivant" Foreground="Black" Style="{StaticResource CustomFont}" HorizontalAlignment="Right"

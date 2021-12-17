@@ -391,7 +391,7 @@
             </StackPanel>
         </DockPanel>
 
-        <DockPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Margin="10">
+        <DockPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Margin="30">
             <Button Width="200" Height="40" Content="Retour" Foreground="Black" Style="{StaticResource CustomFont}" HorizontalAlignment="Left"
                     Command="{Binding NavigateBackCommand}"/>
             <Button Width="200" Height="40" Content="Terminer" Foreground="Black" Style="{StaticResource CustomFont}" HorizontalAlignment="Right"

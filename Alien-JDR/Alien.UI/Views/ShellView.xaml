@@ -42,7 +42,7 @@
         </Grid.RowDefinitions>
 
 
-        <DockPanel Grid.Row="0" Grid.Column="1" Margin="0,5,5,0" Background="Transparent" VerticalAlignment="Top" MouseDown="DockPanel_MouseDown">
+        <DockPanel Grid.Row="0" Grid.Column="1" Margin="20" Background="Transparent" VerticalAlignment="Top" MouseDown="DockPanel_MouseDown">
             <DockPanel HorizontalAlignment="Right">
                 <Button x:Name="MinimizeButton" Content="_" FontSize="16" Style="{StaticResource CustomFont}" FontWeight="Bold" Width="25" Height="25" Margin="2"
                         Click="MinimizeButton_Click" />
@@ -78,7 +78,7 @@
 
         <!--<iconPacks:PackIconMaterial Kind="Bell" Foreground="White" Margin="153,140,0,0" Grid.Row="1"
                                     Visibility="{Binding NotificationReceived, Converter={StaticResource CombiningConverter}}" />-->
-        <iconPacks:PackIconMaterial Kind="BellRing" Foreground="White" Margin="174,140,0,0" Grid.Row="1"
+        <iconPacks:PackIconMaterial Kind="BellRing" Foreground="White" Margin="160,103,0,0" Grid.Row="1"
                                     Visibility="{Binding NotificationReceived, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
 

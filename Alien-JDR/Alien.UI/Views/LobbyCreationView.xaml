@@ -29,32 +29,32 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="creation de jeu" Style="{StaticResource CustomFont}" Foreground="White" FontSize="25" Margin="10" HorizontalAlignment="Center" />
+        <TextBlock Grid.Row="0" Text="creation de jeu" Style="{StaticResource CustomFont}" Foreground="White" FontSize="30" Margin="10" HorizontalAlignment="Center" />
 
 
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
-            <RadioButton Content="Mode Campagne  " Foreground="White" FontSize="20" IsEnabled="{Binding IsCreator}"
+            <RadioButton Content="  Mode Campagne   " Foreground="White" FontSize="20" IsEnabled="{Binding IsCreator}"
                          IsChecked="{Binding SelectedGameMode, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static global:LobbyModeEnum.Campagne}}" Style="{StaticResource MenuButtonTheme}" Margin="20" />
-            <RadioButton Content="Mode Scénario  " Foreground="White" FontSize="20"  IsEnabled="{Binding IsCreator}"
+            <RadioButton Content="  Mode Scénario   " Foreground="White" FontSize="20"  IsEnabled="{Binding IsCreator}"
                          IsChecked="{Binding SelectedGameMode, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static global:LobbyModeEnum.Scenario}}" Style="{StaticResource MenuButtonTheme}" Margin="20"/>
         </StackPanel>
 
         <DockPanel Grid.Row="2">
             <TextBlock Text="nom de la partie" Style="{StaticResource CustomFont}" Foreground="White" FontSize="15" Margin="5" Width="300" VerticalAlignment="Center" />
-            <TextBox Text="{Binding LobbyName}" Margin="5" IsEnabled="{Binding IsCreator}" Foreground="white" FontSize="15" VerticalAlignment="Center"/>
+            <TextBox Text="{Binding LobbyName}" Margin="5" IsEnabled="{Binding IsCreator}" Foreground="white" FontSize="15" VerticalAlignment="Center" FontFamily="Arial Black" HorizontalAlignment="Left"/>
         </DockPanel>
 
         <DockPanel Grid.Row="3" LastChildFill="False">
             <TextBlock Text="nombre de joueurs maximum" Style="{StaticResource CustomFont}" Foreground="white" FontSize="15" Margin="5" Width="300"
                        VerticalAlignment="Center" />
-            <ComboBox x:Name="cmbNumberPlayer" Width="150" Margin="5" DockPanel.Dock="Left" SelectedItem="{Binding MaximumPlayers}" IsEnabled="{Binding IsCreator}" />
+            <ComboBox x:Name="cmbNumberPlayer" Width="auto" Margin="5" DockPanel.Dock="Left" SelectedItem="{Binding MaximumPlayers}" IsEnabled="{Binding IsCreator}" FontFamily="Arial Black" HorizontalAlignment="Left"/>
         </DockPanel>
 
         <DockPanel Grid.Row="4" LastChildFill="False">
             <TextBlock Text="inviter un joueur" Style="{StaticResource CustomFont}" Foreground="White" FontSize="15" Margin="5" Width="300"
                        VerticalAlignment="Center" 
                        DockPanel.Dock="Left"/>
-            <ComboBox ItemsSource="{Binding AvailableUsers}" SelectedItem="{Binding SelectedUser}" MinWidth="400" Margin="5" DockPanel.Dock="Left" IsEnabled="{Binding IsCreator}">
+            <ComboBox ItemsSource="{Binding AvailableUsers}" SelectedItem="{Binding SelectedUser}" MinWidth="400" Margin="5" DockPanel.Dock="Left" IsEnabled="{Binding IsCreator}" FontFamily="Arial Black"  Width="auto" Foreground="White">
                 <behavior:Interaction.Triggers>
                     <behavior:EventTrigger EventName="DropDownOpened">
                         <prism:InvokeCommandAction Command="{Binding LoadPlayersCommand}"/>
@@ -68,7 +68,7 @@
         <DockPanel Grid.Row="5" LastChildFill="False">
             <TextBlock Text="Ajouter un personnage non joueur" Style="{StaticResource CustomFont}" Foreground="White" FontSize="15" Margin="5" Width="300"
                        VerticalAlignment="Center" />
-            <ComboBox ItemsSource="{Binding AvailableCharacters}" MinWidth="400" Margin="5">
+            <ComboBox ItemsSource="{Binding AvailableCharacters}" MinWidth="400" Margin="5" FontFamily="Arial Black" Foreground="White">
                 <behavior:Interaction.Triggers>
                     <behavior:EventTrigger EventName="DropDownOpened">
                         <prism:InvokeCommandAction Command="{Binding LoadCharactersCommand}"/>
@@ -79,7 +79,7 @@
                     IsEnabled="{Binding IsCreator}"/>
         </DockPanel>
 
-        <DataGrid Grid.Row="6" IsReadOnly="True" AutoGenerateColumns="False" Margin="0, 10, 0, 10" ItemsSource="{Binding LobbyPlayers}" Background="Transparent" Opacity="15" AlternatingRowBackground="#045228" FontFamily="Arial Black" FontSize="15" >
+        <DataGrid Grid.Row="6" IsReadOnly="True" AutoGenerateColumns="False" Margin="0, 10, 0, 10" ItemsSource="{Binding LobbyPlayers}" Background="Transparent" Opacity="15" AlternatingRowBackground="#045228" FontFamily="Arial Black" FontSize="15" Foreground="White">
 
             <!--<DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
@@ -165,7 +165,7 @@
 
         </DataGrid>
 
-        <Button Grid.Row="7" Content="Demarrer" Style="{StaticResource CustomFont}" Width="200" Height="40" Margin="10" HorizontalAlignment="Right"
+        <Button Grid.Row="7" Content="Demarrer" Style="{StaticResource CustomFont}" Width="200" Height="40" Margin="30" HorizontalAlignment="Right"
                 Command="{Binding StartGameCommand}"/>
     </Grid>
 </ContentControl>

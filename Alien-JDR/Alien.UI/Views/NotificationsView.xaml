@@ -49,7 +49,7 @@
                 <DataGridTemplateColumn Width="auto" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="V" FontWeight="Bold" Width="35" Height="35" FontSize="20" Foreground="ForestGreen"
+                            <Button Content=" Accepter " FontWeight="Bold" Width="35" Height="35" FontSize="20" Foreground="ForestGreen"
                                     Command="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.RespondCommand}">
                                 <Button.CommandParameter>
                                     <MultiBinding Converter="{StaticResource NotificationMultiValueConverter}">
@@ -74,7 +74,7 @@
                 <DataGridTemplateColumn Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="X" FontWeight="Bold" FontSize="20" Width="35" Height="35" Foreground="Red"
+                            <Button Content=" Refuser " FontWeight="Bold" FontSize="20" Width="35" Height="35" Foreground="Red"
                                     Command="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.RespondCommand}">
                                 <Button.CommandParameter>
                                     <MultiBinding Converter="{StaticResource NotificationMultiValueConverter}">
