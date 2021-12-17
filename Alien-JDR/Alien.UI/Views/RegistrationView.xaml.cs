@@ -66,8 +66,20 @@ namespace Alien.UI.Views
                 {
                     From = FromEmail,
                     Subject = "Confiramation d'enregistrement",
-                    Body = "BIENVENU DANS LE MONDE DE ALIEN JDR"
-                };
+                    Body = "\t\tALIEN, LE JEU DE ROLE, PLONGEZ DANS L'UNIVERS DE SCIENCE-FICTION HORRIFIQUE DE RIDLEY SCOTTE! " +
+                           "\n\n \tL'espace est vaste, sombre, et n'est pas un environnement amical. Les rayons gamma et les neutrinos jaillissent des " +
+                           "\n \tétoiles mourantes pour vous brûler vif, les trous noirs vous déchirent, et le vide lui-même fait bouillir votre sang et gèle " +
+                           "\n \tvotre cerveau. Essayez de crier et personne ne peut vous entendre - retenez votre respiration et vous vous brisez les" +
+                           "\n \tpoumons." +
+                           "\n \tMais l'espace n'est pas aussi vide qu'on pourrait le croire. Ses frontières ne cessent de s'élargir. Les gouvernements" +
+                           "\n \trivaux mènent une guerre froide tandis que les corporations se disputent des ressources précieuses. Les colons se" +
+                           "\n \ttournent vers les étoiles et jouent avec leur vie : chaque nouveau monde apprivoisé offre soit un festin, soit la famine. Et" +
+                           "\n \til y a des choses qui se cachent dans l'ombre de chaque astéroïde, des choses étranges, différentes et mortelles." +
+                           "\n \tDes choses Aliens..."
+
+                
+            };
+
 
                 Message.To.Add(ToEmail);
 
