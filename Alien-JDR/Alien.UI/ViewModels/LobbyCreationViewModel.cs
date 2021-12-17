@@ -255,9 +255,9 @@ namespace Alien.UI.ViewModels
 
                 LobbyPlayerModel existingPlayer = LobbyPlayers.FirstOrDefault(lb => lb.UserId == playerModel.UserId);
 
-                lock(Lock)
+                lock (Lock)
                 {
-                    if(existingPlayer is null)
+                    if (existingPlayer is null)
                     {
                         LobbyPlayers.Add(playerModel);
                     }
@@ -267,7 +267,13 @@ namespace Alien.UI.ViewModels
                     }
                 }
 
-                SocketRouteur.EmitOn(Global.LOBBY_PLAYER_ARRIVED_CHANNEL, args.message);
+                CancellationTokenSource cts = new CancellationTokenSource(5000);
+                Task.Run(() =>
+                {
+                    SocketRouteur.EmitOn(Global.LOBBY_PLAYER_ARRIVED_CHANNEL, args.message);
+                }, cts.Token);
+
+
 
                 return true;
             }
@@ -289,9 +295,9 @@ namespace Alien.UI.ViewModels
 
                 LobbyPlayerModel existingPlayer = LobbyPlayers.FirstOrDefault(lb => lb.UserId == playerModel.UserId);
 
-                lock(Lock)
+                lock (Lock)
                 {
-                    if(existingPlayer is null)
+                    if (existingPlayer is null)
                     {
                         LobbyPlayers.Add(playerModel);
                     }
