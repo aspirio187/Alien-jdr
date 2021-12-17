@@ -267,11 +267,12 @@ namespace Alien.UI.ViewModels
                     }
                 }
 
-                CancellationTokenSource cts = new CancellationTokenSource(5000);
+                CancellationTokenSource cts = new CancellationTokenSource(1000);
                 Task.Run(() =>
                 {
                     SocketRouteur.EmitOn(Global.LOBBY_PLAYER_ARRIVED_CHANNEL, args.message);
                 }, cts.Token);
+                if (cts.IsCancellationRequested) Debug.WriteLine("Fonction annulée");
 
 
 

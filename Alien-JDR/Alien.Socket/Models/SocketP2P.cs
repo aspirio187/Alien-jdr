@@ -274,6 +274,7 @@ namespace Alien.Socket.Models
 
         private string _Onmessage(System.Net.Sockets.Socket sender)
         {
+            // TODO : try catch return string
             // Data buffer
             byte[] messageReceived = new byte[1024];
             // Le thread bloque à cet endroit
@@ -298,7 +299,7 @@ namespace Alien.Socket.Models
         {
             try
             {
-                if (this.isConnected == false) throw new InvalidCastException("Socket n'est pas connecter au point d'accès.");
+                /*if (this.isConnected == false) throw new InvalidCastException("Socket n'est pas connecter au point d'accès.");*/
                 this._send(sender, message);
                 this._reply = new Message(this._Onmessage(sender));
                 this._print(this._reply.message);
