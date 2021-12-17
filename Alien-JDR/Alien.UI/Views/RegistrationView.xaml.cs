@@ -58,18 +58,21 @@ namespace Alien.UI.Views
             };
 
             MailAddress FromEmail = new MailAddress("alienjdrpac@gmail.com", "Alien JDR");
-            MailAddress ToEmail = new MailAddress(txbEmail.Text, "Utilisateur");
-            MailMessage Message = new MailMessage()
+            if(!string.IsNullOrEmpty(txbEmail.Text))
             {
-                From = FromEmail,
-                Subject = "Confiramation d'enregistrement",
-                Body = "BIENVENU DANS LE MONDE DE ALIEN JDR"
-            };
+                MailAddress ToEmail = new MailAddress(txbEmail.Text, "Utilisateur");
+                MailMessage Message = new MailMessage()
+                {
+                    From = FromEmail,
+                    Subject = "Confiramation d'enregistrement",
+                    Body = "BIENVENU DANS LE MONDE DE ALIEN JDR"
+                };
 
-            Message.To.Add(ToEmail);
+                Message.To.Add(ToEmail);
 
-            Client.SendCompleted += Client_SendCompleted;
-            Client.SendMailAsync(Message);
+                Client.SendCompleted += Client_SendCompleted;
+                Client.SendMailAsync(Message);
+            }
         }
 
         private void Client_SendCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
