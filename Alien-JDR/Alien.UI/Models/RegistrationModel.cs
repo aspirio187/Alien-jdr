@@ -16,7 +16,11 @@ namespace Alien.UI.Models
         public string Username
         {
             get { return _username; }
-            set { ValidateProperty(ref _username, value.Trim()); }
+            set
+            {
+                ValidateProperty(ref _username, value.Trim());
+                NotifyPropertyChanged();
+            }
         }
 
         private string _email;
@@ -27,7 +31,11 @@ namespace Alien.UI.Models
         public string Email
         {
             get { return _email; }
-            set { ValidateProperty(ref _email, value.Trim()); }
+            set
+            {
+                ValidateProperty(ref _email, value.Trim());
+                NotifyPropertyChanged();
+            }
         }
 
         private string _firstName;
@@ -37,7 +45,11 @@ namespace Alien.UI.Models
         public string FirstName
         {
             get { return _firstName; }
-            set { ValidateProperty(ref _firstName, value.ToString()); }
+            set
+            {
+                ValidateProperty(ref _firstName, value.ToString());
+                NotifyPropertyChanged();
+            }
         }
 
         [MaxLength(50, ErrorMessage = "Le nom de famille ne peut faire qu'au maximum 50 caractères!")]
@@ -46,7 +58,11 @@ namespace Alien.UI.Models
         public string LastName
         {
             get { return _lastName; }
-            set { ValidateProperty(ref _lastName, value.ToString()); }
+            set
+            {
+                ValidateProperty(ref _lastName, value.ToString());
+                NotifyPropertyChanged();
+            }
         }
 
         private string _password;
@@ -56,7 +72,11 @@ namespace Alien.UI.Models
         public string Password
         {
             get { return _password; }
-            set { ValidateProperty(ref _password, value); }
+            set
+            {
+                ValidateProperty(ref _password, value);
+                NotifyPropertyChanged();
+            }
         }
 
     }

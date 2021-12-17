@@ -38,6 +38,16 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
+        <DockPanel Grid.Row="1" Grid.Column="0">
+            <ListView ItemsSource="{Binding Registration.ValidationResults}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding ErrorMessage}" Margin="5" FontFamily="Arial Black" Foreground="White" FontSize="20" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </DockPanel>
+
         <!--<Border CornerRadius="100"/>-->
 
         <DockPanel Grid.Row="0" Grid.Column="0" 
@@ -204,11 +214,6 @@
             <DockPanel Margin="0,40,0,0" HorizontalAlignment="Center">
                 <Button Width="200" Height="40" Content="s'enregistrer" Margin="20" Style="{StaticResource CustomFont}" Command="{Binding RegisterAccountCommand}" Click="Registration_Click"/>
                 <Button Width="200" Height="40" Content="Retour a l'authentification"   Style="{StaticResource CustomFont}" Command="{Binding NavigateBackToLoginCommand}"/>
-            </DockPanel>
-            <DockPanel>
-                <ListView ItemsSource="{Binding Registration.ValidationResults}">
-
-                </ListView>
             </DockPanel>
 
         </StackPanel>

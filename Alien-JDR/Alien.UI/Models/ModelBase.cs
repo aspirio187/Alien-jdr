@@ -14,8 +14,8 @@ namespace Alien.UI.Models
         private ObservableCollection<ValidationResult> _validationResults = new();
         public ObservableCollection<ValidationResult> ValidationResults
         {
-            get => _validationResults;
-            set => _validationResults = CleanResults(value);
+            get =>  CleanResults(_validationResults);
+            set => _validationResults = value;
         }
 
         public bool IsValid
@@ -59,13 +59,21 @@ namespace Alien.UI.Models
             }
 
             ValidationResults.RemoveRange(removable);
-
             origin = value;
         }
 
         protected ObservableCollection<ValidationResult> CleanResults(ObservableCollection<ValidationResult> validationResults)
         {
-            return new(validationResults.Distinct());
+            for (int i = 0; i < validationResults.Count; i++)
+            {
+                if(validationResults.Any(v => v.ErrorMessage.Equals(validationResults[i].ErrorMessage)))
+                {
+                    validationResults.RemoveAt(i);
+                    i--;
+                }
+            }
+
+            return validationResults;
         }
     }
 }

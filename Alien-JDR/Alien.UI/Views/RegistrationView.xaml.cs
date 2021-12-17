@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -58,7 +59,7 @@ namespace Alien.UI.Views
             };
 
             MailAddress FromEmail = new MailAddress("alienjdrpac@gmail.com", "Alien JDR");
-            if(!string.IsNullOrEmpty(txbEmail.Text))
+            try
             {
                 MailAddress ToEmail = new MailAddress(txbEmail.Text, "Utilisateur");
                 MailMessage Message = new MailMessage()
@@ -72,6 +73,10 @@ namespace Alien.UI.Views
 
                 Client.SendCompleted += Client_SendCompleted;
                 Client.SendMailAsync(Message);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
             }
         }
 
