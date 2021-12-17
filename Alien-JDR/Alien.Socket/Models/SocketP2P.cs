@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Diagnostics;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace Alien.Socket.Models
 {
@@ -136,17 +137,28 @@ namespace Alien.Socket.Models
 
         public SocketP2P SendToOn(string IP, string chanelName, string message)
         {
-            return this.SendTo(IP, $"{{" +
+
+            var msg = new
+            {
+                eventTime = (DateTime.Now - new DateTime(1970, 1, 1)).TotalMilliseconds.ToString(),
+                chanel = chanelName,
+                data = message
+            };
+
+            return this.SendTo(IP , JsonConvert.SerializeObject(msg));
+
+/*            return this.SendTo(IP, $"{{" +
                 $"\"eventTime\" : \"{(DateTime.Now - new DateTime(1970, 1, 1)).TotalMilliseconds.ToString()}\"," +
                 $"\"chanel\" : \"{chanelName}\"," +
                 $"\"data\" : \"{message}\"" +
-                $"}}");
+                $"}}");*/
         }
 
         public SocketP2P SendTo(string IP, string message)
         {
             IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse(IP), 11111);
-            System.Net.Sockets.Socket sender = new System.Net.Sockets.Socket(this.ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            IPAddress myIp = Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(ip => ip.IsIPv6LinkLocal);
+            System.Net.Sockets.Socket sender = new System.Net.Sockets.Socket(myIp.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             this._connect(endPoint, sender);
             this._execClient(sender, message);
             this._close(sender);
@@ -262,15 +274,17 @@ namespace Alien.Socket.Models
 
         private string _Onmessage(System.Net.Sockets.Socket sender)
         {
+            // TODO : try catch return string
             // Data buffer
             byte[] messageReceived = new byte[1024];
+            // Le thread bloque à cet endroit
             int byteRecv = sender.Receive(messageReceived);
             return Encoding.ASCII.GetString(messageReceived, 0, byteRecv);
         }
 
         private void _print(string message)
         {
-            Debug.Write($"{this.ipHost.HostName} ");
+            Debug.Write($"{this.ipHost?.HostName} ");
             Debug.Write(message);
             Debug.WriteLine("");
         }
@@ -285,7 +299,7 @@ namespace Alien.Socket.Models
         {
             try
             {
-                if (this.isConnected == false) throw new InvalidCastException("Socket n'est pas connecter au point d'accès.");
+                /*if (this.isConnected == false) throw new InvalidCastException("Socket n'est pas connecter au point d'accès.");*/
                 this._send(sender, message);
                 this._reply = new Message(this._Onmessage(sender));
                 this._print(this._reply.message);
@@ -322,7 +336,7 @@ namespace Alien.Socket.Models
 
         private void _OnError(string? type, dynamic error)
         {
-            Debug.Write($"{this.ipHost.HostName}-");
+            Debug.Write($"{this.ipHost?.HostName}-");
             Debug.Write($"{type} ");
             Debug.Write($"{error.StackTrace.Split("\\")[error.StackTrace.Split("\\").Length - 1].Split(":line")[0]}:");
             Debug.Write($"{error.StackTrace.Split(":line ")[error.StackTrace.Split(":line ").Length - 1]} ");

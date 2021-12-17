@@ -167,5 +167,11 @@
 
         <Button Grid.Row="7" Content="Demarrer" Style="{StaticResource CustomFont}" Width="200" Height="40" Margin="30" HorizontalAlignment="Right"
                 Command="{Binding StartGameCommand}"/>
+
+        <behavior:Interaction.Triggers>
+            <behavior:EventTrigger EventName="Loaded">
+                <prism:InvokeCommandAction Command="{Binding DeclareArrivalCommand}" />
+            </behavior:EventTrigger>
+        </behavior:Interaction.Triggers>
     </Grid>
 </ContentControl>
