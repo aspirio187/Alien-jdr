@@ -42,7 +42,7 @@
         </Grid.RowDefinitions>
 
 
-        <DockPanel Grid.Row="0" Grid.Column="1" Margin="20" Background="Transparent" VerticalAlignment="Top" MouseDown="DockPanel_MouseDown">
+        <DockPanel Grid.Row="0" Grid.Column="1" Margin="5" Background="Transparent" VerticalAlignment="Top" MouseDown="DockPanel_MouseDown">
             <DockPanel HorizontalAlignment="Right">
                 <Button x:Name="MinimizeButton" Content="_" FontSize="16" Style="{StaticResource CustomFont}" FontWeight="Bold" Width="25" Height="25" Margin="2"
                         Click="MinimizeButton_Click" />

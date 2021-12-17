@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Alien.UI.Views" xmlns:iconPacks="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Material"
         mc:Ignorable="d"
-        Title="InGameView" Height="1500" Width="1250"
+        Title="InGameView" Height="1200" Width="auto"
         WindowStyle="None"
         Background="Transparent">
     <Grid>
@@ -44,19 +44,10 @@
 
         <StackPanel Grid.Row="1" 
                     Grid.Column="0"
-                    VerticalAlignment="Center"
+                    VerticalAlignment="Top"
                     HorizontalAlignment="Center"
-                    Width="150">
-
-            <Expander ExpandDirection="Down">
-
-                <TextBlock FontFamily="arial black"
-                       Foreground="White"
-                       FontSize="15">
-                         description
-                </TextBlock>
-
-            </Expander>
+                    Width="auto">
+                    <Button Style="{StaticResource CustomFont}" Content="Fiche Personnage"/>
         </StackPanel>
 
         <StackPanel Grid.Row="0" 
@@ -77,19 +68,11 @@
 
         <StackPanel Grid.Row="1" 
                     Grid.Column="1"
-                    VerticalAlignment="Center"
+                    VerticalAlignment="Top"
                     HorizontalAlignment="Center"
-                    Width="150">
+                    Width="auto">
 
-            <Expander ExpandDirection="Down">
-
-                <TextBlock FontFamily="arial black"
-                       Foreground="White"
-                       FontSize="15">
-                         description
-                </TextBlock>
-
-            </Expander>
+            <Button Style="{StaticResource CustomFont}" Content="Fiche Personnage"/>
         </StackPanel>
 
         <StackPanel Grid.Row="0" 
@@ -110,19 +93,11 @@
 
         <StackPanel Grid.Row="1" 
                     Grid.Column="2"
-                    VerticalAlignment="Center"
+                    VerticalAlignment="Top"
                     HorizontalAlignment="Center"
-                    Width="150">
+                    Width="auto">
 
-            <Expander ExpandDirection="Down">
-
-                <TextBlock FontFamily="arial black"
-                       Foreground="White"
-                       FontSize="15">
-                         description
-                </TextBlock>
-
-            </Expander>
+            <Button Style="{StaticResource CustomFont}" Content="Fiche Personnage"/>
         </StackPanel>
 
         <StackPanel Grid.Row="0" 
@@ -143,19 +118,11 @@
 
         <StackPanel Grid.Row="1" 
                     Grid.Column="3"
-                    VerticalAlignment="Center"
+                    VerticalAlignment="Top"
                     HorizontalAlignment="Center"
-                    Width="150">
+                    Width="auto">
 
-            <Expander ExpandDirection="Down">
-
-                <TextBlock FontFamily="arial black"
-                       Foreground="White"
-                       FontSize="15">
-                         description
-                </TextBlock>
-
-            </Expander>
+            <Button Style="{StaticResource CustomFont}" Content="Fiche Personnage"/>
         </StackPanel>
 
 
@@ -177,19 +144,11 @@
 
         <StackPanel Grid.Row="1" 
                     Grid.Column="4"
-                    VerticalAlignment="Center"
+                    VerticalAlignment="Top"
                     HorizontalAlignment="Center"
-                    Width="150">
+                    Width="auto">
 
-            <Expander ExpandDirection="Down">
-
-                <TextBlock FontFamily="arial black"
-                       Foreground="White"
-                       FontSize="15">
-                         description
-                </TextBlock>
-
-            </Expander>
+            <Button Style="{StaticResource CustomFont}" Content="Fiche Personnage"/>
         </StackPanel>
 
         <ListBox ItemsSource="{Binding}" Grid.Row="0">
@@ -248,7 +207,7 @@
                     
                     <TextBlock Margin="10" Text="Benjamin : " Foreground="White" FontSize="25" Style="{StaticResource CustomFont}"/>
 
-                    <TextBlock Margin="10" Text="Reçois 5 points de dégats " Foreground="White" FontSize="20" FontFamily="Arial Black"/>
+                    <TextBlock Margin="10" Text="+1 Bouteille d'eau " Foreground="White" FontSize="20" FontFamily="Arial Black"/>
                     
                 </StackPanel>
 
@@ -256,7 +215,7 @@
 
                     <TextBlock Margin="10" Text="David : " Foreground="White" FontSize="25" Style="{StaticResource CustomFont}"/>
 
-                    <TextBlock Margin="10" Text="Reçois 5 points de dégats " Foreground="White" FontSize="20" FontFamily="Arial Black"/>
+                    <TextBlock Margin="10" Text="+ 5 points de dégats " Foreground="White" FontSize="20" FontFamily="Arial Black"/>
 
                 </StackPanel>
 
@@ -264,7 +223,7 @@
 
                     <TextBlock Margin="10" Text="Diego : " Foreground="White" FontSize="25" Style="{StaticResource CustomFont}"/>
 
-                    <TextBlock Margin="10" Text="Reçois 5 points de dégats " Foreground="White" FontSize="20" FontFamily="Arial Black"/>
+                    <TextBlock Margin="10" Text="Gagne 3 pv " Foreground="White" FontSize="20" FontFamily="Arial Black"/>
 
                 </StackPanel>
 
@@ -272,7 +231,7 @@
 
                     <TextBlock Margin="10" Text="Guillaume : " Foreground="White" FontSize="25" Style="{StaticResource CustomFont}"/>
 
-                    <TextBlock Margin="10" Text="Reçois 5 points de dégats " Foreground="White" FontSize="20" FontFamily="Arial Black"/>
+                    <TextBlock Margin="10" Text="+1 barre de metal " Foreground="White" FontSize="20" FontFamily="Arial Black"/>
 
                 </StackPanel>
 
@@ -288,7 +247,7 @@
 
                     <TextBlock Margin="10" Text="Louthierne : " Foreground="White" FontSize="25" Style="{StaticResource CustomFont}"/>
 
-                    <TextBlock Margin="10" Text="Reçois 5 points de dégats " Foreground="White" FontSize="20" FontFamily="Arial Black"/>
+                    <TextBlock Margin="10" Text="Quitte la partie " Foreground="White" FontSize="20" FontFamily="Arial Black"/>
 
                 </StackPanel>
 
@@ -296,7 +255,7 @@
 
                     <TextBlock Margin="10" Text="Sultan : " Foreground="White" FontSize="25" Style="{StaticResource CustomFont}"/>
 
-                    <TextBlock Margin="10" Text="Reçois 5 points de dégats " Foreground="White" FontSize="20" FontFamily="Arial Black"/>
+                    <TextBlock Margin="10" Text="Détruit l'univers " Foreground="White" FontSize="20" FontFamily="Arial Black"/>
 
                 </StackPanel>
             </Grid>
@@ -435,7 +394,7 @@
         <StackPanel Grid.Row="4" 
                     Grid.Column="2" 
                     Orientation="Horizontal" 
-                    HorizontalAlignment="Center" 
+                    HorizontalAlignment="Right" 
                     VerticalAlignment="Center" 
                     Margin="10">
 
@@ -450,7 +409,7 @@
         <StackPanel Grid.Row="5" 
                     Grid.Column="2" 
                     Orientation="Horizontal" 
-                    HorizontalAlignment="Center" 
+                    HorizontalAlignment="Right" 
                     VerticalAlignment="Center" 
                     Margin="10">
 
@@ -465,7 +424,7 @@
         <StackPanel Grid.Row="6" 
                     Grid.Column="2" 
                     Orientation="Horizontal" 
-                    HorizontalAlignment="Center" 
+                    HorizontalAlignment="Right" 
                     VerticalAlignment="Center" 
                     Margin="10">
 

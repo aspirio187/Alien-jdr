@@ -51,7 +51,7 @@
             </ListView.ItemsPanel>
         </ListView>
 
-        <Button Grid.Row="2" Content="creer un personnage" FontSize="25" Style="{StaticResource CustomFont}" Height="80" Width="350" Margin="10" 
+        <Button Grid.Row="2" Content="creer un personnage" FontSize="25" Style="{StaticResource CustomFont}" Height="80" Width="350" Margin="0,0,0,25" 
                 Command="{Binding NavigateCreateCharacterCommand}" />
 
     </Grid>
