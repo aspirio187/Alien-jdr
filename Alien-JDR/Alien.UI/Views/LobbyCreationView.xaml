@@ -47,14 +47,16 @@
         <DockPanel Grid.Row="3" LastChildFill="False">
             <TextBlock Text="nombre de joueurs maximum" Style="{StaticResource CustomFont}" Foreground="white" FontSize="15" Margin="5" Width="300"
                        VerticalAlignment="Center" />
-            <ComboBox x:Name="cmbNumberPlayer" Width="auto" Margin="5" DockPanel.Dock="Left" SelectedItem="{Binding MaximumPlayers}" IsEnabled="{Binding IsCreator}" FontFamily="Arial Black" HorizontalAlignment="Left"/>
+            <ComboBox x:Name="cmbNumberPlayer" Width="auto" Margin="5" DockPanel.Dock="Left" 
+                     
+                      SelectedItem="{Binding MaximumPlayers}" IsEnabled="{Binding IsCreator}" FontFamily="Arial Black" HorizontalAlignment="Left" Foreground="Black" FontSize="15"/>
         </DockPanel>
 
         <DockPanel Grid.Row="4" LastChildFill="False">
             <TextBlock Text="inviter un joueur" Style="{StaticResource CustomFont}" Foreground="White" FontSize="15" Margin="5" Width="300"
                        VerticalAlignment="Center" 
                        DockPanel.Dock="Left"/>
-            <ComboBox ItemsSource="{Binding AvailableUsers}" SelectedItem="{Binding SelectedUser}" MinWidth="400" Margin="5" DockPanel.Dock="Left" IsEnabled="{Binding IsCreator}" FontFamily="Arial Black"  Width="auto" Foreground="White">
+            <ComboBox ItemsSource="{Binding AvailableUsers}" SelectedItem="{Binding SelectedUser}" MinWidth="400" Margin="5" DockPanel.Dock="Left" IsEnabled="{Binding IsCreator}" FontFamily="Arial Black" FontSize="15" Width="auto" Foreground="Black">
                 <behavior:Interaction.Triggers>
                     <behavior:EventTrigger EventName="DropDownOpened">
                         <prism:InvokeCommandAction Command="{Binding LoadPlayersCommand}"/>
@@ -68,7 +70,7 @@
         <DockPanel Grid.Row="5" LastChildFill="False">
             <TextBlock Text="Ajouter un personnage non joueur" Style="{StaticResource CustomFont}" Foreground="White" FontSize="15" Margin="5" Width="300"
                        VerticalAlignment="Center" />
-            <ComboBox ItemsSource="{Binding AvailableCharacters}" MinWidth="400" Margin="5" FontFamily="Arial Black" Foreground="White">
+            <ComboBox ItemsSource="{Binding AvailableCharacters}" MinWidth="400" Margin="5" FontFamily="Arial Black" FontSize="15" Foreground="Black">
                 <behavior:Interaction.Triggers>
                     <behavior:EventTrigger EventName="DropDownOpened">
                         <prism:InvokeCommandAction Command="{Binding LoadCharactersCommand}"/>
