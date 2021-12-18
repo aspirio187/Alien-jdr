@@ -491,7 +491,7 @@ namespace Alien.UI.ViewModels
         {
             base.OnNavigatedFrom(navigationContext);
 
-            _characterService.DeleteCharacter(CharacterCreation.IdentificationStamp);   
+            //_characterService.DeleteCharacter(CharacterCreation.IdentificationStamp);   
         }
 
         public override void OnNavigatedTo(NavigationContext navigationContext)

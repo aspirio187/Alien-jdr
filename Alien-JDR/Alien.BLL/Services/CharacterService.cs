@@ -79,6 +79,7 @@ namespace Alien.BLL.Services
                 }
                 else
                 {
+                    characterToCreate.IsEditable = true;
                     characterToCreate.IsPublic = true;
                     CharacterEntity createdCharacter = _characterRepository.Create(characterToCreate);
                     if (createdCharacter is null) return false;
