@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Net;
+using System.Diagnostics;
 
 namespace Alien.Socket.Models
 {
@@ -173,12 +174,19 @@ namespace Alien.Socket.Models
         /// <param name="message"></param>
         public void EmitOn(string chanel, string message, Action<dynamic, Message> callback = null)
         {
-            List<IPAddress> addressList = this._server.subscriptions.Subribers();
-            foreach (IPAddress ip in addressList)
+            try
             {
-                string ipToSend = ip.ToString().Remove(ip.ToString().IndexOf('%'));
-                SocketP2P sender = this.SendToOn(ipToSend, chanel, message);
-                if (callback != null) sender.OnReply(callback);
+                List<IPAddress> addressList = this._server.subscriptions.Subribers();
+                foreach (IPAddress ip in addressList)
+                {
+                    string ipToSend = ip.ToString().Remove(ip.ToString().IndexOf('%'));
+                    SocketP2P sender = this.SendToOn(ipToSend, chanel, message);
+                    if (callback != null) sender.OnReply(callback);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
             }
         }
 

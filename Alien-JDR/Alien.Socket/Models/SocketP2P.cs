@@ -145,13 +145,13 @@ namespace Alien.Socket.Models
                 data = message
             };
 
-            return this.SendTo(IP , JsonConvert.SerializeObject(msg));
+            return this.SendTo(IP, JsonConvert.SerializeObject(msg));
 
-/*            return this.SendTo(IP, $"{{" +
-                $"\"eventTime\" : \"{(DateTime.Now - new DateTime(1970, 1, 1)).TotalMilliseconds.ToString()}\"," +
-                $"\"chanel\" : \"{chanelName}\"," +
-                $"\"data\" : \"{message}\"" +
-                $"}}");*/
+            /*            return this.SendTo(IP, $"{{" +
+                            $"\"eventTime\" : \"{(DateTime.Now - new DateTime(1970, 1, 1)).TotalMilliseconds.ToString()}\"," +
+                            $"\"chanel\" : \"{chanelName}\"," +
+                            $"\"data\" : \"{message}\"" +
+                            $"}}");*/
         }
 
         public SocketP2P SendTo(string IP, string message)
@@ -278,8 +278,17 @@ namespace Alien.Socket.Models
             // Data buffer
             byte[] messageReceived = new byte[1024];
             // Le thread bloque à cet endroit
-            int byteRecv = sender.Receive(messageReceived);
-            return Encoding.ASCII.GetString(messageReceived, 0, byteRecv);
+            try
+            {
+                int byteRecv = sender.Receive(messageReceived);
+                return Encoding.ASCII.GetString(messageReceived, 0, byteRecv);
+            }
+            catch (Exception e)
+            {
+                return string.Empty;
+            }
+            //int byteRecv = sender.Receive(messageReceived);
+            //return Encoding.ASCII.GetString(messageReceived, 0, byteRecv);
         }
 
         private void _print(string message)
