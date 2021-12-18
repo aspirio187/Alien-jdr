@@ -69,12 +69,17 @@ namespace Alien.UI.ViewModels
             switch (buttonStatus)
             {
                 case NotificationStatusEnum.Accepted:
+                    Dictionary<string, object> parameters = new Dictionary<string, object>()
+                    {
+                        { Global.LOBBY_ID, id }
+                    };
+                    Navigate(ViewsEnum.LobbyCreationView, parameters);
                     // TODO : Change l'état dans la base de donnée et navigue vers le lobby
                     break;
                 case NotificationStatusEnum.Denied:
                     // TODO : Change l'état dans la base de donnée
                     NotificationModel notificationToUpdate = Notifications.FirstOrDefault(n => n.Id == id);
-                    if(await _notificationService.UpdateNotificationStatus(id, NotificationStatusEnum.Denied.ToString()))
+                    if (await _notificationService.UpdateNotificationStatus(id, NotificationStatusEnum.Denied.ToString()))
                     {
                         notificationToUpdate.NotificationStatus = NotificationStatusEnum.Denied;
                     }
