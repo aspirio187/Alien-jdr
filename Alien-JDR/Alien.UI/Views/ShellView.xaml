@@ -78,7 +78,7 @@
 
         <!--<iconPacks:PackIconMaterial Kind="Bell" Foreground="White" Margin="153,140,0,0" Grid.Row="1"
                                     Visibility="{Binding NotificationReceived, Converter={StaticResource CombiningConverter}}" />-->
-        <iconPacks:PackIconMaterial Kind="BellRing" Foreground="White" Margin="157,83,0,0" Grid.Row="1"
+        <iconPacks:PackIconMaterial Kind="BellRing" Foreground="White" Margin="160,134,0,0" Grid.Row="1"
                                     Visibility="{Binding NotificationReceived, Converter={StaticResource BooleanToVisibilityConverter}}" RenderTransformOrigin="0.437,-0.064" />
 
 
