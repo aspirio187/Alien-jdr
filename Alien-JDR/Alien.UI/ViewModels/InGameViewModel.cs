@@ -11,16 +11,35 @@ namespace Alien.UI.ViewModels
 {
     public class InGameViewModel : ViewModelBase
     {
-        public InGameViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, IMapper mapper) 
+        public InGameViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, IMapper mapper)
             : base(regionNavigationService, authenticator, mapper)
         {
 
         }
 
-        public string CPing(dynamic cli, string x, string y)
+        public void ThrowDices(int attributeValue, int competenceValue, int bonus, int malus, int stressValue)
         {
-            // TODO : Logique X
-            return string.Empty;
+            int[] normalDices;
+            int[] stressDices = new int[stressValue];
+
+            if ((attributeValue + competenceValue + bonus) < malus)
+            {
+                normalDices = new int[0];
+            }
+            else
+            {
+                normalDices = new int[attributeValue + competenceValue + bonus];
+            }
+
+            for (int i = 0; i < normalDices.Length; i++)
+            {
+                normalDices[i] = new Random().Next(1, 6);
+            }
+
+            for (int i = 0; i < stressDices.Length; i++)
+            {
+                stressDices[i] = new Random().Next(1, 6);
+            }
         }
     }
 }

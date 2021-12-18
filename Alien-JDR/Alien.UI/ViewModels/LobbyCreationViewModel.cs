@@ -134,12 +134,11 @@ namespace Alien.UI.ViewModels
         private DelegateCommand _addNpcCharacterCommand;
         private DelegateCommand _declareArrivalCommand;
 
-        public DelegateCommand DeclareArrivalCommand => _declareArrivalCommand ??= new DelegateCommand(async () => await DeclareArrival());
-
         public DelegateCommand LoadPlayersCommand => _loadPlayersCommand ??= new DelegateCommand(LoadPlayers);
         public DelegateCommand InvitePlayerCommand => _invitePlayerCommand ??= new DelegateCommand(InvitePlayer);
         public DelegateCommand LoadCharactersCommand => _loadCharactersCommand ??= new DelegateCommand(LoadCharacters);
         public DelegateCommand AddNpcCharacterCommand => _addNpcCharacterCommand ??= new DelegateCommand(AddNpcCharacter);
+        public DelegateCommand DeclareArrivalCommand => _declareArrivalCommand ??= new DelegateCommand(async () => await DeclareArrival());
         public DelegateCommand StartGameCommand => _startGameCommand ??= new DelegateCommand(StartGame);
 
 
@@ -215,7 +214,19 @@ namespace Alien.UI.ViewModels
 
         public void StartGame()
         {
+            Dictionary<string, object> parameters = new Dictionary<string, object>()
+            {
+                { Global.LOBBY_ID, Lobby.Id },
+            };
 
+            if(IsCreator)
+            {
+                // Navigue vers GmInGameView
+            }
+            else
+            {
+                // Navigue vers InGameView
+            }
         }
 
         public override void OnNavigatedFrom(NavigationContext navigationContext)

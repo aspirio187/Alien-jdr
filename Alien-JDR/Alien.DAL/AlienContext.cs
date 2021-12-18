@@ -33,6 +33,7 @@ namespace Alien.DAL
             //                    Database=Alien-JDR-DB;
             //                    Integrated Security=True;
             //                    Connect Timeout=60;");
+
             optionsBuilder.UseSqlServer(
                  @"Server=IDEAPAD-SOULTAN\SQLEXPRESS;Database=Alien-JDR-DB;User Id=thinkpad;
                                                 Password=soultan187;MultipleActiveResultSets=True;");
