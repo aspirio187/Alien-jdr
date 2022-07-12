@@ -9,4 +9,4 @@ Travail de groupe réalisé dans le cadre du cours "Projet d'Analyse et de Conce
 * B. Louthierne
 * H. Soultan
 * H. Guillaume
-* L. Benjamin
+* L. Benjamin (en train d'installer Visual Studio)
