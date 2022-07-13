@@ -6,7 +6,6 @@ Travail de groupe réalisé dans le cadre du cours "Projet d'Analyse et de Conce
 * A. David
 * B. Diego
 * B. Jordan
-* B. Louthierne
 * H. Soultan
 * H. Guillaume
 * L. Benjamin (en train d'installer Visual Studio)
