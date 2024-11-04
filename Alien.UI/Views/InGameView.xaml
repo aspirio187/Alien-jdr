@@ -1,176 +1,198 @@
-﻿<Window x:Class="Alien.UI.Views.InGameView"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Alien.UI.Views" xmlns:iconPacks="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Material"
-        mc:Ignorable="d"
-        Title="InGameView" Height="1200" Width="auto"
-        WindowStyle="None"
-        Background="Transparent">
+﻿<Window
+    x:Class="Alien.UI.Views.InGameView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:iconPacks="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Material"
+    xmlns:local="clr-namespace:Alien.UI.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="InGameView"
+    Width="auto"
+    Height="1200"
+    Background="Transparent"
+    WindowStyle="None"
+    mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" 
-                    Grid.Column="0"
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center" 
-                    Margin="10">
+        <StackPanel
+            Grid.Row="0"
+            Grid.Column="0"
+            Margin="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
 
-            <TextBlock FontFamily="arial black"
-                       Foreground="White"
-                       FontSize="30">
+            <TextBlock
+                FontFamily="arial black"
+                FontSize="30"
+                Foreground="White">
                 Opponent 1
             </TextBlock>
 
         </StackPanel>
 
-        <StackPanel Grid.Row="1" 
-                    Grid.Column="0"
-                    VerticalAlignment="Top"
-                    HorizontalAlignment="Center"
-                    Width="auto">
-                    <Button Style="{StaticResource CustomFont}" Content="Fiche Personnage"/>
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="0"
+            Width="auto"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top">
+            <Button Content="Fiche Personnage" Style="{StaticResource CustomFont}" />
         </StackPanel>
 
-        <StackPanel Grid.Row="0" 
-                    Grid.Column="1" 
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center" 
-                    Margin="10">
+        <StackPanel
+            Grid.Row="0"
+            Grid.Column="1"
+            Margin="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
 
-            <TextBlock FontFamily="arial black"
-                       Foreground="White"
-                       FontSize="30">
+            <TextBlock
+                FontFamily="arial black"
+                FontSize="30"
+                Foreground="White">
                 Opponent 2
-
             </TextBlock>
 
         </StackPanel>
 
-        <StackPanel Grid.Row="1" 
-                    Grid.Column="1"
-                    VerticalAlignment="Top"
-                    HorizontalAlignment="Center"
-                    Width="auto">
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="1"
+            Width="auto"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top">
 
-            <Button Style="{StaticResource CustomFont}" Content="Fiche Personnage"/>
+            <Button Content="Fiche Personnage" Style="{StaticResource CustomFont}" />
         </StackPanel>
 
-        <StackPanel Grid.Row="0" 
-                    Grid.Column="2"
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Margin="10">
+        <StackPanel
+            Grid.Row="0"
+            Grid.Column="2"
+            Margin="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
 
-            <TextBlock FontFamily="arial black"
-                       Foreground="White"
-                       FontSize="30">
+            <TextBlock
+                FontFamily="arial black"
+                FontSize="30"
+                Foreground="White">
                 Opponent 3
-
             </TextBlock>
 
         </StackPanel>
 
-        <StackPanel Grid.Row="1" 
-                    Grid.Column="2"
-                    VerticalAlignment="Top"
-                    HorizontalAlignment="Center"
-                    Width="auto">
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="2"
+            Width="auto"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top">
 
-            <Button Style="{StaticResource CustomFont}" Content="Fiche Personnage"/>
+            <Button Content="Fiche Personnage" Style="{StaticResource CustomFont}" />
         </StackPanel>
 
-        <StackPanel Grid.Row="0" 
-                    Grid.Column="3" 
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center"
-                    Margin="10">
+        <StackPanel
+            Grid.Row="0"
+            Grid.Column="3"
+            Margin="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
 
-            <TextBlock FontFamily="arial black"
-                       Foreground="White"
-                       FontSize="30">
+            <TextBlock
+                FontFamily="arial black"
+                FontSize="30"
+                Foreground="White">
                 Opponent 4
-
             </TextBlock>
 
         </StackPanel>
 
-        <StackPanel Grid.Row="1" 
-                    Grid.Column="3"
-                    VerticalAlignment="Top"
-                    HorizontalAlignment="Center"
-                    Width="auto">
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="3"
+            Width="auto"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top">
 
-            <Button Style="{StaticResource CustomFont}" Content="Fiche Personnage"/>
+            <Button Content="Fiche Personnage" Style="{StaticResource CustomFont}" />
         </StackPanel>
 
 
-        <StackPanel Grid.Row="0" 
-                    Grid.Column="4" 
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center" 
-                    Margin="10">
+        <StackPanel
+            Grid.Row="0"
+            Grid.Column="4"
+            Margin="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
 
-            <TextBlock FontFamily="arial black"
-                       Foreground="White"
-                       FontSize="30">
+            <TextBlock
+                FontFamily="arial black"
+                FontSize="30"
+                Foreground="White">
                 Opponent 5
-
             </TextBlock>
 
         </StackPanel>
 
-        <StackPanel Grid.Row="1" 
-                    Grid.Column="4"
-                    VerticalAlignment="Top"
-                    HorizontalAlignment="Center"
-                    Width="auto">
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="4"
+            Width="auto"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top">
 
-            <Button Style="{StaticResource CustomFont}" Content="Fiche Personnage"/>
+            <Button Content="Fiche Personnage" Style="{StaticResource CustomFont}" />
         </StackPanel>
 
-        <ListBox ItemsSource="{Binding}" Grid.Row="0">
+        <ListBox Grid.Row="0" ItemsSource="{Binding}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
 
-                    <StackPanel Grid.Row="0" Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+                    <StackPanel
+                        Grid.Row="0"
+                        Grid.Column="4"
+                        Margin="10"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
 
-                        <TextBlock FontFamily="arial black"
-                       Foreground="White"
-                       FontSize="30">
-                Opponent 5
-                
-                 <Expander>
-                     <TextBlock FontFamily="arial black"
-                       Foreground="White"
-                       FontSize="30">
-                         description
-                     </TextBlock>
-                     
-                 </Expander>
-            </TextBlock>
+                        <TextBlock
+                            FontFamily="arial black"
+                            FontSize="30"
+                            Foreground="White">
+                            Opponent 5
+                            <Expander>
+                                <TextBlock
+                                    FontFamily="arial black"
+                                    FontSize="30"
+                                    Foreground="White">
+                                    description
+                                </TextBlock>
+
+                            </Expander>
+                        </TextBlock>
 
                     </StackPanel>
                 </DataTemplate>
@@ -178,423 +200,615 @@
 
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <DockPanel>
-                        
-                    </DockPanel>
+                    <DockPanel />
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
             <ListBox.ItemContainerStyle>
-                <Style>
-                    
-                </Style>
+                <Style />
             </ListBox.ItemContainerStyle>
         </ListBox>
 
-        
+
         <StackPanel Grid.Row="2" Grid.ColumnSpan="5">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left" Margin="10">
-                    
-                    <TextBlock Margin="10" Text="Benjamin : " Foreground="White" FontSize="25" Style="{StaticResource CustomFont}"/>
+                <StackPanel
+                    Grid.Row="0"
+                    Margin="10"
+                    HorizontalAlignment="Left"
+                    Orientation="Horizontal">
 
-                    <TextBlock Margin="10" Text="+1 Bouteille d'eau " Foreground="White" FontSize="20" FontFamily="Arial Black"/>
-                    
-                </StackPanel>
+                    <TextBlock
+                        Margin="10"
+                        FontSize="25"
+                        Foreground="White"
+                        Style="{StaticResource CustomFont}"
+                        Text="Benjamin : " />
 
-                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
-
-                    <TextBlock Margin="10" Text="David : " Foreground="White" FontSize="25" Style="{StaticResource CustomFont}"/>
-
-                    <TextBlock Margin="10" Text="+ 5 points de dégats " Foreground="White" FontSize="20" FontFamily="Arial Black"/>
-
-                </StackPanel>
-
-                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="10">
-
-                    <TextBlock Margin="10" Text="Diego : " Foreground="White" FontSize="25" Style="{StaticResource CustomFont}"/>
-
-                    <TextBlock Margin="10" Text="Gagne 3 pv " Foreground="White" FontSize="20" FontFamily="Arial Black"/>
+                    <TextBlock
+                        Margin="10"
+                        FontFamily="Arial Black"
+                        FontSize="20"
+                        Foreground="White"
+                        Text="+1 Bouteille d'eau " />
 
                 </StackPanel>
 
-                <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+                <StackPanel
+                    Grid.Row="1"
+                    Margin="10"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
 
-                    <TextBlock Margin="10" Text="Guillaume : " Foreground="White" FontSize="25" Style="{StaticResource CustomFont}"/>
+                    <TextBlock
+                        Margin="10"
+                        FontSize="25"
+                        Foreground="White"
+                        Style="{StaticResource CustomFont}"
+                        Text="David : " />
 
-                    <TextBlock Margin="10" Text="+1 barre de metal " Foreground="White" FontSize="20" FontFamily="Arial Black"/>
-
-                </StackPanel>
-
-                <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Left" Margin="10">
-
-                    <TextBlock Margin="10" Text="Jordan : " Foreground="White" FontSize="25" Style="{StaticResource CustomFont}"/>
-
-                    <TextBlock Margin="10" Text="Reçois 5 points de dégats " Foreground="White" FontSize="20" FontFamily="Arial Black"/>
-
-                </StackPanel>
-
-                <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
-
-                    <TextBlock Margin="10" Text="Louthierne : " Foreground="White" FontSize="25" Style="{StaticResource CustomFont}"/>
-
-                    <TextBlock Margin="10" Text="Quitte la partie " Foreground="White" FontSize="20" FontFamily="Arial Black"/>
+                    <TextBlock
+                        Margin="10"
+                        FontFamily="Arial Black"
+                        FontSize="20"
+                        Foreground="White"
+                        Text="+ 5 points de dégats " />
 
                 </StackPanel>
 
-                <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Left" Margin="10">
+                <StackPanel
+                    Grid.Row="2"
+                    Margin="10"
+                    HorizontalAlignment="Left"
+                    Orientation="Horizontal">
 
-                    <TextBlock Margin="10" Text="Sultan : " Foreground="White" FontSize="25" Style="{StaticResource CustomFont}"/>
+                    <TextBlock
+                        Margin="10"
+                        FontSize="25"
+                        Foreground="White"
+                        Style="{StaticResource CustomFont}"
+                        Text="Diego : " />
 
-                    <TextBlock Margin="10" Text="Détruit l'univers " Foreground="White" FontSize="20" FontFamily="Arial Black"/>
+                    <TextBlock
+                        Margin="10"
+                        FontFamily="Arial Black"
+                        FontSize="20"
+                        Foreground="White"
+                        Text="Gagne 3 pv " />
+
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Row="3"
+                    Margin="10"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+
+                    <TextBlock
+                        Margin="10"
+                        FontSize="25"
+                        Foreground="White"
+                        Style="{StaticResource CustomFont}"
+                        Text="Guillaume : " />
+
+                    <TextBlock
+                        Margin="10"
+                        FontFamily="Arial Black"
+                        FontSize="20"
+                        Foreground="White"
+                        Text="+1 barre de metal " />
+
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Row="4"
+                    Margin="10"
+                    HorizontalAlignment="Left"
+                    Orientation="Horizontal">
+
+                    <TextBlock
+                        Margin="10"
+                        FontSize="25"
+                        Foreground="White"
+                        Style="{StaticResource CustomFont}"
+                        Text="Jordan : " />
+
+                    <TextBlock
+                        Margin="10"
+                        FontFamily="Arial Black"
+                        FontSize="20"
+                        Foreground="White"
+                        Text="Reçois 5 points de dégats " />
+
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Row="5"
+                    Margin="10"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+
+                    <TextBlock
+                        Margin="10"
+                        FontSize="25"
+                        Foreground="White"
+                        Style="{StaticResource CustomFont}"
+                        Text="Louthierne : " />
+
+                    <TextBlock
+                        Margin="10"
+                        FontFamily="Arial Black"
+                        FontSize="20"
+                        Foreground="White"
+                        Text="Quitte la partie " />
+
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Row="6"
+                    Margin="10"
+                    HorizontalAlignment="Left"
+                    Orientation="Horizontal">
+
+                    <TextBlock
+                        Margin="10"
+                        FontSize="25"
+                        Foreground="White"
+                        Style="{StaticResource CustomFont}"
+                        Text="Sultan : " />
+
+                    <TextBlock
+                        Margin="10"
+                        FontFamily="Arial Black"
+                        FontSize="20"
+                        Foreground="White"
+                        Text="Détruit l'univers " />
 
                 </StackPanel>
             </Grid>
         </StackPanel>
 
 
-        <StackPanel Grid.Row="3" Grid.Column="0"  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+        <StackPanel
+            Grid.Row="3"
+            Grid.Column="0"
+            Margin="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
 
-            <TextBlock Style="{StaticResource CustomFont}" Background="Transparent" Foreground="White" FontSize="20">
+            <TextBlock
+                Background="Transparent"
+                FontSize="20"
+                Foreground="White"
+                Style="{StaticResource CustomFont}">
                 Avatar
             </TextBlock>
 
         </StackPanel>
 
-        <StackPanel Grid.Row="4" Grid.Column="0"  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+        <StackPanel
+            Grid.Row="4"
+            Grid.Column="0"
+            Margin="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
 
-            <TextBlock Style="{StaticResource CustomFont}" Background="Transparent" Foreground="White" FontSize="20">
+            <TextBlock
+                Background="Transparent"
+                FontSize="20"
+                Foreground="White"
+                Style="{StaticResource CustomFont}">
                 Nom du joueur
             </TextBlock>
 
         </StackPanel>
 
-        <StackPanel Grid.Row="5" Grid.RowSpan="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" Width="auto" Height="auto">
+        <StackPanel
+            Grid.Row="5"
+            Grid.RowSpan="2"
+            Grid.Column="0"
+            Width="auto"
+            Height="auto"
+            Margin="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
             <Button>
-                <iconPacks:PackIconMaterial Kind="ExitRun" Foreground="White" Width="95" Height="95" />
+                <iconPacks:PackIconMaterial
+                    Width="95"
+                    Height="95"
+                    Foreground="White"
+                    Kind="ExitRun" />
             </Button>
         </StackPanel>
 
-        <StackPanel Grid.Row="3" Grid.Column="1"  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+        <StackPanel
+            Grid.Row="3"
+            Grid.Column="1"
+            Margin="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
 
-            <TextBlock Style="{StaticResource CustomFont}" Background="Transparent" Foreground="White" FontSize="20">
+            <TextBlock
+                Background="Transparent"
+                FontSize="20"
+                Foreground="White"
+                Style="{StaticResource CustomFont}">
                 Points de vie =
             </TextBlock>
 
         </StackPanel>
 
-        <StackPanel Grid.Row="4" Grid.Column="1"  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+        <StackPanel
+            Grid.Row="4"
+            Grid.Column="1"
+            Margin="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
 
-            <TextBlock Style="{StaticResource CustomFont}" Background="Transparent" Foreground="White" FontSize="20">
+            <TextBlock
+                Background="Transparent"
+                FontSize="20"
+                Foreground="White"
+                Style="{StaticResource CustomFont}">
                 Points de stresse =
             </TextBlock>
 
         </StackPanel>
 
-        <StackPanel Grid.Row="5" Grid.Column="1"  Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+        <StackPanel
+            Grid.Row="5"
+            Grid.Column="1"
+            Margin="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
 
-            <TextBlock Style="{StaticResource CustomFont}" Background="Transparent" Foreground="White" FontSize="20">
+            <TextBlock
+                Background="Transparent"
+                FontSize="20"
+                Foreground="White"
+                Style="{StaticResource CustomFont}">
                 XP
             </TextBlock>
 
         </StackPanel>
 
-        <StackPanel Grid.Row="6" 
-                    Grid.Column="1"  
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center" 
-                    Margin="10">
+        <StackPanel
+            Grid.Row="6"
+            Grid.Column="1"
+            Margin="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
 
-            <Button Width="200" Height="40" Content="Plus d'infos..."   Style="{StaticResource CustomFont}"/>
+            <Button
+                Width="200"
+                Height="40"
+                Content="Plus d'infos..."
+                Style="{StaticResource CustomFont}" />
 
         </StackPanel>
 
-        <StackPanel Grid.Row="3" 
-                    Grid.Column="2" 
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center" 
-                    Margin="10">
+        <StackPanel
+            Grid.Row="3"
+            Grid.Column="2"
+            Margin="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
 
-            <TextBlock 
-                Style="{StaticResource CustomFont}" 
-                Foreground="White"
+            <TextBlock
                 FontSize="20"
-                Text="Attribut "/>
+                Foreground="White"
+                Style="{StaticResource CustomFont}"
+                Text="Attribut " />
 
-            <ComboBox Foreground="Black" 
-                      Style="{StaticResource CustomFont}"
-                      FontSize="20">
+            <ComboBox
+                FontSize="20"
+                Foreground="Black"
+                Style="{StaticResource CustomFont}">
                 <ComboBoxItem IsSelected="True">Force</ComboBoxItem>
-                <ComboBoxItem >Agilité</ComboBoxItem>
+                <ComboBoxItem>Agilité</ComboBoxItem>
                 <ComboBoxItem>Esprit</ComboBoxItem>
                 <ComboBoxItem>Empathie</ComboBoxItem>
             </ComboBox>
 
         </StackPanel>
 
-        <StackPanel Grid.Row="3" 
-                    Grid.Column="3" 
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center" 
-                    Margin="10">
+        <StackPanel
+            Grid.Row="3"
+            Grid.Column="3"
+            Margin="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
 
-            <TextBlock 
-                Style="{StaticResource CustomFont}" 
-                Foreground="White"
+            <TextBlock
                 FontSize="20"
-                Text="Competances "/>
+                Foreground="White"
+                Style="{StaticResource CustomFont}"
+                Text="Competances " />
 
-            <ComboBox Foreground="Black" 
-                      Style="{StaticResource CustomFont}"
-                      FontSize="20">
+            <ComboBox
+                FontSize="20"
+                Foreground="Black"
+                Style="{StaticResource CustomFont}">
                 <ComboBoxItem IsSelected="True">Binding</ComboBoxItem>
-                <ComboBoxItem >Binding</ComboBoxItem>
+                <ComboBoxItem>Binding</ComboBoxItem>
                 <ComboBoxItem>Binding</ComboBoxItem>
                 <ComboBoxItem>Binding</ComboBoxItem>
             </ComboBox>
 
         </StackPanel>
 
-        <StackPanel Grid.Row="3" 
-                    Grid.Column="4" 
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center" 
-                    Margin="10">
+        <StackPanel
+            Grid.Row="3"
+            Grid.Column="4"
+            Margin="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
 
-            <TextBlock 
-                Style="{StaticResource CustomFont}" 
-                Foreground="White"
+            <TextBlock
                 FontSize="20"
-                Text="Bonus "/>
+                Foreground="White"
+                Style="{StaticResource CustomFont}"
+                Text="Bonus " />
 
-            <ComboBox Foreground="Black" 
-                      Style="{StaticResource CustomFont}"
-                      FontSize="20">
+            <ComboBox
+                FontSize="20"
+                Foreground="Black"
+                Style="{StaticResource CustomFont}">
                 <ComboBoxItem IsSelected="True">Binding</ComboBoxItem>
-                <ComboBoxItem >Binding</ComboBoxItem>
+                <ComboBoxItem>Binding</ComboBoxItem>
                 <ComboBoxItem>Binding</ComboBoxItem>
                 <ComboBoxItem>Binding</ComboBoxItem>
             </ComboBox>
 
         </StackPanel>
 
-        <StackPanel Grid.Row="4" 
-                    Grid.Column="2" 
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Right" 
-                    VerticalAlignment="Center" 
-                    Margin="10">
+        <StackPanel
+            Grid.Row="4"
+            Grid.Column="2"
+            Margin="10"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
 
-            <TextBlock 
-                Style="{StaticResource CustomFont}" 
-                Foreground="White"
+            <TextBlock
                 FontSize="20"
-                Text="Normaux"/>
-
-        </StackPanel>
-        
-        <StackPanel Grid.Row="5" 
-                    Grid.Column="2" 
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Right" 
-                    VerticalAlignment="Center" 
-                    Margin="10">
-
-            <TextBlock 
-                Style="{StaticResource CustomFont}" 
                 Foreground="White"
-                FontSize="20"
-                Text="Bonus"/>
+                Style="{StaticResource CustomFont}"
+                Text="Normaux" />
 
         </StackPanel>
 
-        <StackPanel Grid.Row="6" 
-                    Grid.Column="2" 
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Right" 
-                    VerticalAlignment="Center" 
-                    Margin="10">
+        <StackPanel
+            Grid.Row="5"
+            Grid.Column="2"
+            Margin="10"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
 
-            <TextBlock 
-                Style="{StaticResource CustomFont}" 
+            <TextBlock
+                FontSize="20"
                 Foreground="White"
+                Style="{StaticResource CustomFont}"
+                Text="Bonus" />
+
+        </StackPanel>
+
+        <StackPanel
+            Grid.Row="6"
+            Grid.Column="2"
+            Margin="10"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
+
+            <TextBlock
                 FontSize="20"
-                Text="Stress"/>
+                Foreground="White"
+                Style="{StaticResource CustomFont}"
+                Text="Stress" />
 
         </StackPanel>
 
-        <StackPanel Grid.Row="4" 
-                    Grid.Column="3" 
-                    Grid.ColumnSpan="2"
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center" 
-                    Margin="0,0,0,15">
+        <StackPanel
+            Grid.Row="4"
+            Grid.Column="3"
+            Grid.ColumnSpan="2"
+            Margin="0,0,0,15"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
 
-            <Button Width="40" 
-                    Margin="0,0,20,0" 
-                    Height="40" 
-                    FontSize="30" 
-                    Content="D"
-                    Style="{StaticResource CustomFont}"/>
+            <Button
+                Width="40"
+                Height="40"
+                Margin="0,0,20,0"
+                Content="D"
+                FontSize="30"
+                Style="{StaticResource CustomFont}" />
 
-            <Button Width="40" 
-                    Margin="0,0,20,0" 
-                    Height="40" 
-                    FontSize="30" 
-                    Content="D"
-                    Style="{StaticResource CustomFont}"/>
+            <Button
+                Width="40"
+                Height="40"
+                Margin="0,0,20,0"
+                Content="D"
+                FontSize="30"
+                Style="{StaticResource CustomFont}" />
 
-            <Button Width="40" 
-                    Margin="0,0,20,0" 
-                    Height="40" 
-                    FontSize="30" 
-                    Content="D"
-                    Style="{StaticResource CustomFont}"/>
+            <Button
+                Width="40"
+                Height="40"
+                Margin="0,0,20,0"
+                Content="D"
+                FontSize="30"
+                Style="{StaticResource CustomFont}" />
 
-            <Button Width="40" 
-                    Margin="0,0,20,0" 
-                    Height="40" 
-                    FontSize="30" 
-                    Content="D"
-                    Style="{StaticResource CustomFont}"/>
+            <Button
+                Width="40"
+                Height="40"
+                Margin="0,0,20,0"
+                Content="D"
+                FontSize="30"
+                Style="{StaticResource CustomFont}" />
 
-            <Button Width="40" 
-                    Margin="0,0,20,0" 
-                    Height="40" 
-                    FontSize="30" 
-                    Content="D"
-                    Style="{StaticResource CustomFont}"/>
+            <Button
+                Width="40"
+                Height="40"
+                Margin="0,0,20,0"
+                Content="D"
+                FontSize="30"
+                Style="{StaticResource CustomFont}" />
 
-            <Button Width="40" 
-                    Margin="0,0,20,0" 
-                    Height="40" 
-                    FontSize="30" 
-                    Content="D"
-                    Style="{StaticResource CustomFont}"/>
-
-        </StackPanel>
-
-        <StackPanel Grid.Row="5" 
-                    Grid.Column="3" 
-                    Grid.ColumnSpan="2"
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center" 
-                    Margin="0,0,0,15">
-
-            <Button Width="40" 
-                    Margin="0,0,20,0" 
-                    Height="40" 
-                    FontSize="30" 
-                    Content="D"
-                    Style="{StaticResource CustomFont}"/>
-
-            <Button Width="40" 
-                    Margin="0,0,20,0" 
-                    Height="40" 
-                    FontSize="30" 
-                    Content="D"
-                    Style="{StaticResource CustomFont}"/>
-
-            <Button Width="40" 
-                    Margin="0,0,20,0" 
-                    Height="40" 
-                    FontSize="30" 
-                    Content="D"
-                    Style="{StaticResource CustomFont}"/>
-
-            <Button Width="40" 
-                    Margin="0,0,20,0" 
-                    Height="40" 
-                    FontSize="30" 
-                    Content="D"
-                    Style="{StaticResource CustomFont}"/>
-
-            <Button Width="40" 
-                    Margin="0,0,20,0" 
-                    Height="40" 
-                    FontSize="30" 
-                    Content="D"
-                    Style="{StaticResource CustomFont}"/>
-
-            <Button Width="40" 
-                    Margin="0,0,20,0" 
-                    Height="40" 
-                    FontSize="30" 
-                    Content="D"
-                    Style="{StaticResource CustomFont}"/>
+            <Button
+                Width="40"
+                Height="40"
+                Margin="0,0,20,0"
+                Content="D"
+                FontSize="30"
+                Style="{StaticResource CustomFont}" />
 
         </StackPanel>
 
-        <StackPanel Grid.Row="6" 
-                    Grid.Column="3" 
-                    Grid.ColumnSpan="2"
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center" 
-                    Margin="0,0,0,15">
+        <StackPanel
+            Grid.Row="5"
+            Grid.Column="3"
+            Grid.ColumnSpan="2"
+            Margin="0,0,0,15"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
 
-            <Button Width="40" 
-                    Margin="0,0,20,0" 
-                    Height="40" 
-                    FontSize="30" 
-                    Content="D"
-                    Foreground="Red"
-                    Style="{StaticResource CustomFont}"/>
+            <Button
+                Width="40"
+                Height="40"
+                Margin="0,0,20,0"
+                Content="D"
+                FontSize="30"
+                Style="{StaticResource CustomFont}" />
 
-            <Button Width="40" 
-                    Margin="0,0,20,0" 
-                    Height="40" 
-                    FontSize="30" 
-                    Content="D"
-                    Foreground="Red"
-                    Style="{StaticResource CustomFont}"/>
+            <Button
+                Width="40"
+                Height="40"
+                Margin="0,0,20,0"
+                Content="D"
+                FontSize="30"
+                Style="{StaticResource CustomFont}" />
 
-            <Button Width="40" 
-                    Margin="0,0,20,0" 
-                    Height="40" 
-                    FontSize="30" 
-                    Content="D"
-                    Foreground="Red"
-                    Style="{StaticResource CustomFont}"/>
+            <Button
+                Width="40"
+                Height="40"
+                Margin="0,0,20,0"
+                Content="D"
+                FontSize="30"
+                Style="{StaticResource CustomFont}" />
 
-            <Button Width="40" 
-                    Margin="0,0,20,0" 
-                    Height="40" 
-                    FontSize="30" 
-                    Content="D"
-                    Foreground="Red"
-                    Style="{StaticResource CustomFont}"/>
+            <Button
+                Width="40"
+                Height="40"
+                Margin="0,0,20,0"
+                Content="D"
+                FontSize="30"
+                Style="{StaticResource CustomFont}" />
 
-            <Button Width="40" 
-                    Margin="0,0,20,0" 
-                    Height="40" 
-                    FontSize="30" 
-                    Content="D"
-                    Foreground="Red"
-                    Style="{StaticResource CustomFont}"/>
+            <Button
+                Width="40"
+                Height="40"
+                Margin="0,0,20,0"
+                Content="D"
+                FontSize="30"
+                Style="{StaticResource CustomFont}" />
 
-            <Button Width="40" 
-                    Margin="0,0,20,0" 
-                    Height="40" 
-                    FontSize="30" 
-                    Content="D"
-                    Foreground="Red"
-                    Style="{StaticResource CustomFont}"/>
+            <Button
+                Width="40"
+                Height="40"
+                Margin="0,0,20,0"
+                Content="D"
+                FontSize="30"
+                Style="{StaticResource CustomFont}" />
+
+        </StackPanel>
+
+        <StackPanel
+            Grid.Row="6"
+            Grid.Column="3"
+            Grid.ColumnSpan="2"
+            Margin="0,0,0,15"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
+
+            <Button
+                Width="40"
+                Height="40"
+                Margin="0,0,20,0"
+                Content="D"
+                FontSize="30"
+                Foreground="Red"
+                Style="{StaticResource CustomFont}" />
+
+            <Button
+                Width="40"
+                Height="40"
+                Margin="0,0,20,0"
+                Content="D"
+                FontSize="30"
+                Foreground="Red"
+                Style="{StaticResource CustomFont}" />
+
+            <Button
+                Width="40"
+                Height="40"
+                Margin="0,0,20,0"
+                Content="D"
+                FontSize="30"
+                Foreground="Red"
+                Style="{StaticResource CustomFont}" />
+
+            <Button
+                Width="40"
+                Height="40"
+                Margin="0,0,20,0"
+                Content="D"
+                FontSize="30"
+                Foreground="Red"
+                Style="{StaticResource CustomFont}" />
+
+            <Button
+                Width="40"
+                Height="40"
+                Margin="0,0,20,0"
+                Content="D"
+                FontSize="30"
+                Foreground="Red"
+                Style="{StaticResource CustomFont}" />
+
+            <Button
+                Width="40"
+                Height="40"
+                Margin="0,0,20,0"
+                Content="D"
+                FontSize="30"
+                Foreground="Red"
+                Style="{StaticResource CustomFont}" />
 
         </StackPanel>
 

@@ -1,51 +1,55 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
-    <UseWPF>true</UseWPF>
-    <StartupObject>Alien.UI.App</StartupObject>
-    <ApplicationIcon>alien_banner_2000x1000-VF-1170x585.ico</ApplicationIcon>
-    <Win32Resource />
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net5.0-windows</TargetFramework>
+		<UseWPF>true</UseWPF>
+		<StartupObject>Alien.UI.App</StartupObject>
+		<ApplicationIcon>alien_banner_2000x1000-VF-1170x585.ico</ApplicationIcon>
+		<Win32Resource />
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="Fonts\alenia.regular.ttf" />
-    <None Remove="Images\alienMainUI.jpg" />
-    <None Remove="Images\AlienRegistration.jpg" />
-    <None Remove="Images\alien_banner_2000x1000-VF-1170x585.jpg" />
-    <None Remove="Images\Create.jpg" />
-    <None Remove="Sounds\mixkit-hard-click-1118.wav" />
-    <None Remove="Sounds\mixkit-quest-game-interface-click-1139.wav" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Remove="Fonts\alenia.regular.ttf" />
+		<None Remove="Images\alienMainUI.jpg" />
+		<None Remove="Images\AlienRegistration.jpg" />
+		<None Remove="Images\alien_banner_2000x1000-VF-1170x585.jpg" />
+		<None Remove="Images\Create.jpg" />
+		<None Remove="Sounds\mixkit-hard-click-1118.wav" />
+		<None Remove="Sounds\mixkit-quest-game-interface-click-1139.wav" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="MahApps.Metro.IconPacks" Version="4.11.0" />
-    <PackageReference Include="MaterialDesignThemes" Version="4.2.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.10">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Prism.Unity" Version="8.1.97" />
-    <PackageReference Include="Prism.Wpf" Version="8.1.97" />
-    <PackageReference Include="Syncfusion.PdfViewer.WPF" Version="19.3.0.48" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="MahApps.Metro.IconPacks" Version="4.11.0" />
+		<PackageReference Include="MaterialDesignThemes" Version="4.2.1" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.10">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Syncfusion.PdfViewer.WPF" Version="19.3.0.48" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Alien.BLL\Alien.BLL.csproj" />
-    <ProjectReference Include="..\Alien.Socket\Alien.Socket.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Alien.BLL\Alien.BLL.csproj" />
+		<ProjectReference Include="..\Alien.Socket\Alien.Socket.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Resource Include="Fonts\alenia.regular.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\alienMainUI.jpg" />
-    <Resource Include="Images\AlienRegistration.jpg" />
-    <Resource Include="Images\alien_banner_2000x1000-VF-1170x585.jpg" />
-    <Resource Include="Images\Create.jpg" />
-    <Resource Include="Sounds\mixkit-hard-click-1118.wav" />
-    <Resource Include="Sounds\mixkit-quest-game-interface-click-1139.wav" />
-  </ItemGroup>
+	<ItemGroup>
+		<Resource Include="Fonts\alenia.regular.ttf">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="Images\alienMainUI.jpg" />
+		<Resource Include="Images\AlienRegistration.jpg" />
+		<Resource Include="Images\alien_banner_2000x1000-VF-1170x585.jpg" />
+		<Resource Include="Images\Create.jpg" />
+		<Resource Include="Sounds\mixkit-hard-click-1118.wav" />
+		<Resource Include="Sounds\mixkit-quest-game-interface-click-1139.wav" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Views\Views\" />
+	  <Folder Include="Views\Windows\" />
+	</ItemGroup>
 
 </Project>

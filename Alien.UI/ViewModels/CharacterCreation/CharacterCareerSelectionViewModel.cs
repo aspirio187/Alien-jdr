@@ -1,33 +1,36 @@
 ﻿using Alien.BLL.Dtos;
 using Alien.BLL.Interfaces;
+using Alien.UI.Commands;
 using Alien.UI.Helpers;
+using Alien.UI.Managers;
 using Alien.UI.Models;
 using Alien.UI.States;
+using Alien.UI.Views;
 using AutoMapper;
-using Prism.Commands;
-using Prism.Regions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Alien.UI.ViewModels
 {
-    public class CharacterCareerSelectionViewModel : ViewModelBase, IJournalAware
+    public class CharacterCareerSelectionViewModel : ViewModelBase
     {
         private readonly ICharacterService _characterService;
+        private readonly NavigationManager _navigationManager;
 
-        private CharacterCareerSelectionModel _selectedCareer;
+        private CharacterCareerSelectionModel? _selectedCareer;
 
-        public CharacterCareerSelectionModel SelectedCareer
+        public CharacterCareerSelectionModel? SelectedCareer
         {
             get { return _selectedCareer; }
             set
             {
-                SetProperty(ref _selectedCareer, value);
-                NavigateNextPageCommand.RaiseCanExecuteChanged();
+                _selectedCareer = value;
+                NotifyPropertyChanged();
             }
         }
 
@@ -38,27 +41,36 @@ namespace Alien.UI.ViewModels
             get { return _selectedRace; }
             set
             {
-                SetProperty(ref _selectedRace, value);
-                NavigateNextPageCommand.RaiseCanExecuteChanged();
+                _selectedRace = value;
+                NotifyPropertyChanged();
             }
         }
 
 
-        public ObservableCollection<CharacterCareerSelectionModel> Careers { get; set; }
+        public ObservableCollection<CharacterCareerSelectionModel> Careers { get; set; } = new();
 
-        private DelegateCommand _navigateNextPageCommand;
+        public ICommand NavigateNextPageCommand { get; private set; }
 
-        public DelegateCommand NavigateNextPageCommand => _navigateNextPageCommand ??= new DelegateCommand(NavigateNextPage, CanNavigateNextPage);
-
-        public CharacterCareerSelectionViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, IMapper mapper, ICharacterService characterService)
-            : base(regionNavigationService, authenticator, mapper)
+        public CharacterCareerSelectionViewModel(IAuthenticator authenticator, IMapper mapper, ICharacterService characterService, NavigationManager navigationManager)
+            : base(authenticator, mapper)
         {
-            _characterService = characterService ??
+            if (characterService is null)
+            {
                 throw new ArgumentNullException(nameof(characterService));
+            }
+
+            if (navigationManager is null)
+            {
+                throw new ArgumentNullException(nameof(navigationManager));
+            }
+
+            _characterService = characterService;
+            _navigationManager = navigationManager;
 
             LoadCareers();
 
-            NavigateNextPageCommand.RaiseCanExecuteChanged();
+            NavigateNextPageCommand = new RelayCommand(NavigateNextPage, CanNavigateNextPage);
+            _navigationManager = navigationManager;
         }
 
         public bool CanNavigateNextPage()
@@ -76,15 +88,10 @@ namespace Alien.UI.ViewModels
                 IdentificationStamp = Guid.NewGuid()
             };
 
-            Navigate(ViewsEnum.CharacterInfosCreationView, new Dictionary<string, object>()
+            _navigationManager.Navigate(nameof(CharacterInfosCreationView), parameters: new Dictionary<string, object>()
             {
                 { Global.CHARACTER_CREATION, characterCreation }
             });
-        }
-
-        public bool PersistInHistory()
-        {
-            return true;
         }
 
         private void LoadCareers()

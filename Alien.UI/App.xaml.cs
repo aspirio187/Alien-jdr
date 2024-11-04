@@ -1,58 +1,78 @@
-﻿using Prism.Unity;
-using Prism.Ioc;
-using Prism.Modularity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using Alien.UI.Views;
 using Alien.UI.States;
 using Alien.BLL;
+using System.Threading;
+using System.Globalization;
+using Microsoft.Extensions.DependencyInjection;
+using Alien.UI.ViewModels;
+using Alien.UI.Views;
 
 namespace Alien.UI
 {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : PrismApplication
+    public partial class App : Application
     {
-        protected override Window CreateShell()
+        public static IServiceProvider ServiceProvider { get; private set; } = default!;
+
+        public App()
         {
-            return Container.Resolve<ShellView>();
+            // Set the current thread to the french culture
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("fr-FR");
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("fr-FR");
+
+            // Initialize ServiceCollection
+            ServiceCollection serviceCollection = new ServiceCollection();
+
+            ConfigureServices(serviceCollection);
+
+            ServiceProvider = serviceCollection.BuildServiceProvider();
         }
 
-        protected override void RegisterTypes(IContainerRegistry containerRegistry)
+        protected override void OnStartup(StartupEventArgs e)
         {
-            containerRegistry.InjectNTier();
+            ShellView shellView = new();
 
-            containerRegistry.RegisterSingleton<IAuthenticator, Authenticator>();
+            shellView.Show();
+        }
 
-            containerRegistry.RegisterDialog<LoginView>();
-            containerRegistry.RegisterDialog<RegistrationView>();
+        private void ConfigureServices(ServiceCollection services)
+        {
+            // Implemenrt a correct NTier injection
+            //services.InjectNTier();
 
-            containerRegistry.RegisterForNavigation<ManuelView>();
-            containerRegistry.RegisterForNavigation<CreditView>();
+            services.AddSingleton<IAuthenticator, Authenticator>();
+
+            services.AddTransient<LoginViewModel>();
+            services.AddTransient<RegistrationViewModel>();
+
+            //services.AddTransient<ManuelView>();
+            //services.AddTransient<CreditView>();
 
             // Character views
-            containerRegistry.RegisterForNavigation<CharactersView>();
-            containerRegistry.RegisterForNavigation<CharacterCareerSelectionView>();
-            containerRegistry.RegisterForNavigation<CharacterInfosCreationView>();
-            containerRegistry.RegisterForNavigation<CharacterTalentSelectionView>();
-            containerRegistry.RegisterForNavigation<CharacterAttributesCompetencesView>();
-            containerRegistry.RegisterForNavigation<CharacterAndroidCreationView>();
-            containerRegistry.RegisterForNavigation<CharacterCreationSummaryView>();
-            containerRegistry.RegisterForNavigation<CharacterPublicInfosView>();
+            services.AddTransient<CharactersViewModel>();
+            services.AddTransient<CharacterCareerSelectionViewModel>();
+            services.AddTransient<CharacterInfosCreationViewModel>();
+            services.AddTransient<CharacterTalentSelectionViewModel>();
+            services.AddTransient<CharacterAttributesCompetencesViewModel>();
+            services.AddTransient<CharacterAndroidCreationViewModel>();
+            services.AddTransient<CharacterCreationSummaryViewModel>();
+            services.AddTransient<CharacterPublicInfosViewModel>();
 
             // Lobby View
-            containerRegistry.RegisterForNavigation<LobbiesView>();
-            containerRegistry.RegisterForNavigation<LobbyCreationView>();
+            services.AddTransient<LobbiesViewModel>();
+            services.AddTransient<LobbyCreationViewModel>();
+
 
             // Notification View
-            containerRegistry.RegisterForNavigation<NotificationsView>();
-
+            services.AddTransient<NotificationsViewModel>();
         }
     }
 }

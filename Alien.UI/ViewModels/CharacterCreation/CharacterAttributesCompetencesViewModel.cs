@@ -1,32 +1,39 @@
 ﻿using Alien.BLL.Dtos;
 using Alien.BLL.Interfaces;
 using Alien.Tools.Helpers;
+using Alien.UI.Commands;
 using Alien.UI.Helpers;
+using Alien.UI.Managers;
 using Alien.UI.Models;
 using Alien.UI.States;
+using Alien.UI.Views;
 using AutoMapper;
-using Prism.Commands;
-using Prism.Regions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Alien.UI.ViewModels
 {
-    public class CharacterAttributesCompetencesViewModel : ViewModelBase, IJournalAware
+    public class CharacterAttributesCompetencesViewModel : ViewModelBase
     {
         private readonly ICharacterService _characterService;
+        private readonly NavigationManager _navigationManager;
 
-        public CharacterCreationDto CharacterCreation { get; set; }
+        public CharacterCreationDto CharacterCreation { get; set; } = new();
 
         private CharacterAttributesCompetencesModel _characterAttributesCompetences = new();
 
         public CharacterAttributesCompetencesModel CharacterAttributesCompetences
         {
             get { return _characterAttributesCompetences; }
-            set { SetProperty(ref _characterAttributesCompetences, value); }
+            set
+            {
+                _characterAttributesCompetences = value;
+                NotifyPropertyChanged();
+            }
         }
 
         private int _attributePoints;
@@ -36,8 +43,9 @@ namespace Alien.UI.ViewModels
             get { return _attributePoints; }
             set
             {
-                SetProperty(ref _attributePoints, value);
-                NavigateNextPageCommand.RaiseCanExecuteChanged();
+                _attributePoints = value;
+                NotifyPropertyChanged();
+                NavigateNextPageCommand.CanExecute(null);
             }
         }
 
@@ -48,39 +56,50 @@ namespace Alien.UI.ViewModels
             get { return _competencePoints; }
             set
             {
-                SetProperty(ref _competencePoints, value);
-                NavigateNextPageCommand.RaiseCanExecuteChanged();
+                _competencePoints = value;
+                NotifyPropertyChanged();
+                NavigateNextPageCommand.CanExecute(null);
             }
         }
 
-        private DelegateCommand<Attributes?> _increaseAttributeCommand;
-        private DelegateCommand<Attributes?> _decreaseAttributeCommand;
-        private DelegateCommand<Competences?> _increaseCompetenceCommand;
-        private DelegateCommand<Competences?> _decreaseCompetenceCommand;
-        private DelegateCommand _navigateBackCommand;
-        private DelegateCommand _navigateNextPageCommand;
+        public ICommand IncreaseAttributeCommand { get; private set; }
+        public ICommand DecreaseAttributeCommand { get; private set; }
+        public ICommand IncreaseCompetenceCommand { get; private set; }
+        public ICommand DecreaseCompetenceCommand { get; private set; }
+        public ICommand NavigateBackCommand { get; private set; }
+        public ICommand NavigateNextPageCommand { get; private set; }
 
-        public DelegateCommand<Attributes?> IncreaseAttributeCommand => _increaseAttributeCommand ??= new DelegateCommand<Attributes?>(IncreaseAttribute, CanIncreaseAttributes);
-        public DelegateCommand<Attributes?> DecreaseAttributeCommand => _decreaseAttributeCommand ??= new DelegateCommand<Attributes?>(DecreaseAttribute, CanDecreaseAttribute);
-        public DelegateCommand<Competences?> IncreaseCompetenceCommand => _increaseCompetenceCommand ??= new DelegateCommand<Competences?>(IncreaseCompetence, CanIncreaseCompetence);
-        public DelegateCommand<Competences?> DecreaseCompetenceCommand => _decreaseCompetenceCommand ??= new DelegateCommand<Competences?>(DecreaseCompetence, CanDecreaseCompetence);
-        public DelegateCommand NavigateBackCommand => _navigateBackCommand ??= new DelegateCommand(NavigateBack);
-        public DelegateCommand NavigateNextPageCommand => _navigateNextPageCommand ??= new DelegateCommand(NavigateNextPage, CanNavigateNextPage);
-
-        public CharacterAttributesCompetencesViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, IMapper mapper, 
-            ICharacterService characterService) : base(regionNavigationService, authenticator, mapper)
+        public CharacterAttributesCompetencesViewModel(IAuthenticator authenticator, IMapper mapper, ICharacterService characterService, NavigationManager navigationManager)
+            : base(authenticator, mapper)
         {
-            _characterService = characterService ??
+            if (characterService is null)
+            {
                 throw new ArgumentNullException(nameof(characterService));
+            }
+
+            if (navigationManager is null)
+            {
+                throw new ArgumentNullException(nameof(navigationManager));
+            }
+
+            _characterService = characterService;
+            _navigationManager = navigationManager;
 
             AttributePoints = 6;
             CompetencePoints = 10;
 
-            IncreaseAttributeCommand.RaiseCanExecuteChanged();
-            DecreaseAttributeCommand.RaiseCanExecuteChanged();
-            IncreaseCompetenceCommand.RaiseCanExecuteChanged();
-            DecreaseCompetenceCommand.RaiseCanExecuteChanged();
-            NavigateNextPageCommand.RaiseCanExecuteChanged();
+            IncreaseAttributeCommand = new RelayCommand<Attributes?>(IncreaseAttribute, CanIncreaseAttributes);
+            DecreaseAttributeCommand = new RelayCommand<Attributes?>(DecreaseAttribute, CanDecreaseAttribute);
+            IncreaseCompetenceCommand = new RelayCommand<Competences?>(IncreaseCompetence, CanIncreaseCompetence);
+            DecreaseCompetenceCommand = new RelayCommand<Competences?>(DecreaseCompetence, CanDecreaseCompetence);
+            NavigateBackCommand = new RelayCommand(NavigateBack);
+            NavigateNextPageCommand = new RelayCommand(NavigateNextPage, CanNavigateNextPage);
+
+            IncreaseAttributeCommand.CanExecute(null);
+            DecreaseAttributeCommand.CanExecute(null);
+            IncreaseCompetenceCommand.CanExecute(null);
+            DecreaseCompetenceCommand.CanExecute(null);
+            NavigateNextPageCommand.CanExecute(null);
         }
 
         public bool CanIncreaseAttributes(Attributes? attribute)
@@ -119,8 +138,8 @@ namespace Alien.UI.ViewModels
             }
 
             AttributePoints--;
-            IncreaseAttributeCommand.RaiseCanExecuteChanged();
-            DecreaseAttributeCommand.RaiseCanExecuteChanged();
+            IncreaseAttributeCommand.CanExecute(null);
+            DecreaseAttributeCommand.CanExecute(null);
         }
 
         public bool CanDecreaseAttribute(Attributes? attribute)
@@ -158,8 +177,8 @@ namespace Alien.UI.ViewModels
             }
 
             AttributePoints++;
-            IncreaseAttributeCommand.RaiseCanExecuteChanged();
-            DecreaseAttributeCommand.RaiseCanExecuteChanged();
+            IncreaseAttributeCommand.CanExecute(null);
+            DecreaseAttributeCommand.CanExecute(null);
         }
 
         public bool CanIncreaseCompetence(Competences? competence)
@@ -229,8 +248,8 @@ namespace Alien.UI.ViewModels
             }
 
             CompetencePoints--;
-            IncreaseCompetenceCommand.RaiseCanExecuteChanged();
-            DecreaseCompetenceCommand.RaiseCanExecuteChanged();
+            IncreaseCompetenceCommand.CanExecute(null);
+            DecreaseCompetenceCommand.CanExecute(null);
         }
 
         public bool CanDecreaseCompetence(Competences? competence)
@@ -300,15 +319,15 @@ namespace Alien.UI.ViewModels
             }
 
             CompetencePoints++;
-            IncreaseCompetenceCommand.RaiseCanExecuteChanged();
-            DecreaseCompetenceCommand.RaiseCanExecuteChanged();
+            IncreaseCompetenceCommand.CanExecute(null);
+            DecreaseCompetenceCommand.CanExecute(null);
         }
 
         public void NavigateBack()
         {
-            if (_regionNavigationService.Journal.CanGoBack)
+            if (_navigationManager.CanNavigateBack())
             {
-                _regionNavigationService.Journal.GoBack();
+                _navigationManager.NavigateBack();
             }
         }
 
@@ -344,26 +363,21 @@ namespace Alien.UI.ViewModels
 
             if (CharacterCreation.Race.Equals(RaceEnum.Android.ToString()))
             {
-                Navigate(ViewsEnum.CharacterAndroidCreationView, parameters);
+                _navigationManager.Navigate(nameof(CharacterAndroidCreationView), parameters: parameters);
             }
             else
             {
-                Navigate(ViewsEnum.CharacterCreationSummaryView, parameters);
+                _navigationManager.Navigate(nameof(CharacterCreationSummaryView), parameters: parameters);
             }
         }
 
-        public override void OnNavigatedTo(NavigationContext navigationContext)
-        {
-            base.OnNavigatedTo(navigationContext);
+        //public override void OnNavigatedTo(NavigationContext navigationContext)
+        //{
+        //    base.OnNavigatedTo(navigationContext);
 
-            CharacterCreation = navigationContext.Parameters.GetValue<CharacterCreationDto>(Global.CHARACTER_CREATION);
-            IncreaseAttributeCommand.RaiseCanExecuteChanged();
-        }
-
-        public bool PersistInHistory()
-        {
-            return true;
-        }
+        //    CharacterCreation = navigationContext.Parameters.GetValue<CharacterCreationDto>(Global.CHARACTER_CREATION);
+        //    IncreaseAttributeCommand.RaiseCanExecuteChanged();
+        //}
 
         private bool IsKeyAttribute(Attributes? attribute)
         {

@@ -3,8 +3,6 @@ using Alien.UI.Helpers;
 using Alien.UI.Models;
 using Alien.UI.States;
 using AutoMapper;
-using Prism.Commands;
-using Prism.Regions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Alien.UI.ViewModels
 {
-    public class CharacterInfosCreationViewModel : ViewModelBase, IJournalAware
+    public class CharacterInfosCreationViewModel : ViewModelBase
     {
         public CharacterCreationDto CharacterCreation { get; private set; }
 

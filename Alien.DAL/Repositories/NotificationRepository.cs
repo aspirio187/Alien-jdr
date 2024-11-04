@@ -14,9 +14,10 @@ namespace Alien.DAL.Repositories
 {
     public class NotificationRepository : RepositoryBase<NotificationEntity, int>, INotificationRepository
     {
-        private const string CONNECTION_STRING = @"Server=IDEAPAD-SOULTAN\SQLEXPRESS;
+        private const string CONNECTION_STRING = @"Server=DESKTOP-SOULTAN;
                                                 Database=Alien-JDR-DB;
-                                                User Id=thinkpad;
+                                                User Id=DESKTOP-SOULTAN\Soultan;
+                                                Trusted_Connection=True;
                                                 Password=soultan187;";
         //private const string CONNECTION_STRING = @"Server=(localdb)\MSSQLLocalDB;
         //                                        Database=Alien-JDR-DB;

@@ -16,18 +16,13 @@ using System.Windows.Shapes;
 namespace Alien.UI.Views
 {
     /// <summary>
-    /// Logique d'interaction pour CharacterView.xaml
+    /// Logique d'interaction pour ViewBase.xaml
     /// </summary>
-    public partial class CharactersView : ViewBase
+    public partial class ViewBase : ContentControl
     {
-        public CharactersView()
+        public ViewBase()
         {
             InitializeComponent();
-        }
-
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

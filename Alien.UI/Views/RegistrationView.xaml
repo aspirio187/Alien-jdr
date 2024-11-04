@@ -1,18 +1,20 @@
-﻿<UserControl   x:Class="Alien.UI.Views.RegistrationView"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-        xmlns:prism="http://prismlibrary.com/"
-        prism:ViewModelLocator.AutoWireViewModel="True"
-        xmlns:helper="clr-namespace:Alien.UI.Helpers"
-        xmlns:local="clr-namespace:Alien.UI.Views" 
-        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-        mc:Ignorable="d" 
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        d:DesignHeight="540" d:DesignWidth="960" >
+﻿<UserControl
+    x:Class="Alien.UI.Views.RegistrationView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:helper="clr-namespace:Alien.UI.Helpers"
+    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:local="clr-namespace:Alien.UI.Views"
+    xmlns:locator="clr-namespace:Alien.UI.Locators"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="540"
+    d:DesignWidth="960"
+    locator:ViewModelLocator.AutoConnectedViewModelProperty="True"
+    mc:Ignorable="d">
 
-    <prism:Dialog.WindowStyle>
+    <!--<prism:Dialog.WindowStyle>
         <Style TargetType="Window">
             <Setter Property="prism:Dialog.WindowStartupLocation" Value="CenterScreen"/>
             <Setter Property="WindowStyle" Value="None" />
@@ -20,29 +22,34 @@
             <Setter Property="Height" Value="540" />
             <Setter Property="Width" Value="960" />
         </Style>
-    </prism:Dialog.WindowStyle>
+    </prism:Dialog.WindowStyle>-->
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="pack://application:,,,/Images/AlienRegistration.jpg"/>
+            <ImageBrush ImageSource="pack://application:,,,/Images/AlienRegistration.jpg" />
         </Grid.Background>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="480"/>
-            <ColumnDefinition Width="480"/>
+            <ColumnDefinition Width="480" />
+            <ColumnDefinition Width="480" />
 
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
         <DockPanel Grid.Row="1" Grid.Column="0">
             <ListView ItemsSource="{Binding Registration.ValidationResults}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding ErrorMessage}" Margin="5" FontFamily="Arial Black" Foreground="White" FontSize="20" />
+                        <TextBlock
+                            Margin="5"
+                            FontFamily="Arial Black"
+                            FontSize="20"
+                            Foreground="White"
+                            Text="{Binding ErrorMessage}" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
@@ -50,170 +57,207 @@
 
         <!--<Border CornerRadius="100"/>-->
 
-        <DockPanel Grid.Row="0" Grid.Column="0" 
-                   Grid.ColumnSpan="2" 
-                   Background="Transparent" 
-                   MouseDown="DockPanel_MouseDown"
-                   Margin="5">
+        <DockPanel
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Margin="5"
+            Background="Transparent"
+            MouseDown="DockPanel_MouseDown">
 
-            <Button x:Name="CloseButton" 
-                    Style="{StaticResource CustomFont}" 
-                    Content="x" 
-                    VerticalAlignment="Top" 
-                    HorizontalAlignment="Right"
-                    Width="25" Height="25"
-                    Click="CloseButton_Click"/>
+            <Button
+                x:Name="CloseButton"
+                Width="25"
+                Height="25"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Click="CloseButton_Click"
+                Content="x"
+                Style="{StaticResource CustomFont}" />
 
         </DockPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="1">
-            <TextBlock Text="ENREGISTREMENT"
-                       Style="{DynamicResource CustomFont}"
-                       FontWeight="Light"
-                       FontSize="35" 
-                       Foreground="White"
-                       HorizontalAlignment="Center"/>
+            <TextBlock
+                HorizontalAlignment="Center"
+                FontSize="35"
+                FontWeight="Light"
+                Foreground="White"
+                Style="{DynamicResource CustomFont}"
+                Text="ENREGISTREMENT" />
 
-            <DockPanel HorizontalAlignment="Center" >
-                <TextBox Text="{Binding Registration.Username}"
-                         FontFamily="arial black"
-                         materialDesign:HintAssist.Hint="Nom d'utilisateur" 
-                         FontWeight="Light" FontSize="20"
-                         HorizontalAlignment="Center" HorizontalContentAlignment="Left"
-                         Foreground="White" Background="Transparent"
-                         BorderThickness="0" Margin="0,30,0,0"
-                         Width="400"
-                         CaretBrush="White"/>
+            <DockPanel HorizontalAlignment="Center">
+                <TextBox
+                    Width="400"
+                    Margin="0,30,0,0"
+                    HorizontalAlignment="Center"
+                    HorizontalContentAlignment="Left"
+                    materialDesign:HintAssist.Hint="Nom d'utilisateur"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    CaretBrush="White"
+                    FontFamily="arial black"
+                    FontSize="20"
+                    FontWeight="Light"
+                    Foreground="White"
+                    Text="{Binding Registration.Username}" />
 
-                <iconPacks:PackIconMaterial Kind="Account"
-                                           VerticalAlignment="Center" 
-                                           HorizontalAlignment="Left"
-                                                Margin="0,25,0,0"
-                                           Foreground="White"/>
+                <iconPacks:PackIconMaterial
+                    Margin="0,25,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Foreground="White"
+                    Kind="Account" />
             </DockPanel>
 
-            <Border Width="450"
-                    Height="2"
-                    Background="White"
-                    Opacity="0.5"/>
+            <Border
+                Width="450"
+                Height="2"
+                Background="White"
+                Opacity="0.5" />
 
-            <DockPanel HorizontalAlignment="Center" >
-                <TextBox FontFamily="arial black" materialDesign:HintAssist.Hint="Nom"
-                         FontWeight="Light"
-                         Text="{Binding Registration.LastName}"
-                         FontSize="20"
-                         HorizontalAlignment="Center"
-                         Foreground="White"
-                         Background="Transparent"
-                         BorderThickness="0"
-                         Width="400"
-                         HorizontalContentAlignment="Left"
-                         Margin="0,30,0,0"
-                         CaretBrush="White"/>
+            <DockPanel HorizontalAlignment="Center">
+                <TextBox
+                    Width="400"
+                    Margin="0,30,0,0"
+                    HorizontalAlignment="Center"
+                    HorizontalContentAlignment="Left"
+                    materialDesign:HintAssist.Hint="Nom"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    CaretBrush="White"
+                    FontFamily="arial black"
+                    FontSize="20"
+                    FontWeight="Light"
+                    Foreground="White"
+                    Text="{Binding Registration.LastName}" />
 
-                <iconPacks:PackIconMaterial Kind="Account"
-                                           VerticalAlignment="Center" 
-                                           HorizontalAlignment="Left"
-                                                Margin="0,25,0,0"
-                                           Foreground="White"/>
+                <iconPacks:PackIconMaterial
+                    Margin="0,25,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Foreground="White"
+                    Kind="Account" />
             </DockPanel>
 
 
-            <Border Width="450"
-                    Height="2"
-                    Background="White"
-                    Opacity="0.5"/>
+            <Border
+                Width="450"
+                Height="2"
+                Background="White"
+                Opacity="0.5" />
 
-            <DockPanel HorizontalAlignment="Center" >
-                <TextBox FontFamily="arial black"
-                         materialDesign:HintAssist.Hint="Prénom"
-                         FontWeight="Light"
-                         Text="{Binding Registration.FirstName}"
-                         FontSize="20"
-                         HorizontalAlignment="Center"
-                         Foreground="White"
-                         Background="Transparent"
-                         BorderThickness="0"
-                         Width="400"
-                         HorizontalContentAlignment="Left"
-                         Margin="0,30,0,0"
-                         x:Name="txbName"
-                         CaretBrush="White"/>
+            <DockPanel HorizontalAlignment="Center">
+                <TextBox
+                    x:Name="txbName"
+                    Width="400"
+                    Margin="0,30,0,0"
+                    HorizontalAlignment="Center"
+                    HorizontalContentAlignment="Left"
+                    materialDesign:HintAssist.Hint="Prénom"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    CaretBrush="White"
+                    FontFamily="arial black"
+                    FontSize="20"
+                    FontWeight="Light"
+                    Foreground="White"
+                    Text="{Binding Registration.FirstName}" />
 
 
-                <iconPacks:PackIconMaterial Kind="Account"
-                                           VerticalAlignment="Center" 
-                                           HorizontalAlignment="Left"
-                                                Margin="0,25,0,0"
-                                           Foreground="White"/>
+                <iconPacks:PackIconMaterial
+                    Margin="0,25,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Foreground="White"
+                    Kind="Account" />
             </DockPanel>
 
-            <Border Width="450"
-                    Height="2"
-                    Background="White"
-                    Opacity="0.5"/>
+            <Border
+                Width="450"
+                Height="2"
+                Background="White"
+                Opacity="0.5" />
 
-            <DockPanel HorizontalAlignment="Center" >
-                <TextBox FontFamily="arial black"
-                         materialDesign:HintAssist.Hint="Adresse mail"
-                         FontWeight="Light"
-                         Text="{Binding Registration.Email}"
-                         FontSize="20"
-                         HorizontalAlignment="Center"
-                         Foreground="White"
-                         Background="Transparent"
-                         BorderThickness="0"
-                         Width="400"
-                         HorizontalContentAlignment="Left"
-                         Margin="0,30,0,0"
-                         x:Name="txbEmail" 
-                         CaretBrush="White"/>
+            <DockPanel HorizontalAlignment="Center">
+                <TextBox
+                    x:Name="txbEmail"
+                    Width="400"
+                    Margin="0,30,0,0"
+                    HorizontalAlignment="Center"
+                    HorizontalContentAlignment="Left"
+                    materialDesign:HintAssist.Hint="Adresse mail"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    CaretBrush="White"
+                    FontFamily="arial black"
+                    FontSize="20"
+                    FontWeight="Light"
+                    Foreground="White"
+                    Text="{Binding Registration.Email}" />
 
 
-                <iconPacks:PackIconMaterial Kind="Mail"
-                                           VerticalAlignment="Center" 
-                                           HorizontalAlignment="Left"
-                                                Margin="0,25,0,0"
-                                           Foreground="White"/>
+                <iconPacks:PackIconMaterial
+                    Margin="0,25,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Foreground="White"
+                    Kind="Mail" />
             </DockPanel>
 
-            <Border Width="450"
-                    Height="2"
-                    Background="White"
-                    Opacity="0.5"/>
+            <Border
+                Width="450"
+                Height="2"
+                Background="White"
+                Opacity="0.5" />
 
-            <DockPanel HorizontalAlignment="Center" >
-                <PasswordBox  FontFamily="arial black"
-                         materialDesign:HintAssist.Hint="Mot de passe"
-                         helper:PasswordBoxHelper.Attach="True"
-                         helper:PasswordBoxHelper.Password="{Binding Registration.Password, Mode=TwoWay}"
-                         FontWeight="Light"
-                         Password="admin"
-                         FontSize="20"
-                         HorizontalAlignment="Center"
-                         Foreground="White"
-                         Background="Transparent"
-                         BorderThickness="0"
-                         Width="400"
-                         HorizontalContentAlignment="Left"
-                         Margin="0,30,0,0"
-                         CaretBrush="White"/>
+            <DockPanel HorizontalAlignment="Center">
+                <PasswordBox
+                    Width="400"
+                    Margin="0,30,0,0"
+                    HorizontalAlignment="Center"
+                    HorizontalContentAlignment="Left"
+                    helper:PasswordBoxHelper.Attach="True"
+                    helper:PasswordBoxHelper.Password="{Binding Registration.Password, Mode=TwoWay}"
+                    materialDesign:HintAssist.Hint="Mot de passe"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    CaretBrush="White"
+                    FontFamily="arial black"
+                    FontSize="20"
+                    FontWeight="Light"
+                    Foreground="White"
+                    Password="admin" />
 
-                <iconPacks:PackIconMaterial Kind="FormTextboxPassword"
-                                           VerticalAlignment="Center" 
-                                           HorizontalAlignment="Left"
-                                                Margin="0,25,0,0"
-                                           Foreground="White"/>
+                <iconPacks:PackIconMaterial
+                    Margin="0,25,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Foreground="White"
+                    Kind="FormTextboxPassword" />
             </DockPanel>
 
-            <Border Width="450"
-                    Height="2"
-                    Background="White"
-                    Opacity="0.5"/>
+            <Border
+                Width="450"
+                Height="2"
+                Background="White"
+                Opacity="0.5" />
 
             <DockPanel Margin="0,40,0,0" HorizontalAlignment="Center">
-                <Button Width="200" Height="40" Content="s'enregistrer" Margin="20" Style="{StaticResource CustomFont}" Command="{Binding RegisterAccountCommand}" Click="Registration_Click"/>
-                <Button Width="200" Height="40" Content="Retour a l'authentification"   Style="{StaticResource CustomFont}" Command="{Binding NavigateBackToLoginCommand}"/>
+                <Button
+                    Width="200"
+                    Height="40"
+                    Margin="20"
+                    Click="Registration_Click"
+                    Command="{Binding RegisterAccountCommand}"
+                    Content="s'enregistrer"
+                    Style="{StaticResource CustomFont}" />
+                <Button
+                    Width="200"
+                    Height="40"
+                    Command="{Binding NavigateBackToLoginCommand}"
+                    Content="Retour a l'authentification"
+                    Style="{StaticResource CustomFont}" />
             </DockPanel>
 
         </StackPanel>

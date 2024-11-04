@@ -28,10 +28,10 @@ namespace Alien.UI.Views
         public ShellView()
         {
             InitializeComponent();
-            this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+            MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
         }
 
-        
+
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {

@@ -1,21 +1,25 @@
 ﻿using Alien.BLL.Dtos;
+using Alien.UI.Commands;
 using Alien.UI.Helpers;
+using Alien.UI.Managers;
 using Alien.UI.Models;
 using Alien.UI.States;
+using Alien.UI.Views;
 using AutoMapper;
-using Prism.Commands;
-using Prism.Regions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Alien.UI.ViewModels
 {
-    public class CharacterAndroidCreationViewModel : ViewModelBase, IJournalAware
+    public class CharacterAndroidCreationViewModel : ViewModelBase
     {
+        private readonly NavigationManager _navigationManager;
+
         public CharacterCreationDto CharacterCreation { get; set; }
 
         public ObservableCollection<bool> SelectedAttributes { get; set; } = new()
@@ -26,25 +30,33 @@ namespace Alien.UI.ViewModels
             false
         };
 
-        private DelegateCommand _navigateBackCommand;
-        private DelegateCommand _navigateNextPageCommand;
-        private DelegateCommand<Attributes?> _selectAttributeCommand;
+        public ICommand NavigateBackCommand { get; private set; }
+        public ICommand NavigateNextPageCommand { get; private set; }
+        public ICommand SelectAttributeCommand { get; private set; }
 
-        public DelegateCommand NavigateBackCommand => _navigateBackCommand ??= new(NavigateBack);
-        public DelegateCommand NavigateNextPageCommand => _navigateNextPageCommand ??= new(NavigateNextPage, CanNavigateNextPage);
-        public DelegateCommand<Attributes?> SelectAttributeCommand => _selectAttributeCommand ??= new DelegateCommand<Attributes?>(SelectAttribute, CanSelectAttribute);
-
-        public CharacterAndroidCreationViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, IMapper mapper)
-            : base(regionNavigationService, authenticator, mapper)
+        public CharacterAndroidCreationViewModel(IAuthenticator authenticator, IMapper mapper, NavigationManager navigationManager)
+            : base(authenticator, mapper)
         {
-            SelectAttributeCommand.RaiseCanExecuteChanged();
+            if (navigationManager is null)
+            {
+                throw new ArgumentNullException(nameof(navigationManager));
+            }
+
+            _navigationManager = navigationManager;
+
+            NavigateBackCommand = new RelayCommand(NavigateBack);
+            NavigateNextPageCommand = new RelayCommand(NavigateNextPage, CanNavigateNextPage);
+            SelectAttributeCommand = new RelayCommand<Attributes?>(SelectAttribute, CanSelectAttribute);
+
+            SelectAttributeCommand.CanExecute(null);
+            _navigationManager = navigationManager;
         }
 
         public void NavigateBack()
         {
-            if (_regionNavigationService.Journal.CanGoBack)
+            if (_navigationManager.CanNavigateBack())
             {
-                _regionNavigationService.Journal.GoBack();
+                _navigationManager.NavigateBack();
             }
         }
 
@@ -55,9 +67,14 @@ namespace Alien.UI.ViewModels
 
         public void SelectAttribute(Attributes? attribute)
         {
+            if (attribute is null)
+            {
+                throw new ArgumentNullException(nameof(attribute));
+            }
+
             SelectedAttributes[(int)attribute] = !SelectedAttributes[(int)attribute];
-            NavigateNextPageCommand.RaiseCanExecuteChanged();
-            SelectAttributeCommand.RaiseCanExecuteChanged();
+            NavigateNextPageCommand.CanExecute(null);
+            SelectAttributeCommand.CanExecute(null);
         }
 
         public bool CanNavigateNextPage()
@@ -79,19 +96,14 @@ namespace Alien.UI.ViewModels
                 { Global.CHARACTER_CREATION, CharacterCreation }
             };
 
-            Navigate(ViewsEnum.CharacterCreationSummaryView, parameters);
+            _navigationManager.Navigate(nameof(CharacterCreationSummaryView), parameters: parameters);
         }
 
-        public override void OnNavigatedTo(NavigationContext navigationContext)
-        {
-            base.OnNavigatedTo(navigationContext);
+        //public override void OnNavigatedTo(NavigationContext navigationContext)
+        //{
+        //    base.OnNavigatedTo(navigationContext);
 
-            CharacterCreation = navigationContext.Parameters.GetValue<CharacterCreationDto>(Global.CHARACTER_CREATION);
-        }
-
-        public bool PersistInHistory()
-        {
-            return true;
-        }
+        //    CharacterCreation = navigationContext.Parameters.GetValue<CharacterCreationDto>(Global.CHARACTER_CREATION);
+        //}
     }
 }

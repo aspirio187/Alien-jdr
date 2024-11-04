@@ -1,99 +1,64 @@
-﻿using Alien.UI.Helpers;
+﻿using Alien.UI.Commands;
+using Alien.UI.Helpers;
 using Alien.UI.States;
 using AutoMapper;
-using Prism.Commands;
-using Prism.Mvvm;
-using Prism.Regions;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Alien.UI.ViewModels
 {
-    public class ViewModelBase : BindableBase, INavigationAware
+    public class ViewModelBase : INotifyPropertyChanged
     {
         protected readonly IAuthenticator _authenticator;
         protected readonly IMapper _mapper;
 
-        protected IRegionNavigationService _regionNavigationService;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        public IRegionNavigationService RegionNavigationService => _regionNavigationService;
+        public virtual ICommand OnInitCommand { get; private set; }
 
-        protected DelegateCommand _loadCommand;
-        public virtual DelegateCommand LoadCommand => _loadCommand;
-
-        public ViewModelBase(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, IMapper mapper)
+        public ViewModelBase(IAuthenticator authenticator, IMapper mapper)
         {
-            _regionNavigationService = regionNavigationService ??
-                throw new ArgumentNullException(nameof(regionNavigationService));
-            _authenticator = authenticator ??
+            if (authenticator is null)
+            {
                 throw new ArgumentNullException(nameof(authenticator));
-            _mapper = mapper ??
+            }
+
+            if (mapper is null)
+            {
                 throw new ArgumentNullException(nameof(mapper));
-        }
-
-        /// <summary>
-        /// Synchronious loading method
-        /// </summary>
-        protected virtual void Load()
-        {
-
-        }
-
-        /// <summary>
-        /// Asynchronious loading method
-        /// </summary>
-        protected virtual async Task LoadAsync()
-        {
-
-        }
-
-        /// <summary>
-        /// Navigate to a view registered in the ViewsEnum with custom parameters set to null by default
-        /// </summary>
-        /// <param name="view">Enumeration containing all the views</param>
-        /// <param name="navigationParams">Dictionnary containing all the parameters of all type</param>
-        protected virtual void Navigate(ViewsEnum view, Dictionary<string, object> navigationParams = null)
-        {
-            try
-            {
-                NavigationParameters navigationParameters = new()
-                {
-                    { Global.NAVIGATION_SERVICE, _regionNavigationService }
-                };
-
-                if (navigationParams is not null)
-                {
-                    foreach (var navigationParam in navigationParams)
-                    {
-                        navigationParameters.Add(navigationParam.Key, navigationParam.Value);
-                    }
-                }
-                _regionNavigationService.RequestNavigate(new Uri(view.ToString(), UriKind.Relative), navigationParameters);
             }
-            catch (Exception e)
+
+            _authenticator = authenticator;
+            _mapper = mapper;
+
+            OnInitCommand = new RelayCommand(OnInit);
+        }
+
+        public void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            if (PropertyChanged is not null)
             {
-                Debug.WriteLine(e.Message);
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 
-        public virtual bool IsNavigationTarget(NavigationContext navigationContext)
+        public virtual void OnInit()
         {
-            return true;
+            // Implement with some things
         }
 
-        public virtual void OnNavigatedFrom(NavigationContext navigationContext)
+        public virtual void OnNavigatedFrom(Dictionary<string, object> parameters)
         {
-            // rien pour l'instant
+            // TODO: Implement with some things
         }
 
-        public virtual void OnNavigatedTo(NavigationContext navigationContext)
-        {
-            if (_regionNavigationService is null || _regionNavigationService.Region is null)
-                _regionNavigationService = navigationContext.Parameters.GetValue<IRegionNavigationService>(Global.NAVIGATION_SERVICE);
-        }
+        // TODO: Create a method that gets the current view
     }
 }

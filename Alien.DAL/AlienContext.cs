@@ -1,6 +1,7 @@
 ﻿using Alien.DAL.Configurations;
 using Alien.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
+using Syncfusion.Windows.PdfViewer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,8 +36,9 @@ namespace Alien.DAL
             //                    Connect Timeout=60;");
 
             optionsBuilder.UseSqlServer(
-                 @"Server=IDEAPAD-SOULTAN\SQLEXPRESS;Database=Alien-JDR-DB;User Id=thinkpad;
-                                                Password=soultan187;MultipleActiveResultSets=True;");
+                 @"Server=DESKTOP-SOULTAN;Database=Alien-JDR-DB;Trusted_Connection=True;User Id=DESKTOP-SOULTAN\Soultan;MultipleActiveResultSets=True;");
+
+            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

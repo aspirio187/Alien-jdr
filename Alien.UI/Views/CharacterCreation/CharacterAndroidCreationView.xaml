@@ -1,72 +1,169 @@
-﻿<ContentControl x:Class="Alien.UI.Views.CharacterAndroidCreationView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:prism="http://prismlibrary.com/"
-             xmlns:local="clr-namespace:Alien.UI.Views"
-             xmlns:global="clr-namespace:Alien.UI.Helpers"
-             prism:ViewModelLocator.AutoWireViewModel="True"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+﻿<ContentControl
+    x:Class="Alien.UI.Views.CharacterAndroidCreationView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:global="clr-namespace:Alien.UI.Helpers"
+    xmlns:local="clr-namespace:Alien.UI.Views"
+    xmlns:locator="clr-namespace:Alien.UI.Locators"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://prismlibrary.com/"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    locator:ViewModelLocator.AutoConnectedViewModelProperty="True"
+    mc:Ignorable="d">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Bonus d'attribut pour Android" Style="{StaticResource CustomFont}" FontSize="40" Foreground="White" Margin="10"
-                   HorizontalAlignment="Center"/>
+        <TextBlock
+            Margin="10"
+            HorizontalAlignment="Center"
+            FontSize="40"
+            Foreground="White"
+            Style="{StaticResource CustomFont}"
+            Text="Bonus d'attribut pour Android" />
 
-        <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel
+            Grid.Row="1"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Vertical">
 
             <DockPanel HorizontalAlignment="Center">
-                <TextBlock Text="Force" Style="{StaticResource CustomFont}" Foreground="White" Width="150" FontSize="30" Margin="10"
-                           VerticalAlignment="Center"/>
+                <TextBlock
+                    Width="150"
+                    Margin="10"
+                    VerticalAlignment="Center"
+                    FontSize="30"
+                    Foreground="White"
+                    Style="{StaticResource CustomFont}"
+                    Text="Force" />
 
-                <Button Content="+3" FontWeight="Bold" FontSize="25" Width="40" Height="40" HorizontalAlignment="Center" Margin="10"
-                        Command="{Binding SelectAttributeCommand}" CommandParameter="{x:Static global:Attributes.Force}" />
+                <Button
+                    Width="40"
+                    Height="40"
+                    Margin="10"
+                    HorizontalAlignment="Center"
+                    Command="{Binding SelectAttributeCommand}"
+                    CommandParameter="{x:Static global:Attributes.Force}"
+                    Content="+3"
+                    FontSize="25"
+                    FontWeight="Bold" />
 
-                <CheckBox IsEnabled="False" IsChecked="{Binding SelectedAttributes[0]}" HorizontalAlignment="Center" />
+                <CheckBox
+                    HorizontalAlignment="Center"
+                    IsChecked="{Binding SelectedAttributes[0]}"
+                    IsEnabled="False" />
             </DockPanel>
 
             <DockPanel HorizontalAlignment="Center">
-                <TextBlock Text="Agilite"  Style="{StaticResource CustomFont}" Foreground="White" Width="150" FontSize="30" Margin="10"
-                           VerticalAlignment="Center"/>
+                <TextBlock
+                    Width="150"
+                    Margin="10"
+                    VerticalAlignment="Center"
+                    FontSize="30"
+                    Foreground="White"
+                    Style="{StaticResource CustomFont}"
+                    Text="Agilite" />
 
-                <Button Content="+3" FontWeight="Bold" FontSize="25" Width="40" Height="40" HorizontalAlignment="Center" Margin="10"
-                        Command="{Binding SelectAttributeCommand}" CommandParameter="{x:Static global:Attributes.Agilité}" />
+                <Button
+                    Width="40"
+                    Height="40"
+                    Margin="10"
+                    HorizontalAlignment="Center"
+                    Command="{Binding SelectAttributeCommand}"
+                    CommandParameter="{x:Static global:Attributes.Agilité}"
+                    Content="+3"
+                    FontSize="25"
+                    FontWeight="Bold" />
 
-                <CheckBox IsEnabled="False" IsChecked="{Binding SelectedAttributes[1]}" HorizontalAlignment="Center" />
+                <CheckBox
+                    HorizontalAlignment="Center"
+                    IsChecked="{Binding SelectedAttributes[1]}"
+                    IsEnabled="False" />
             </DockPanel>
 
             <DockPanel HorizontalAlignment="Center">
 
-                <TextBlock Text="Esprit"  Style="{StaticResource CustomFont}" Foreground="White" Width="150" FontSize="30" Margin="10"
-                           VerticalAlignment="Center"/>
-                <Button Content="+3" FontWeight="Bold" FontSize="25" Width="40" Height="40" HorizontalAlignment="Center" Margin="10"
-                        Command="{Binding SelectAttributeCommand}" CommandParameter="{x:Static global:Attributes.Esprit}" />
+                <TextBlock
+                    Width="150"
+                    Margin="10"
+                    VerticalAlignment="Center"
+                    FontSize="30"
+                    Foreground="White"
+                    Style="{StaticResource CustomFont}"
+                    Text="Esprit" />
+                <Button
+                    Width="40"
+                    Height="40"
+                    Margin="10"
+                    HorizontalAlignment="Center"
+                    Command="{Binding SelectAttributeCommand}"
+                    CommandParameter="{x:Static global:Attributes.Esprit}"
+                    Content="+3"
+                    FontSize="25"
+                    FontWeight="Bold" />
 
-                <CheckBox IsEnabled="False" IsChecked="{Binding SelectedAttributes[2]}" HorizontalAlignment="Center" />
+                <CheckBox
+                    HorizontalAlignment="Center"
+                    IsChecked="{Binding SelectedAttributes[2]}"
+                    IsEnabled="False" />
             </DockPanel>
 
             <DockPanel HorizontalAlignment="Center">
 
-                <TextBlock Text="Empathie"  Style="{StaticResource CustomFont}" Foreground="White" Width="150" FontSize="30" Margin="10"
-                           VerticalAlignment="Center"/>
+                <TextBlock
+                    Width="150"
+                    Margin="10"
+                    VerticalAlignment="Center"
+                    FontSize="30"
+                    Foreground="White"
+                    Style="{StaticResource CustomFont}"
+                    Text="Empathie" />
 
-                <Button Content="+3" FontWeight="Bold" FontSize="25" Width="40" Height="40" HorizontalAlignment="Center" Margin="10"
-                        Command="{Binding SelectAttributeCommand}" CommandParameter="{x:Static global:Attributes.Empathie}" />
+                <Button
+                    Width="40"
+                    Height="40"
+                    Margin="10"
+                    HorizontalAlignment="Center"
+                    Command="{Binding SelectAttributeCommand}"
+                    CommandParameter="{x:Static global:Attributes.Empathie}"
+                    Content="+3"
+                    FontSize="25"
+                    FontWeight="Bold" />
 
-                <CheckBox IsEnabled="False" IsChecked="{Binding SelectedAttributes[3]}" HorizontalAlignment="Center" />
+                <CheckBox
+                    HorizontalAlignment="Center"
+                    IsChecked="{Binding SelectedAttributes[3]}"
+                    IsEnabled="False" />
             </DockPanel>
         </StackPanel>
 
-        <DockPanel Grid.Row="2" HorizontalAlignment="Stretch" Margin="30">
-            <Button Width="200" Height="40" FontSize="20" Content="Retour" Style="{StaticResource CustomFont}" HorizontalAlignment="Left" Command="{Binding NavigateBackCommand}"/>
-            <Button Width="200" Height="40" FontSize="20" Content="Suivant" Style="{StaticResource CustomFont}" HorizontalAlignment="Right" Command="{Binding NavigateNextPageCommand}"/>
+        <DockPanel
+            Grid.Row="2"
+            Margin="30"
+            HorizontalAlignment="Stretch">
+            <Button
+                Width="200"
+                Height="40"
+                HorizontalAlignment="Left"
+                Command="{Binding NavigateBackCommand}"
+                Content="Retour"
+                FontSize="20"
+                Style="{StaticResource CustomFont}" />
+            <Button
+                Width="200"
+                Height="40"
+                HorizontalAlignment="Right"
+                Command="{Binding NavigateNextPageCommand}"
+                Content="Suivant"
+                FontSize="20"
+                Style="{StaticResource CustomFont}" />
         </DockPanel>
     </Grid>
 </ContentControl>

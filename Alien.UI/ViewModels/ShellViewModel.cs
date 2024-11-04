@@ -1,61 +1,90 @@
-﻿using Prism.Mvvm;
-using Prism.Regions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Alien.UI.Views;
-using Prism.Commands;
 using Alien.UI.Helpers;
 using Alien.UI.States;
-using Prism.Services.Dialogs;
 using TableDependency.SqlClient;
 using Alien.BLL.Interfaces;
 using Alien.BLL.Helpers;
 using AutoMapper;
+using System.Windows.Controls;
+using System.Windows.Input;
+using Alien.UI.Commands;
+using System.Threading;
+using Alien.UI.Managers;
 
 namespace Alien.UI.ViewModels
 {
     public class ShellViewModel : ViewModelBase
     {
         private readonly INotificationService _notificationService;
-        private readonly IRegionManager _regionManager;
-        private readonly IDialogService _dialogService;
+        private readonly NavigationManager _navigationManager;
+
+        private ContentControl _currentView;
+
+        public ContentControl CurrentView
+        {
+            get { return _currentView; }
+            set
+            {
+                if (value is null)
+                {
+                    throw new ArgumentNullException(nameof(value));
+                }
+
+                _currentView = value;
+                NotifyPropertyChanged();
+            }
+        }
+
 
         private bool _notificationReceived;
 
         public bool NotificationReceived
         {
             get { return _notificationReceived; }
-            set { SetProperty(ref _notificationReceived, value); }
+            set
+            {
+                _notificationReceived = value;
+                NotifyPropertyChanged();
+            }
         }
 
-        private DelegateCommand _navigateCharacterCommand;
-        private DelegateCommand _navigateLobbiesCommand;
-        private DelegateCommand _navigateNotificationsCommand;
-        private DelegateCommand _navigateManuelCommand;
-        private DelegateCommand _navigateCreditCommand;
+        public ICommand NavigateCharacterCommand { get; private set; }
+        public ICommand NavigateLobbiesCommand { get; private set; }
+        public ICommand NavigateNotificationsCommand { get; private set; }
+        public ICommand NavigateManuelCommand { get; private set; }
+        public ICommand NavigateCreditCommand { get; private set; }
 
-        public DelegateCommand NavigateCharacterCommand => _navigateCharacterCommand ??= new DelegateCommand(NavigateCharacter);
-        public DelegateCommand NavigateLobbiesCommand => _navigateLobbiesCommand ??= new DelegateCommand(NavigateLobbies);
-        public DelegateCommand NavigateNotificationsCommand => _navigateNotificationsCommand ??= new DelegateCommand(NavigateNotifications);
-        public DelegateCommand NavigateManuelCommand => _navigateManuelCommand ??= new DelegateCommand(NavigateManuel);
-        public DelegateCommand NavigateCreditCommand => _navigateCreditCommand ??= new DelegateCommand(NavigateCredit);
-        public override DelegateCommand LoadCommand => _loadCommand ??= new DelegateCommand(async () => await LoadAsync());
-
-        public ShellViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, IMapper mapper, IRegionManager regionManager,
-            IDialogService dialogService, INotificationService notificationService)
-            : base(regionNavigationService, authenticator, mapper)
+        public ShellViewModel(IAuthenticator authenticator, IMapper mapper, INotificationService notificationService, NavigationManager navigationManager)
+            : base(authenticator, mapper)
         {
-            _regionManager = regionManager ??
-                throw new ArgumentNullException(nameof(regionManager));
-            _dialogService = dialogService ??
-                throw new ArgumentNullException(nameof(dialogService));
-            _notificationService = notificationService ??
+
+            if (notificationService is null)
+            {
                 throw new ArgumentNullException(nameof(notificationService));
+            }
+
+            if (navigationManager is null)
+            {
+                throw new ArgumentNullException(nameof(navigationManager));
+            }
+
+            _notificationService = notificationService;
+            _navigationManager = navigationManager;
 
             _notificationService.OnNotificationReceived += Notification_Received;
+
+            // Commands
+            NavigateCharacterCommand = new RelayCommand(NavigateCharacter);
+            NavigateLobbiesCommand = new RelayCommand(NavigateLobbies);
+            NavigateNotificationsCommand = new RelayCommand(NavigateNotifications);
+            NavigateManuelCommand = new RelayCommand(NavigateManuel);
+            NavigateCreditCommand = new RelayCommand(NavigateCredit);
+            _navigationManager = navigationManager;
         }
 
         private void Notification_Received(object sender, NotificationEventArgs e)
@@ -66,46 +95,52 @@ namespace Alien.UI.ViewModels
             }
         }
 
-        protected override async Task LoadAsync()
+        public override void OnInit()
         {
-            if (!await _authenticator.IsConnected())
-            {
-                _dialogService.ShowDialog("LoginView", null);
-            }
+            base.OnInit();
 
-            if (await _notificationService.CheckPendingNotifications(_authenticator.User.Id))
+            Task.Run(async () =>
             {
-                NotificationReceived = true;
-            }
+                if (!await _authenticator.IsConnected())
+                {
 
-            _regionNavigationService.Region = _regionManager.Regions[Global.REGION_NAME];
-            Navigate(ViewsEnum.CharactersView);
+                    _navigationManager.OpenDialog("LoginView", this);
+                }
+
+                if (await _notificationService.CheckPendingNotifications(_authenticator.User.Id))
+                {
+                    NotificationReceived = true;
+                }
+
+                //_regionNavigationService.Region = _regionManager.Regions[Global.REGION_NAME];
+                NavigateCharacterCommand.Execute(this);
+            });
         }
 
         public void NavigateCharacter()
         {
-            Navigate(ViewsEnum.CharactersView);
+            _navigationManager.Navigate(nameof(CharactersView));
         }
 
         public void NavigateLobbies()
         {
-            Navigate(ViewsEnum.LobbiesView);
+            _navigationManager.Navigate(nameof(LobbiesView));
         }
 
         public void NavigateNotifications()
         {
             NotificationReceived = false;
-            Navigate(ViewsEnum.NotificationsView);
+            _navigationManager.Navigate(nameof(NotificationsView));
         }
 
         public void NavigateManuel()
         {
-            Navigate(ViewsEnum.ManuelView);
+            _navigationManager.Navigate(nameof(ManuelView));
         }
 
         public void NavigateCredit()
         {
-            Navigate(ViewsEnum.CreditView);
+            _navigationManager.Navigate(nameof(CreditView));
         }
     }
 }

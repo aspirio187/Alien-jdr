@@ -4,7 +4,6 @@ using Alien.DAL;
 using Alien.DAL.Interfaces;
 using Alien.DAL.Repositories;
 using AutoMapper;
-using Prism.Ioc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,32 +14,32 @@ namespace Alien.BLL
 {
     public static class LayersConfiguration
     {
-        public static IContainerRegistry InjectNTier(this IContainerRegistry containerRegistry)
-        {
-            containerRegistry.Register<IMapper>(ConfigureMapper);
-            containerRegistry.RegisterScoped<AlienContext>();
+        //public static IContainerRegistry InjectNTier(this IContainerRegistry containerRegistry)
+        //{
+        //    containerRegistry.Register<IMapper>(ConfigureMapper);
+        //    containerRegistry.RegisterScoped<AlienContext>();
 
-            // Injection des Repository
-            containerRegistry.RegisterScoped<ICharacterRepository, CharacterRepository>();
-            containerRegistry.RegisterScoped<IEquipmentRepository, EquipmentRepository>();
-            containerRegistry.RegisterScoped<ILobbyPlayerRepository, LobbyPlayerRepository>();
-            containerRegistry.RegisterScoped<ILobbyRepository, LobbyRepository>();
-            containerRegistry.RegisterScoped<INotificationRepository, NotificationRepository>();
-            containerRegistry.RegisterScoped<IRoleRepository, RoleRepository>();
-            containerRegistry.RegisterScoped<ITalentRepository, TalentRepository>();
-            containerRegistry.RegisterScoped<IUserRepository, UserRepository>();
-            containerRegistry.RegisterScoped<IWoundRepository, WoundRepository>();
+        //    // Injection des Repository
+        //    containerRegistry.RegisterScoped<ICharacterRepository, CharacterRepository>();
+        //    containerRegistry.RegisterScoped<IEquipmentRepository, EquipmentRepository>();
+        //    containerRegistry.RegisterScoped<ILobbyPlayerRepository, LobbyPlayerRepository>();
+        //    containerRegistry.RegisterScoped<ILobbyRepository, LobbyRepository>();
+        //    containerRegistry.RegisterScoped<INotificationRepository, NotificationRepository>();
+        //    containerRegistry.RegisterScoped<IRoleRepository, RoleRepository>();
+        //    containerRegistry.RegisterScoped<ITalentRepository, TalentRepository>();
+        //    containerRegistry.RegisterScoped<IUserRepository, UserRepository>();
+        //    containerRegistry.RegisterScoped<IWoundRepository, WoundRepository>();
 
 
-            // Injection des services
-            containerRegistry.RegisterScoped<ICharacterService, CharacterService>();
-            containerRegistry.RegisterScoped<ILobbyService, LobbyService>();
-            containerRegistry.RegisterScoped<ILobbyPlayerService, LobbyPlayerService>();
-            containerRegistry.RegisterScoped<INotificationService, NotificationService>();
-            containerRegistry.RegisterScoped<IUserService, UserService>();
+        //    // Injection des services
+        //    containerRegistry.RegisterScoped<ICharacterService, CharacterService>();
+        //    containerRegistry.RegisterScoped<ILobbyService, LobbyService>();
+        //    containerRegistry.RegisterScoped<ILobbyPlayerService, LobbyPlayerService>();
+        //    containerRegistry.RegisterScoped<INotificationService, NotificationService>();
+        //    containerRegistry.RegisterScoped<IUserService, UserService>();
 
-            return containerRegistry;
-        }
+        //    return containerRegistry;
+        //}
 
         public static IMapper ConfigureMapper()
         {
