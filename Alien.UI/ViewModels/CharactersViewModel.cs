@@ -33,11 +33,10 @@ namespace Alien.UI.ViewModels
             }
         }
 
-
-        public ICommand LoadCommand { get; private set; }
         public ICommand NavigateCreateCharacterCommand { get; private set; }
 
-        public CharactersViewModel(IAuthenticator authenticator, IMapper mapper, ICharacterService characterService, NavigationManager navigationManager)
+        public CharactersViewModel(IAuthenticator authenticator, IMapper mapper, ICharacterService characterService,
+            NavigationManager navigationManager)
             : base(authenticator, mapper)
         {
             if (characterService is null)
@@ -53,21 +52,21 @@ namespace Alien.UI.ViewModels
             _characterService = characterService;
             _navigationManager = navigationManager;
 
-            LoadCommand = new RelayCommand(async () => await LoadAsync());
             NavigateCreateCharacterCommand = new RelayCommand(NavigateCreateCharacter);
         }
 
         public override void OnInit()
         {
-            base.OnInit();
-        }
-
-        // TODO: Move to OnInit
-        public async Task LoadAsync()
-        {
             try
             {
-                CharacterMiniatures = new(await _characterService.GetCharactersMiniaturesAsync(_authenticator.User.Id));
+                Task
+                    .Run(() => _characterService.GetCharactersMiniaturesAsync(_authenticator.User.Id))
+                    .ContinueWith(
+                        (task) =>
+                        {
+                            CharacterMiniatures = new ObservableCollection<CharacterMiniatureDto>(task.Result);
+                        },
+                        TaskScheduler.FromCurrentSynchronizationContext());
             }
             catch (Exception e)
             {
@@ -75,7 +74,7 @@ namespace Alien.UI.ViewModels
             }
         }
 
-        public void NavigateCreateCharacter()
+        private void NavigateCreateCharacter()
         {
             _navigationManager.Navigate(nameof(CharacterCareerSelectionView));
         }
