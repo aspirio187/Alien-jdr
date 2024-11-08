@@ -46,11 +46,22 @@
 		<Resource Include="Images\Create.jpg" />
 		<Resource Include="Sounds\mixkit-hard-click-1118.wav" />
 		<Resource Include="Sounds\mixkit-quest-game-interface-click-1139.wav" />
+		<None Remove="Assets\loading.gif" />
+		<Resource Include="Assets\loading.gif">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Folder Include="Views\Views\" />
-	  <Folder Include="Views\Windows\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Page Update="Views\Windows\ShellView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	    <XamlRuntime>Wpf</XamlRuntime>
+	    <SubType>Designer</SubType>
+	  </Page>
 	</ItemGroup>
 
 </Project>

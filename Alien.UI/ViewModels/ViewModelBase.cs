@@ -11,6 +11,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Alien.UI.Views;
 
 namespace Alien.UI.ViewModels
 {
@@ -21,9 +22,19 @@ namespace Alien.UI.ViewModels
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public virtual ICommand OnInitCommand { get; private set; }
+        private bool _isBusy;
 
-        public ViewModelBase(IAuthenticator authenticator, IMapper mapper)
+        public bool IsBusy
+        {
+            get => _isBusy;
+            set
+            {
+                _isBusy = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        protected ViewModelBase(IAuthenticator authenticator, IMapper mapper)
         {
             if (authenticator is null)
             {
@@ -37,8 +48,6 @@ namespace Alien.UI.ViewModels
 
             _authenticator = authenticator;
             _mapper = mapper;
-
-            OnInitCommand = new RelayCommand(OnInit);
         }
 
         public void NotifyPropertyChanged([CallerMemberName] string propertyName = "")

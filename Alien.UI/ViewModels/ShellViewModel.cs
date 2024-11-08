@@ -15,6 +15,7 @@ using System.Windows.Input;
 using Alien.UI.Commands;
 using System.Threading;
 using Alien.UI.Managers;
+using ViewBase = Alien.UI.Views.ViewBase;
 
 namespace Alien.UI.ViewModels
 {
@@ -23,9 +24,9 @@ namespace Alien.UI.ViewModels
         private readonly INotificationService _notificationService;
         private readonly NavigationManager _navigationManager;
 
-        private ContentControl _currentView;
+        private ViewBase? _currentView;
 
-        public ContentControl CurrentView
+        public ViewBase? CurrentView
         {
             get { return _currentView; }
             set
@@ -59,10 +60,10 @@ namespace Alien.UI.ViewModels
         public ICommand NavigateManuelCommand { get; private set; }
         public ICommand NavigateCreditCommand { get; private set; }
 
-        public ShellViewModel(IAuthenticator authenticator, IMapper mapper, INotificationService notificationService, NavigationManager navigationManager)
+        public ShellViewModel(IAuthenticator authenticator, IMapper mapper, INotificationService notificationService,
+            NavigationManager navigationManager)
             : base(authenticator, mapper)
         {
-
             if (notificationService is null)
             {
                 throw new ArgumentNullException(nameof(notificationService));
@@ -74,9 +75,12 @@ namespace Alien.UI.ViewModels
             }
 
             _notificationService = notificationService;
-            _navigationManager = navigationManager;
 
             _notificationService.OnNotificationReceived += Notification_Received;
+
+            _navigationManager = navigationManager;
+
+            _navigationManager.OnCurrentViewChanged += OnCurrentViewChanged;
 
             // Commands
             NavigateCharacterCommand = new RelayCommand(NavigateCharacter);
@@ -84,10 +88,26 @@ namespace Alien.UI.ViewModels
             NavigateNotificationsCommand = new RelayCommand(NavigateNotifications);
             NavigateManuelCommand = new RelayCommand(NavigateManuel);
             NavigateCreditCommand = new RelayCommand(NavigateCredit);
-            _navigationManager = navigationManager;
+
+            NavigateCharacterCommand.Execute(this);
         }
 
-        private void Notification_Received(object sender, NotificationEventArgs e)
+        private void OnCurrentViewChanged(ContentControl? currentView)
+        {
+            if (_navigationManager is null)
+            {
+                throw new NullReferenceException(nameof(_navigationManager));
+            }
+
+            if (currentView is null)
+            {
+                throw new ArgumentNullException(nameof(currentView));
+            }
+
+            CurrentView = currentView as ViewBase;
+        }
+
+        private void Notification_Received(object? sender, NotificationEventArgs e)
         {
             if (e.Notification.ReceiverId == _authenticator.User.Id)
             {
@@ -103,7 +123,6 @@ namespace Alien.UI.ViewModels
             {
                 if (!await _authenticator.IsConnected())
                 {
-
                     _navigationManager.OpenDialog("LoginView", this);
                 }
 

@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Syncfusion.XPS;
 
 namespace Alien.UI.ViewModels
 {
@@ -57,14 +58,24 @@ namespace Alien.UI.ViewModels
 
         public override void OnInit()
         {
+            IsBusy = true;
             try
             {
                 Task
-                    .Run(() => _characterService.GetCharactersMiniaturesAsync(_authenticator.User.Id))
+                    .Run(async () =>
+                    {
+                        if (await _authenticator.IsConnected())
+                        {
+                            return await _characterService.GetCharactersMiniaturesAsync(_authenticator.User.Id);
+                        }
+
+                        return new List<CharacterMiniatureDto>();
+                    })
                     .ContinueWith(
                         (task) =>
                         {
                             CharacterMiniatures = new ObservableCollection<CharacterMiniatureDto>(task.Result);
+                            IsBusy = false;
                         },
                         TaskScheduler.FromCurrentSynchronizationContext());
             }

@@ -1,5 +1,4 @@
-﻿<ContentControl
-    Background="Black"
+﻿<local:ViewBase
     d:DesignHeight="450"
     d:DesignWidth="800"
     locator:ViewModelLocator.AutoConnectedViewModelProperty="True"
@@ -13,7 +12,6 @@
     xmlns:locator="clr-namespace:Alien.UI.Locators"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-
     <Grid>
 
         <Grid.Resources>
@@ -82,11 +80,4 @@
             Width="350" />
 
     </Grid>
-
-    <!--<behavior:Interaction.Triggers>
-        <behavior:EventTrigger EventName="Loaded">
-            <behavior:InvokeCommandAction Command="{Binding LoadCommand}" />
-        </behavior:EventTrigger>
-    </behavior:Interaction.Triggers>-->
-
-</ContentControl>
+</local:ViewBase>

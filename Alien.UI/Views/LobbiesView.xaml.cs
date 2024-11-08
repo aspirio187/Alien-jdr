@@ -18,7 +18,7 @@ namespace Alien.UI.Views
     /// <summary>
     /// Logique d'interaction pour LobbiesView.xaml
     /// </summary>
-    public partial class LobbiesView : ContentControl
+    public partial class LobbiesView : ViewBase
     {
         public LobbiesView()
         {

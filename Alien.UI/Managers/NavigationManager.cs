@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
 using Alien.UI.Iterators;
+using ViewBase = Alien.UI.Views.ViewBase;
 
 namespace Alien.UI.Managers
 {
@@ -30,7 +31,7 @@ namespace Alien.UI.Managers
         /// <summary>
         /// Event fired when the current view changes.
         /// </summary>
-        public event Action? OnCurrentViewChanged;
+        public event Action<ViewBase?>? OnCurrentViewChanged;
 
         /// <summary>
         /// Iterator containing all the navigation page registered in the stack
@@ -40,20 +41,20 @@ namespace Alien.UI.Managers
         /// <summary>
         /// The currently selected view
         /// </summary>
-        private ContentControl? _currentView;
+        private ViewBase? _currentView;
 
         /// <summary>
         /// Gets or sets the curent view. Invoke <see cref="OnCurrentViewChanged"/> when the Current
         /// View changes
         /// </summary>
-        public ContentControl? CurrentView
+        public ViewBase? CurrentView
         {
             get => _currentView;
 
             private set
             {
                 _currentView = value;
-                OnCurrentViewChanged?.Invoke();
+                OnCurrentViewChanged?.Invoke(_currentView);
             }
         }
 
@@ -130,10 +131,7 @@ namespace Alien.UI.Managers
                 ResizeMode = ResizeMode.NoResize
             };
 
-            window.Closing += delegate (object? sender, CancelEventArgs e)
-            {
-                CloseDialog(viewName);
-            };
+            window.Closing += delegate(object? sender, CancelEventArgs e) { CloseDialog(viewName); };
 
 
             ContentControl? view = NavigationStack[viewName];
@@ -190,7 +188,8 @@ namespace Alien.UI.Managers
                 throw new ArgumentNullException(nameof(viewName));
             }
 
-            KeyValuePair<ViewModelBase, Window> openedDialog = OpenedDialogs.SingleOrDefault(o => o.Value.Name.Equals(viewName));
+            KeyValuePair<ViewModelBase, Window> openedDialog =
+                OpenedDialogs.SingleOrDefault(o => o.Value.Name.Equals(viewName));
 
             if (openedDialog.Value is not null)
             {
@@ -204,7 +203,8 @@ namespace Alien.UI.Managers
 
                 if (window.Content is not ContentControl contentControl)
                 {
-                    throw new NullReferenceException($"The content control of the opened view {viewName} is null and should never be null");
+                    throw new NullReferenceException(
+                        $"The content control of the opened view {viewName} is null and should never be null");
                 }
 
                 if (parameters is not null)
@@ -224,7 +224,7 @@ namespace Alien.UI.Managers
                 OpenedDialogs.Remove(openedDialog.Key);
             }
         }
-
+ 
         /// <summary>
         /// Changes the current view and optionnaly add the new view in the view stack
         /// </summary>
@@ -239,7 +239,7 @@ namespace Alien.UI.Managers
                 throw new ArgumentNullException(viewName, nameof(viewName));
             }
 
-            ContentControl? view = NavigationStack[viewName];
+            ViewBase? view = NavigationStack[viewName];
 
             if (view is null)
             {
@@ -250,7 +250,7 @@ namespace Alien.UI.Managers
                     throw new NullReferenceException(nameof(_currentAssembly));
                 }
 
-                view = Activator.CreateInstance(viewType) as ContentControl;
+                view = Activator.CreateInstance(viewType) as ViewBase;
             }
 
             if (view is null)
@@ -262,13 +262,13 @@ namespace Alien.UI.Managers
             {
                 NavigationStack.Add(view);
                 NavigationStack.MoveNext();
-
-                CurrentView = view;
-
-                ViewModelBase currentViewModel = (ViewModelBase)CurrentView.DataContext;
-
-                currentViewModel.OnInit();
             }
+
+            CurrentView = view;
+
+            ViewModelBase currentViewModel = (ViewModelBase)CurrentView.DataContext;
+
+            currentViewModel.OnInit();
         }
 
         /// <summary>

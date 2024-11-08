@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Controls;
+using Alien.UI.Views;
 
 namespace Alien.UI.Iterators
 {
-    public class ViewIterator : IEnumerator<ContentControl>
+    public class ViewIterator : IEnumerator<ViewBase>
     {
-        private ContentControl[]? _controls;
+        private ViewBase[]? _controls;
 
         object IEnumerator.Current => Current;
 
@@ -21,7 +21,7 @@ namespace Alien.UI.Iterators
             get => _position;
         }
 
-        public ContentControl Current
+        public ViewBase Current
         {
             get
             {
@@ -38,6 +38,7 @@ namespace Alien.UI.Iterators
                 return _controls[_position];
             }
         }
+
         public int Length
         {
             get => _controls is not null ? _controls.Length : throw new NullReferenceException(nameof(_controls));
@@ -46,10 +47,10 @@ namespace Alien.UI.Iterators
         public ViewIterator()
         {
             _position = 0;
-            _controls = new ContentControl[0];
+            _controls = new ViewBase[0];
         }
 
-        public ContentControl? this[string name]
+        public ViewBase? this[string name]
         {
             get
             {
@@ -70,7 +71,7 @@ namespace Alien.UI.Iterators
             }
         }
 
-        public ContentControl this[int index]
+        public ViewBase this[int index]
         {
             get
             {
@@ -88,7 +89,7 @@ namespace Alien.UI.Iterators
             }
         }
 
-        public void Add(ContentControl contentControl)
+        public void Add(ViewBase contentControl)
         {
             if (contentControl is null)
             {
@@ -100,7 +101,7 @@ namespace Alien.UI.Iterators
                 throw new NullReferenceException(nameof(_controls));
             }
 
-            ContentControl[] controls = new ContentControl[_controls.Length + 1];
+            ViewBase[] controls = new ViewBase[_controls.Length + 1];
 
             if (_controls.Length > 0)
             {
@@ -112,7 +113,7 @@ namespace Alien.UI.Iterators
             _controls = controls;
         }
 
-        public bool Any(Func<ContentControl, bool> predicate)
+        public bool Any(Func<ViewBase, bool> predicate)
         {
             if (_controls is null)
             {
@@ -143,13 +144,13 @@ namespace Alien.UI.Iterators
                 throw new NullReferenceException(nameof(_controls));
             }
 
-            if (_position + 1 < _controls.Length)
+            if (_position + 1 >= _controls.Length)
             {
-                _position++;
-                return true;
+                return false;
             }
 
-            return false;
+            _position++;
+            return true;
         }
 
         /// <summary>
@@ -166,7 +167,7 @@ namespace Alien.UI.Iterators
 
                 if (removeCurrent)
                 {
-                    ContentControl[] temp = new ContentControl[_controls.Length - 1];
+                    ViewBase[] temp = new ViewBase[_controls.Length - 1];
 
                     Array.Copy(_controls, temp, _controls.Length - 1);
 
@@ -175,12 +176,13 @@ namespace Alien.UI.Iterators
 
                 return true;
             }
+
             return false;
         }
 
         public void Reset()
         {
-            _controls = new ContentControl[0];
+            _controls = Array.Empty<ViewBase>();
             _position = -1;
         }
     }
