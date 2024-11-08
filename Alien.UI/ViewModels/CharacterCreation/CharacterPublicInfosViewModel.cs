@@ -1,32 +1,39 @@
 ﻿using Alien.BLL.Dtos;
 using Alien.BLL.Interfaces;
+using Alien.UI.Commands;
 using Alien.UI.Helpers;
+using Alien.UI.Managers;
 using Alien.UI.Models;
 using Alien.UI.States;
+using Alien.UI.Views;
 using AutoMapper;
-using Prism.Commands;
-using Prism.Regions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Alien.UI.ViewModels
 {
-    public class CharacterPublicInfosViewModel : ViewModelBase, IJournalAware
+    public class CharacterPublicInfosViewModel : ViewModelBase
     {
         private readonly ICharacterService _characterService;
+        private readonly NavigationManager _navigationManager;
 
-        public CharacterCreationDto CharacterCreation { get; set; }
+        public CharacterCreationDto CharacterCreation { get; set; } = new();
 
         private CharacterPublicInfosModel _publicCharacter = new();
 
         public CharacterPublicInfosModel PublicCharacter
         {
             get { return _publicCharacter; }
-            set { SetProperty(ref _publicCharacter, value); }
+            set
+            {
+                _publicCharacter = value;
+                NotifyPropertyChanged();
+            }
         }
 
         private RaceEnum _race;
@@ -36,9 +43,9 @@ namespace Alien.UI.ViewModels
             get { return _race; }
             set
             {
-                if(value == RaceEnum.Humain)
+                if (value == RaceEnum.Humain)
                 {
-                    if(PublicCharacter is not null && SelectedAttributes is not null && SelectedAttributes.Any(a => a))
+                    if (PublicCharacter is not null && SelectedAttributes is not null && SelectedAttributes.Any(a => a))
                     {
                         if (SelectedAttributes[(int)Attributes.Force])
                         {
@@ -63,16 +70,20 @@ namespace Alien.UI.ViewModels
                     }
                 }
 
-                SetProperty(ref _race, value);
-                SelectAttributeCommand?.RaiseCanExecuteChanged();
+                _race = value;
+                NotifyPropertyChanged();
             }
         }
-        private ObservableCollection<bool> _selectedAttributes;
+        private ObservableCollection<bool> _selectedAttributes = new();
 
         public ObservableCollection<bool> SelectedAttributes
         {
             get { return _selectedAttributes; }
-            set { SetProperty(ref _selectedAttributes, value); }
+            set
+            {
+                _selectedAttributes = value;
+                NotifyPropertyChanged();
+            }
         }
 
         private int _attributePoints;
@@ -80,7 +91,11 @@ namespace Alien.UI.ViewModels
         public int AttributePoints
         {
             get { return _attributePoints; }
-            set { SetProperty(ref _attributePoints, value); }
+            set
+            {
+                _attributePoints = value;
+                NotifyPropertyChanged();
+            }
         }
 
         private int _competencePoints;
@@ -88,37 +103,44 @@ namespace Alien.UI.ViewModels
         public int CompetencePoints
         {
             get { return _competencePoints; }
-            set { SetProperty(ref _competencePoints, value); }
+            set
+            {
+                _competencePoints = value;
+                NotifyPropertyChanged();
+            }
         }
 
-        private DelegateCommand<Attributes?> _increaseAttributeCommand;
-        private DelegateCommand<Attributes?> _decreaseAttributeCommand;
-        private DelegateCommand<Attributes?> _selectAttributeCommand;
-        private DelegateCommand<Competences?> _increaseCompetenceCommand;
-        private DelegateCommand<Competences?> _decreaseCompetenceCommand;
-        private DelegateCommand _navigateBackCommand;
-        private DelegateCommand _createPublicCharacterCommand;
+        public ICommand IncreaseAttributeCommand { get; private set; }
+        public ICommand DecreaseAttributeCommand { get; private set; }
+        public ICommand SelectAttributeCommand { get; private set; }
+        public ICommand IncreaseCompetenceCommand { get; private set; }
+        public ICommand DecreaseCompetenceCommand { get; private set; }
+        public ICommand NavigateBackCommand { get; private set; }
+        public ICommand CreatePublicCharacterCommand { get; private set; }
 
-
-        public DelegateCommand<Attributes?> IncreaseAttributeCommand => _increaseAttributeCommand ??= new DelegateCommand<Attributes?>(IncreaseAttribute, CanIncreaseAttributes);
-        public DelegateCommand<Attributes?> DecreaseAttributeCommand => _decreaseAttributeCommand ??= new DelegateCommand<Attributes?>(DecreaseAttribute, CanDecreaseAttribute);
-        public DelegateCommand<Attributes?> SelectAttributeCommand => _selectAttributeCommand ??= new DelegateCommand<Attributes?>(SelectAttribute, CanSelectAttribute);
-        public DelegateCommand<Competences?> IncreaseCompetenceCommand => _increaseCompetenceCommand ??= new DelegateCommand<Competences?>(IncreaseCompetence, CanIncreaseCompetence);
-        public DelegateCommand<Competences?> DecreaseCompetenceCommand => _decreaseCompetenceCommand ??= new DelegateCommand<Competences?>(DecreaseCompetence, CanDecreaseCompetence);
-        public DelegateCommand NavigateBackCommand => _navigateBackCommand ??= new(NavigateBack);
-        public DelegateCommand CreatePublicCharacterCommand => _createPublicCharacterCommand ??= new(CreatePublicCharacter);
-
-        public CharacterPublicInfosViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, IMapper mapper, ICharacterService characterService)
-            : base(regionNavigationService, authenticator, mapper)
+        public CharacterPublicInfosViewModel(IAuthenticator authenticator, IMapper mapper, ICharacterService characterService, NavigationManager navigationManager)
+            : base(authenticator, mapper)
         {
-            _characterService = characterService ??
+            if (characterService is null)
+            {
                 throw new ArgumentNullException(nameof(characterService));
+            }
 
-            IncreaseAttributeCommand.RaiseCanExecuteChanged();
-            DecreaseAttributeCommand.RaiseCanExecuteChanged();
-            SelectAttributeCommand.RaiseCanExecuteChanged();
-            IncreaseCompetenceCommand.RaiseCanExecuteChanged();
-            DecreaseCompetenceCommand.RaiseCanExecuteChanged();
+            if (navigationManager is null)
+            {
+                throw new ArgumentNullException(nameof(navigationManager));
+            }
+
+            _characterService = characterService;
+            _navigationManager = navigationManager;
+
+            IncreaseAttributeCommand = new RelayCommand<Attributes?>(IncreaseAttribute, CanIncreaseAttributes);
+            DecreaseAttributeCommand = new RelayCommand<Attributes?>(DecreaseAttribute, CanDecreaseAttribute);
+            SelectAttributeCommand = new RelayCommand<Attributes?>(SelectAttribute, CanSelectAttribute);
+            IncreaseCompetenceCommand = new RelayCommand<Competences?>(IncreaseCompetence, CanIncreaseCompetence);
+            DecreaseCompetenceCommand = new RelayCommand<Competences?>(DecreaseCompetence, CanDecreaseCompetence);
+            NavigateBackCommand = new RelayCommand(NavigateBack);
+            CreatePublicCharacterCommand = new RelayCommand(CreatePublicCharacter);
         }
 
         public bool CanIncreaseAttributes(Attributes? attribute)
@@ -195,14 +217,12 @@ namespace Alien.UI.ViewModels
             }
 
             AttributePoints--;
-            IncreaseAttributeCommand.RaiseCanExecuteChanged();
-            DecreaseAttributeCommand.RaiseCanExecuteChanged();
         }
 
         public bool CanDecreaseAttribute(Attributes? attribute)
         {
             return attribute is null
-                ? false 
+                ? false
                 : AttributePoints >= 6
                 ? false
                 : attribute switch
@@ -234,15 +254,13 @@ namespace Alien.UI.ViewModels
             }
 
             AttributePoints++;
-            IncreaseAttributeCommand.RaiseCanExecuteChanged();
-            DecreaseAttributeCommand.RaiseCanExecuteChanged();
         }
 
         public bool CanSelectAttribute(Attributes? attribute)
         {
-            return SelectedAttributes is not null && 
-                Race.Equals(RaceEnum.Android) && 
-                attribute is not null && 
+            return SelectedAttributes is not null &&
+                Race.Equals(RaceEnum.Android) &&
+                attribute is not null &&
                 (SelectedAttributes.Count(a => a) < 2 || SelectedAttributes[(int)attribute]);
         }
 
@@ -293,9 +311,6 @@ namespace Alien.UI.ViewModels
                     }
                     break;
             }
-
-            CreatePublicCharacterCommand.RaiseCanExecuteChanged();
-            SelectAttributeCommand.RaiseCanExecuteChanged();
         }
 
         public bool CanIncreaseCompetence(Competences? competence)
@@ -363,8 +378,6 @@ namespace Alien.UI.ViewModels
             }
 
             CompetencePoints--;
-            IncreaseCompetenceCommand.RaiseCanExecuteChanged();
-            DecreaseCompetenceCommand.RaiseCanExecuteChanged();
         }
 
         public bool CanDecreaseCompetence(Competences? competence)
@@ -432,16 +445,14 @@ namespace Alien.UI.ViewModels
             }
 
             CompetencePoints++;
-            IncreaseCompetenceCommand.RaiseCanExecuteChanged();
-            DecreaseCompetenceCommand.RaiseCanExecuteChanged();
         }
 
 
         public void NavigateBack()
         {
-            if (_regionNavigationService.Journal.CanGoBack)
+            if (_navigationManager.CanNavigateBack())
             {
-                _regionNavigationService.Journal.GoBack();
+                _navigationManager.NavigateBack();
             }
         }
 
@@ -481,64 +492,58 @@ namespace Alien.UI.ViewModels
 
                 if (await _characterService.CreateCharacter(CharacterCreation, _authenticator.User.Id))
                 {
-                    _regionNavigationService.Journal.Clear();
-                    Navigate(ViewsEnum.CharactersView);
+                    _navigationManager.NavigationStack.Reset();
+                    _navigationManager.Navigate(nameof(CharactersView));
                 }
             }
         }
 
-        public override void OnNavigatedFrom(NavigationContext navigationContext)
-        {
-            base.OnNavigatedFrom(navigationContext);
+        //public override void OnNavigatedFrom(NavigationContext navigationContext)
+        //{
+        //    base.OnNavigatedFrom(navigationContext);
 
-            //_characterService.DeleteCharacter(CharacterCreation.IdentificationStamp);   
-        }
+        //    //_characterService.DeleteCharacter(CharacterCreation.IdentificationStamp);   
+        //}
 
-        public override void OnNavigatedTo(NavigationContext navigationContext)
-        {
-            base.OnNavigatedTo(navigationContext);
+        //public override void OnNavigatedTo(NavigationContext navigationContext)
+        //{
+        //    base.OnNavigatedTo(navigationContext);
 
-            CharacterCreation = navigationContext.Parameters.GetValue<CharacterCreationDto>(Global.CHARACTER_CREATION);
+        //    CharacterCreation = navigationContext.Parameters.GetValue<CharacterCreationDto>(Global.CHARACTER_CREATION);
 
-            PublicCharacter.Objectives = CharacterCreation.Objectives;
-            PublicCharacter.Friends = CharacterCreation.Friends;
-            PublicCharacter.Rivals = CharacterCreation.Rivals;
+        //    PublicCharacter.Objectives = CharacterCreation.Objectives;
+        //    PublicCharacter.Friends = CharacterCreation.Friends;
+        //    PublicCharacter.Rivals = CharacterCreation.Rivals;
 
 
-            Race = (RaceEnum)Enum.Parse(typeof(RaceEnum), CharacterCreation.Race);
+        //    Race = (RaceEnum)Enum.Parse(typeof(RaceEnum), CharacterCreation.Race);
 
-            PublicCharacter.Strength = CharacterCreation.Strength;
-            PublicCharacter.Agility = CharacterCreation.Agility;
-            PublicCharacter.Mind = CharacterCreation.Mind;
-            PublicCharacter.Empathy = CharacterCreation.Empathy;
+        //    PublicCharacter.Strength = CharacterCreation.Strength;
+        //    PublicCharacter.Agility = CharacterCreation.Agility;
+        //    PublicCharacter.Mind = CharacterCreation.Mind;
+        //    PublicCharacter.Empathy = CharacterCreation.Empathy;
 
-            PublicCharacter.HeavyMachines = CharacterCreation.HeavyMachines;
-            PublicCharacter.Stamina = CharacterCreation.Stamina;
-            PublicCharacter.CloseCombat = CharacterCreation.CloseCombat;
-            PublicCharacter.Mobility = CharacterCreation.Mobility;
-            PublicCharacter.Piloting = CharacterCreation.Piloting;
-            PublicCharacter.RangeCombat = CharacterCreation.RangedCombat;
-            PublicCharacter.Observation = CharacterCreation.Observation;
-            PublicCharacter.Comtech = CharacterCreation.Comtech;
-            PublicCharacter.Survival = CharacterCreation.Survival;
-            PublicCharacter.Manipulation = CharacterCreation.Manipulation;
-            PublicCharacter.Commandment = CharacterCreation.Commandment;
-            PublicCharacter.MedicalCare = CharacterCreation.MedicalCare;
+        //    PublicCharacter.HeavyMachines = CharacterCreation.HeavyMachines;
+        //    PublicCharacter.Stamina = CharacterCreation.Stamina;
+        //    PublicCharacter.CloseCombat = CharacterCreation.CloseCombat;
+        //    PublicCharacter.Mobility = CharacterCreation.Mobility;
+        //    PublicCharacter.Piloting = CharacterCreation.Piloting;
+        //    PublicCharacter.RangeCombat = CharacterCreation.RangedCombat;
+        //    PublicCharacter.Observation = CharacterCreation.Observation;
+        //    PublicCharacter.Comtech = CharacterCreation.Comtech;
+        //    PublicCharacter.Survival = CharacterCreation.Survival;
+        //    PublicCharacter.Manipulation = CharacterCreation.Manipulation;
+        //    PublicCharacter.Commandment = CharacterCreation.Commandment;
+        //    PublicCharacter.MedicalCare = CharacterCreation.MedicalCare;
 
-            SelectedAttributes = new(CharacterCreation.SelectedAttributes);
+        //    SelectedAttributes = new(CharacterCreation.SelectedAttributes);
 
-            IncreaseAttributeCommand?.RaiseCanExecuteChanged();
-            DecreaseAttributeCommand?.RaiseCanExecuteChanged();
-            SelectAttributeCommand?.RaiseCanExecuteChanged();
-            IncreaseCompetenceCommand?.RaiseCanExecuteChanged();
-            DecreaseCompetenceCommand?.RaiseCanExecuteChanged();
-        }
-
-        public bool PersistInHistory()
-        {
-            return true;
-        }
-
+        //    IncreaseAttributeCommand?.RaiseCanExecuteChanged();
+        //    DecreaseAttributeCommand?.RaiseCanExecuteChanged();
+        //    SelectAttributeCommand?.RaiseCanExecuteChanged();
+        //    IncreaseCompetenceCommand?.RaiseCanExecuteChanged();
+        //    DecreaseCompetenceCommand?.RaiseCanExecuteChanged();
+        //}
         private bool IsKeyAttribute(Attributes? attribute)
         {
             if (CharacterCreation is null) return false;
@@ -553,7 +558,7 @@ namespace Alien.UI.ViewModels
             if (CharacterCreation is null || competence is null) return false;
             IEnumerable<string> characterCompetences = _characterService.GetCareer(CharacterCreation.Career).Competences;
             if (characterCompetences.Count() <= 0) return false;
-            string competenceString = Global.Competences.GetValueOrDefault(competence);
+            string? competenceString = Global.Competences.GetValueOrDefault(competence);
             if (string.IsNullOrEmpty(competenceString)) return false;
 
             return characterCompetences.Contains(competenceString);

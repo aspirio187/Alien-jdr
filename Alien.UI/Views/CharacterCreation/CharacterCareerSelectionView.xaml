@@ -1,15 +1,18 @@
-﻿<ContentControl xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"  x:Class="Alien.UI.Views.CharacterCareerSelectionView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:prism="http://prismlibrary.com/"
-             xmlns:iconPack="http://metro.mahapps.com/winfx/xaml/iconpacks"
-             xmlns:local="clr-namespace:Alien.UI.Views"
-             xmlns:global="clr-namespace:Alien.UI.Helpers"
-             prism:ViewModelLocator.AutoWireViewModel="True"
-             mc:Ignorable="d" 
-             d:DesignHeight="700" d:DesignWidth="800">
+﻿<ContentControl
+    x:Class="Alien.UI.Views.CharacterCareerSelectionView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:global="clr-namespace:Alien.UI.Helpers"
+    xmlns:iconPack="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:local="clr-namespace:Alien.UI.Views"
+    xmlns:locator="clr-namespace:Alien.UI.Locators"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="700"
+    d:DesignWidth="800"
+    locator:ViewModelLocator.AutoConnectedViewModelProperty="True"
+    mc:Ignorable="d">
 
     <Grid Background="Transparent">
 
@@ -19,31 +22,42 @@
         </Grid.Resources>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Label Content="Carrieres" 
-                   Style="{StaticResource CustomFont}"
-                   Foreground="White"
-                   FontSize="40"/>
+        <StackPanel
+            Grid.Row="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+            <Label
+                Content="Carrieres"
+                FontSize="40"
+                Foreground="White"
+                Style="{StaticResource CustomFont}" />
         </StackPanel>
 
-        <ListBox Grid.Row="1" Background="Transparent" ItemsSource="{Binding Careers}" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                 SelectedItem="{Binding SelectedCareer}">
+        <ListBox
+            Grid.Row="1"
+            Background="Transparent"
+            ItemsSource="{Binding Careers}"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+            SelectedItem="{Binding SelectedCareer}">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="{x:Type ListBoxItem}">
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type ListBoxItem}">
 
-                                <RadioButton Margin="5" MaxWidth="400" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsSelected}">
+                                <RadioButton
+                                    MaxWidth="400"
+                                    Margin="5"
+                                    IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsSelected}">
                                     <Border BorderBrush="White" BorderThickness="1">
-                                        <Image Stretch="Fill" Source="{Binding ImagePath, Converter={StaticResource ImageConverter}}" />
+                                        <Image Source="{Binding ImagePath, Converter={StaticResource ImageConverter}}" Stretch="Fill" />
                                     </Border>
                                 </RadioButton>
                             </ControlTemplate>
@@ -54,35 +68,62 @@
 
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal" VerticalAlignment="Stretch" />
+                    <WrapPanel VerticalAlignment="Stretch" Orientation="Horizontal" />
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>
 
         <StackPanel Grid.Row="2" VerticalAlignment="Center">
 
-            <TextBlock Text="race" Style="{StaticResource CustomFont}" HorizontalAlignment="Center" Foreground="White" FontSize="40" Margin="0,0,0,0"/>
+            <TextBlock
+                Margin="0,0,0,0"
+                HorizontalAlignment="Center"
+                FontSize="40"
+                Foreground="White"
+                Style="{StaticResource CustomFont}"
+                Text="race" />
 
-            <StackPanel Margin="0,0,0,0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel
+                Margin="0,0,0,0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
 
-                <RadioButton IsChecked="{Binding SelectedRace, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static global:RaceEnum.Humain}}" Margin="10">
+                <RadioButton Margin="10" IsChecked="{Binding SelectedRace, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static global:RaceEnum.Humain}}">
 
-                    <iconPack:PackIconMaterial Kind="Human" Foreground="White"
-                                            VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="100" />
-                    
+                    <iconPack:PackIconMaterial
+                        Width="100"
+                        Height="100"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Foreground="White"
+                        Kind="Human" />
+
                 </RadioButton>
 
-                <RadioButton IsChecked="{Binding SelectedRace, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static global:RaceEnum.Android}}" Margin="10" >
+                <RadioButton Margin="10" IsChecked="{Binding SelectedRace, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static global:RaceEnum.Android}}">
 
-                    <iconPack:PackIconMaterial Kind="Robot" Foreground="White"
-                                            VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="100"/>
-                  
+                    <iconPack:PackIconMaterial
+                        Width="100"
+                        Height="100"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Foreground="White"
+                        Kind="Robot" />
+
                 </RadioButton>
             </StackPanel>
         </StackPanel>
 
         <StackPanel Grid.Row="4" Margin="30">
-            <Button Width="200" Height="40" Content="Suivant" Style="{StaticResource CustomFont}" HorizontalAlignment="Right" Command="{Binding NavigateNextPageCommand}" FontSize="20" />
+            <Button
+                Width="200"
+                Height="40"
+                HorizontalAlignment="Right"
+                Command="{Binding NavigateNextPageCommand}"
+                Content="Suivant"
+                FontSize="20"
+                Style="{StaticResource CustomFont}" />
         </StackPanel>
 
     </Grid>

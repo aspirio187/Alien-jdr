@@ -1,13 +1,13 @@
 ﻿using Alien.BLL.Dtos;
 using Alien.BLL.Interfaces;
 using Alien.Socket.Models;
+using Alien.UI.Commands;
 using Alien.UI.Helpers;
+using Alien.UI.Managers;
 using Alien.UI.Models;
 using Alien.UI.States;
 using AutoMapper;
 using Newtonsoft.Json;
-using Prism.Commands;
-using Prism.Regions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,16 +19,18 @@ using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Input;
 
 namespace Alien.UI.ViewModels
 {
-    public class LobbyCreationViewModel : ViewModelBase, IJournalAware
+    public class LobbyCreationViewModel : ViewModelBase
     {
         private readonly ILobbyService _lobbyService;
         private readonly ICharacterService _characterService;
         private readonly IUserService _userService;
         private readonly INotificationService _notificationService;
         private readonly ILobbyPlayerService _lobbyPlayerService;
+        private readonly NavigationManager _navigationManager;
 
         public LobbyModel Lobby { get; set; }
         public SocketRouter SocketRouteur { get; set; } = new SocketRouter();
@@ -38,7 +40,11 @@ namespace Alien.UI.ViewModels
         public bool IsCreator
         {
             get { return _isCreator; }
-            set { SetProperty(ref _isCreator, value); }
+            set
+            {
+                _isCreator = value;
+                NotifyPropertyChanged();
+            }
         }
 
         public Guid UserId
@@ -53,20 +59,22 @@ namespace Alien.UI.ViewModels
             get { return _selectedGameMode; }
             set
             {
-                SetProperty(ref _selectedGameMode, value);
+                _selectedGameMode = value;
+                NotifyPropertyChanged();
                 Lobby.Mode = value.ToString();
                 UpdateLobbyAsync();
             }
         }
 
-        private string _lobbyName = $"NOUVELLE PARTIE { new Random().Next(1, 250) }";
+        private string _lobbyName = $"NOUVELLE PARTIE {new Random().Next(1, 250)}";
 
         public string LobbyName
         {
             get { return _lobbyName; }
             set
             {
-                SetProperty(ref _lobbyName, value);
+                _lobbyName = value;
+                NotifyPropertyChanged();
                 Lobby.Name = value;
                 UpdateLobbyAsync();
             }
@@ -79,7 +87,8 @@ namespace Alien.UI.ViewModels
             get { return _maximumPlayers; }
             set
             {
-                SetProperty(ref _maximumPlayers, value);
+                _maximumPlayers = value;
+                NotifyPropertyChanged();
                 Lobby.MaximumPlayers = int.Parse(value);
                 UpdateLobbyAsync();
             }
@@ -92,7 +101,11 @@ namespace Alien.UI.ViewModels
         public ObservableCollection<LobbyPlayerModel> LobbyPlayers
         {
             get { return _lobbyPlayers; }
-            set { SetProperty(ref _lobbyPlayers, value); }
+            set
+            {
+                _lobbyPlayers = value;
+                NotifyPropertyChanged();
+            }
         }
 
         private ObservableCollection<LobbyUserModel> _availableUsers = new();
@@ -100,7 +113,11 @@ namespace Alien.UI.ViewModels
         public ObservableCollection<LobbyUserModel> AvailableUsers
         {
             get { return _availableUsers; }
-            set { SetProperty(ref _availableUsers, value); }
+            set
+            {
+                _availableUsers = value;
+                NotifyPropertyChanged();
+            }
         }
 
         private LobbyUserModel _selectedUser;
@@ -108,7 +125,11 @@ namespace Alien.UI.ViewModels
         public LobbyUserModel SelectedUser
         {
             get { return _selectedUser; }
-            set { SetProperty(ref _selectedUser, value); }
+            set
+            {
+                _selectedUser = value;
+                NotifyPropertyChanged();
+            }
         }
 
         private ObservableCollection<LobbyCharacterModel> _availableCharacters = new();
@@ -116,7 +137,11 @@ namespace Alien.UI.ViewModels
         public ObservableCollection<LobbyCharacterModel> AvailableCharacters
         {
             get { return _availableCharacters; }
-            set { SetProperty(ref _availableCharacters, value); }
+            set
+            {
+                _availableCharacters = value;
+                NotifyPropertyChanged();
+            }
         }
 
         private LobbyCharacterModel _selectedNpcCharacter;
@@ -124,38 +149,69 @@ namespace Alien.UI.ViewModels
         public LobbyCharacterModel SelectedNpcCharacter
         {
             get { return _selectedNpcCharacter; }
-            set { SetProperty(ref _selectedNpcCharacter, value); }
+            set
+            {
+                _selectedNpcCharacter = value;
+                NotifyPropertyChanged();
+            }
         }
 
-        private DelegateCommand _loadPlayersCommand;
-        private DelegateCommand _invitePlayerCommand;
-        private DelegateCommand _startGameCommand;
-        private DelegateCommand _loadCharactersCommand;
-        private DelegateCommand _addNpcCharacterCommand;
-        private DelegateCommand _declareArrivalCommand;
-
-        public DelegateCommand LoadPlayersCommand => _loadPlayersCommand ??= new DelegateCommand(LoadPlayers);
-        public DelegateCommand InvitePlayerCommand => _invitePlayerCommand ??= new DelegateCommand(InvitePlayer);
-        public DelegateCommand LoadCharactersCommand => _loadCharactersCommand ??= new DelegateCommand(LoadCharacters);
-        public DelegateCommand AddNpcCharacterCommand => _addNpcCharacterCommand ??= new DelegateCommand(AddNpcCharacter);
-        public DelegateCommand DeclareArrivalCommand => _declareArrivalCommand ??= new DelegateCommand(async () => await DeclareArrival());
-        public DelegateCommand StartGameCommand => _startGameCommand ??= new DelegateCommand(StartGame);
+        public ICommand LoadPlayersCommand { get; private set; }
+        public ICommand InvitePlayerCommand { get; private set; }
+        public ICommand LoadCharactersCommand { get; private set; }
+        public ICommand AddNpcCharacterCommand { get; private set; }
+        public ICommand DeclareArrivalCommand { get; private set; }
+        public ICommand StartGameCommand { get; private set; }
 
 
-        public LobbyCreationViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, IMapper mapper, ILobbyService lobbyService,
-            ICharacterService characterService, IUserService userService, INotificationService notificationService, ILobbyPlayerService lobbyPlayerService)
-            : base(regionNavigationService, authenticator, mapper)
+        public LobbyCreationViewModel(IAuthenticator authenticator, IMapper mapper, ILobbyService lobbyService,
+            ICharacterService characterService, IUserService userService, INotificationService notificationService,
+            ILobbyPlayerService lobbyPlayerService, NavigationManager navigationManager)
+            : base(authenticator, mapper)
         {
-            _lobbyService = lobbyService ??
+            if (lobbyService is null)
+            {
                 throw new ArgumentNullException(nameof(lobbyService));
-            _characterService = characterService ??
+            }
+
+            if (characterService is null)
+            {
                 throw new ArgumentNullException(nameof(characterService));
-            _userService = userService ??
+            }
+
+            if (userService is null)
+            {
                 throw new ArgumentNullException(nameof(userService));
-            _notificationService = notificationService ??
+            }
+
+            if (notificationService is null)
+            {
                 throw new ArgumentNullException(nameof(notificationService));
-            _lobbyPlayerService = lobbyPlayerService ??
+            }
+
+            if (lobbyPlayerService is null)
+            {
                 throw new ArgumentNullException(nameof(lobbyPlayerService));
+            }
+
+            if (navigationManager is null)
+            {
+                throw new ArgumentNullException(nameof(navigationManager));
+            }
+
+            _lobbyService = lobbyService;
+            _characterService = characterService;
+            _userService = userService;
+            _notificationService = notificationService;
+            _lobbyPlayerService = lobbyPlayerService;
+            _navigationManager = navigationManager;
+
+            LoadPlayersCommand = new RelayCommand(LoadPlayers);
+            InvitePlayerCommand = new RelayCommand(InvitePlayer);
+            LoadCharactersCommand = new RelayCommand(LoadCharacters);
+            AddNpcCharacterCommand = new RelayCommand(AddNpcCharacter);
+            DeclareArrivalCommand = new RelayCommand(async () => await DeclareArrival());
+            StartGameCommand = new RelayCommand(StartGame);
 
             BindingOperations.EnableCollectionSynchronization(_lobbyPlayers, Lock);
         }
@@ -219,7 +275,7 @@ namespace Alien.UI.ViewModels
                 { Global.LOBBY_ID, Lobby.Id },
             };
 
-            if(IsCreator)
+            if (IsCreator)
             {
                 // Navigue vers GmInGameView
             }
@@ -229,30 +285,30 @@ namespace Alien.UI.ViewModels
             }
         }
 
-        public override void OnNavigatedFrom(NavigationContext navigationContext)
-        {
-            base.OnNavigatedFrom(navigationContext);
+        //public override void OnNavigatedFrom(NavigationContext navigationContext)
+        //{
+        //    base.OnNavigatedFrom(navigationContext);
 
-            LobbyPlayerModel player = LobbyPlayers.FirstOrDefault(lb => lb.UserId == _authenticator.User.Id);
+        //    LobbyPlayerModel player = LobbyPlayers.FirstOrDefault(lb => lb.UserId == _authenticator.User.Id);
 
-            if (player is not null)
-            {
-                LobbyPlayers.Remove(player);
-            }
-        }
+        //    if (player is not null)
+        //    {
+        //        LobbyPlayers.Remove(player);
+        //    }
+        //}
 
-        public override void OnNavigatedTo(NavigationContext navigationContext)
-        {
-            base.OnNavigatedTo(navigationContext);
+        //public override void OnNavigatedTo(NavigationContext navigationContext)
+        //{
+        //    base.OnNavigatedTo(navigationContext);
 
-            int? lobbyId = navigationContext.Parameters.GetValue<int?>(Global.LOBBY_ID);
+        //    int? lobbyId = navigationContext.Parameters.GetValue<int?>(Global.LOBBY_ID);
 
-            if (!InitializeLobby(lobbyId))
-            {
-                Navigate(ViewsEnum.LobbiesView);
-                _regionNavigationService.Journal.Clear();
-            }
-        }
+        //    if (!InitializeLobby(lobbyId))
+        //    {
+        //        Navigate(ViewsEnum.LobbiesView);
+        //        _regionNavigationService.Journal.Clear();
+        //    }
+        //}
 
         #region Host Socket functions
         public bool PlayerArrived(dynamic cli, Message args)
@@ -495,11 +551,6 @@ namespace Alien.UI.ViewModels
             }
         }
         #endregion
-
-        public bool PersistInHistory()
-        {
-            return false;
-        }
     }
 }
 

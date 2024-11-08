@@ -1,63 +1,80 @@
 ﻿using Alien.BLL.Dtos;
 using Alien.BLL.Interfaces;
+using Alien.UI.Commands;
 using Alien.UI.Helpers;
+using Alien.UI.Managers;
 using Alien.UI.States;
+using Alien.UI.Views;
 using AutoMapper;
-using Prism.Commands;
-using Prism.Regions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Alien.UI.ViewModels
 {
-    public class CharacterTalentSelectionViewModel : ViewModelBase, IJournalAware
+    public class CharacterTalentSelectionViewModel : ViewModelBase
     {
         private readonly ICharacterService _characterService;
+        private readonly NavigationManager _navigationManager;
 
-        public CharacterCreationDto CharacterCreation { get; private set; }
+        public CharacterCreationDto CharacterCreation { get; private set; } = new();
 
-        private ObservableCollection<TalentFromJsonDto> _talents;
+        private ObservableCollection<TalentFromJsonDto> _talents = new();
 
         public ObservableCollection<TalentFromJsonDto> Talents
         {
             get { return _talents; }
-            set { SetProperty(ref _talents, value); }
+            set
+            {
+                _talents = value;
+                NotifyPropertyChanged();
+            }
         }
 
-        private TalentFromJsonDto _selectedTalent;
+        private TalentFromJsonDto _selectedTalent = new();
 
         public TalentFromJsonDto SelectedTalent
         {
             get { return _selectedTalent; }
             set
             {
-                SetProperty(ref _selectedTalent, value);
-                NavigateNextPageCommand.RaiseCanExecuteChanged();
+                _selectedTalent = value;
+                NotifyPropertyChanged();
             }
         }
 
-        private DelegateCommand _navigateBackCommand;
-        private DelegateCommand _navigateNextPageCommand;
+        public ICommand NavigateBackCommand { get; private set; }
+        public ICommand NavigateNextPageCommand { get; private set; }
 
-        public DelegateCommand NavigateBackCommand => _navigateBackCommand ??= new(NavigateBack);
-        public DelegateCommand NavigateNextPageCommand => _navigateNextPageCommand ??= new DelegateCommand(NavigateNextPage, CanNavigateNextPage);
-
-        public CharacterTalentSelectionViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, IMapper mapper, ICharacterService characterService)
-            : base(regionNavigationService, authenticator, mapper)
+        public CharacterTalentSelectionViewModel(IAuthenticator authenticator, IMapper mapper, ICharacterService characterService, NavigationManager navigationManager)
+            : base(authenticator, mapper)
         {
-            _characterService = characterService ??
+            if (characterService is null)
+            {
                 throw new ArgumentNullException(nameof(characterService));
+            }
+
+            if (navigationManager is null)
+            {
+                throw new ArgumentNullException(nameof(navigationManager));
+            }
+
+            _characterService = characterService;
+            _navigationManager = navigationManager;
+
+            NavigateBackCommand = new RelayCommand(NavigateBack);
+            NavigateNextPageCommand = new RelayCommand(NavigateNextPage);
         }
 
         public void NavigateBack()
         {
-            if (_regionNavigationService.Journal.CanGoBack)
+            if (_navigationManager.CanNavigateBack())
             {
-                _regionNavigationService.Journal.GoBack();
+                _navigationManager.NavigateBack();
             }
         }
 
@@ -75,20 +92,15 @@ namespace Alien.UI.ViewModels
                 { Global.CHARACTER_CREATION, CharacterCreation }
             };
 
-            Navigate(ViewsEnum.CharacterAttributesCompetencesView, parameters);
+            _navigationManager.Navigate(nameof(CharacterAttributesCompetencesView), parameters: parameters);
         }
 
-        public override void OnNavigatedTo(NavigationContext navigationContext)
-        {
-            base.OnNavigatedTo(navigationContext);
+        //public override void OnNavigatedTo(NavigationContext navigationContext)
+        //{
+        //    base.OnNavigatedTo(navigationContext);
 
-            CharacterCreation = navigationContext.Parameters.GetValue<CharacterCreationDto>(Global.CHARACTER_CREATION);
-            Talents = new(_characterService.GetTalentsFromJson(CharacterCreation.Career));
-        }
-
-        public bool PersistInHistory()
-        {
-            return true;
-        }
+        //    CharacterCreation = navigationContext.Parameters.GetValue<CharacterCreationDto>(Global.CHARACTER_CREATION);
+        //    Talents = new(_characterService.GetTalentsFromJson(CharacterCreation.Career));
+        //}
     }
 }

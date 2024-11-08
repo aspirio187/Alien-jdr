@@ -1,64 +1,65 @@
-﻿using Alien.UI.Models;
+﻿using Alien.UI.Commands;
+using Alien.UI.Managers;
+using Alien.UI.Models;
 using Alien.UI.States;
-using Prism.Commands;
-using Prism.Mvvm;
-using Prism.Services.Dialogs;
+using Alien.UI.Views;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Alien.UI.ViewModels
 {
-    public class LoginViewModel : BindableBase, IDialogAware
+    public class LoginViewModel : ViewModelBase
     {
-        private readonly IAuthenticator _authenticator;
-        private readonly IDialogService _dialogService;
+        private readonly NavigationManager _navigationManager;
 
-        private DelegateCommand _connectionCommand;
-
-        public DelegateCommand ConnectionCommand => _connectionCommand ??= new DelegateCommand(async () => await SignIn());
-
-        private DelegateCommand _navigateRegistrationCommand;
-
-        public DelegateCommand NavigateRegistrationCommand => _navigateRegistrationCommand ??= new DelegateCommand(NavigateRegister);
+        public ICommand ConnectionCommand { get; private set; }
+        public ICommand NavigateRegistrationCommand { get; private set; }
 
         private LoginModel _login = new();
 
         public LoginModel Login
         {
             get { return _login; }
-            set { SetProperty(ref _login, value); }
+            set
+            {
+                _login = value;
+                NotifyPropertyChanged();
+            }
         }
 
-        public LoginViewModel(IAuthenticator authenticator, IDialogService dialogService)
+        public LoginViewModel(IAuthenticator authenticator, IMapper mapper, NavigationManager navigationManager)
+            : base(authenticator, mapper)
         {
-            _authenticator = authenticator;
-            _dialogService = dialogService;
+            if (navigationManager is null)
+            {
+                throw new ArgumentNullException(nameof(navigationManager));
+            }
+
+            _navigationManager = navigationManager;
+
+            ConnectionCommand = new RelayCommand(async () => await SignIn());
+            NavigateRegistrationCommand = new RelayCommand(NavigateRegister);
         }
 
         public string Title => "Connexion";
 
-        public event Action<IDialogResult> RequestClose;
-
         public async Task SignIn()
         {
-            if(await _authenticator.LogIn(Login))
+            if (await _authenticator.LogIn(Login))
             {
-                RaiseRequestClose(new DialogResult(ButtonResult.OK));
+                //RaiseRequestClose(new DialogResult(ButtonResult.OK));
             }
         }
 
-        public void RaiseRequestClose(IDialogResult dialogResult)
-        {
-            RequestClose?.Invoke(dialogResult);
-        }
 
         public void CloseDialog(string parameter)
         {
-            ButtonResult buttonResult = ButtonResult.None;
-            RaiseRequestClose(new DialogResult(buttonResult));
+
         }
 
         public bool CanCloseDialog()
@@ -71,14 +72,14 @@ namespace Alien.UI.ViewModels
 
         }
 
-        public void OnDialogOpened(IDialogParameters parameters)
-        {
+        //public void OnDialogOpened(IDialogParameters parameters)
+        //{
 
-        }
+        //}
 
         public void NavigateRegister()
         {
-            _dialogService.ShowDialog("RegistrationView");
+            _navigationManager.OpenDialog(nameof(RegistrationView), this);
         }
     }
 }

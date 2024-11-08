@@ -1,6 +1,5 @@
 ﻿using Alien.UI.States;
 using AutoMapper;
-using Prism.Regions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +10,8 @@ namespace Alien.UI.ViewModels
 {
     public class InGameViewModel : ViewModelBase
     {
-        public InGameViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, IMapper mapper)
-            : base(regionNavigationService, authenticator, mapper)
+        public InGameViewModel(IAuthenticator authenticator, IMapper mapper)
+            : base(authenticator, mapper)
         {
 
         }

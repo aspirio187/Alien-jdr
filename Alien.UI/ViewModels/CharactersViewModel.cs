@@ -1,9 +1,10 @@
 ﻿using Alien.BLL.Dtos;
 using Alien.BLL.Interfaces;
+using Alien.UI.Commands;
+using Alien.UI.Managers;
 using Alien.UI.States;
+using Alien.UI.Views;
 using AutoMapper;
-using Prism.Commands;
-using Prism.Regions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,36 +12,58 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Alien.UI.ViewModels
 {
     public class CharactersViewModel : ViewModelBase
     {
         private readonly ICharacterService _characterService;
+        private readonly NavigationManager _navigationManager;
 
-        private DelegateCommand _navigateCreateCharacterCommand;
-
-        //public ObservableCollection<CharacterMiniatureDto> CharacterMiniatures { get; set; }
-        private ObservableCollection<CharacterMiniatureDto> _characterMiniatures;
+        private ObservableCollection<CharacterMiniatureDto> _characterMiniatures = new();
 
         public ObservableCollection<CharacterMiniatureDto> CharacterMiniatures
         {
             get { return _characterMiniatures; }
-            set {SetProperty(ref _characterMiniatures, value); }
+            set
+            {
+                _characterMiniatures = value;
+                NotifyPropertyChanged();
+            }
         }
 
 
-        public override DelegateCommand LoadCommand => _loadCommand ??= new(async () => await LoadAsync());
-        public DelegateCommand NavigateCreateCharacterCommand => _navigateCreateCharacterCommand ??= new DelegateCommand(NavigateCreateCharacter);
+        public ICommand LoadCommand { get; private set; }
+        public ICommand NavigateCreateCharacterCommand { get; private set; }
 
-        public CharactersViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, IMapper mapper, ICharacterService characterService)
-            : base(regionNavigationService, authenticator, mapper)
+        public CharactersViewModel(IAuthenticator authenticator, IMapper mapper, ICharacterService characterService, NavigationManager navigationManager)
+            : base(authenticator, mapper)
         {
-            _characterService = characterService ??
+            if (characterService is null)
+            {
                 throw new ArgumentNullException(nameof(characterService));
+            }
+
+            if (navigationManager is null)
+            {
+                throw new ArgumentNullException(nameof(navigationManager));
+            }
+
+            _characterService = characterService;
+            _navigationManager = navigationManager;
+
+            LoadCommand = new RelayCommand(async () => await LoadAsync());
+            NavigateCreateCharacterCommand = new RelayCommand(NavigateCreateCharacter);
         }
 
-        protected override async Task LoadAsync()
+        public override void OnInit()
+        {
+            base.OnInit();
+        }
+
+        // TODO: Move to OnInit
+        public async Task LoadAsync()
         {
             try
             {
@@ -54,7 +77,7 @@ namespace Alien.UI.ViewModels
 
         public void NavigateCreateCharacter()
         {
-            Navigate(Helpers.ViewsEnum.CharacterCareerSelectionView);
+            _navigationManager.Navigate(nameof(CharacterCareerSelectionView));
         }
     }
 }

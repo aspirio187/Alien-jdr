@@ -9,39 +9,56 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Alien.UI.Commands;
+using Alien.UI.Managers;
+using Alien.UI.Views;
 
 namespace Alien.UI.ViewModels
 {
     public class CharacterInfosCreationViewModel : ViewModelBase
     {
-        public CharacterCreationDto CharacterCreation { get; private set; }
+        private readonly NavigationManager _navigationManager;
+        public CharacterCreationDto? CharacterCreation { get; private set; }
 
         private CharacterInfosCreationModel _characterInfos = new();
 
         public CharacterInfosCreationModel CharacterInfos
         {
             get { return _characterInfos; }
-            set { SetProperty(ref _characterInfos, value); }
+            set
+            {
+                _characterInfos = value;
+                NotifyPropertyChanged();
+            }
         }
 
-        private DelegateCommand _navigateBackCommand;
-        private DelegateCommand _navigateNextPageCommand;
-        private DelegateCommand _addItemCommand;
-        private DelegateCommand _removeItemCommand;
-        private DelegateCommand _addEquipmentCommand;
-        private DelegateCommand _removeEquipmentCommand;
+        public ICommand NavigateBackCommand { get; private set; }
 
-        public DelegateCommand NavigateBackCommand => _navigateBackCommand ??= new DelegateCommand(NavigateBack);
-        public DelegateCommand NavigateNextPageCommand => _navigateNextPageCommand ??= new DelegateCommand(NavigateNextPage);
-        public DelegateCommand AddItemCommand => _addItemCommand ??= new(AddItem);
-        public DelegateCommand RemoveItemCommand => _removeItemCommand ??= new(RemoveItem);
-        public DelegateCommand AddEquipmentCommand => _addEquipmentCommand ??= new(AddEquipment);
-        public DelegateCommand RemoveEquipmentCommand => _removeEquipmentCommand ??= new(RemoveEquipment);
+        public ICommand NavigateNextPageCommand { get; private set; }
 
-        public CharacterInfosCreationViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, IMapper mapper)
-            : base(regionNavigationService, authenticator, mapper)
+        public ICommand AddItemCommand { get; private set; }
+        public ICommand RemoveItemCommand { get; private set; }
+        public ICommand AddEquipmentCommand { get; private set; }
+        public ICommand RemoveEquipmentCommand { get; private set; }
+
+        public CharacterInfosCreationViewModel(IAuthenticator authenticator, IMapper mapper,
+            NavigationManager navigationManager)
+            : base(authenticator, mapper)
         {
+            if (navigationManager is null)
+            {
+                throw new ArgumentNullException(nameof(navigationManager));
+            }
 
+            _navigationManager = navigationManager;
+
+            NavigateBackCommand = new RelayCommand(NavigateBack);
+            NavigateNextPageCommand = new RelayCommand(NavigateNextPage);
+            AddItemCommand = new RelayCommand(AddItem);
+            RemoveItemCommand = new RelayCommand(RemoveItem);
+            AddEquipmentCommand = new RelayCommand(AddEquipment);
+            RemoveEquipmentCommand = new RelayCommand(RemoveEquipment);
         }
 
         public void AddItem()
@@ -80,18 +97,18 @@ namespace Alien.UI.ViewModels
             }
         }
 
-        public override void OnNavigatedTo(NavigationContext navigationContext)
-        {
-            base.OnNavigatedTo(navigationContext);
-
-            CharacterCreation = navigationContext.Parameters.GetValue<CharacterCreationDto>(Global.CHARACTER_CREATION);
-        }
+        // public override void OnNavigatedTo(NavigationContext navigationContext)
+        // {
+        //     base.OnNavigatedTo(navigationContext);
+        //
+        //     CharacterCreation = navigationContext.Parameters.GetValue<CharacterCreationDto>(Global.CHARACTER_CREATION);
+        // }
 
         public void NavigateBack()
         {
-            if (_regionNavigationService.Journal.CanGoBack)
+            if (_navigationManager.CanNavigateBack())
             {
-                _regionNavigationService.Journal.GoBack();
+                _navigationManager.NavigateBack();
             }
         }
 
@@ -132,13 +149,8 @@ namespace Alien.UI.ViewModels
                     { Global.CHARACTER_CREATION, CharacterCreation }
                 };
 
-                Navigate(ViewsEnum.CharacterTalentSelectionView, parameters);
+                _navigationManager.Navigate(nameof(CharacterTalentSelectionView), parameters: parameters);
             }
-        }
-
-        public bool PersistInHistory()
-        {
-            return true;
         }
     }
 }

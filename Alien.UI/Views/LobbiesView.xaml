@@ -7,7 +7,6 @@
     xmlns:local="clr-namespace:Alien.UI.Views"
     xmlns:locator="clr-namespace:Alien.UI.Locators"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:prism="http://prismlibrary.com/"
     d:DesignHeight="450"
     locator:ViewModelLocator.AutoConnectedViewModelProperty="True"
     Background="Transparent"
@@ -89,7 +88,8 @@
 
                                         <behavior:EventTrigger EventName="Loaded">
 
-                                            <behavior:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.CheckChangesCommand}" />
+                                            <behavior:InvokeCommandAction
+                                                Command="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.CheckChangesCommand}" />
                                         </behavior:EventTrigger>
                                     </behavior:Interaction.Triggers>
                                 </Button>
@@ -126,7 +126,7 @@
 
         <behavior:Interaction.Triggers>
             <behavior:EventTrigger EventName="Loaded">
-                <prism:InvokeCommandAction Command="{Binding LoadCommand}" />
+                <behavior:InvokeCommandAction Command="{Binding LoadCommand}" />
             </behavior:EventTrigger>
         </behavior:Interaction.Triggers>
     </Grid>

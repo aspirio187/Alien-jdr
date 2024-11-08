@@ -1,10 +1,11 @@
 ﻿using Alien.BLL.Dtos;
 using Alien.BLL.Interfaces;
+using Alien.UI.Commands;
 using Alien.UI.Helpers;
+using Alien.UI.Managers;
 using Alien.UI.States;
+using Alien.UI.Views;
 using AutoMapper;
-using Prism.Commands;
-using Prism.Regions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,6 +13,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Alien.UI.ViewModels
 {
@@ -19,43 +21,62 @@ namespace Alien.UI.ViewModels
     {
         private readonly ILobbyService _lobbyService;
         private readonly IUserService _userService;
+        private readonly NavigationManager _navigationManager;
 
         //public ObservableCollection<LobbyDto> Lobbies { get; set; }
-        private ObservableCollection<LobbyDto> _lobbies;
+        private ObservableCollection<LobbyDto> _lobbies = new();
 
         public ObservableCollection<LobbyDto> Lobbies
         {
             get { return _lobbies; }
-            set { SetProperty(ref _lobbies, value); }
+            set
+            {
+                _lobbies = value;
+                NotifyPropertyChanged();
+            }
         }
 
+        public ICommand CheckChangesCommand { get; private set; }
 
-        private DelegateCommand<int?> _joinLobbyCommand;
-        private DelegateCommand _createLobbyCommand;
-        private DelegateCommand _refreshLobbiesCommand;
-        private DelegateCommand _checkChangesCommand;
+        public ICommand JoinLobbyCommand { get; private set; }
+        public ICommand CreateLobbyCommand { get; private set; }
+        public ICommand RefreshLobbiesCommand { get; private set; }
 
-        public DelegateCommand CheckChangesCommand => _checkChangesCommand ??= new(CheckChanges);
-
-        public DelegateCommand<int?> JoinLobbyCommand => _joinLobbyCommand ??= new DelegateCommand<int?>(JoinLobby, CanJoinLobby);
-        public DelegateCommand CreateLobbyCommand => _createLobbyCommand ??= new DelegateCommand(CreateLobby, CanCreateLobby);
-        public DelegateCommand RefreshLobbiesCommand => _refreshLobbiesCommand ??= new DelegateCommand(RefreshLobbies);
-
-        public override DelegateCommand LoadCommand => _loadCommand ??= new DelegateCommand(async () => await LoadAsync());
+        public ICommand LoadCommand { get; private set; }
 
 
-        public LobbiesViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, IMapper mapper, ILobbyService lobbyService, IUserService userService)
-            : base(regionNavigationService, authenticator, mapper)
+        public LobbiesViewModel(IAuthenticator authenticator, IMapper mapper, ILobbyService lobbyService, IUserService userService, NavigationManager navigationManager)
+            : base(authenticator, mapper)
         {
-            _lobbyService = lobbyService ??
+            if (lobbyService is null)
+            {
                 throw new ArgumentNullException(nameof(lobbyService));
-            _userService = userService ??
+            }
+
+            if (userService is null)
+            {
                 throw new ArgumentNullException(nameof(userService));
+            }
+
+            if (navigationManager is null)
+            {
+                throw new ArgumentNullException(nameof(navigationManager));
+            }
+
+            _lobbyService = lobbyService;
+            _userService = userService;
+            _navigationManager = navigationManager;
+
+            CheckChangesCommand = new RelayCommand(CheckChanges);
+            JoinLobbyCommand = new RelayCommand<int?>(JoinLobby, CanJoinLobby);
+            CreateLobbyCommand = new RelayCommand(CreateLobby, CanCreateLobby);
+            RefreshLobbiesCommand = new RelayCommand(RefreshLobbies);
+            LoadCommand = new RelayCommand(async () => await LoadAsync());
         }
 
         public void CheckChanges()
         {
-            JoinLobbyCommand.RaiseCanExecuteChanged();
+            // TODO : Vérifier les changements dans les lobbies
         }
 
         public bool CanJoinLobby(int? id)
@@ -71,7 +92,7 @@ namespace Alien.UI.ViewModels
             {
                 { Global.LOBBY_ID, id }
             };
-            Navigate(ViewsEnum.LobbyCreationView, parameters);
+            _navigationManager.Navigate(nameof(LobbyCreationView), parameters: parameters);
             // TODO : Ajouté le joueur dans la base de donnée
         }
 
@@ -102,10 +123,10 @@ namespace Alien.UI.ViewModels
 
         public void CreateLobby()
         {
-            Navigate(ViewsEnum.LobbyCreationView);
+            _navigationManager.Navigate(nameof(LobbyCreationView));
         }
 
-        protected override async Task LoadAsync()
+        public async Task LoadAsync()
         {
             Lobbies = new ObservableCollection<LobbyDto>(await _lobbyService.GetLobbiesAsync());
         }

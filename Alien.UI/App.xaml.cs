@@ -9,6 +9,7 @@ using Alien.UI.States;
 using Alien.BLL;
 using System.Threading;
 using System.Globalization;
+using Alien.UI.Managers;
 using Microsoft.Extensions.DependencyInjection;
 using Alien.UI.ViewModels;
 using Alien.UI.Views;
@@ -46,9 +47,11 @@ namespace Alien.UI
         private void ConfigureServices(ServiceCollection services)
         {
             // Implemenrt a correct NTier injection
-            //services.InjectNTier();
+            services.InjectNTier();
 
             services.AddSingleton<IAuthenticator, Authenticator>();
+
+            services.AddSingleton<NavigationManager>();
 
             services.AddTransient<LoginViewModel>();
             services.AddTransient<RegistrationViewModel>();
@@ -57,6 +60,7 @@ namespace Alien.UI
             //services.AddTransient<CreditView>();
 
             // Character views
+            services.AddTransient<ShellViewModel>();
             services.AddTransient<CharactersViewModel>();
             services.AddTransient<CharacterCareerSelectionViewModel>();
             services.AddTransient<CharacterInfosCreationViewModel>();

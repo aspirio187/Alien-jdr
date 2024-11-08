@@ -2,7 +2,6 @@
 using Alien.UI.Helpers;
 using Alien.UI.States;
 using AutoMapper;
-using Prism.Regions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,8 +15,8 @@ namespace Alien.UI.ViewModels
     {
         public SocketRouter SocketRouteur { get; set; }
 
-        public GmInGameViewModel(IRegionNavigationService regionNavigationService, IAuthenticator authenticator, IMapper mapper)
-            : base(regionNavigationService, authenticator, mapper)
+        public GmInGameViewModel(IAuthenticator authenticator, IMapper mapper)
+            : base(authenticator, mapper)
         {
             SocketRouteur = new SocketRouter().Start();
 
@@ -93,7 +92,8 @@ namespace Alien.UI.ViewModels
         /// <param name="cli"></param>
         /// <param name="arg"></param>
         /// <returns></returns>
-        public bool PLAYER_ThrowDice(dynamic cli, Message arg) {
+        public bool PLAYER_ThrowDice(dynamic cli, Message arg)
+        {
             /// BACK : Effectuer le lancement de dé afin de le communiquer au MJ
             return cli.Reply("Résultat du lancement de dé");
         }

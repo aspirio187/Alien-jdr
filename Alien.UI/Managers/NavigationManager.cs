@@ -60,7 +60,7 @@ namespace Alien.UI.Managers
         /// <summary>
         /// Dictionary to hold open dialogs associated with their view models.
         /// </summary>
-        public Dictionary<ViewModelBase, Window> OpenedDialogs { get; private set; } = [];
+        public Dictionary<ViewModelBase, Window> OpenedDialogs { get; private set; } = new();
 
         /// <summary>
         /// Construct a new instance of the Navigation Manager

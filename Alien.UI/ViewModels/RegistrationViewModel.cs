@@ -1,44 +1,50 @@
-﻿using Alien.UI.Models;
+﻿using Alien.UI.Commands;
+using Alien.UI.Managers;
+using Alien.UI.Models;
 using Alien.UI.States;
-using Prism.Commands;
-using Prism.Mvvm;
-using Prism.Services.Dialogs;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Alien.UI.ViewModels
 {
-    public class RegistrationViewModel : BindableBase, IDialogAware
+    public class RegistrationViewModel : ViewModelBase
     {
-        private readonly IAuthenticator _authenticator;
+        private readonly NavigationManager _navigationManager;
 
         private RegistrationModel _registration = new RegistrationModel();
         public RegistrationModel Registration
         {
             get => _registration;
-            set => SetProperty(ref _registration, value);
+            set
+            {
+                _registration = value;
+                NotifyPropertyChanged();
+            }
         }
 
-        private DelegateCommand _registerAccountCommand;
-
-        public DelegateCommand RegisterAccountCommand => _registerAccountCommand ??= new DelegateCommand(async () => await RegisterAccount());
-
-        private DelegateCommand _navigateBackToLoginCommand;
-
-        public DelegateCommand NavigateBackToLoginCommand => _navigateBackToLoginCommand ??= new DelegateCommand(RaiseRequestClose);
+        public ICommand RegisterAccountCommand { get; private set; }
+        public ICommand NavigateBackToLoginCommand { get; private set; }
 
         public string Title => "Inscription";
 
-        public event Action<IDialogResult> RequestClose;
-
-        public RegistrationViewModel(IAuthenticator authenticator)
+        public RegistrationViewModel(IAuthenticator authenticator, IMapper mapper, NavigationManager navigationManager)
+            : base(authenticator, mapper)
         {
-            _authenticator = authenticator ??
+            if (authenticator is null)
+            {
                 throw new ArgumentNullException(nameof(authenticator));
+            }
+
+            _navigationManager = navigationManager;
+
+            RegisterAccountCommand = new RelayCommand(async () => await RegisterAccount());
+            NavigateBackToLoginCommand = new RelayCommand(RaiseRequestClose);
         }
 
         public async Task RegisterAccount()
@@ -47,14 +53,14 @@ namespace Alien.UI.ViewModels
             {
                 if (await _authenticator.Register(Registration))
                 {
-                    RaiseRequestClose();
+                    //RaiseRequestClose();
                 }
             }
         }
 
         public void RaiseRequestClose()
         {
-            RequestClose?.Invoke(null);
+            //RequestClose?.Invoke(null);
         }
 
         public bool CanCloseDialog()
@@ -67,9 +73,9 @@ namespace Alien.UI.ViewModels
 
         }
 
-        public void OnDialogOpened(IDialogParameters parameters)
-        {
+        //public void OnDialogOpened(IDialogParameters parameters)
+        //{
 
-        }
+        //}
     }
 }

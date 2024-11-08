@@ -6,10 +6,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:global="clr-namespace:Alien.UI.Helpers"
     xmlns:local="clr-namespace:Alien.UI.Views"
+    xmlns:locator="clr-namespace:Alien.UI.Locators"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:prism="http://prismlibrary.com/"
     d:DesignHeight="450"
-    prism:ViewModelLocator.AutoWireViewModel="True"
+    locator:ViewModelLocator.AutoConnectedViewModelProperty="True"
     Background="Black"
     mc:Ignorable="d">
     <Grid>
@@ -127,7 +127,7 @@
                 SelectedItem="{Binding SelectedUser}">
                 <behavior:Interaction.Triggers>
                     <behavior:EventTrigger EventName="DropDownOpened">
-                        <prism:InvokeCommandAction Command="{Binding LoadPlayersCommand}" />
+                        <behavior:InvokeCommandAction Command="{Binding LoadPlayersCommand}" />
                     </behavior:EventTrigger>
                 </behavior:Interaction.Triggers>
             </ComboBox>
@@ -159,7 +159,7 @@
                 ItemsSource="{Binding AvailableCharacters}">
                 <behavior:Interaction.Triggers>
                     <behavior:EventTrigger EventName="DropDownOpened">
-                        <prism:InvokeCommandAction Command="{Binding LoadCharactersCommand}" />
+                        <behavior:InvokeCommandAction Command="{Binding LoadCharactersCommand}" />
                     </behavior:EventTrigger>
                 </behavior:Interaction.Triggers>
             </ComboBox>
@@ -245,7 +245,7 @@
 
                                 <behavior:Interaction.Triggers>
                                     <behavior:EventTrigger EventName="DropDownOpened">
-                                        <prism:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.LoadCharactersCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.Id}" />
+                                        <behavior:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.LoadCharactersCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.Id}" />
                                     </behavior:EventTrigger>
                                 </behavior:Interaction.Triggers>
                             </ComboBox>
@@ -253,7 +253,7 @@
                     </DataGridTemplateColumn.CellTemplate>
                     <!--<behavior:Interaction.Triggers>
                         <behavior:EventTrigger EventName="DropDownOpenend">
-                            <prism:InvokeCommandAction Command="{Binding LoadCharactersCommand}"/>
+                            <behavior:InvokeCommandAction Command="{Binding LoadCharactersCommand}"/>
                         </behavior:EventTrigger>
                     </behavior:Interaction.Triggers>-->
 
@@ -298,7 +298,7 @@
 
         <behavior:Interaction.Triggers>
             <behavior:EventTrigger EventName="Loaded">
-                <prism:InvokeCommandAction Command="{Binding DeclareArrivalCommand}" />
+                <behavior:InvokeCommandAction Command="{Binding DeclareArrivalCommand}" />
             </behavior:EventTrigger>
         </behavior:Interaction.Triggers>
     </Grid>

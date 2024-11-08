@@ -6,12 +6,12 @@
     xmlns:helper="clr-namespace:Alien.UI.Helpers"
     xmlns:iconPack="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:local="clr-namespace:Alien.UI.Views"
+    xmlns:locator="clr-namespace:Alien.UI.Locators"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:prism="http://prismlibrary.com/"
     d:DesignHeight="400"
     d:DesignWidth="350"
-    prism:ViewModelLocator.AutoWireViewModel="True"
+    locator:ViewModelLocator.AutoConnectedViewModelProperty="True"
     mc:Ignorable="d">
 
 
@@ -25,7 +25,7 @@
         WindowStartupLocation="CenterScreen"
     -->
 
-    <prism:Dialog.WindowStyle>
+    <!--<prism:Dialog.WindowStyle>
         <Style TargetType="Window">
             <Setter Property="prism:Dialog.WindowStartupLocation" Value="CenterScreen" />
             <Setter Property="AllowsTransparency" Value="True" />
@@ -35,7 +35,7 @@
             <Setter Property="Height" Value="400" />
             <Setter Property="Width" Value="350" />
         </Style>
-    </prism:Dialog.WindowStyle>
+    </prism:Dialog.WindowStyle>-->
 
     <Grid>
         <Grid>
