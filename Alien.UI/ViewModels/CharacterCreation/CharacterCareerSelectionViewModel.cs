@@ -17,7 +17,7 @@ using System.Windows.Input;
 
 namespace Alien.UI.ViewModels
 {
-    public class CharacterCareerSelectionViewModel : ViewModelBase
+    public class CharacterCareerSelectionViewModel : ViewModelBase, INavigationHistory
     {
         private readonly ICharacterService _characterService;
         private readonly NavigationManager _navigationManager;
@@ -51,7 +51,8 @@ namespace Alien.UI.ViewModels
 
         public ICommand NavigateNextPageCommand { get; private set; }
 
-        public CharacterCareerSelectionViewModel(IAuthenticator authenticator, IMapper mapper, ICharacterService characterService, NavigationManager navigationManager)
+        public CharacterCareerSelectionViewModel(IAuthenticator authenticator, IMapper mapper,
+            ICharacterService characterService, NavigationManager navigationManager)
             : base(authenticator, mapper)
         {
             if (characterService is null)
@@ -111,6 +112,11 @@ namespace Alien.UI.ViewModels
             }
 
             Careers = new ObservableCollection<CharacterCareerSelectionModel>(careers);
+        }
+
+        public bool PersistInHistory()
+        {
+            return true;
         }
     }
 }

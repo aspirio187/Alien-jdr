@@ -273,9 +273,7 @@ namespace Alien.UI.Managers
                 currentViewModel.OnNavigatedTo(parameters);
             }
 
-            INavigationHistory navigationHistory = currentViewModel as INavigationHistory;
-
-            if (navigationHistory is null)
+            if (currentViewModel is not INavigationHistory navigationHistory)
             {
                 return;
             }
@@ -300,12 +298,7 @@ namespace Alien.UI.Managers
                 return false;
             }
 
-            if (NavigationStack.Position == 0)
-            {
-                return false;
-            }
-
-            return true;
+            return NavigationStack.Position != 0;
         }
 
         /// <summary>
@@ -313,11 +306,13 @@ namespace Alien.UI.Managers
         /// </summary>
         public void NavigateBack()
         {
-            if (CanNavigateBack())
+            if (!CanNavigateBack())
             {
-                NavigationStack.MovePrevious(true);
-                CurrentView = NavigationStack.Current;
+                return;
             }
+
+            NavigationStack.MovePrevious(true);
+            CurrentView = NavigationStack.Current;
         }
 
         /// <summary>
@@ -349,6 +344,14 @@ namespace Alien.UI.Managers
                 NavigationStack.MoveNext();
                 CurrentView = NavigationStack.Current;
             }
+        }
+
+        /// <summary>
+        /// Clear the navigation stack
+        /// </summary>
+        public void ClearNavigationStack()
+        {
+            NavigationStack.Reset();
         }
     }
 }
