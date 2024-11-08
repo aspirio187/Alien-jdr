@@ -60,14 +60,14 @@ namespace Alien.UI.ViewModels
 
         public virtual void OnInit()
         {
-            // Implement with some things
         }
 
         public virtual void OnNavigatedFrom(Dictionary<string, object> parameters)
         {
-            // TODO: Implement with some things
         }
 
-        // TODO: Create a method that gets the current view
+        public virtual void OnNavigatedTo(Dictionary<string, object> parameters)
+        {
+        }
     }
 }

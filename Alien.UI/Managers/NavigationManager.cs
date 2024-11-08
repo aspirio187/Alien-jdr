@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -224,15 +225,18 @@ namespace Alien.UI.Managers
                 OpenedDialogs.Remove(openedDialog.Key);
             }
         }
- 
+
         /// <summary>
-        /// Changes the current view and optionnaly add the new view in the view stack
+        /// Changes the current view to the view with the given name. If the view is not in the navigation stack, it will
+        /// be created and added to the stack if the view model implements <see cref="INavigationHistory"/> and returns true.
+        /// If the parameters are not null, they will be passed to the view model of the view to the method
+        /// <see cref="ViewModelBase.OnNavigatedTo(Dictionary{string, object})"/>
         /// </summary>
         /// <param name="viewName">The name of the view to open</param>
-        /// <param name="save">Chose to save the view in the navigation stack. false by default</param>
+        /// <param name="parameters">The dictionary of parameters to pass to the following view</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="NullReferenceException"></exception>
-        public void Navigate(string viewName, bool save = false, Dictionary<string, object>? parameters = null)
+        public void Navigate(string viewName, Dictionary<string, object>? parameters = null)
         {
             if (string.IsNullOrEmpty(viewName))
             {
@@ -258,17 +262,31 @@ namespace Alien.UI.Managers
                 throw new NullReferenceException(nameof(view));
             }
 
-            if (save && !NavigationStack.Any(v => v.ToString().Equals(viewName)))
-            {
-                NavigationStack.Add(view);
-                NavigationStack.MoveNext();
-            }
-
             CurrentView = view;
 
             ViewModelBase currentViewModel = (ViewModelBase)CurrentView.DataContext;
 
             currentViewModel.OnInit();
+
+            if (parameters is not null)
+            {
+                currentViewModel.OnNavigatedTo(parameters);
+            }
+
+            INavigationHistory navigationHistory = currentViewModel as INavigationHistory;
+
+            if (navigationHistory is null)
+            {
+                return;
+            }
+
+            if (!navigationHistory.PersistInHistory() || NavigationStack.Any(v => v.ToString().Equals(viewName)))
+            {
+                return;
+            }
+
+            NavigationStack.Add(view);
+            NavigationStack.MoveNext();
         }
 
         /// <summary>
