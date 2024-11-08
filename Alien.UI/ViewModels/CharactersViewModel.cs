@@ -58,7 +58,6 @@ namespace Alien.UI.ViewModels
 
         public override void OnInit()
         {
-            IsBusy = true;
             try
             {
                 Task
@@ -75,7 +74,6 @@ namespace Alien.UI.ViewModels
                         (task) =>
                         {
                             CharacterMiniatures = new ObservableCollection<CharacterMiniatureDto>(task.Result);
-                            IsBusy = false;
                         },
                         TaskScheduler.FromCurrentSynchronizationContext());
             }

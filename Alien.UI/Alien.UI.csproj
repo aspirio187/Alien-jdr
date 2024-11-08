@@ -53,14 +53,36 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Views\Views\" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <Page Update="Views\Windows\ShellView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	    <XamlRuntime>Wpf</XamlRuntime>
 	    <SubType>Designer</SubType>
+	  </Page>
+	  <Page Update="Views\Views\CharactersView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	    <XamlRuntime>Wpf</XamlRuntime>
+	    <SubType>Designer</SubType>
+	  </Page>
+	  <Page Update="Views\Views\CharacterCreation\CharacterAndroidCreationView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Update="Views\Views\CharacterCreation\CharacterAttributesCompetencesView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Update="Views\Views\CharacterCreation\CharacterCareerSelectionView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Update="Views\Views\CharacterCreation\CharacterCreationSummaryView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Update="Views\Views\CharacterCreation\CharacterInfosCreationView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Update="Views\Views\CharacterCreation\CharacterPublicInfosView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	  <Page Update="Views\Views\CharacterCreation\CharacterTalentSelectionView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
 	  </Page>
 	</ItemGroup>
 

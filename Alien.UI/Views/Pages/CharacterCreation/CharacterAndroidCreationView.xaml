@@ -1,16 +1,16 @@
-﻿<ContentControl
+﻿<local:ViewBase
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    locator:ViewModelLocator.AutoConnectedViewModelProperty="True"
+    mc:Ignorable="d"
     x:Class="Alien.UI.Views.CharacterAndroidCreationView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:global="clr-namespace:Alien.UI.Helpers"
     xmlns:local="clr-namespace:Alien.UI.Views"
     xmlns:locator="clr-namespace:Alien.UI.Locators"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
-    locator:ViewModelLocator.AutoConnectedViewModelProperty="True"
-    mc:Ignorable="d">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -20,39 +20,39 @@
         </Grid.RowDefinitions>
 
         <TextBlock
-            Margin="10"
-            HorizontalAlignment="Center"
             FontSize="40"
             Foreground="White"
+            HorizontalAlignment="Center"
+            Margin="10"
             Style="{StaticResource CustomFont}"
             Text="Bonus d'attribut pour Android" />
 
         <StackPanel
             Grid.Row="1"
             HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Orientation="Vertical">
+            Orientation="Vertical"
+            VerticalAlignment="Center">
 
             <DockPanel HorizontalAlignment="Center">
                 <TextBlock
-                    Width="150"
-                    Margin="10"
-                    VerticalAlignment="Center"
                     FontSize="30"
                     Foreground="White"
+                    Margin="10"
                     Style="{StaticResource CustomFont}"
-                    Text="Force" />
+                    Text="Force"
+                    VerticalAlignment="Center"
+                    Width="150" />
 
                 <Button
-                    Width="40"
-                    Height="40"
-                    Margin="10"
-                    HorizontalAlignment="Center"
                     Command="{Binding SelectAttributeCommand}"
                     CommandParameter="{x:Static global:Attributes.Force}"
                     Content="+3"
                     FontSize="25"
-                    FontWeight="Bold" />
+                    FontWeight="Bold"
+                    Height="40"
+                    HorizontalAlignment="Center"
+                    Margin="10"
+                    Width="40" />
 
                 <CheckBox
                     HorizontalAlignment="Center"
@@ -62,24 +62,24 @@
 
             <DockPanel HorizontalAlignment="Center">
                 <TextBlock
-                    Width="150"
-                    Margin="10"
-                    VerticalAlignment="Center"
                     FontSize="30"
                     Foreground="White"
+                    Margin="10"
                     Style="{StaticResource CustomFont}"
-                    Text="Agilite" />
+                    Text="Agilite"
+                    VerticalAlignment="Center"
+                    Width="150" />
 
                 <Button
-                    Width="40"
-                    Height="40"
-                    Margin="10"
-                    HorizontalAlignment="Center"
                     Command="{Binding SelectAttributeCommand}"
                     CommandParameter="{x:Static global:Attributes.Agilité}"
                     Content="+3"
                     FontSize="25"
-                    FontWeight="Bold" />
+                    FontWeight="Bold"
+                    Height="40"
+                    HorizontalAlignment="Center"
+                    Margin="10"
+                    Width="40" />
 
                 <CheckBox
                     HorizontalAlignment="Center"
@@ -90,23 +90,23 @@
             <DockPanel HorizontalAlignment="Center">
 
                 <TextBlock
-                    Width="150"
-                    Margin="10"
-                    VerticalAlignment="Center"
                     FontSize="30"
                     Foreground="White"
-                    Style="{StaticResource CustomFont}"
-                    Text="Esprit" />
-                <Button
-                    Width="40"
-                    Height="40"
                     Margin="10"
-                    HorizontalAlignment="Center"
+                    Style="{StaticResource CustomFont}"
+                    Text="Esprit"
+                    VerticalAlignment="Center"
+                    Width="150" />
+                <Button
                     Command="{Binding SelectAttributeCommand}"
                     CommandParameter="{x:Static global:Attributes.Esprit}"
                     Content="+3"
                     FontSize="25"
-                    FontWeight="Bold" />
+                    FontWeight="Bold"
+                    Height="40"
+                    HorizontalAlignment="Center"
+                    Margin="10"
+                    Width="40" />
 
                 <CheckBox
                     HorizontalAlignment="Center"
@@ -117,24 +117,24 @@
             <DockPanel HorizontalAlignment="Center">
 
                 <TextBlock
-                    Width="150"
-                    Margin="10"
-                    VerticalAlignment="Center"
                     FontSize="30"
                     Foreground="White"
+                    Margin="10"
                     Style="{StaticResource CustomFont}"
-                    Text="Empathie" />
+                    Text="Empathie"
+                    VerticalAlignment="Center"
+                    Width="150" />
 
                 <Button
-                    Width="40"
-                    Height="40"
-                    Margin="10"
-                    HorizontalAlignment="Center"
                     Command="{Binding SelectAttributeCommand}"
                     CommandParameter="{x:Static global:Attributes.Empathie}"
                     Content="+3"
                     FontSize="25"
-                    FontWeight="Bold" />
+                    FontWeight="Bold"
+                    Height="40"
+                    HorizontalAlignment="Center"
+                    Margin="10"
+                    Width="40" />
 
                 <CheckBox
                     HorizontalAlignment="Center"
@@ -145,24 +145,24 @@
 
         <DockPanel
             Grid.Row="2"
-            Margin="30"
-            HorizontalAlignment="Stretch">
+            HorizontalAlignment="Stretch"
+            Margin="30">
             <Button
-                Width="200"
-                Height="40"
-                HorizontalAlignment="Left"
                 Command="{Binding NavigateBackCommand}"
                 Content="Retour"
                 FontSize="20"
-                Style="{StaticResource CustomFont}" />
-            <Button
-                Width="200"
                 Height="40"
-                HorizontalAlignment="Right"
+                HorizontalAlignment="Left"
+                Style="{StaticResource CustomFont}"
+                Width="200" />
+            <Button
                 Command="{Binding NavigateNextPageCommand}"
                 Content="Suivant"
                 FontSize="20"
-                Style="{StaticResource CustomFont}" />
+                Height="40"
+                HorizontalAlignment="Right"
+                Style="{StaticResource CustomFont}"
+                Width="200" />
         </DockPanel>
     </Grid>
-</ContentControl>
+</local:ViewBase>
